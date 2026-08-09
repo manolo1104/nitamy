@@ -1,0 +1,491 @@
+{
+  "_esquema": {
+    "_": "Documentación del esquema. Cada objeto de `marcas` acepta estos campos.",
+    "slug": "string. URL de la marca: /marcas/{slug}. No cambiar una vez publicado: rompe el SEO.",
+    "nombre": "string. Como se escribe la marca.",
+    "nombreCompleto": "string opcional. Nombre largo o descriptivo, para el H1 y el title.",
+    "logo": "string opcional. Ruta en /public/marcas/. Si falta, se renderiza un monograma tipográfico.",
+    "categorias": "string[]. Slugs de content/categorias.json. Genera el enlazado interno.",
+    "fundadora": "boolean. true solo para Nishikawa, Tama-Roca y Miguelito, los tres proveedores que dan nombre a Nitamy.",
+    "resumen": "string. Una línea. Se usa en la marquesina, en el índice y en la meta description.",
+    "descripcion": "string[]. Dos o tres párrafos: qué es la marca y por qué rota.",
+    "porQueRota": "string. El argumento comercial de rotación, en una frase.",
+    "compradores": "ClaveSegmento[]. Quién la compra. Cruza con SEGMENTOS de config/nitamy.ts.",
+    "productos": "Producto[]. { producto, presentacion, piezasPorCaja, sellos }. `sellos` son los de NOM-051.",
+    "datosDeEjemplo": "boolean. true mientras `productos` no venga del cliente. Muestra un aviso en la página.",
+    "textoRevisado": "boolean. true cuando el cliente aprobó `descripcion`. Mientras sea false, es borrador.",
+    "relacionadas": "string[]. Slugs de otras marcas, para el enlazado interno."
+  },
+
+  "_sellos": {
+    "_": "Valores permitidos en `sellos`, según NOM-051.",
+    "valores": [
+      "exceso-calorias",
+      "exceso-azucares",
+      "exceso-grasas-saturadas",
+      "exceso-grasas-trans",
+      "exceso-sodio",
+      "contiene-cafeina",
+      "contiene-edulcorantes",
+      "sin-sellos"
+    ]
+  },
+
+  "_conteo": {
+    "_": "OJO. El brief titula esta lista como 'Marcas distribuidas (20)' pero enumera 23. Las cifras que se muestran en el sitio se derivan de la longitud de `marcas`, nunca se escriben a mano, para que la página no se contradiga. Confirmar con el cliente cuál es el número correcto."
+  },
+
+  "marcas": [
+    {
+      "slug": "nishikawa",
+      "nombre": "Nishikawa",
+      "nombreCompleto": "Nishikawa Cacahuate Japonés",
+      "logo": "/marcas/nishikawa.png",
+      "categorias": ["cacahuates", "botana"],
+      "fundadora": true,
+      "resumen": "El cacahuate japonés que definió la categoría en México.",
+      "descripcion": [
+        "Nishikawa es la marca que introdujo el cacahuate japonés al mercado mexicano y sigue siendo la referencia de la categoría. Es cacahuate cubierto con una capa de harina de trigo y salsa de soya, la receta que trajo Yoshigei Nakatani a México en los años cuarenta.",
+        "En el anaquel es un producto de rotación constante y compra por impulso. No depende de temporada, no depende de moda, y el consumidor lo busca por nombre. Para un punto de venta pequeño, es de los artículos que se venden solos.",
+        "Es una de las tres marcas que dan nombre a Grupo Nitamy y una de las tres que le creyeron al proyecto en 1995."
+      ],
+      "porQueRota": "El consumidor lo pide por nombre y la compra es por impulso, no por temporada.",
+      "compradores": ["tienda", "mayorista", "cadena", "eventos"],
+      "productos": [
+        {
+          "producto": "Cacahuate japonés",
+          "presentacion": "Bolsa 60 g",
+          "piezasPorCaja": 40,
+          "sellos": ["exceso-calorias", "exceso-sodio"]
+        },
+        {
+          "producto": "Cacahuate japonés",
+          "presentacion": "Bolsa 120 g",
+          "piezasPorCaja": 24,
+          "sellos": ["exceso-calorias", "exceso-sodio"]
+        },
+        {
+          "producto": "Cacahuate japonés",
+          "presentacion": "Bolsa familiar 300 g",
+          "piezasPorCaja": 12,
+          "sellos": ["exceso-calorias", "exceso-sodio"]
+        }
+      ],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["tama-roca", "miguelito", "pipos"]
+    },
+    {
+      "slug": "tama-roca",
+      "nombre": "Tama-Roca",
+      "nombreCompleto": "Tama-Roca Dulce de Tamarindo",
+      "logo": "/marcas/tama-roca.png",
+      "categorias": ["tamarindo", "enchilados"],
+      "fundadora": true,
+      "resumen": "Dulce de tamarindo enchilado, el sabor base del dulce mexicano.",
+      "descripcion": [
+        "Tama-Roca trabaja el tamarindo enchilado, que es la columna vertebral del dulce mexicano de tiendita. Pulpa de tamarindo con chile y sal, en las presentaciones que el consumidor de a pie ya reconoce.",
+        "Es producto de rotación alta y precio accesible, lo que lo vuelve una de las líneas más rentables por metro de anaquel. Funciona igual de bien en tiendita de barrio que en mesa de dulces.",
+        "Es una de las tres marcas que dan nombre a Grupo Nitamy."
+      ],
+      "porQueRota": "Precio accesible y sabor de consumo diario: el volumen compensa el margen unitario.",
+      "compradores": ["tienda", "mayorista", "eventos"],
+      "productos": [
+        {
+          "producto": "Tamarindo enchilado",
+          "presentacion": "Bote con 40 piezas",
+          "piezasPorCaja": 12,
+          "sellos": ["exceso-calorias", "exceso-azucares", "exceso-sodio"]
+        },
+        {
+          "producto": "Pulpa de tamarindo",
+          "presentacion": "Bolsa 1 kg",
+          "piezasPorCaja": 10,
+          "sellos": ["exceso-calorias", "exceso-azucares"]
+        }
+      ],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["nishikawa", "miguelito", "chaca-chaca"]
+    },
+    {
+      "slug": "miguelito",
+      "nombre": "Miguelito",
+      "nombreCompleto": "Miguelito Polvo Enchilado",
+      "categorias": ["enchilados", "tamarindo"],
+      "fundadora": true,
+      "resumen": "El polvo enchilado que acompaña fruta, botana y paleta.",
+      "descripcion": [
+        "Miguelito es polvo de chile con sal y ácido, el que se le pone a la fruta, a la paleta y al vaso de botana. Es un producto que no compite con el resto del anaquel: lo complementa, y por eso la venta cruzada es alta.",
+        "Para un punto de venta que ya mueve fruta picada o raspados, es un artículo que se agrega al ticket sin esfuerzo.",
+        "Es una de las tres marcas que dan nombre a Grupo Nitamy."
+      ],
+      "porQueRota": "Complementa otros productos del anaquel en lugar de competir con ellos: sube el ticket promedio.",
+      "compradores": ["tienda", "mayorista", "eventos"],
+      "productos": [
+        {
+          "producto": "Polvo enchilado",
+          "presentacion": "Sobre 12 g",
+          "piezasPorCaja": 100,
+          "sellos": ["exceso-sodio"]
+        },
+        {
+          "producto": "Polvo enchilado",
+          "presentacion": "Bote 250 g",
+          "piezasPorCaja": 24,
+          "sellos": ["exceso-sodio"]
+        }
+      ],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["tama-roca", "nishikawa", "chaca-chaca"]
+    },
+    {
+      "slug": "candy-pop",
+      "nombre": "Candy Pop",
+      "nombreCompleto": "Candy Pop, CP Products",
+      "logo": "/marcas/candy-pop.png",
+      "categorias": ["paletas", "gomitas"],
+      "resumen": "Paletas y confitería infantil de rotación rápida.",
+      "descripcion": [
+        "Candy Pop maneja paletas y confitería de formato pequeño, la que se vende de una en una en el mostrador. Es compra por impulso pura: precio bajo, decisión inmediata.",
+        "Es de las líneas que mejor funcionan para llenar la caja registradora de un punto de venta pequeño y para armar bolsas de fiesta."
+      ],
+      "porQueRota": "Precio de una moneda y decisión de compra inmediata en el mostrador.",
+      "compradores": ["tienda", "eventos", "mayorista"],
+      "productos": [
+        {
+          "producto": "Paleta surtida",
+          "presentacion": "Bolsa con 50 piezas",
+          "piezasPorCaja": 20,
+          "sellos": ["exceso-azucares", "exceso-calorias"]
+        }
+      ],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["rivera", "charly", "pipos"]
+    },
+    {
+      "slug": "rivera",
+      "nombre": "Productos Rivera",
+      "nombreCompleto": "Productos Rivera, malvaviscos y gomitas",
+      "logo": "/marcas/rivera.png",
+      "categorias": ["gomitas"],
+      "resumen": "Malvaviscos y gomitas para anaquel y para mesa de dulces.",
+      "descripcion": [
+        "Productos Rivera trabaja malvaviscos y gomitas, que son la base de cualquier mesa de dulces y una categoría de peso en el anaquel de dulcería.",
+        "Se venden tanto en presentación individual para mostrador como en bolsa de volumen para eventos, lo que permite surtir dos tipos de cliente con una sola marca."
+      ],
+      "porQueRota": "Sirve a dos mercados con la misma marca: mostrador por pieza y volumen para eventos.",
+      "compradores": ["tienda", "eventos", "mayorista", "cadena"],
+      "productos": [
+        {
+          "producto": "Malvavisco",
+          "presentacion": "Bolsa 500 g",
+          "piezasPorCaja": 12,
+          "sellos": ["exceso-azucares", "exceso-calorias"]
+        },
+        {
+          "producto": "Gomita surtida",
+          "presentacion": "Bolsa 1 kg",
+          "piezasPorCaja": 10,
+          "sellos": ["exceso-azucares", "exceso-calorias"]
+        }
+      ],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["candy-pop", "dulces-liz", "charly"]
+    },
+    {
+      "slug": "salsa-tamazula",
+      "nombre": "Salsa Tamazula",
+      "nombreCompleto": "Salsa Tamazula y Valentina",
+      "logo": "/marcas/valentina.png",
+      "categorias": ["salsas", "botana"],
+      "resumen": "Salsa picante embotellada, artículo de despensa y de botana.",
+      "descripcion": [
+        "Salsa Tamazula es la casa de Valentina, una de las salsas embotelladas más vendidas de México. Es producto de despensa, no de impulso: el consumidor la compra por reposición, con una frecuencia predecible.",
+        "Para el punto de venta eso significa rotación estable todo el año y cero riesgo de quedarse con inventario parado."
+      ],
+      "porQueRota": "Compra de reposición, no de impulso: la frecuencia es predecible todo el año.",
+      "compradores": ["tienda", "mayorista", "cadena"],
+      "productos": [
+        {
+          "producto": "Salsa Valentina etiqueta amarilla",
+          "presentacion": "Botella 370 ml",
+          "piezasPorCaja": 24,
+          "sellos": ["exceso-sodio"]
+        },
+        {
+          "producto": "Salsa Valentina etiqueta negra",
+          "presentacion": "Botella 370 ml",
+          "piezasPorCaja": 24,
+          "sellos": ["exceso-sodio"]
+        }
+      ],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["nishikawa", "betamex", "chaca-chaca"]
+    },
+    {
+      "slug": "chaca-chaca",
+      "nombre": "Chaca Chaca",
+      "categorias": ["enchilados", "tamarindo"],
+      "resumen": "Dulce enchilado en barra, de los clásicos de tiendita.",
+      "descripcion": [
+        "Chaca Chaca es dulce enchilado en barra, uno de los productos que el consumidor mexicano identifica sin necesidad de publicidad.",
+        "Es de los artículos que sostienen la venta diaria de una tiendita: precio bajo, sabor reconocido y compra repetida."
+      ],
+      "porQueRota": "Producto reconocido sin publicidad, con compra repetida entre semana.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["tama-roca", "miguelito", "dulces-pillo"]
+    },
+    {
+      "slug": "charly",
+      "nombre": "Charly",
+      "categorias": ["gomitas", "paletas"],
+      "resumen": "Confitería infantil con presentación llamativa.",
+      "descripcion": [
+        "Charly trabaja confitería dirigida a público infantil, con presentaciones y empaque que compiten por atención en el anaquel.",
+        "Funciona bien en dulcerías de fiesta y en tiendas cercanas a escuelas, donde la decisión de compra la toma el consumidor final frente al producto."
+      ],
+      "porQueRota": "El empaque hace el trabajo de venta en el anaquel.",
+      "compradores": ["tienda", "eventos", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["candy-pop", "rivera", "dulces-karla"]
+    },
+    {
+      "slug": "pipos",
+      "nombre": "Pipos",
+      "categorias": ["botana", "cacahuates"],
+      "resumen": "Botana salada y semillas para acompañar.",
+      "descripcion": [
+        "Pipos maneja botana salada y semillas, categoría que acompaña bebida y que se mueve fuerte los fines de semana.",
+        "Complementa bien un anaquel dominado por dulce: le da al punto de venta una segunda ocasión de consumo."
+      ],
+      "porQueRota": "Segunda ocasión de consumo en un anaquel que suele ser solo dulce.",
+      "compradores": ["tienda", "mayorista", "cadena"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["nishikawa", "betamex", "salsa-tamazula"]
+    },
+    {
+      "slug": "obleas-kevin",
+      "nombre": "Obleas Kevin",
+      "categorias": ["obleas-y-dulce-tradicional"],
+      "resumen": "Obleas con cajeta, dulce tradicional mexicano.",
+      "descripcion": [
+        "Obleas Kevin trabaja el dulce tradicional de oblea con cajeta, una categoría con demanda estable y competencia baja.",
+        "Es de los productos que diferencian un anaquel: casi ninguna cadena grande lo surte bien, y el consumidor que lo busca es fiel."
+      ],
+      "porQueRota": "Competencia baja y consumidor fiel: diferencia el anaquel frente a la cadena grande.",
+      "compradores": ["tienda", "mayorista", "eventos"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["dulces-tradicionales", "portico", "dulces-guaz"]
+    },
+    {
+      "slug": "dulces-tradicionales",
+      "nombre": "Dulces Tradicionales",
+      "categorias": ["obleas-y-dulce-tradicional"],
+      "resumen": "Dulce típico mexicano: palanquetas, cocadas y jamoncillo.",
+      "descripcion": [
+        "Línea de dulce típico mexicano, del que se vende en mercado y en tienda de barrio: palanqueta, cocada, jamoncillo y similares.",
+        "Es una categoría con clientela definida y precio estable, útil para redondear un surtido que de otro modo sería solo confitería industrial."
+      ],
+      "porQueRota": "Clientela definida y precio estable, con poca guerra de precios.",
+      "compradores": ["tienda", "mayorista", "eventos"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["obleas-kevin", "portico", "dulces-guaz"]
+    },
+    {
+      "slug": "grupo-frato",
+      "nombre": "Grupo Frato",
+      "categorias": ["gomitas", "enchilados"],
+      "resumen": "Confitería de volumen para anaquel y para armado de bolsas.",
+      "descripcion": [
+        "Grupo Frato surte confitería en presentaciones de volumen, pensadas tanto para anaquel como para armado de bolsas y mesas de dulces."
+      ],
+      "porQueRota": "Presentación de volumen que sirve igual para anaquel y para eventos.",
+      "compradores": ["mayorista", "eventos", "tienda"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["rivera", "confitados-finos", "candy-pop"]
+    },
+    {
+      "slug": "betamex",
+      "nombre": "Betamex",
+      "categorias": ["botana", "enchilados"],
+      "resumen": "Botana y producto enchilado para punto de venta.",
+      "descripcion": [
+        "Betamex maneja botana y producto enchilado en presentaciones de punto de venta."
+      ],
+      "porQueRota": "Formato de mostrador con precio de impulso.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["pipos", "salsa-tamazula", "chaca-chaca"]
+    },
+    {
+      "slug": "cabadas",
+      "nombre": "Cabadas",
+      "categorias": ["obleas-y-dulce-tradicional", "paletas"],
+      "resumen": "Dulcería tradicional en presentaciones de mostrador.",
+      "descripcion": [
+        "Cabadas surte dulcería tradicional en presentaciones pensadas para mostrador y venta por pieza."
+      ],
+      "porQueRota": "Venta por pieza con margen sano para el detallista.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["dulces-tradicionales", "obleas-kevin", "portico"]
+    },
+    {
+      "slug": "dulces-pillo",
+      "nombre": "Dulces Pillo",
+      "categorias": ["enchilados", "paletas"],
+      "resumen": "Dulce enchilado y paleta de rotación diaria.",
+      "descripcion": [
+        "Dulces Pillo trabaja dulce enchilado y paleta, categorías de rotación diaria en tiendita."
+      ],
+      "porQueRota": "Rotación diaria y reposición constante.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["chaca-chaca", "dulces-liz", "miguelito"]
+    },
+    {
+      "slug": "dulces-liz",
+      "nombre": "Dulces Liz",
+      "categorias": ["gomitas", "paletas"],
+      "resumen": "Gomitas y confitería para dulcería y evento.",
+      "descripcion": [
+        "Dulces Liz surte gomitas y confitería en formatos que funcionan tanto en dulcería como en armado de bolsas para evento."
+      ],
+      "porQueRota": "Un solo producto sirve al anaquel y a la mesa de dulces.",
+      "compradores": ["tienda", "eventos", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["rivera", "dulces-karla", "charly"]
+    },
+    {
+      "slug": "portico",
+      "nombre": "Portico",
+      "categorias": ["obleas-y-dulce-tradicional"],
+      "resumen": "Dulce tradicional y de temporada.",
+      "descripcion": [
+        "Portico maneja dulce tradicional, con líneas que se refuerzan en temporada."
+      ],
+      "porQueRota": "Base estable todo el año con picos de temporada.",
+      "compradores": ["tienda", "mayorista", "eventos"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["dulces-tradicionales", "cabadas", "obleas-kevin"]
+    },
+    {
+      "slug": "productos-del-rey",
+      "nombre": "Productos del Rey",
+      "categorias": ["botana", "cacahuates"],
+      "resumen": "Botana y semilla en presentaciones de volumen.",
+      "descripcion": [
+        "Productos del Rey surte botana y semilla en presentaciones de volumen para punto de venta."
+      ],
+      "porQueRota": "Presentación de volumen con costo por pieza bajo.",
+      "compradores": ["mayorista", "tienda", "cadena"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["pipos", "nishikawa", "betamex"]
+    },
+    {
+      "slug": "dulces-karla",
+      "nombre": "Dulces Karla",
+      "categorias": ["gomitas", "enchilados"],
+      "resumen": "Confitería enchilada y gomita para dulcería.",
+      "descripcion": [
+        "Dulces Karla trabaja confitería enchilada y gomita, con formatos de dulcería y de bolsa."
+      ],
+      "porQueRota": "El enchilado es la categoría de mayor rotación en dulcería mexicana.",
+      "compradores": ["tienda", "eventos", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["dulces-liz", "charly", "dulces-pillo"]
+    },
+    {
+      "slug": "dulces-guaz",
+      "nombre": "Dulces Guaz",
+      "categorias": ["obleas-y-dulce-tradicional", "tamarindo"],
+      "resumen": "Dulce regional y de tamarindo.",
+      "descripcion": [
+        "Dulces Guaz surte dulce regional y de tamarindo, categorías con demanda arraigada."
+      ],
+      "porQueRota": "Demanda arraigada que no depende de publicidad.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["tama-roca", "dulces-tradicionales", "obleas-kevin"]
+    },
+    {
+      "slug": "confitados-finos",
+      "nombre": "Confitados Finos",
+      "categorias": ["gomitas"],
+      "resumen": "Confitado y gragea para mesa de dulces y decoración.",
+      "descripcion": [
+        "Confitados Finos trabaja confitado y gragea, producto de mesa de dulces y de decoración de repostería."
+      ],
+      "porQueRota": "Sirve a repostería y a eventos, dos mercados fuera del anaquel clásico.",
+      "compradores": ["eventos", "mayorista", "tienda"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["rivera", "grupo-frato", "dulces-liz"]
+    },
+    {
+      "slug": "alvbro",
+      "nombre": "Alvbro",
+      "categorias": ["gomitas", "paletas"],
+      "resumen": "Confitería en formatos de impulso.",
+      "descripcion": [
+        "Alvbro surte confitería en formatos de impulso para mostrador."
+      ],
+      "porQueRota": "Formato de impulso con precio de una moneda.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["candy-pop", "chompys", "charly"]
+    },
+    {
+      "slug": "chompys",
+      "nombre": "Chompys",
+      "categorias": ["botana", "enchilados"],
+      "resumen": "Botana enchilada en presentación individual.",
+      "descripcion": [
+        "Chompys maneja botana enchilada en presentación individual para punto de venta."
+      ],
+      "porQueRota": "Presentación individual que se vende de una en una en el mostrador.",
+      "compradores": ["tienda", "mayorista"],
+      "productos": [],
+      "datosDeEjemplo": true,
+      "textoRevisado": false,
+      "relacionadas": ["betamex", "pipos", "alvbro"]
+    }
+  ]
+}

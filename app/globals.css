@@ -1,26 +1,261 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   GRUPO NITAMY. Sistema de diseño "Bodega editorial"
+   --------------------------------------------------------------------------
+   Restricción de negocio: quien decide la compra es un empresario evaluando a
+   un proveedor para un pedido de decenas de miles de pesos. La interfaz es
+   sobria; la saturación cromática viene de la fotografía de producto y de los
+   logos de las 20 marcas, nunca de fondos amplios de color de marca.
+   ========================================================================== */
+
+@theme {
+  /* --- Color. Una sola paleta para todo el proyecto. ---------------------
+     Verificada con `npm run contraste`, que sale con error si algún par en
+     uso reprueba. Los números de abajo los produce ese script, no una
+     estimación.
+
+     El acento es un solo tono en dos valores, porque el rojo de la marca
+     (#d93516) da 4.49:1 sobre papel y reprueba AA para texto normal por un
+     pelo. La regla resultante:
+
+       --color-rojo         relleno (botones, bloques) y texto GRANDE
+                            (>=24px, o >=18.7px en negrita, donde AA pide 3:1).
+                            Blanco encima da 4.70:1.
+       --color-rojo-fuerte  cualquier texto rojo por debajo de ese tamaño,
+                            y el estado :active de los botones. 6.02:1 sobre
+                            papel.
+
+     El ámbar da 2.04:1 sobre papel: NUNCA es texto sobre fondo claro. Solo
+     relleno, subrayado grueso o icono. Sobre carbón da 8.71:1 y ahí sí puede
+     ser texto.
+  */
+  --color-papel: #fafaf8;
+  --color-papel-2: #f2f0eb;
+  --color-tinta: #14110f;
+  --color-tinta-2: #57514b;
+  --color-rojo: #d93516;
+  --color-rojo-fuerte: #b82a10;
+  --color-ambar: #f0a202;
+  --color-carbon: #16130f;
+  --color-carbon-2: #241f1a;
+
+  /* Divisores decorativos. No son controles, así que WCAG 1.4.11 no les
+     aplica; su trabajo es separar sin gritar. */
+  --color-linea: #e2ded6;
+  --color-linea-oscura: #3a332c;
+
+  /* Bordes de campos y controles. Estos SÍ caen en WCAG 1.4.11 y necesitan
+     3:1 contra su fondo. Por eso son bastante más oscuros que los divisores. */
+  --color-borde-campo: #8b8378;
+  --color-borde-campo-oscuro: #6e6459;
+
+  /* --- Tipografía. Una sola familia, dos expresiones. --------------------
+     Archivo variable con eje de ancho. El ancho expandido lee como letrero
+     de caja y de camión, que es el registro de un distribuidor.
+     Cero serif, cero Inter.
+  */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Radio. Un solo sistema, documentado y aplicado en todo. -----------
+     Botones: pill completo. Todo lo demás: 4px. Sin excepciones.
+  */
+  --radius-nada: 0px;
+  --radius-caja: 4px;
+  --radius-pill: 9999px;
+
+  /* --- Curvas. Las nativas de CSS son demasiado débiles. ----------------- */
+  --ease-salida: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-entrada-salida: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Variables no expuestas como utilidades de Tailwind */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --dur-press: 160ms;
+  --dur-ui: 200ms;
+  --dur-reveal: 500ms;
+  --marquesina-dur: 46s;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  /* El header pegajoso mide 68px; los anclajes no deben quedar debajo. */
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-papel);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Las cifras siempre alineadas en columna: contadores, tablas de
+   presentaciones, piezas por caja. */
+.cifra {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Ancho expandido de Archivo. Solo para display, nunca para cuerpo:
+   el texto corrido expandido cansa a los 40 caracteres. */
+.ancho {
+  font-stretch: 118%;
+}
+
+/* --------------------------------------------------------------------------
+   Foco visible. Nunca se elimina; se rediseña.
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--color-rojo);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.seccion-oscura :focus-visible {
+  outline-color: var(--color-ambar);
+}
+
+/* --------------------------------------------------------------------------
+   Movimiento
+   --------------------------------------------------------------------------
+   Sin librería de animación. El presupuesto es JS inicial < 150 KB
+   comprimido en celular de gama media dentro de una bodega con señal
+   irregular; Motion pesa ~40 KB gzip y todo esto se hace con CSS.
+
+   Reglas: solo transform y opacity. Cero `transition: all`. Cero `ease-in`
+   (arranca lento justo en el instante que el usuario está mirando).
+   -------------------------------------------------------------------------- */
+
+/* --- Aparición ----------------------------------------------------------
+   Regla que manda: el contenido NUNCA depende de JavaScript para ser
+   visible. La primera versión de esto ocultaba los elementos y los revelaba
+   con un IntersectionObserver; en dev quedó la página en blanco hasta que
+   React hidrató, y en un celular de gama media con señal irregular eso son
+   segundos de pantalla vacía y un LCP arruinado.
+
+   Ahora son dos mecanismos, ambos de CSS puro y cero JavaScript:
+
+     .entrada  para lo que está sobre el pliegue. Corre al cargar, con
+               retraso escalonado. No espera scroll ni hidratación.
+     .revelar  para lo que está más abajo. Usa línea de tiempo de scroll
+               (`animation-timeline: view()`).
+
+   Los dos parten de estado VISIBLE y la animación solo se aplica cuando el
+   navegador la soporta y el usuario no pidió movimiento reducido. Si algo
+   falla, el peor caso es que se vea todo de inmediato, que es exactamente
+   lo que se quiere que pase.
+   ------------------------------------------------------------------------ */
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .entrada {
+    animation: surgir var(--dur-reveal) var(--ease-salida) both;
+    animation-delay: var(--retraso, 0ms);
+  }
+}
+
+/* La línea de tiempo de scroll todavía no está en todos los navegadores.
+   Donde no existe, este bloque no aplica y el contenido simplemente se ve:
+   sin animación, pero legible, que es la degradación correcta. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .revelar {
+      animation: surgir linear both;
+      animation-timeline: view();
+      /* Termina poco después de asomar, no al llegar al centro: si no, el
+         usuario alcanza a leer un texto todavía a media opacidad. */
+      animation-range: entry 0% cover 18%;
+    }
+  }
+}
+
+/* Modal del calificador. Solo entrada, nunca salida: ver el comentario en
+   ModalCalificador.tsx. Arranca en 0.96 y no en 0, porque nada en el mundo
+   real aparece de la nada. */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modalEntra {
+  from {
+    opacity: 0;
+    /* El translate del centrado va incluido: si no, el modal salta. */
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+}
+
+/* Marquesina de las 20 marcas. La única de toda la página.
+   Comunica "tengo todo el surtido" en segundos. Movimiento constante =
+   linear; cualquier easing aquí se vería como un tirón en el bucle. */
+@keyframes desfile {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquesina-pista {
+  animation: desfile var(--marquesina-dur) linear infinite;
+  will-change: transform;
+}
+
+/* Detener al pasar el cursor deja leer el logo que interesa.
+   Solo en dispositivos con puntero fino: en táctil el hover es un falso
+   positivo al tocar. */
+@media (hover: hover) and (pointer: fine) {
+  .marquesina:hover .marquesina-pista {
+    animation-play-state: paused;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Movimiento reducido
+   --------------------------------------------------------------------------
+   Movimiento reducido significa menos movimiento y más suave, no cero
+   información. Se conservan opacidad y color, que ayudan a comprender;
+   se elimina todo desplazamiento.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquesina-pista {
+    animation: none;
+    /* Sin animación el bucle duplicado sobra: se muestra la primera mitad. */
+    transform: none;
+  }
+
+  .marquesina {
+    overflow-x: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

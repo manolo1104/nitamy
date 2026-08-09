@@ -1,0 +1,67 @@
+{
+  "_esquema": {
+    "slug": "string. URL: /categorias/{slug}. No cambiar una vez publicado.",
+    "nombre": "string. Como se muestra.",
+    "resumen": "string. Una línea, para el índice y la meta description.",
+    "descripcion": "string. Un párrafo: qué agrupa la categoría y a quién le sirve.",
+    "textoRevisado": "boolean. false mientras el cliente no apruebe el texto."
+  },
+  "categorias": [
+    {
+      "slug": "enchilados",
+      "nombre": "Enchilados",
+      "resumen": "La categoría de mayor rotación del dulce mexicano.",
+      "descripcion": "Dulce con chile, sal y ácido, en barra, polvo, gomita o pulpa. Es la categoría que sostiene la venta diaria de una tiendita: precio bajo, sabor reconocido y compra repetida entre semana.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "cacahuates",
+      "nombre": "Cacahuates",
+      "resumen": "Japonés, salado y enchilado, para botana y para acompañar.",
+      "descripcion": "Cacahuate en sus presentaciones de botana: japonés, salado, enchilado y con semilla. Se mueve fuerte los fines de semana y acompaña la venta de bebida.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "tamarindo",
+      "nombre": "Tamarindo",
+      "resumen": "Pulpa, bolita y barra, con y sin chile.",
+      "descripcion": "El tamarindo es el sabor base del dulce mexicano. Se surte en pulpa para preparar, en bolita y en barra, con distintos niveles de picante.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "gomitas",
+      "nombre": "Gomitas",
+      "resumen": "Gomita y malvavisco, para anaquel y para mesa de dulces.",
+      "descripcion": "Gomita y malvavisco en presentación individual para mostrador y en bolsa de volumen para armado de bolsas y mesas de dulces.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "paletas",
+      "nombre": "Paletas",
+      "resumen": "Compra por impulso pura, de una en una en el mostrador.",
+      "descripcion": "Paleta de caramelo, enchilada y rellena. Es el producto de impulso por excelencia: precio de una moneda y decisión de compra inmediata frente al mostrador.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "salsas",
+      "nombre": "Salsas",
+      "resumen": "Salsa picante embotellada, artículo de despensa.",
+      "descripcion": "Salsa picante embotellada. A diferencia del resto del anaquel, es compra de reposición y no de impulso, lo que la vuelve la línea más predecible de todas.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "obleas-y-dulce-tradicional",
+      "nombre": "Obleas y dulce tradicional",
+      "resumen": "Palanqueta, cocada, jamoncillo y oblea con cajeta.",
+      "descripcion": "Dulce típico mexicano. Es la categoría que diferencia un anaquel frente a la cadena grande, que casi nunca la surte bien, y su consumidor es fiel.",
+      "textoRevisado": false
+    },
+    {
+      "slug": "botana",
+      "nombre": "Botana",
+      "resumen": "Salada, enchilada y semillas, la segunda ocasión de consumo.",
+      "descripcion": "Botana salada, enchilada y semillas. Le da al punto de venta una segunda ocasión de consumo en un anaquel que de otro modo sería solo dulce.",
+      "textoRevisado": false
+    }
+  ]
+}

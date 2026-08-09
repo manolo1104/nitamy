@@ -1,0 +1,48 @@
+{
+  "_nota": "Estas preguntas alimentan el acordeón de la home y el marcado FAQPage. Las respuestas con `pendiente: true` esperan dato del cliente y NO se publican en el JSON-LD: declarar una respuesta falsa en datos estructurados es peor que no declararla.",
+  "faqs": [
+    {
+      "pregunta": "¿Cuál es el pedido mínimo?",
+      "respuesta": "",
+      "pendiente": true,
+      "_pendiente": "Depende de PEDIDO_MINIMO en config/nitamy.ts. Es el pendiente más urgente: sin él, el WhatsApp de ventas recibe solicitudes fuera de perfil."
+    },
+    {
+      "pregunta": "¿Le venden a público en general?",
+      "respuesta": "No. Grupo Nitamy vende únicamente a negocios establecidos: mayoristas, distribuidores, tiendas, dulcerías, cadenas de autoservicio y organizadores de eventos.",
+      "pendiente": false
+    },
+    {
+      "pregunta": "¿A qué estados llegan y en cuánto tiempo?",
+      "respuesta": "Llegamos a toda la República. En la Ciudad de México y el Estado de México entregamos con flotilla propia, así que controlamos la ruta de punta a punta. Para el resto del país trabajamos con una red de transporte contratada, seleccionada por cobertura y confiabilidad.",
+      "pendiente": false,
+      "_parcial": "Los tiempos por zona dependen de TIEMPOS_ENTREGA_POR_ZONA. Mientras esté pendiente, la respuesta habla de cobertura pero no promete días."
+    },
+    {
+      "pregunta": "¿Emiten factura?",
+      "respuesta": "Sí. Grupo Nitamy S.A. de C.V. factura todas sus operaciones.",
+      "pendiente": false
+    },
+    {
+      "pregunta": "¿Qué formas de pago aceptan? ¿Dan crédito?",
+      "respuesta": "",
+      "pendiente": true,
+      "_pendiente": "Depende de FORMAS_DE_PAGO y CONDICIONES_DE_CREDITO en config/nitamy.ts."
+    },
+    {
+      "pregunta": "¿Puedo recoger en su CEDIS?",
+      "respuesta": "Sí. Nuestro centro de distribución está en Iztapalapa, Ciudad de México. Coordina la recolección por WhatsApp para que tu pedido esté armado cuando llegues.",
+      "pendiente": false
+    },
+    {
+      "pregunta": "¿Manejan producto sin sellos de advertencia?",
+      "respuesta": "Sí. Dentro de las marcas que distribuimos hay producto que no lleva sellos NOM-051. En cada página de marca puedes ver qué sellos trae cada presentación, y en la cotización te marcamos cuáles cumplen con lo que necesitas para tu punto de venta.",
+      "pendiente": false
+    },
+    {
+      "pregunta": "¿Puedo pedir presentaciones armadas o displays?",
+      "respuesta": "Sí. Empaquetamos y acondicionamos producto según lo que tu punto de venta necesita: bolsas armadas, presentaciones listas para anaquel y displays. Dinos qué formato buscas y lo cotizamos.",
+      "pendiente": false
+    }
+  ]
+}

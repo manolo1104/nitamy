@@ -52,7 +52,19 @@ export default function RootLayout({
         parte de estado visible, así que no hay nada que desbloquear antes
         del pintado ni nada que se rompa si el bundle tarda o nunca llega.
       */}
-      <body className="antialiased">{children}</body>
+      {/*
+        `suppressHydrationWarning` va aquí por las extensiones del navegador.
+        Grammarly y varias más inyectan atributos en el <body> (por ejemplo
+        `data-gr-ext-installed`) antes de que React hidrate, y eso dispara un
+        error de hidratación que no viene del sitio.
+
+        Suprimirlo no es taparse los ojos: solo aplica a los atributos de ESTE
+        elemento, no a sus hijos. Dejarlo sin suprimir es peor, porque el ruido
+        constante esconde un error de hidratación de verdad cuando aparezca.
+      */}
+      <body className="antialiased" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

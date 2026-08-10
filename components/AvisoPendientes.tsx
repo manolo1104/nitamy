@@ -20,7 +20,9 @@ export function AvisoPendientes() {
   return (
     <aside
       aria-label="Datos pendientes del cliente"
-      className="fixed bottom-3 left-3 z-20 max-w-[19rem] rounded-caja border border-borde-campo bg-white/95 p-3 text-xs shadow-[0_8px_24px_rgba(20,17,15,0.14)] backdrop-blur-sm"
+      /* Abajo a la derecha: abajo a la izquierda vive el indicador de Next y
+         se encimaban, tapando el contenido de la página. */
+      className="fixed bottom-3 right-3 z-20 max-w-[19rem] rounded-caja border border-borde-campo bg-white/95 p-3 text-xs shadow-[0_8px_24px_rgba(20,17,15,0.14)] backdrop-blur-sm"
     >
       <details>
         <summary className="cursor-pointer font-bold text-rojo-fuerte">

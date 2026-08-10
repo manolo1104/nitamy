@@ -24,7 +24,9 @@ export function Hero() {
   return (
     <section className="border-b border-linea">
       <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-5 pb-14 pt-12 sm:px-8 lg:grid-cols-12 lg:gap-14 lg:pb-20 lg:pt-16">
-        <div className="lg:col-span-7">
+        {/* 8 de 12, no 7: con la columna más angosta el titular se partía en
+            cuatro líneas y perdía fuerza. */}
+        <div className="lg:col-span-8">
           <Revelar modo="entrada">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-rojo-fuerte">
               Desde 1995
@@ -32,7 +34,7 @@ export function Hero() {
           </Revelar>
 
           <Revelar modo="entrada" retraso={60}>
-            <h1 className="ancho mt-4 text-[clamp(2.25rem,5.4vw,3.9rem)] font-extrabold leading-[1.04] tracking-[-0.02em]">
+            <h1 className="ancho mt-4 text-[clamp(2.25rem,4.4vw,3.25rem)] font-extrabold leading-[1.04] tracking-[-0.02em]">
               Un solo proveedor para surtir todo tu anaquel de dulce
             </h1>
           </Revelar>
@@ -58,7 +60,7 @@ export function Hero() {
           </Revelar>
         </div>
 
-        <Revelar modo="entrada" retraso={140} className="lg:col-span-5">
+        <Revelar modo="entrada" retraso={140} className="lg:col-span-4">
           <div className="relative overflow-hidden rounded-caja bg-carbon">
             {/*
               El producto sobre carbón: el recorte tiene fondo transparente y

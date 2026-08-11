@@ -91,7 +91,7 @@ function Articulo({
   return (
     <Link
       href={`/recursos/${articulo.slug}`}
-      className="group flex h-full flex-col justify-between rounded-caja border border-linea bg-papel p-6 transition-[border-color,transform] duration-200 ease-salida hover:border-tinta active:scale-[0.99] lg:p-8"
+      className="ficha presionable group flex h-full flex-col justify-between rounded-caja border border-linea bg-papel p-6 hover:border-tinta lg:p-8"
     >
       <div>
         {articulo.borrador && (

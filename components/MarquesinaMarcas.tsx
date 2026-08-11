@@ -52,7 +52,7 @@ export function MarquesinaMarcas() {
               <Link
                 href={`/marcas/${marca.slug}`}
                 tabIndex={duplicado ? -1 : undefined}
-                className="block opacity-75 transition-opacity duration-200 ease-salida hover:opacity-100 focus-visible:opacity-100"
+                className="logo-desfile block opacity-75 hover:opacity-100 focus-visible:opacity-100"
               >
                 <LogoMarca marca={marca} alto={44} />
               </Link>

@@ -1,4 +1,4 @@
-import { aniosOperando } from "@/config/nitamy";
+import { aniosOperando, PROVEEDORES } from "@/config/nitamy";
 import { ESTADOS } from "@/lib/estados";
 import { TOTAL_MARCAS } from "@/lib/contenido";
 import { Contador } from "../Contador";
@@ -16,8 +16,6 @@ import { Revelar } from "../Revelar";
  * publica "más de 40 años", que es falso. Al derivarlo, ese error no puede
  * repetirse.
  */
-
-const PROVEEDORES = 26;
 
 export function BarraConfianza() {
   const cifras = [

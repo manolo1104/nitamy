@@ -4,6 +4,8 @@
     "nombre": "string. Como se muestra.",
     "resumen": "string. Una línea, para el índice y la meta description.",
     "descripcion": "string. Un párrafo: qué agrupa la categoría y a quién le sirve.",
+    "color": "string. Sabor de la paleta: fresa|mango|menta|uva|cielo|limon. El color CODIFICA la categoría: es el mismo en la rejilla de la home, en la ficha de temporada y en la página de la categoría. Dos categorías vecinas en la rejilla nunca comparten sabor.",
+    "icono": "string. Nombre de icono de Phosphor, sin el sufijo Icon. La lista blanca vive en components/IconoCategoria.tsx: un nombre que no esté ahí no renderiza.",
     "textoRevisado": "boolean. false mientras el cliente no apruebe el texto."
   },
   "categorias": [
@@ -12,6 +14,8 @@
       "nombre": "Enchilados",
       "resumen": "La categoría de mayor rotación del dulce mexicano.",
       "descripcion": "Dulce con chile, sal y ácido, en barra, polvo, gomita o pulpa. Es la categoría que sostiene la venta diaria de una tiendita: precio bajo, sabor reconocido y compra repetida entre semana.",
+      "color": "fresa",
+      "icono": "Pepper",
       "textoRevisado": false
     },
     {
@@ -19,6 +23,8 @@
       "nombre": "Cacahuates",
       "resumen": "Japonés, salado y enchilado, para botana y para acompañar.",
       "descripcion": "Cacahuate en sus presentaciones de botana: japonés, salado, enchilado y con semilla. Se mueve fuerte los fines de semana y acompaña la venta de bebida.",
+      "color": "mango",
+      "icono": "Acorn",
       "textoRevisado": false
     },
     {
@@ -26,6 +32,8 @@
       "nombre": "Tamarindo",
       "resumen": "Pulpa, bolita y barra, con y sin chile.",
       "descripcion": "El tamarindo es el sabor base del dulce mexicano. Se surte en pulpa para preparar, en bolita y en barra, con distintos niveles de picante.",
+      "color": "limon",
+      "icono": "Cherries",
       "textoRevisado": false
     },
     {
@@ -33,6 +41,8 @@
       "nombre": "Gomitas",
       "resumen": "Gomita y malvavisco, para anaquel y para mesa de dulces.",
       "descripcion": "Gomita y malvavisco en presentación individual para mostrador y en bolsa de volumen para armado de bolsas y mesas de dulces.",
+      "color": "uva",
+      "icono": "Heart",
       "textoRevisado": false
     },
     {
@@ -40,6 +50,8 @@
       "nombre": "Paletas",
       "resumen": "Compra por impulso pura, de una en una en el mostrador.",
       "descripcion": "Paleta de caramelo, enchilada y rellena. Es el producto de impulso por excelencia: precio de una moneda y decisión de compra inmediata frente al mostrador.",
+      "color": "cielo",
+      "icono": "Spiral",
       "textoRevisado": false
     },
     {
@@ -47,6 +59,8 @@
       "nombre": "Salsas",
       "resumen": "Salsa picante embotellada, artículo de despensa.",
       "descripcion": "Salsa picante embotellada. A diferencia del resto del anaquel, es compra de reposición y no de impulso, lo que la vuelve la línea más predecible de todas.",
+      "color": "fresa",
+      "icono": "Jar",
       "textoRevisado": false
     },
     {
@@ -54,6 +68,8 @@
       "nombre": "Obleas y dulce tradicional",
       "resumen": "Palanqueta, cocada, jamoncillo y oblea con cajeta.",
       "descripcion": "Dulce típico mexicano. Es la categoría que diferencia un anaquel frente a la cadena grande, que casi nunca la surte bien, y su consumidor es fiel.",
+      "color": "mango",
+      "icono": "Cookie",
       "textoRevisado": false
     },
     {
@@ -61,6 +77,8 @@
       "nombre": "Botana",
       "resumen": "Salada, enchilada y semillas, la segunda ocasión de consumo.",
       "descripcion": "Botana salada, enchilada y semillas. Le da al punto de venta una segunda ocasión de consumo en un anaquel que de otro modo sería solo dulce.",
+      "color": "menta",
+      "icono": "Popcorn",
       "textoRevisado": false
     }
   ]

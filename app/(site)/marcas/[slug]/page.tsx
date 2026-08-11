@@ -1,5 +1,6 @@
 import { CheckCircleIcon, WarningCircleIcon } from "@phosphor-icons/react/dist/ssr";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BotonEnlace } from "@/components/Boton";
@@ -235,34 +236,94 @@ export default async function PaginaDeMarca(
               <ul className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {marca.productos.map((p) => (
                   <Revelar key={`${p.producto}-${p.presentacion}`} como="li">
-                    <div className="flex h-full flex-col rounded-caja border border-linea bg-papel p-6">
-                      <h3 className="text-lg font-semibold leading-snug text-tinta">
-                        {p.producto}
-                      </h3>
-                      <p className="mt-1 text-tinta-2">{p.presentacion}</p>
-                      <p className="ancho cifra mt-5 text-3xl font-extrabold leading-none tracking-tight text-rojo">
-                        {p.piezasPorCaja}
-                      </p>
-                      <p className="mt-1 text-sm text-tinta-2">piezas por caja</p>
+                    <div className="ficha flex h-full flex-col overflow-hidden rounded-caja border border-linea bg-papel">
+                      {/*
+                        La foto del producto real, del catálogo del cliente.
 
-                      <div className="mt-5 border-t border-linea pt-4">
-                        {p.sellos.length === 0 ||
-                        p.sellos[0] === "sin-sellos" ? (
-                          <p className="text-sm font-semibold text-tinta">
-                            Sin sellos de advertencia
-                          </p>
+                        Sobre blanco y no sobre papel: las fotos vienen
+                        recortadas sobre fondo blanco, y cualquier otro tono
+                        detrás deja ver el borde del recorte.
+
+                        Y cuadrada, no apaisada: las fotos del cliente son
+                        verticales (4:5) y en una caja 4:3 quedaban con dos
+                        franjas blancas enormes a los lados.
+                      */}
+                      {p.foto && (
+                        <div className="relative aspect-square border-b border-linea bg-white">
+                          <Image
+                            src={p.foto}
+                            alt={`${p.producto} de ${marca.nombre}`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="ficha-medio object-contain p-4"
+                          />
+                        </div>
+                      )}
+
+                      <div className="flex flex-1 flex-col p-6">
+                        <h3 className="text-lg font-semibold leading-snug text-tinta">
+                          {p.producto}
+                        </h3>
+
+                        {/*
+                          Dos formas de mostrar lo mismo, según haya dato duro:
+
+                          con cifra  cuando el cliente dice sin ambigüedad
+                                     cuántas piezas trae la caja. Es el número
+                                     que el comprador está buscando, y por eso
+                                     va grande.
+                          sin cifra  cuando el texto dice "16 bolsas de 12
+                                     piezas" y no se sabe si son 16 o 192. Se
+                                     muestra tal cual lo escribió el cliente.
+                                     Inventar aquí es corromper una cotización.
+                        */}
+                        {p.piezasPorCaja !== null ? (
+                          <>
+                            <p className="mt-1 text-tinta-2">{p.presentacion}</p>
+                            <p className="ancho cifra mt-5 text-3xl font-extrabold leading-none tracking-tight text-rojo">
+                              {p.piezasPorCaja}
+                            </p>
+                            <p className="mt-1 text-sm text-tinta-2">
+                              piezas por caja
+                            </p>
+                          </>
                         ) : (
-                          <ul className="flex flex-wrap gap-1.5">
-                            {p.sellos.map((s) => (
-                              <li
-                                key={s}
-                                className="rounded-caja bg-carbon px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide text-papel"
-                              >
-                                {ETIQUETA_SELLO[s]}
-                              </li>
-                            ))}
-                          </ul>
+                          <p className="mt-3 leading-relaxed text-tinta">
+                            {p.presentacion}
+                          </p>
                         )}
+
+                        <div className="mt-auto border-t border-linea pt-4">
+                          {/*
+                            "Sin sellos de advertencia" solo se dice cuando el
+                            cliente confirmó los sellos. El catálogo que salió
+                            de su sitio anterior no los trae, y afirmar que un
+                            producto no tiene sellos NOM-051 sin el dato es
+                            una afirmación sobre etiquetado regulado que un
+                            comprador de cadena va a creer.
+                          */}
+                          {!marca.sellosVerificados ? (
+                            <p className="text-sm text-tinta-2">
+                              Sellos NOM-051 en la cotización
+                            </p>
+                          ) : p.sellos.length === 0 ||
+                            p.sellos[0] === "sin-sellos" ? (
+                            <p className="text-sm font-semibold text-tinta">
+                              Sin sellos de advertencia
+                            </p>
+                          ) : (
+                            <ul className="flex flex-wrap gap-1.5">
+                              {p.sellos.map((s) => (
+                                <li
+                                  key={s}
+                                  className="rounded-caja bg-carbon px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide text-papel"
+                                >
+                                  {ETIQUETA_SELLO[s]}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </Revelar>

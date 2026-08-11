@@ -56,7 +56,7 @@ export function Footer() {
             </h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/marcas" className="text-tinta-2 hover:text-tinta">
+                <Link href="/marcas" className="enlace text-tinta-2 hover:text-tinta">
                   Las {TOTAL_MARCAS} marcas
                 </Link>
               </li>
@@ -64,7 +64,7 @@ export function Footer() {
                 <li key={m.slug}>
                   <Link
                     href={`/marcas/${m.slug}`}
-                    className="text-tinta-2 hover:text-tinta"
+                    className="enlace text-tinta-2 hover:text-tinta"
                   >
                     {m.nombre}
                   </Link>
@@ -74,7 +74,7 @@ export function Footer() {
                 <li key={c.slug}>
                   <Link
                     href={`/categorias/${c.slug}`}
-                    className="text-tinta-2 hover:text-tinta"
+                    className="enlace text-tinta-2 hover:text-tinta"
                   >
                     {c.nombre}
                   </Link>
@@ -92,27 +92,27 @@ export function Footer() {
             </h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/mayoristas" className="text-tinta-2 hover:text-tinta">
+                <Link href="/mayoristas" className="enlace text-tinta-2 hover:text-tinta">
                   Mayoristas
                 </Link>
               </li>
               <li>
-                <Link href="/tiendas" className="text-tinta-2 hover:text-tinta">
+                <Link href="/tiendas" className="enlace text-tinta-2 hover:text-tinta">
                   Tiendas y dulcerías
                 </Link>
               </li>
               <li>
-                <Link href="/cadenas" className="text-tinta-2 hover:text-tinta">
+                <Link href="/cadenas" className="enlace text-tinta-2 hover:text-tinta">
                   Cadenas
                 </Link>
               </li>
               <li>
-                <Link href="/eventos" className="text-tinta-2 hover:text-tinta">
+                <Link href="/eventos" className="enlace text-tinta-2 hover:text-tinta">
                   Eventos
                 </Link>
               </li>
               <li>
-                <Link href="/recursos" className="text-tinta-2 hover:text-tinta">
+                <Link href="/recursos" className="enlace text-tinta-2 hover:text-tinta">
                   Recursos
                 </Link>
               </li>
@@ -127,7 +127,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:+52${CONTACTO.telefono}`}
-                  className="inline-flex items-center gap-2 text-tinta-2 hover:text-tinta"
+                  className="enlace inline-flex items-center gap-2 text-tinta-2 hover:text-tinta"
                 >
                   <PhoneIcon size={17} aria-hidden="true" />
                   {CONTACTO.telefonoLegible}
@@ -138,7 +138,7 @@ export function Footer() {
                   href={enlaceWhatsappSimple()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-tinta-2 hover:text-tinta"
+                  className="enlace inline-flex items-center gap-2 text-tinta-2 hover:text-tinta"
                 >
                   <WhatsappLogoIcon size={17} aria-hidden="true" />
                   {CONTACTO.whatsappGeneralLegible}
@@ -191,7 +191,7 @@ export function Footer() {
           </p>
           <Link
             href="/aviso-de-privacidad"
-            className="font-medium hover:text-tinta"
+            className="enlace font-medium hover:text-tinta"
           >
             Aviso de privacidad
           </Link>

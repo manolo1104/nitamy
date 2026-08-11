@@ -38,9 +38,13 @@ export function Faq() {
 
           <div className="mt-8 lg:col-span-8 lg:mt-0">
             {FAQS_PUBLICABLES.map((faq) => (
+              // `acordeon` anima la apertura con `::details-content` e
+              // `interpolate-size`. Sin eso la respuesta aparece de golpe y
+              // empuja todo lo de abajo en un solo cuadro. Donde el navegador
+              // no lo soporte, abre de golpe como siempre.
               <details
                 key={faq.pregunta}
-                className="group border-b border-linea py-1 first:border-t"
+                className="acordeon group border-b border-linea py-1 first:border-t"
               >
                 <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 [&::-webkit-details-marker]:hidden">
                   <span className="text-lg font-semibold leading-snug text-tinta">

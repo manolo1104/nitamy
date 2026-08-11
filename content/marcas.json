@@ -4,19 +4,21 @@
     "slug": "string. URL de la marca: /marcas/{slug}. No cambiar una vez publicado: rompe el SEO.",
     "nombre": "string. Como se escribe la marca.",
     "nombreCompleto": "string opcional. Nombre largo o descriptivo, para el H1 y el title.",
-    "logo": "string opcional. Ruta en /public/marcas/. Si falta, se renderiza un monograma tipográfico.",
+    "logo": "string opcional. Ruta en /public/marcas/. Los 20 logos del sitio vivo venian con fondo BLANCO OPACO; se les quito por inundacion desde los bordes y se guardaron en WebP con alfa. Si falta, se renderiza un monograma.",
     "categorias": "string[]. Slugs de content/categorias.json. Genera el enlazado interno.",
     "fundadora": "boolean. true solo para Nishikawa, Tama-Roca y Miguelito, los tres proveedores que dan nombre a Nitamy.",
     "resumen": "string. Una línea. Se usa en la marquesina, en el índice y en la meta description.",
     "descripcion": "string[]. Dos o tres párrafos: qué es la marca y por qué rota.",
     "porQueRota": "string. El argumento comercial de rotación, en una frase.",
     "compradores": "ClaveSegmento[]. Quién la compra. Cruza con SEGMENTOS de config/nitamy.ts.",
-    "productos": "Producto[]. { producto, presentacion, piezasPorCaja, sellos }. `sellos` son los de NOM-051.",
+    "productos": "Producto[]. { producto, presentacion, piezasPorCaja, sellos, foto }. `piezasPorCaja` es number|null: solo se llena cuando el texto del cliente lo dice sin ambiguedad. 'caja con 16 bolsas de 12 piezas' queda en null porque no se sabe si son 16 o 192.",
     "datosDeEjemplo": "boolean. true mientras `productos` no venga del cliente. Muestra un aviso en la página.",
     "textoRevisado": "boolean. true cuando el cliente aprobó `descripcion`. Mientras sea false, es borrador.",
-    "relacionadas": "string[]. Slugs de otras marcas, para el enlazado interno."
+    "relacionadas": "string[]. Slugs de otras marcas, para el enlazado interno.",
+    "sellosVerificados": "boolean. Los sellos NOM-051 NO vienen del sitio viejo. Mientras esto sea false, la pagina NO afirma 'sin sellos de advertencia': decir eso sin dato es una afirmacion regulada y falsa. Solo se pone true cuando el cliente entregue los sellos reales por presentacion.",
+    "fuenteProductos": "string opcional. De donde salio el catalogo.",
+    "notaInterna": "string opcional. Nota para el equipo, no se publica."
   },
-
   "_sellos": {
     "_": "Valores permitidos en `sellos`, según NOM-051.",
     "valores": [
@@ -30,18 +32,19 @@
       "sin-sellos"
     ]
   },
-
   "_conteo": {
     "_": "OJO. El brief titula esta lista como 'Marcas distribuidas (20)' pero enumera 23. Las cifras que se muestran en el sitio se derivan de la longitud de `marcas`, nunca se escriben a mano, para que la página no se contradiga. Confirmar con el cliente cuál es el número correcto."
   },
-
   "marcas": [
     {
       "slug": "nishikawa",
       "nombre": "Nishikawa",
       "nombreCompleto": "Nishikawa Cacahuate Japonés",
-      "logo": "/marcas/nishikawa.png",
-      "categorias": ["cacahuates", "botana"],
+      "logo": "/marcas/nishikawa.webp",
+      "categorias": [
+        "cacahuates",
+        "botana"
+      ],
       "fundadora": true,
       "resumen": "El cacahuate japonés que definió la categoría en México.",
       "descripcion": [
@@ -50,37 +53,202 @@
         "Es una de las tres marcas que dan nombre a Grupo Nitamy y una de las tres que le creyeron al proyecto en 1995."
       ],
       "porQueRota": "El consumidor lo pide por nombre y la compra es por impulso, no por temporada.",
-      "compradores": ["tienda", "mayorista", "cadena", "eventos"],
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "cadena",
+        "eventos"
+      ],
       "productos": [
         {
-          "producto": "Cacahuate japonés",
-          "presentacion": "Bolsa 60 g",
-          "piezasPorCaja": 40,
-          "sellos": ["exceso-calorias", "exceso-sodio"]
+          "producto": "SAKURA",
+          "presentacion": "1 caja con 16 piezas",
+          "piezasPorCaja": 16,
+          "sellos": [],
+          "foto": "/productos/nishikawa/sakura.webp"
         },
         {
-          "producto": "Cacahuate japonés",
-          "presentacion": "Bolsa 120 g",
-          "piezasPorCaja": 24,
-          "sellos": ["exceso-calorias", "exceso-sodio"]
+          "producto": "Black Pepper",
+          "presentacion": "1 caja con 16 piezas",
+          "piezasPorCaja": 16,
+          "sellos": [],
+          "foto": "/productos/nishikawa/black-pepper.webp"
         },
         {
-          "producto": "Cacahuate japonés",
-          "presentacion": "Bolsa familiar 300 g",
-          "piezasPorCaja": 12,
-          "sellos": ["exceso-calorias", "exceso-sodio"]
+          "producto": "Japonés 40 GR",
+          "presentacion": "1 paquete con 50 piezas de 40 gramos",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-40-gr.webp"
+        },
+        {
+          "producto": "Japonés 60 GR",
+          "presentacion": "1 paquete de 50 piezas de 60 gramos",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-60-gr.webp"
+        },
+        {
+          "producto": "Japonés 80 GR",
+          "presentacion": "1 paquete con 50 piezas de 80 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-80-gr.webp"
+        },
+        {
+          "producto": "Enchilado 60 GR",
+          "presentacion": "1 paquete con 50 piezas de 60 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/enchilado-60-gr.webp"
+        },
+        {
+          "producto": "Salado 60 GR",
+          "presentacion": "1 paquete con 50 piezas de 80 gramos",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/salado-60-gr.webp"
+        },
+        {
+          "producto": "Japonés 200 GR",
+          "presentacion": "1 paquete con 20 piezas de 200 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-200-gr.webp"
+        },
+        {
+          "producto": "Enchilado 200 GR",
+          "presentacion": "1 paquete con 20 piezas de 200 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/enchilado-200-gr.webp"
+        },
+        {
+          "producto": "Salado 200 gr",
+          "presentacion": "1 paquete con 20 piezas de 200 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/salado-200-gr.webp"
+        },
+        {
+          "producto": "Japonés 1 Kilo",
+          "presentacion": "1 paquete de 1 kilo",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-1-kilo.webp"
+        },
+        {
+          "producto": "Paquete Japonés 40 gr",
+          "presentacion": "1 caja de 20 paquetes con 10 piezas de 40 gramos y 10 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/paquete-japon-s-40-gr.webp"
+        },
+        {
+          "producto": "Paquete Japonés 60 gr",
+          "presentacion": "1 caja de 15 paquetes con 10 piezas de 60 gramos y 10 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/paquete-japon-s-60-gr.webp"
+        },
+        {
+          "producto": "Paquete Japonés 80 gr",
+          "presentacion": "1 caja de 10 paquetes con 10 piezas de 80 gramos y 10 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/paquete-japon-s-80-gr.webp"
+        },
+        {
+          "producto": "Paquete Enchilado 60 gr",
+          "presentacion": "1 caja de 15 paquetes con 10 piezas de 60 gramos y 10 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/paquete-enchilado-60-gr.webp"
+        },
+        {
+          "producto": "Paquete Salado 60 gr",
+          "presentacion": "1 caja de 15 paquetes con 10 piezas de 60 gramos y 10 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/paquete-salado-60-gr.webp"
+        },
+        {
+          "producto": "Japonés 40 gr con Salsa",
+          "presentacion": "1 caja de 16 paquetes con 25 piezas de 40 gramos y 25 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-40-gr-con-salsa.webp"
+        },
+        {
+          "producto": "Japonés 70 gr",
+          "presentacion": "1 caja de 8 paquetes con 7 piezas de 120 gramos y 10 sobres de valentina de 10 gr c/u.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-70-gr.webp"
+        },
+        {
+          "producto": "Salado 70 GR",
+          "presentacion": "1 con 16 piezas de 70 gramos.",
+          "piezasPorCaja": 16,
+          "sellos": [],
+          "foto": "/productos/nishikawa/salado-70-gr.webp"
+        },
+        {
+          "producto": "Enchilado 70 GR",
+          "presentacion": "1 caja con 16 piezas de 70 gramos.",
+          "piezasPorCaja": 16,
+          "sellos": [],
+          "foto": "/productos/nishikawa/enchilado-70-gr.webp"
+        },
+        {
+          "producto": "Japonés 70 GR",
+          "presentacion": "1 caja con 16 piezas de 70 gramos.",
+          "piezasPorCaja": 16,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-70-gr.webp"
+        },
+        {
+          "producto": "Laminado TUBO",
+          "presentacion": "1 paquete de 35 tubos laminados de 120 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/laminado-tubo.webp"
+        },
+        {
+          "producto": "Japonés 190 GR",
+          "presentacion": "1 paquete de 12 piezas de 190 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-190-gr.webp"
+        },
+        {
+          "producto": "Japonés 1 kilo",
+          "presentacion": "1 paquete de 1 kilo",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/nishikawa/japon-s-1-kilo.webp"
         }
       ],
-      "datosDeEjemplo": true,
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["tama-roca", "miguelito", "pipos"]
+      "relacionadas": [
+        "tama-roca",
+        "miguelito",
+        "pipos"
+      ],
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "tama-roca",
       "nombre": "Tama-Roca",
-      "nombreCompleto": "Tama-Roca Dulce de Tamarindo",
-      "logo": "/marcas/tama-roca.png",
-      "categorias": ["tamarindo", "enchilados"],
+      "nombreCompleto": "Tama-Roca, de Grupo Frato",
+      "logo": "/marcas/tama-roca.svg",
+      "categorias": [
+        "tamarindo",
+        "enchilados",
+        "gomitas"
+      ],
       "fundadora": true,
       "resumen": "Dulce de tamarindo enchilado, el sabor base del dulce mexicano.",
       "descripcion": [
@@ -89,30 +257,74 @@
         "Es una de las tres marcas que dan nombre a Grupo Nitamy."
       ],
       "porQueRota": "Precio accesible y sabor de consumo diario: el volumen compensa el margen unitario.",
-      "compradores": ["tienda", "mayorista", "eventos"],
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "eventos"
+      ],
       "productos": [
         {
-          "producto": "Tamarindo enchilado",
-          "presentacion": "Bote con 40 piezas",
-          "piezasPorCaja": 12,
-          "sellos": ["exceso-calorias", "exceso-azucares", "exceso-sodio"]
+          "producto": "Palebola",
+          "presentacion": "1 caja con 16 bolsas de 12 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/grupo-frato/palebola.webp"
         },
         {
-          "producto": "Pulpa de tamarindo",
-          "presentacion": "Bolsa 1 kg",
-          "piezasPorCaja": 10,
-          "sellos": ["exceso-calorias", "exceso-azucares"]
+          "producto": "Cobertura para manzana",
+          "presentacion": "1 caja con 12 estuches de 14 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/grupo-frato/cobertura-para-manzana.webp"
+        },
+        {
+          "producto": "#21 Banderilla Vitrolero",
+          "presentacion": "1 caja con 6 vitroleros de 30 piezas con 40 gramos cada una,",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/grupo-frato/21-banderilla-vitrolero.webp"
+        },
+        {
+          "producto": "#22 Micheleta",
+          "presentacion": "1 caja con 6 estuches de 40 piezas con 40 gramos",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/grupo-frato/22-micheleta.webp"
+        },
+        {
+          "producto": "#20A Banderilla 40 GR",
+          "presentacion": "Presentación por confirmar",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/grupo-frato/20a-banderilla-40-gr.webp"
+        },
+        {
+          "producto": "#29 Banderilla 50 GR",
+          "presentacion": "1 caja con 50 piezas de 40 gramos.",
+          "piezasPorCaja": 50,
+          "sellos": [],
+          "foto": "/productos/grupo-frato/29-banderilla-50-gr.webp"
         }
       ],
-      "datosDeEjemplo": true,
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["nishikawa", "miguelito", "chaca-chaca"]
+      "relacionadas": [
+        "nishikawa",
+        "miguelito",
+        "chaca-chaca"
+      ],
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026",
+      "notaInterna": "Grupo Frato (fundada en 1975) es la EMPRESA y Tama-Roca su MARCA. Estaban como dos marcas distintas y era doble conteo: el sitio anterior del cliente publica el logotipo de Tama-Roca para 'Grupo Frato', y tamaroca.com cierra con 'Grupo Frato S.A. de C.V.' y enumera Palebola y Banderilla como productos propios. Se fusionaron el 11 ago 2026. Si el cliente dice que son dos cuentas distintas, se vuelve a separar."
     },
     {
       "slug": "miguelito",
       "nombre": "Miguelito",
       "nombreCompleto": "Miguelito Polvo Enchilado",
-      "categorias": ["enchilados", "tamarindo"],
+      "categorias": [
+        "enchilados",
+        "tamarindo"
+      ],
       "fundadora": true,
       "resumen": "El polvo enchilado que acompaña fruta, botana y paleta.",
       "descripcion": [
@@ -121,371 +333,1490 @@
         "Es una de las tres marcas que dan nombre a Grupo Nitamy."
       ],
       "porQueRota": "Complementa otros productos del anaquel en lugar de competir con ellos: sube el ticket promedio.",
-      "compradores": ["tienda", "mayorista", "eventos"],
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "eventos"
+      ],
       "productos": [
         {
-          "producto": "Polvo enchilado",
-          "presentacion": "Sobre 12 g",
-          "piezasPorCaja": 100,
-          "sellos": ["exceso-sodio"]
+          "producto": "Pulpa 1/4 GR",
+          "presentacion": "1 caja con 48 piezas de 250 gramos",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/pulpa-1-4-gr.webp"
         },
         {
-          "producto": "Polvo enchilado",
-          "presentacion": "Bote 250 g",
+          "producto": "Pulpa de 950 GR",
+          "presentacion": "1 caja con 12 íezas de 950 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/pulpa-de-950-gr.webp"
+        },
+        {
+          "producto": "Original Polvo 400 GR",
+          "presentacion": "1 caja con 24 piezas de 400 gramos.",
           "piezasPorCaja": 24,
-          "sellos": ["exceso-sodio"]
+          "sellos": [],
+          "foto": "/productos/miguelito/original-polvo-400-gr.webp"
+        },
+        {
+          "producto": "Enchilado 1/4",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/enchilado-1-4.webp"
+        },
+        {
+          "producto": "Sazonador 1/4",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/sazonador-1-4.webp"
+        },
+        {
+          "producto": "Mora",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/mora.webp"
+        },
+        {
+          "producto": "Cereza",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/cereza.webp"
+        },
+        {
+          "producto": "Mango",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/mango.webp"
+        },
+        {
+          "producto": "Sandia",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/sandia.webp"
+        },
+        {
+          "producto": "Fresa",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/fresa.webp"
+        },
+        {
+          "producto": "Uva",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/uva.webp"
+        },
+        {
+          "producto": "Naranja",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/naranja.webp"
+        },
+        {
+          "producto": "Tamarindo",
+          "presentacion": "Presentación por confirmar",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/tamarindo.webp"
+        },
+        {
+          "producto": "Pepino-Limón",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/pepino-lim-n.webp"
+        },
+        {
+          "producto": "Piña",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/pi-a.webp"
+        },
+        {
+          "producto": "Sabores",
+          "presentacion": "1 caja con 48 piezas de 250 gramos.",
+          "piezasPorCaja": 48,
+          "sellos": [],
+          "foto": "/productos/miguelito/sabores.webp"
+        },
+        {
+          "producto": "Sobres Sabores",
+          "presentacion": "1 caja con 25 bolsas de 100 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/sobres-sabores.webp"
+        },
+        {
+          "producto": "Chamoy Polvo",
+          "presentacion": "1 caja con 25 bolsas de 100 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/chamoy-polvo.webp"
+        },
+        {
+          "producto": "Kilo 20´s Bolsa",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-20-s-bolsa.webp"
+        },
+        {
+          "producto": "Kilo Mora",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-mora.webp"
+        },
+        {
+          "producto": "Kilo Uva",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-uva.webp"
+        },
+        {
+          "producto": "Kilo Mango",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-mango.webp"
+        },
+        {
+          "producto": "Kilo Fresa",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-fresa.webp"
+        },
+        {
+          "producto": "Kilo Tamarindo",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-tamarindo.webp"
+        },
+        {
+          "producto": "Kilo Sandia",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-sandia.webp"
+        },
+        {
+          "producto": "Kilo Sabores",
+          "presentacion": "1 caja con 20 bolsas de 980 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/kilo-sabores.webp"
+        },
+        {
+          "producto": "Polvo Botella",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/polvo-botella.webp"
+        },
+        {
+          "producto": "Sabores Botella",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/sabores-botella.webp"
+        },
+        {
+          "producto": "Mora Botella",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/mora-botella.webp"
+        },
+        {
+          "producto": "Polvo Tarro",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/polvo-tarro.webp"
+        },
+        {
+          "producto": "Sabores Tarro",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/sabores-tarro.webp"
+        },
+        {
+          "producto": "Mora Tarro",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/mora-tarro.webp"
+        },
+        {
+          "producto": "Charly Paleta Elote",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/charly-paleta-elote.webp"
+        },
+        {
+          "producto": "Charly Paleta Mango",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/charly-paleta-mango.webp"
+        },
+        {
+          "producto": "Charly Paleta Sandia",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/charly-paleta-sandia.webp"
+        },
+        {
+          "producto": "Charly Paleta Piña",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/charly-paleta-pi-a.webp"
+        },
+        {
+          "producto": "Tira Cilosa",
+          "presentacion": "1 caja con 24 tiras de 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/tira-cilosa.webp"
+        },
+        {
+          "producto": "Miguelin Dulce",
+          "presentacion": "1 caja con 20 bolsas de 25 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/miguelin-dulce.webp"
+        },
+        {
+          "producto": "Miguelin Chile",
+          "presentacion": "1 caja con 20 bolsas de 25 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/miguelin-chile.webp"
+        },
+        {
+          "producto": "Raqueta con Chile",
+          "presentacion": "1 caja con 20 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/raqueta-con-chile.webp"
+        },
+        {
+          "producto": "Raqueta Menta",
+          "presentacion": "1 caja con 20 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/raqueta-menta.webp"
+        },
+        {
+          "producto": "Raqueta Mango",
+          "presentacion": "1 caja con 20 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/raqueta-mango.webp"
+        },
+        {
+          "producto": "Raqueta Tamarindo",
+          "presentacion": "1 caja con 20 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/raqueta-tamarindo.webp"
+        },
+        {
+          "producto": "<font class=\\",
+          "presentacion": "1 caja con 15 displays de 60 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/font-class.webp"
+        },
+        {
+          "producto": "Sorpresa Mix",
+          "presentacion": "1 caja con 10 bolsas de 1.5 kg",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/sorpresa-mix.webp"
+        },
+        {
+          "producto": "Chamoyaso MIX",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
+          "piezasPorCaja": 12,
+          "sellos": [],
+          "foto": "/productos/miguelito/chamoyaso-mix.webp"
+        },
+        {
+          "producto": "Chamagosa",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/miguelito/chamagosa.webp"
         }
       ],
-      "datosDeEjemplo": true,
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["tama-roca", "nishikawa", "chaca-chaca"]
+      "relacionadas": [
+        "tama-roca",
+        "nishikawa",
+        "chaca-chaca"
+      ],
+      "logo": "/marcas/miguelito.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "candy-pop",
       "nombre": "Candy Pop",
       "nombreCompleto": "Candy Pop, CP Products",
-      "logo": "/marcas/candy-pop.png",
-      "categorias": ["paletas", "gomitas"],
+      "logo": "/marcas/candy-pop.webp",
+      "categorias": [
+        "paletas",
+        "gomitas"
+      ],
       "resumen": "Paletas y confitería infantil de rotación rápida.",
       "descripcion": [
         "Candy Pop maneja paletas y confitería de formato pequeño, la que se vende de una en una en el mostrador. Es compra por impulso pura: precio bajo, decisión inmediata.",
         "Es de las líneas que mejor funcionan para llenar la caja registradora de un punto de venta pequeño y para armar bolsas de fiesta."
       ],
       "porQueRota": "Precio de una moneda y decisión de compra inmediata en el mostrador.",
-      "compradores": ["tienda", "eventos", "mayorista"],
+      "compradores": [
+        "tienda",
+        "eventos",
+        "mayorista"
+      ],
       "productos": [
         {
-          "producto": "Paleta surtida",
-          "presentacion": "Bolsa con 50 piezas",
+          "producto": "Malvalleno Sandía",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malvalleno-sand-a.webp"
+        },
+        {
+          "producto": "Malvalleno Mango",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malvalleno-mango.webp"
+        },
+        {
+          "producto": "Malvalleno Piña",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malvalleno-pi-a.webp"
+        },
+        {
+          "producto": "Malvalleno Cereza",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malvalleno-cereza.webp"
+        },
+        {
+          "producto": "Malvalleno Tamarindo",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malvalleno-tamarindo.webp"
+        },
+        {
+          "producto": "Malvalleno Mix Chocolate",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malvalleno-mix-chocolate.webp"
+        },
+        {
+          "producto": "Malva Coffi´s",
+          "presentacion": "1 caja con 12 bolsas con 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/malva-coffi-s.webp"
+        },
+        {
+          "producto": "Super Super Tira",
+          "presentacion": "1 caja con 16 tiras con 20 piezas.",
           "piezasPorCaja": 20,
-          "sellos": ["exceso-azucares", "exceso-calorias"]
+          "sellos": [],
+          "foto": "/productos/candy-pop/super-super-tira.webp"
+        },
+        {
+          "producto": "Paleta Rebanadita sin Chile",
+          "presentacion": "1 caja con 24 bolsas de 48 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/paleta-rebanadita-sin-chile.webp"
+        },
+        {
+          "producto": "Bolitochas Sandía",
+          "presentacion": "1 caja con 24 bolsas de 60 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/bolitochas-sand-a.webp"
+        },
+        {
+          "producto": "Bolitochas Surtidas",
+          "presentacion": "1 caja con 24 bolsas de 60 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/bolitochas-surtidas.webp"
+        },
+        {
+          "producto": "Rebanada con chile",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/rebanada-con-chile.webp"
+        },
+        {
+          "producto": "Super Rebanada Mango",
+          "presentacion": "1 caja con 16 bolsas de 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/super-rebanada-mango.webp"
+        },
+        {
+          "producto": "Super Rebanada Sandía",
+          "presentacion": "1 caja con 16 bolsas de 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/candy-pop/super-rebanada-sand-a.webp"
         }
       ],
-      "datosDeEjemplo": true,
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["rivera", "charly", "pipos"]
+      "relacionadas": [
+        "rivera",
+        "charly",
+        "pipos"
+      ],
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "rivera",
       "nombre": "Productos Rivera",
       "nombreCompleto": "Productos Rivera, malvaviscos y gomitas",
       "logo": "/marcas/rivera.png",
-      "categorias": ["gomitas"],
+      "categorias": [
+        "gomitas"
+      ],
       "resumen": "Malvaviscos y gomitas para anaquel y para mesa de dulces.",
       "descripcion": [
         "Productos Rivera trabaja malvaviscos y gomitas, que son la base de cualquier mesa de dulces y una categoría de peso en el anaquel de dulcería.",
         "Se venden tanto en presentación individual para mostrador como en bolsa de volumen para eventos, lo que permite surtir dos tipos de cliente con una sola marca."
       ],
       "porQueRota": "Sirve a dos mercados con la misma marca: mostrador por pieza y volumen para eventos.",
-      "compradores": ["tienda", "eventos", "mayorista", "cadena"],
+      "compradores": [
+        "tienda",
+        "eventos",
+        "mayorista",
+        "cadena"
+      ],
       "productos": [
         {
           "producto": "Malvavisco",
           "presentacion": "Bolsa 500 g",
           "piezasPorCaja": 12,
-          "sellos": ["exceso-azucares", "exceso-calorias"]
+          "sellos": [
+            "exceso-azucares",
+            "exceso-calorias"
+          ],
+          "foto": null
         },
         {
           "producto": "Gomita surtida",
           "presentacion": "Bolsa 1 kg",
           "piezasPorCaja": 10,
-          "sellos": ["exceso-azucares", "exceso-calorias"]
+          "sellos": [
+            "exceso-azucares",
+            "exceso-calorias"
+          ],
+          "foto": null
         }
       ],
       "datosDeEjemplo": true,
       "textoRevisado": false,
-      "relacionadas": ["candy-pop", "dulces-liz", "charly"]
+      "relacionadas": [
+        "candy-pop",
+        "dulces-liz",
+        "charly"
+      ],
+      "sellosVerificados": false
     },
     {
       "slug": "salsa-tamazula",
       "nombre": "Salsa Tamazula",
       "nombreCompleto": "Salsa Tamazula y Valentina",
-      "logo": "/marcas/valentina.png",
-      "categorias": ["salsas", "botana"],
+      "logo": "/marcas/salsa-tamazula.webp",
+      "categorias": [
+        "salsas",
+        "botana"
+      ],
       "resumen": "Salsa picante embotellada, artículo de despensa y de botana.",
       "descripcion": [
         "Salsa Tamazula es la casa de Valentina, una de las salsas embotelladas más vendidas de México. Es producto de despensa, no de impulso: el consumidor la compra por reposición, con una frecuencia predecible.",
         "Para el punto de venta eso significa rotación estable todo el año y cero riesgo de quedarse con inventario parado."
       ],
       "porQueRota": "Compra de reposición, no de impulso: la frecuencia es predecible todo el año.",
-      "compradores": ["tienda", "mayorista", "cadena"],
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "cadena"
+      ],
       "productos": [
         {
-          "producto": "Salsa Valentina etiqueta amarilla",
-          "presentacion": "Botella 370 ml",
-          "piezasPorCaja": 24,
-          "sellos": ["exceso-sodio"]
+          "producto": "Salsa Roja 370 ML",
+          "presentacion": "1 caja con 24 envases de 370 mililitros.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/salsa-roja-370-ml.webp"
         },
         {
-          "producto": "Salsa Valentina etiqueta negra",
-          "presentacion": "Botella 370 ml",
-          "piezasPorCaja": 24,
-          "sellos": ["exceso-sodio"]
+          "producto": "Salsa Roja 1/4",
+          "presentacion": "1 caja con 24 envases de 250 mililitros.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/salsa-roja-1-4.webp"
+        },
+        {
+          "producto": "Salsa Negra 1 LT",
+          "presentacion": "1 caja con 12 envases de 1 litro.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/salsa-negra-1-lt.webp"
+        },
+        {
+          "producto": "Salsa Negra 370 ML",
+          "presentacion": "1 caja con 24 envases de 370 mililitros.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/salsa-negra-370-ml.webp"
+        },
+        {
+          "producto": "Salsa Sobre de 10 GR",
+          "presentacion": "1 caja con 10 bolsas de 60 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/salsa-sobre-de-10-gr.webp"
+        },
+        {
+          "producto": "Valentina Roja 10 GR",
+          "presentacion": "1 caja con 900 sobres de 10 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/valentina-roja-10-gr.webp"
+        },
+        {
+          "producto": "Valentina Roja 8 GR",
+          "presentacion": "1 caja de 1200 sobres de 8 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/valentina-roja-8-gr.webp"
+        },
+        {
+          "producto": "Valentina Roja 5 GR",
+          "presentacion": "1 caja con 1800 sobres de 5 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/valentina-roja-5-gr.webp"
+        },
+        {
+          "producto": "Valentina Negra 10 GR",
+          "presentacion": "1 caja con 900 sobres de 10 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/valentina-negra-10-gr.webp"
+        },
+        {
+          "producto": "Costa Brava Galón",
+          "presentacion": "1 caja con 24 envases de 370 mililitros.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/salsa-tamazula/costa-brava-gal-n.webp"
         }
       ],
-      "datosDeEjemplo": true,
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["nishikawa", "betamex", "chaca-chaca"]
+      "relacionadas": [
+        "nishikawa",
+        "betamex",
+        "chaca-chaca"
+      ],
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "chaca-chaca",
       "nombre": "Chaca Chaca",
-      "categorias": ["enchilados", "tamarindo"],
+      "categorias": [
+        "enchilados",
+        "tamarindo"
+      ],
       "resumen": "Dulce enchilado en barra, de los clásicos de tiendita.",
       "descripcion": [
         "Chaca Chaca es dulce enchilado en barra, uno de los productos que el consumidor mexicano identifica sin necesidad de publicidad.",
         "Es de los artículos que sostienen la venta diaria de una tiendita: precio bajo, sabor reconocido y compra repetida."
       ],
       "porQueRota": "Producto reconocido sin publicidad, con compra repetida entre semana.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Chaca Trozo",
+          "presentacion": "1 caja con 32 bolsas de 400 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chaca-chaca/chaca-trozo.webp"
+        },
+        {
+          "producto": "Rielito en Trozo en bolsa",
+          "presentacion": "1 caja con 26 bolsas de 50 gramos con 10 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chaca-chaca/rielito-en-trozo-en-bolsa.webp"
+        },
+        {
+          "producto": "Pulpa Chaca Chaca",
+          "presentacion": "1 caja con 20 bolsas de 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chaca-chaca/pulpa-chaca-chaca.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["tama-roca", "miguelito", "dulces-pillo"]
+      "relacionadas": [
+        "tama-roca",
+        "miguelito",
+        "dulces-pillo"
+      ],
+      "logo": "/marcas/chaca-chaca.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "charly",
       "nombre": "Charly",
-      "categorias": ["gomitas", "paletas"],
+      "categorias": [
+        "gomitas",
+        "paletas"
+      ],
       "resumen": "Confitería infantil con presentación llamativa.",
       "descripcion": [
         "Charly trabaja confitería dirigida a público infantil, con presentaciones y empaque que compiten por atención en el anaquel.",
         "Funciona bien en dulcerías de fiesta y en tiendas cercanas a escuelas, donde la decisión de compra la toma el consumidor final frente al producto."
       ],
       "porQueRota": "El empaque hace el trabajo de venta en el anaquel.",
-      "compradores": ["tienda", "eventos", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "eventos",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Churrito Salado 25´s",
+          "presentacion": "25 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/charly/churrito-salado-25-s.webp"
+        },
+        {
+          "producto": "Palomitas",
+          "presentacion": "20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/charly/palomitas.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["candy-pop", "rivera", "dulces-karla"]
+      "relacionadas": [
+        "candy-pop",
+        "rivera",
+        "dulces-karla"
+      ],
+      "logo": "/marcas/charly.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "pipos",
       "nombre": "Pipos",
-      "categorias": ["botana", "cacahuates"],
+      "categorias": [
+        "botana",
+        "cacahuates"
+      ],
       "resumen": "Botana salada y semillas para acompañar.",
       "descripcion": [
         "Pipos maneja botana salada y semillas, categoría que acompaña bebida y que se mueve fuerte los fines de semana.",
         "Complementa bien un anaquel dominado por dulce: le da al punto de venta una segunda ocasión de consumo."
       ],
       "porQueRota": "Segunda ocasión de consumo en un anaquel que suele ser solo dulce.",
-      "compradores": ["tienda", "mayorista", "cadena"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "cadena"
+      ],
+      "productos": [
+        {
+          "producto": "Surtido Mix",
+          "presentacion": "1 caja con 10 bolsas de 50 piezas de 10 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/pipos/surtido-mix.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["nishikawa", "betamex", "salsa-tamazula"]
+      "relacionadas": [
+        "nishikawa",
+        "betamex",
+        "salsa-tamazula"
+      ],
+      "logo": "/marcas/pipos.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "obleas-kevin",
       "nombre": "Obleas Kevin",
-      "categorias": ["obleas-y-dulce-tradicional"],
+      "categorias": [
+        "obleas-y-dulce-tradicional"
+      ],
       "resumen": "Obleas con cajeta, dulce tradicional mexicano.",
       "descripcion": [
         "Obleas Kevin trabaja el dulce tradicional de oblea con cajeta, una categoría con demanda estable y competencia baja.",
         "Es de los productos que diferencian un anaquel: casi ninguna cadena grande lo surte bien, y el consumidor que lo busca es fiel."
       ],
       "porQueRota": "Competencia baja y consumidor fiel: diferencia el anaquel frente a la cadena grande.",
-      "compradores": ["tienda", "mayorista", "eventos"],
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "eventos"
+      ],
       "productos": [],
       "datosDeEjemplo": true,
       "textoRevisado": false,
-      "relacionadas": ["dulces-tradicionales", "portico", "dulces-guaz"]
+      "relacionadas": [
+        "dulces-tradicionales",
+        "portico",
+        "dulces-guaz"
+      ],
+      "sellosVerificados": false,
+      "notaInterna": "SIN EVIDENCIA DE QUE EXISTA. No aparece en el sitio del cliente (su sitemap lista 20 marcas y esta no esta), no tiene logotipo, no tiene productos, y dos busquedas web no devuelven nada con ese nombre. Salio solo de la lista del PDF institucional. Ojo: Cabadas, que si esta en el catalogo y si tiene productos, es un fabricante conocido de oblea con cajeta; puede que 'Obleas Kevin' sea un error de transcripcion o una marca regional diminuta. PREGUNTAR AL CLIENTE antes de publicar: una marca fantasma infla la cifra que el sitio presume."
     },
     {
       "slug": "dulces-tradicionales",
       "nombre": "Dulces Tradicionales",
-      "categorias": ["obleas-y-dulce-tradicional"],
+      "categorias": [
+        "obleas-y-dulce-tradicional"
+      ],
       "resumen": "Dulce típico mexicano: palanquetas, cocadas y jamoncillo.",
       "descripcion": [
         "Línea de dulce típico mexicano, del que se vende en mercado y en tienda de barrio: palanqueta, cocada, jamoncillo y similares.",
         "Es una categoría con clientela definida y precio estable, útil para redondear un surtido que de otro modo sería solo confitería industrial."
       ],
       "porQueRota": "Clientela definida y precio estable, con poca guerra de precios.",
-      "compradores": ["tienda", "mayorista", "eventos"],
-      "productos": [],
-      "datosDeEjemplo": true,
-      "textoRevisado": false,
-      "relacionadas": ["obleas-kevin", "portico", "dulces-guaz"]
-    },
-    {
-      "slug": "grupo-frato",
-      "nombre": "Grupo Frato",
-      "categorias": ["gomitas", "enchilados"],
-      "resumen": "Confitería de volumen para anaquel y para armado de bolsas.",
-      "descripcion": [
-        "Grupo Frato surte confitería en presentaciones de volumen, pensadas tanto para anaquel como para armado de bolsas y mesas de dulces."
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "eventos"
       ],
-      "porQueRota": "Presentación de volumen que sirve igual para anaquel y para eventos.",
-      "compradores": ["mayorista", "eventos", "tienda"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "productos": [
+        {
+          "producto": "Palanqueta Estuche",
+          "presentacion": "1 caja con 12 estuches de 950 gramos de 60 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/palanqueta-estuche.webp"
+        },
+        {
+          "producto": "Borrachito Chico",
+          "presentacion": "1 caja con 18 estuches de 24 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/borrachito-chico.webp"
+        },
+        {
+          "producto": "Borrachíto Grande",
+          "presentacion": "1 caja con 12 estuches de 60 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/borrach-to-grande.webp"
+        },
+        {
+          "producto": "Paleta Mango",
+          "presentacion": "1 caja con 25 bolsas con 25 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/paleta-mango.webp"
+        },
+        {
+          "producto": "Paleta Menta",
+          "presentacion": "1 caja con 25 bolsas con 25 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/paleta-menta.webp"
+        },
+        {
+          "producto": "Checolines",
+          "presentacion": "1 caja con 25 bolsa de 500 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/checolines.webp"
+        },
+        {
+          "producto": "Pulpa Clara Cisne",
+          "presentacion": "1 caja con 20 bolsas con 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/pulpa-clara-cisne.webp"
+        },
+        {
+          "producto": "Vaso Memito",
+          "presentacion": "1 caja con 28 bolsas de 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/vaso-memito.webp"
+        },
+        {
+          "producto": "Hostia Estuche",
+          "presentacion": "1 caja con 12 estuches de 48 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/hostia-estuche.webp"
+        },
+        {
+          "producto": "Hostia Colchón",
+          "presentacion": "1 caja con 32 paquetes de 12 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/hostia-colch-n.webp"
+        },
+        {
+          "producto": "Hostia Recorte",
+          "presentacion": "1 bulto con 10 bolsas de 24 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-tradicionales/hostia-recorte.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["rivera", "confitados-finos", "candy-pop"]
+      "relacionadas": [
+        "obleas-kevin",
+        "portico",
+        "dulces-guaz"
+      ],
+      "logo": "/marcas/dulces-tradicionales.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "betamex",
       "nombre": "Betamex",
-      "categorias": ["botana", "enchilados"],
+      "categorias": [
+        "botana",
+        "enchilados"
+      ],
       "resumen": "Botana y producto enchilado para punto de venta.",
       "descripcion": [
         "Betamex maneja botana y producto enchilado en presentaciones de punto de venta."
       ],
       "porQueRota": "Formato de mostrador con precio de impulso.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Beta Lancita con chile Desenvuelta",
+          "presentacion": "1 caja con 6 estuches de 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/betamex/beta-lancita-con-chile-desenvuelta.webp"
+        },
+        {
+          "producto": "Beta Tamarrico",
+          "presentacion": "1 caja con 16 bolsas de 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/betamex/beta-tamarrico.webp"
+        },
+        {
+          "producto": "Beta Lancita con chile Envuelta",
+          "presentacion": "1 caja con 6 estuches de 50 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/betamex/beta-lancita-con-chile-envuelta.webp"
+        },
+        {
+          "producto": "Beta Lancita Tamarrico",
+          "presentacion": "Presentación por confirmar",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/betamex/beta-lancita-tamarrico.webp"
+        },
+        {
+          "producto": "Beta Tamarugo chile",
+          "presentacion": "1 caja con 24 bolsas de 30 piezas,",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/betamex/beta-tamarugo-chile.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["pipos", "salsa-tamazula", "chaca-chaca"]
+      "relacionadas": [
+        "pipos",
+        "salsa-tamazula",
+        "chaca-chaca"
+      ],
+      "logo": "/marcas/betamex.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "cabadas",
       "nombre": "Cabadas",
-      "categorias": ["obleas-y-dulce-tradicional", "paletas"],
+      "categorias": [
+        "obleas-y-dulce-tradicional",
+        "paletas"
+      ],
       "resumen": "Dulcería tradicional en presentaciones de mostrador.",
       "descripcion": [
         "Cabadas surte dulcería tradicional en presentaciones pensadas para mostrador y venta por pieza."
       ],
       "porQueRota": "Venta por pieza con margen sano para el detallista.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Oblea mini",
+          "presentacion": "1 caja con 84 empaques de 100 gramos de 10 piezas,",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/cabadas/oblea-mini.webp"
+        },
+        {
+          "producto": "Oblea Mediana",
+          "presentacion": "1 caja con 24 empaques de 500 gramos de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/cabadas/oblea-mediana.webp"
+        },
+        {
+          "producto": "Oblea Grande",
+          "presentacion": "1 caja con 16 empaques de 700 gramos de 10 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/cabadas/oblea-grande.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["dulces-tradicionales", "obleas-kevin", "portico"]
+      "relacionadas": [
+        "dulces-tradicionales",
+        "obleas-kevin",
+        "portico"
+      ],
+      "logo": "/marcas/cabadas.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "dulces-pillo",
       "nombre": "Dulces Pillo",
-      "categorias": ["enchilados", "paletas"],
+      "categorias": [
+        "enchilados",
+        "paletas"
+      ],
       "resumen": "Dulce enchilado y paleta de rotación diaria.",
       "descripcion": [
         "Dulces Pillo trabaja dulce enchilado y paleta, categorías de rotación diaria en tiendita."
       ],
       "porQueRota": "Rotación diaria y reposición constante.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Bibi Polis Frutix",
+          "presentacion": "1 caja con 12 displáys de 12 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-pillo/bibi-polis-frutix.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["chaca-chaca", "dulces-liz", "miguelito"]
+      "relacionadas": [
+        "chaca-chaca",
+        "dulces-liz",
+        "miguelito"
+      ],
+      "logo": "/marcas/dulces-pillo.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "dulces-liz",
       "nombre": "Dulces Liz",
-      "categorias": ["gomitas", "paletas"],
+      "categorias": [
+        "gomitas",
+        "paletas"
+      ],
       "resumen": "Gomitas y confitería para dulcería y evento.",
       "descripcion": [
         "Dulces Liz surte gomitas y confitería en formatos que funcionan tanto en dulcería como en armado de bolsas para evento."
       ],
       "porQueRota": "Un solo producto sirve al anaquel y a la mesa de dulces.",
-      "compradores": ["tienda", "eventos", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "eventos",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Vela de Leche",
+          "presentacion": "1 caja de 12 estuches de 180 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-liz/vela-de-leche.webp"
+        },
+        {
+          "producto": "Vela vitrolero leche",
+          "presentacion": "1 caja con 12 estuches de 90 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-liz/vela-vitrolero-leche.webp"
+        },
+        {
+          "producto": "Vela Extra de Agua",
+          "presentacion": "1 caja con 6 estuches de 100 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-liz/vela-extra-de-agua.webp"
+        },
+        {
+          "producto": "Vela Extra de Leche",
+          "presentacion": "1 caja con 6 estuches de 100 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-liz/vela-extra-de-leche.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["rivera", "dulces-karla", "charly"]
+      "relacionadas": [
+        "rivera",
+        "dulces-karla",
+        "charly"
+      ],
+      "logo": "/marcas/dulces-liz.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "portico",
       "nombre": "Portico",
-      "categorias": ["obleas-y-dulce-tradicional"],
+      "categorias": [
+        "obleas-y-dulce-tradicional"
+      ],
       "resumen": "Dulce tradicional y de temporada.",
       "descripcion": [
         "Portico maneja dulce tradicional, con líneas que se refuerzan en temporada."
       ],
       "porQueRota": "Base estable todo el año con picos de temporada.",
-      "compradores": ["tienda", "mayorista", "eventos"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista",
+        "eventos"
+      ],
+      "productos": [
+        {
+          "producto": "Polvo Tico Grande 30`s",
+          "presentacion": "1 caja con 30 bolsas de 25 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/portico/polvo-tico-grande-30-s.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["dulces-tradicionales", "cabadas", "obleas-kevin"]
+      "relacionadas": [
+        "dulces-tradicionales",
+        "cabadas",
+        "obleas-kevin"
+      ],
+      "logo": "/marcas/portico.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "productos-del-rey",
       "nombre": "Productos del Rey",
-      "categorias": ["botana", "cacahuates"],
+      "categorias": [
+        "botana",
+        "cacahuates"
+      ],
       "resumen": "Botana y semilla en presentaciones de volumen.",
       "descripcion": [
         "Productos del Rey surte botana y semilla en presentaciones de volumen para punto de venta."
       ],
       "porQueRota": "Presentación de volumen con costo por pieza bajo.",
-      "compradores": ["mayorista", "tienda", "cadena"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "mayorista",
+        "tienda",
+        "cadena"
+      ],
+      "productos": [
+        {
+          "producto": "Tarugo con Chile",
+          "presentacion": "1 caja con 18 dsiplays con 80 piezas.",
+          "piezasPorCaja": 80,
+          "sellos": [],
+          "foto": "/productos/productos-del-rey/tarugo-con-chile.webp"
+        },
+        {
+          "producto": "T-Reyes mini lancita Tajín",
+          "presentacion": "1 caja con 18 displáys de 50 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/productos-del-rey/t-reyes-mini-lancita-taj-n.webp"
+        },
+        {
+          "producto": "Lancita con Chile",
+          "presentacion": "1 caja con 6 displáys de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/productos-del-rey/lancita-con-chile.webp"
+        },
+        {
+          "producto": "Lancita con Azúcar",
+          "presentacion": "1 caja con 6 displáys de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/productos-del-rey/lancita-con-az-car.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["pipos", "nishikawa", "betamex"]
+      "relacionadas": [
+        "pipos",
+        "nishikawa",
+        "betamex"
+      ],
+      "logo": "/marcas/productos-del-rey.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "dulces-karla",
       "nombre": "Dulces Karla",
-      "categorias": ["gomitas", "enchilados"],
+      "categorias": [
+        "gomitas",
+        "enchilados"
+      ],
       "resumen": "Confitería enchilada y gomita para dulcería.",
       "descripcion": [
         "Dulces Karla trabaja confitería enchilada y gomita, con formatos de dulcería y de bolsa."
       ],
       "porQueRota": "El enchilado es la categoría de mayor rotación en dulcería mexicana.",
-      "compradores": ["tienda", "eventos", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "eventos",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Vasito Tamarindo Grande",
+          "presentacion": "1 caja con 16 paquetes de 8 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-karla/vasito-tamarindo-grande.webp"
+        },
+        {
+          "producto": "Vasito Tamarindo Chico",
+          "presentacion": "1 caja con 18 paquetes de 24 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-karla/vasito-tamarindo-chico.webp"
+        },
+        {
+          "producto": "Gomi King Mango",
+          "presentacion": "1 caja con 18 bolsas de 47 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-karla/gomi-king-mango.webp"
+        },
+        {
+          "producto": "Fire Kids Sandía",
+          "presentacion": "1 caja con 18 bolsas de 47 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-karla/fire-kids-sand-a.webp"
+        },
+        {
+          "producto": "Mangomis",
+          "presentacion": "1 caja con 25 bolsas de 540 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-karla/mangomis.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["dulces-liz", "charly", "dulces-pillo"]
+      "relacionadas": [
+        "dulces-liz",
+        "charly",
+        "dulces-pillo"
+      ],
+      "logo": "/marcas/dulces-karla.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "dulces-guaz",
       "nombre": "Dulces Guaz",
-      "categorias": ["obleas-y-dulce-tradicional", "tamarindo"],
+      "categorias": [
+        "obleas-y-dulce-tradicional",
+        "tamarindo"
+      ],
       "resumen": "Dulce regional y de tamarindo.",
       "descripcion": [
         "Dulces Guaz surte dulce regional y de tamarindo, categorías con demanda arraigada."
       ],
       "porQueRota": "Demanda arraigada que no depende de publicidad.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Mega Kachetada",
+          "presentacion": "1 caja con 30 bolsas con 25 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-guaz/mega-kachetada.webp"
+        },
+        {
+          "producto": "K-Chekangurin",
+          "presentacion": "1 caja con 200 bolsas con 5 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-guaz/k-chekangurin.webp"
+        },
+        {
+          "producto": "Tamalito",
+          "presentacion": "1 caja con 30 bolsas con 20 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-guaz/tamalito.webp"
+        },
+        {
+          "producto": "Devora-Guaz Tira",
+          "presentacion": "1 caja con 50 tiras de 10 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/dulces-guaz/devora-guaz-tira.webp"
+        },
+        {
+          "producto": "Comesaurio",
+          "presentacion": "1 caja con 50 tiras con 10 piezas.",
+          "piezasPorCaja": 10,
+          "sellos": [],
+          "foto": "/productos/dulces-guaz/comesaurio.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["tama-roca", "dulces-tradicionales", "obleas-kevin"]
+      "relacionadas": [
+        "tama-roca",
+        "dulces-tradicionales",
+        "obleas-kevin"
+      ],
+      "logo": "/marcas/dulces-guaz.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "confitados-finos",
       "nombre": "Confitados Finos",
-      "categorias": ["gomitas"],
+      "categorias": [
+        "gomitas"
+      ],
       "resumen": "Confitado y gragea para mesa de dulces y decoración.",
       "descripcion": [
         "Confitados Finos trabaja confitado y gragea, producto de mesa de dulces y de decoración de repostería."
       ],
       "porQueRota": "Sirve a repostería y a eventos, dos mercados fuera del anaquel clásico.",
-      "compradores": ["eventos", "mayorista", "tienda"],
+      "compradores": [
+        "eventos",
+        "mayorista",
+        "tienda"
+      ],
       "productos": [],
       "datosDeEjemplo": true,
       "textoRevisado": false,
-      "relacionadas": ["rivera", "grupo-frato", "dulces-liz"]
+      "relacionadas": [
+        "rivera",
+        "tama-roca",
+        "dulces-liz"
+      ],
+      "logo": "/marcas/confitados-finos.webp",
+      "sellosVerificados": false
     },
     {
       "slug": "alvbro",
       "nombre": "Alvbro",
-      "categorias": ["gomitas", "paletas"],
+      "categorias": [
+        "gomitas",
+        "paletas"
+      ],
       "resumen": "Confitería en formatos de impulso.",
       "descripcion": [
         "Alvbro surte confitería en formatos de impulso para mostrador."
       ],
       "porQueRota": "Formato de impulso con precio de una moneda.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Paleta Hueso",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/alvbro/paleta-hueso.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["candy-pop", "chompys", "charly"]
+      "relacionadas": [
+        "candy-pop",
+        "chompys",
+        "charly"
+      ],
+      "logo": "/marcas/alvbro.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
       "slug": "chompys",
       "nombre": "Chompys",
-      "categorias": ["botana", "enchilados"],
+      "categorias": [
+        "botana",
+        "enchilados"
+      ],
       "resumen": "Botana enchilada en presentación individual.",
       "descripcion": [
         "Chompys maneja botana enchilada en presentación individual para punto de venta."
       ],
       "porQueRota": "Presentación individual que se vende de una en una en el mostrador.",
-      "compradores": ["tienda", "mayorista"],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "compradores": [
+        "tienda",
+        "mayorista"
+      ],
+      "productos": [
+        {
+          "producto": "Piña Caribeña",
+          "presentacion": "1 caja con 28 bolsas de 40 piezas de 14 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/pi-a-caribe-a.webp"
+        },
+        {
+          "producto": "Calcalocas",
+          "presentacion": "1 caja con 28 bolsas de 40 piezas de 14 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/calcalocas.webp"
+        },
+        {
+          "producto": "Pulpinta",
+          "presentacion": "1 caja con 28 bolsas de 40 piezas de 14 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/pulpinta.webp"
+        },
+        {
+          "producto": "Futgolazo",
+          "presentacion": "1 caja con 28 bolsas de 40 piezas de 10 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/futgolazo.webp"
+        },
+        {
+          "producto": "Dulce Vida Cítricos",
+          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/dulce-vida-c-tricos.webp"
+        },
+        {
+          "producto": "Dulce Vida Frutos Rojos",
+          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/dulce-vida-frutos-rojos.webp"
+        },
+        {
+          "producto": "Dulce Vida Sandía",
+          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/dulce-vida-sand-a.webp"
+        },
+        {
+          "producto": "Dulce Vida Enchilado",
+          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/dulce-vida-enchilado.webp"
+        },
+        {
+          "producto": "Dulce Vida Café",
+          "presentacion": "1 caja con 12 bolsas de 20 piezas",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/chompys/dulce-vida-caf.webp"
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": ["betamex", "pipos", "alvbro"]
+      "relacionadas": [
+        "betamex",
+        "pipos",
+        "alvbro"
+      ],
+      "logo": "/marcas/chompys.webp",
+      "sellosVerificados": false,
+      "fuenteProductos": "gruponitamy.com, agosto 2026"
     }
   ]
 }

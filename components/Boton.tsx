@@ -28,7 +28,13 @@ const BASE = [
 
 const VARIANTES: Record<Variante, string> = {
   // Blanco sobre rojo da 4.70:1. Al presionar pasa al rojo fuerte, 6.22:1.
-  primario: "bg-rojo text-white hover:bg-rojo-fuerte active:bg-rojo-fuerte",
+  //
+  // `brillo` hace cruzar un destello al pasar el cursor, como el celofán de
+  // un dulce. Solo en el primario: si todos los botones brillaran, el gesto
+  // dejaría de señalar cuál es la acción principal. Solo con puntero fino, y
+  // se apaga con movimiento reducido.
+  primario:
+    "brillo bg-rojo text-white hover:bg-rojo-fuerte active:bg-rojo-fuerte",
   // Borde de control, no divisor decorativo: necesita 3:1 contra el papel.
   secundario:
     "border border-borde-campo text-tinta hover:border-tinta hover:bg-papel-2",

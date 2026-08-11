@@ -1,0 +1,346 @@
+"use client";
+
+import { type ReactNode, useId, useRef, useState } from "react";
+import type { Sabor } from "@/lib/contenido";
+import { BORDE_SILUETA, SABORES } from "@/lib/sabores";
+import { BotonCotizar } from "../calificador/BotonCotizar";
+import { Odometro } from "../Odometro";
+
+/**
+ * El rail seleccionable de temporadas.
+ *
+ * Único componente de cliente de la sección. Todo el cálculo de fechas ocurre
+ * en el servidor (`Temporadas.tsx`) y aquí solo baja el estado de la pestaña
+ * seleccionada, que es lo único que de verdad necesita JavaScript.
+ *
+ * Se implementa como patrón `tablist` de ARIA, no como una lista de botones
+ * sueltos, porque es exactamente eso: siete pestañas, un panel. Lo que eso
+ * obliga a hacer y que un `<button>` suelto no daría:
+ *
+ *   - `tabindex` móvil: solo la pestaña seleccionada es tabulable. Con siete
+ *     botones normales, quien navega con teclado tendría que pasar por los
+ *     siete para llegar al contenido.
+ *   - Flechas arriba y abajo para moverse entre pestañas, Inicio y Fin para
+ *     los extremos. En un tablist vertical eso es lo que la gente espera.
+ *   - El foco sigue a la selección, y por eso se llama `.focus()` a mano: sin
+ *     eso, el foco se queda en la pestaña vieja y la navegación se rompe.
+ *
+ * La selección inicial es la temporada MÁS PRÓXIMA, no la primera del año.
+ * El servidor ya manda el arreglo ordenado por cercanía, así que es el índice
+ * cero. En enero abre en San Valentín y en octubre en Día de Muertos, sin que
+ * nadie toque nada.
+ *
+ * LOS ICONOS LLEGAN YA RENDERIZADOS, como `ReactNode`, en vez de resolverse
+ * aquí desde su nombre. Eso no es un rodeo: la primera versión importaba
+ * `<IconoCategoria>` en este archivo, y como este archivo es `"use client"`,
+ * los catorce iconos de Phosphor se iban enteros al paquete del navegador.
+ * La home subió a 150 kB, que es justo el techo del presupuesto del brief.
+ *
+ * Un elemento creado en el servidor y pasado como prop cruza la frontera sin
+ * arrastrar su código: el navegador recibe el SVG ya resuelto. Este
+ * componente solo pone el estado de la pestaña, que es lo único que de
+ * verdad necesita JavaScript.
+ */
+
+export type CategoriaVista = {
+  slug: string;
+  nombre: string;
+  color: Sabor;
+  /** Icono ya renderizado en el servidor. Ver la nota de arriba. */
+  icono: ReactNode;
+};
+
+export type TemporadaVista = {
+  slug: string;
+  nombre: string;
+  cuando: string;
+  queRota: string;
+  color: Sabor;
+  /** Icono chico, para la pestaña del rail. */
+  icono: ReactNode;
+  /** El mismo icono en grande, para la marca de agua del panel. */
+  iconoGrande: ReactNode;
+  estado: "abierta" | "urgente" | "tarde";
+  diasParaCorte: number;
+  corteLegible: string;
+  picoLegible: string;
+  categorias: CategoriaVista[];
+};
+
+/** El texto corto del rail. Se lee de reojo, así que no pasa de tres palabras. */
+function resumenDeCorte(t: TemporadaVista): string {
+  if (t.estado === "tarde") return "Sobre el tiempo";
+  if (t.diasParaCorte === 0) return "Último día";
+  if (t.diasParaCorte === 1) return "Queda 1 día";
+  return `Quedan ${t.diasParaCorte} días`;
+}
+
+/** El texto largo del panel. Aquí sí se explica de qué son los días. */
+function frameDeCorte(t: TemporadaVista): string {
+  if (t.estado === "tarde") {
+    return `La fecha recomendada para pedir era el ${t.corteLegible}. Todavía se alcanza, pero con menos margen: escríbenos y vemos qué hay disponible.`;
+  }
+  if (t.diasParaCorte === 0) {
+    return `Hoy es el último día recomendado para levantar el pedido y que llegue completo al ${t.picoLegible}.`;
+  }
+  const dias =
+    t.diasParaCorte === 1 ? "queda 1 día" : `quedan ${t.diasParaCorte} días`;
+  return `Para llegar completo al ${t.picoLegible}, conviene levantar el pedido antes del ${t.corteLegible}: ${dias}.`;
+}
+
+export function RailTemporadas({
+  temporadas,
+}: {
+  temporadas: TemporadaVista[];
+}) {
+  const [activa, setActiva] = useState(0);
+  const idBase = useId();
+  const pestanas = useRef<Array<HTMLButtonElement | null>>([]);
+
+  // Mover el foco además de la selección. `setState` no mueve el foco solo, y
+  // sin esto las flechas dejan el foco atrás y la siguiente flecha no hace
+  // nada.
+  function irA(i: number) {
+    const destino = (i + temporadas.length) % temporadas.length;
+    setActiva(destino);
+    pestanas.current[destino]?.focus();
+  }
+
+  function alTeclado(e: React.KeyboardEvent) {
+    const tecla = e.key;
+    // Se aceptan las flechas de los dos ejes: el rail es vertical en
+    // escritorio y horizontal en celular, y quien navega con teclado no
+    // debería tener que adivinar cuál es cuál.
+    if (tecla === "ArrowDown" || tecla === "ArrowRight") {
+      e.preventDefault();
+      irA(activa + 1);
+    } else if (tecla === "ArrowUp" || tecla === "ArrowLeft") {
+      e.preventDefault();
+      irA(activa - 1);
+    } else if (tecla === "Home") {
+      e.preventDefault();
+      irA(0);
+    } else if (tecla === "End") {
+      e.preventDefault();
+      irA(temporadas.length - 1);
+    }
+  }
+
+  const t = temporadas[activa];
+  const piel = SABORES[t.color];
+
+  return (
+    <div className="lg:grid lg:grid-cols-12 lg:gap-10">
+      {/*
+        En celular el rail se recorre con el dedo, en escritorio se apila.
+        `.carrusel` da scroll-snap nativo: cero librería de carrusel y nada
+        escondido, solo desplazado, así que teclado y lector de pantalla
+        siguen funcionando igual.
+      */}
+      <div
+        role="tablist"
+        aria-label="Temporadas del año"
+        aria-orientation="vertical"
+        onKeyDown={alTeclado}
+        className="carrusel -mx-5 gap-3 px-5 pb-2 lg:col-span-4 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0"
+      >
+        {temporadas.map((item, i) => {
+          const suPiel = SABORES[item.color];
+          const seleccionada = i === activa;
+          return (
+            <button
+              key={item.slug}
+              ref={(n) => {
+                pestanas.current[i] = n;
+              }}
+              type="button"
+              role="tab"
+              id={`${idBase}-tab-${item.slug}`}
+              aria-selected={seleccionada}
+              aria-controls={`${idBase}-panel`}
+              tabIndex={seleccionada ? 0 : -1}
+              onClick={() => setActiva(i)}
+              className={`presionable flex w-[15rem] items-center gap-3 rounded-caja px-3 py-3 text-left transition-[background-color,transform] duration-200 ease-salida lg:w-full ${
+                seleccionada
+                  ? "bg-papel shadow-[0_1px_0_var(--color-linea)]"
+                  : "hover:bg-papel/70"
+              }`}
+            >
+              <span
+                className={`flex size-11 shrink-0 items-center justify-center rounded-caja transition-transform duration-200 ease-salida ${suPiel.relleno} ${suPiel.texto} ${BORDE_SILUETA} ${
+                  seleccionada ? "scale-105" : ""
+                }`}
+              >
+                {item.icono}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span
+                  className={`ancho block truncate font-extrabold leading-tight tracking-tight ${
+                    seleccionada ? "text-tinta" : "text-tinta-2"
+                  }`}
+                >
+                  {item.nombre}
+                </span>
+                <span
+                  className={`cifra mt-0.5 block text-xs font-semibold ${
+                    item.estado === "abierta" ? "text-tinta-2" : "text-rojo-fuerte"
+                  }`}
+                >
+                  {resumenDeCorte(item)}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/*
+        Un solo panel que cambia de contenido, no siete paneles ocultos. Con
+        `tabIndex={0}` el panel entra en el orden de tabulación: al salir de
+        la pestaña con Tab, el foco cae en el contenido que acaba de aparecer,
+        que es lo que el patrón de ARIA pide cuando el panel no empieza con un
+        elemento enfocable.
+      */}
+      <div
+        role="tabpanel"
+        id={`${idBase}-panel`}
+        aria-labelledby={`${idBase}-tab-${t.slug}`}
+        tabIndex={0}
+        className="mt-8 lg:col-span-8 lg:mt-0"
+      >
+        {/*
+          `key` en el contenedor, no solo en los hijos. Al cambiar de pestaña,
+          React desmonta este nodo y monta uno nuevo, y eso hace que la
+          animación de entrada se vuelva a disparar. Sin el `key` el nodo se
+          reutiliza, la animación no se reinicia y el panel cambia de golpe.
+
+          `panel-entra` incluye un desenfoque de 6px que se va: sin él se
+          alcanzan a ver los dos estados superpuestos y se lee como parpadeo.
+        */}
+        <div
+          key={t.slug}
+          className={`panel-entra grupo-sticker relative overflow-hidden rounded-blanda p-7 sm:p-10 ${piel.pastel}`}
+        >
+          <div
+            aria-hidden="true"
+            className={`punteado pointer-events-none absolute inset-0 ${piel.acento}`}
+          />
+
+          {/*
+            Marca de agua con el icono de la temporada. No es adorno gratuito:
+            el texto del panel está limitado a 54 caracteres por línea, que es
+            lo que se lee cómodo, y eso deja la mitad derecha del bloque vacía
+            en escritorio. Un pastel liso de ese tamaño se ve como un error de
+            maquetación.
+
+            Va recortada por el borde del panel, muy tenue y por debajo del
+            contenido. Solo desde `sm`: en celular no sobra ese espacio y ahí
+            sí estorbaría.
+          */}
+          <div
+            aria-hidden="true"
+            className={`flota pointer-events-none absolute -right-10 -top-10 hidden opacity-15 sm:block ${piel.acento}`}
+          >
+            {t.iconoGrande}
+          </div>
+
+          <div className="relative">
+            <div className="flex flex-wrap items-center gap-3">
+              <span
+                className={`sticker inline-flex items-center rounded-pill px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${piel.relleno} ${piel.texto}`}
+              >
+                Temporada
+              </span>
+              <span className="text-sm font-semibold text-tinta-2">
+                {t.cuando}
+              </span>
+            </div>
+
+            <h3 className="ancho mt-5 text-[clamp(1.75rem,3.2vw,2.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
+              {t.nombre}
+            </h3>
+
+            <p className="mt-4 max-w-[54ch] text-lg leading-relaxed text-tinta">
+              {t.queRota}
+            </p>
+
+            {/*
+              La cuenta regresiva. Va en una caja de papel y no suelta sobre
+              el pastel: es el dato por el que existe la sección y tiene que
+              despegarse del párrafo de arriba.
+
+              Cuando quedan días por delante, el número sale del párrafo y se
+              muestra en grande con los dígitos rodando. Antes iba enterrado a
+              media frase, y es lo único de esta sección que hace que alguien
+              abra WhatsApp hoy en vez de la semana que entra.
+
+              Cuando el corte ya pasó no hay número que enseñar, así que solo
+              queda la explicación.
+            */}
+            <div className="mt-6 max-w-[54ch] rounded-caja bg-papel/80 px-5 py-4">
+              {t.estado !== "tarde" && t.diasParaCorte > 0 && (
+                <p className="flex items-baseline gap-3">
+                  {/* En rojo de marca, NO en el acento del sabor. El acento
+                      sobre este fondo no alcanza ni el 3:1 que WCAG pide a
+                      texto grande: el mango da 1.78:1 sobre su pastel y 1.95
+                      sobre papel. El rojo da 4.49 y ya es el color de las
+                      cifras grandes en la barra de credibilidad, así que
+                      además unifica. */}
+                  <Odometro
+                    valor={t.diasParaCorte}
+                    className="ancho text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold tracking-[-0.03em] text-rojo"
+                  />
+                  <span className="text-sm font-semibold leading-tight text-tinta-2">
+                    {t.diasParaCorte === 1 ? "día" : "días"}
+                    <br />
+                    para pedir
+                  </span>
+                </p>
+              )}
+              <p
+                className={`leading-relaxed text-tinta ${
+                  t.estado !== "tarde" && t.diasParaCorte > 0 ? "mt-3" : ""
+                }`}
+              >
+                {frameDeCorte(t)}
+              </p>
+            </div>
+
+            {t.categorias.length > 0 && (
+              <div className="mt-7">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tinta-2">
+                  Qué surtir
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {t.categorias.map((c) => {
+                    const cPiel = SABORES[c.color];
+                    return (
+                      <li key={c.slug}>
+                        <span className="chip inline-flex items-center gap-2 rounded-pill bg-papel px-3.5 py-2 text-sm font-semibold text-tinta">
+                          <span
+                            className={`flex size-6 items-center justify-center rounded-pill ${cPiel.relleno} ${cPiel.texto}`}
+                          >
+                            {c.icono}
+                          </span>
+                          {c.nombre}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+
+            <div className="mt-8">
+              <BotonCotizar
+                origen="Inicio"
+                interes={`Temporada: ${t.nombre}`}
+                etiqueta={`Apartar ${t.nombre}`}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

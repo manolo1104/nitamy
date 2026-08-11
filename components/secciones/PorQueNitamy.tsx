@@ -60,7 +60,11 @@ export function PorQueNitamy() {
               const silaba = marca.nombre.slice(0, marca.slug === "miguelito" ? 1 : 2);
               const resto = marca.nombre.slice(silaba.length);
               return (
-                <li key={marca.slug} className="bg-carbon p-7">
+                // `entra-lado`: las tres celdas se deslizan desde la
+                // izquierda una detrás de otra al hacer scroll. No es adorno:
+                // NITAMY se arma leyendo NIshikawa, TAma-Roca y Miguelito en
+                // ese orden, y que entren a la vez desperdicia la historia.
+                <li key={marca.slug} className="entra-lado bg-carbon p-7">
                   <p className="ancho text-[clamp(2rem,4vw,2.75rem)] font-extrabold leading-none tracking-[-0.02em]">
                     <span className="text-ambar">{silaba}</span>
                     <span className="text-papel/55">{resto}</span>

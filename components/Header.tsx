@@ -51,11 +51,14 @@ export function Header() {
   }, [abierto]);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-linea bg-papel/92 backdrop-blur-md">
+    // `cabecera-scroll` le da sombra conforme baja el scroll. Va con línea de
+    // tiempo de scroll en CSS y no con un listener: un `onScroll` que hace
+    // `setState` re-renderiza este árbol en cada cuadro del desplazamiento.
+    <header className="cabecera-scroll sticky top-0 z-30 border-b border-linea bg-papel/92 backdrop-blur-md">
       <div className="mx-auto flex h-17 max-w-[1400px] items-center gap-6 px-5 sm:px-8">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5"
+          className="grupo-marca flex shrink-0 items-center gap-2.5"
           aria-label="Grupo Nitamy, ir al inicio"
         >
           <Image
@@ -64,28 +67,38 @@ export function Header() {
             width={40}
             height={40}
             priority
-            className="size-10 object-contain"
+            className="marca-logo size-10 object-contain"
           />
           <span className="ancho text-[1.0625rem] font-extrabold leading-none tracking-tight">
             Grupo Nitamy
           </span>
         </Link>
 
+        {/*
+          La sección activa va en una píldora rellena, como en la referencia
+          de Azúcar Dulcerías que mandó el cliente. Antes se marcaba solo
+          poniendo el texto un tono más oscuro, y esa diferencia es
+          imperceptible entre dos grises.
+
+          El estilo cuelga de `aria-current`, no de una clase suelta: así el
+          marcado que anuncia la página actual al lector de pantalla y el que
+          la pinta son el mismo, y no pueden desincronizarse.
+        */}
         <nav
           aria-label="Principal"
-          className="ml-auto hidden items-center gap-7 lg:flex"
+          className="ml-auto hidden items-center gap-1 lg:flex"
         >
           {ENLACES.map((e) => (
             <Link
               key={e.href}
               href={e.href}
               aria-current={ruta.startsWith(e.href) ? "page" : undefined}
-              className="text-[0.9375rem] font-medium text-tinta-2 transition-colors duration-200 ease-salida hover:text-tinta aria-[current=page]:text-tinta"
+              className="rounded-pill px-4 py-2 text-[0.9375rem] font-medium text-tinta-2 transition-colors duration-200 ease-salida hover:bg-papel-2 hover:text-tinta aria-[current=page]:bg-fresa aria-[current=page]:font-semibold aria-[current=page]:text-fresa-encima"
             >
               {e.texto}
             </Link>
           ))}
-          <BotonCotizar origen={origen} tamano="normal" />
+          <BotonCotizar origen={origen} tamano="normal" className="ml-3" />
         </nav>
 
         <button
@@ -100,15 +113,27 @@ export function Header() {
         </button>
       </div>
 
+      {/*
+        Barra de avance de lectura. Va pegada al borde inferior del header y
+        crece conforme se baja la página. Es `aria-hidden` porque no aporta
+        nada a quien no la ve: el progreso de lectura ya lo da la estructura
+        de encabezados.
+      */}
+      <div
+        aria-hidden="true"
+        className="avance absolute inset-x-0 bottom-0 h-0.5 bg-fresa"
+      />
+
       {abierto && (
         <div
           id="menu-movil"
-          className="border-t border-linea bg-papel lg:hidden"
+          className="menu-baja border-t border-linea bg-papel lg:hidden"
         >
           <nav aria-label="Principal, celular" className="px-5 py-4">
             <ul className="divide-y divide-linea">
-              {ENLACES.map((e) => (
-                <li key={e.href}>
+              {ENLACES.map((e, i) => (
+                // `--i` escalona la entrada de cada fila detrás del panel.
+                <li key={e.href} style={{ "--i": i } as React.CSSProperties}>
                   <Link
                     href={e.href}
                     className="flex min-h-13 items-center text-base font-medium text-tinta"

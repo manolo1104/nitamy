@@ -1,25 +1,34 @@
-"use client";
-
 import {
+  CaretRightIcon,
   ChatCircleTextIcon,
   ReceiptIcon,
   TruckIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import { useEffect, useRef, useState } from "react";
+import { BotonCotizar } from "../calificador/BotonCotizar";
+import { Revelar } from "../Revelar";
+import { SABORES } from "@/lib/sabores";
+import type { Sabor } from "@/lib/contenido";
 
 /**
- * Cómo funciona: tres pasos con visual persistente.
+ * Cómo funciona: tres pasos.
  *
- * El movimiento aquí sí comunica: los tres pasos son una secuencia temporal,
- * y un visual que se queda fijo mientras el texto avanza deja claro que es un
- * mismo proceso y no tres servicios sueltos.
+ * Reescrito en agosto 2026 sobre la referencia de "How it works" que mandó el
+ * cliente: número en un sticker de color, icono, y el texto debajo. Tres
+ * columnas, se lee de un vistazo.
  *
- * Se hace con `position: sticky` y un IntersectionObserver. No hace falta
- * GSAP ni ScrollTrigger para esto, y meterlos costaría más kilobytes que
- * toda la página junta.
+ * Lo que se fue, y por qué vale la pena decirlo: la versión anterior tenía un
+ * visual pegado con `position: sticky` que se sincronizaba con la lista
+ * mediante un IntersectionObserver. Se veía bien y no era gratis, costaba un
+ * componente de cliente entero. La forma nueva dice lo mismo en menos
+ * espacio, con la estética que el cliente pidió, y es un componente de
+ * SERVIDOR: cero JavaScript al navegador y un `useEffect` menos que mantener.
  *
- * En celular (< 1024px) el sticky se apaga y los pasos se apilan. Es la
- * restricción 4 del brief: en móvil el movimiento se reduce, no se replica.
+ * Cuando un rediseño elimina código en vez de agregarlo, es que la
+ * dirección es la correcta.
+ *
+ * El número va en el sticker girado y no como un `<h3>` numerado porque
+ * `<ol>` ya numera para el lector de pantalla; el sticker es la versión
+ * visible de esa misma numeración, y por eso es `aria-hidden`.
  */
 
 const PASOS = [
@@ -29,6 +38,7 @@ const PASOS = [
     detalle:
       "Marcas, categorías o el surtido completo. Si no sabes por dónde empezar, te decimos qué rota en negocios como el tuyo.",
     Icono: ChatCircleTextIcon,
+    color: "cielo",
   },
   {
     titulo: "Te cotizamos el mismo día",
@@ -36,134 +46,136 @@ const PASOS = [
     detalle:
       "La cotización trae piezas por caja y sellos NOM-051 de cada presentación, para que sepas exactamente qué llega a tu anaquel.",
     Icono: ReceiptIcon,
+    color: "mango",
   },
   {
     titulo: "Te lo entregamos",
-    texto:
-      "Flotilla propia en CDMX y Estado de México, transporte confiable a foráneo.",
+    texto: "Flotilla propia en CDMX y Estado de México.",
     detalle:
       "En la zona metropolitana controlamos la ruta de punta a punta. Para el resto del país trabajamos con transportistas elegidos por cobertura y cumplimiento.",
     Icono: TruckIcon,
+    color: "menta",
   },
-];
+] as const satisfies ReadonlyArray<{
+  titulo: string;
+  texto: string;
+  detalle: string;
+  Icono: typeof TruckIcon;
+  color: Sabor;
+}>;
 
 export function ComoFunciona() {
-  const [activo, setActivo] = useState(0);
-  const refs = useRef<Array<HTMLLIElement | null>>([]);
-
-  useEffect(() => {
-    // El visual persistente solo existe en escritorio: si no hay sticky, no
-    // hay nada que sincronizar y el observador sobra.
-    const escritorio = window.matchMedia("(min-width: 1024px)");
-    if (!escritorio.matches) return;
-
-    const observador = new IntersectionObserver(
-      (entradas) => {
-        for (const entrada of entradas) {
-          if (!entrada.isIntersecting) continue;
-          const i = Number((entrada.target as HTMLElement).dataset.paso);
-          if (!Number.isNaN(i)) setActivo(i);
-        }
-      },
-      // La banda estrecha en el centro de la pantalla evita que dos pasos
-      // se consideren activos a la vez.
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
-    );
-
-    for (const nodo of refs.current) {
-      if (nodo) observador.observe(nodo);
-    }
-
-    return () => observador.disconnect();
-  }, []);
-
-  const IconoActivo = PASOS[activo].Icono;
-
   return (
+    // `orilla-ondulada` dibuja el festón contra la sección de arriba, que es
+    // la rejilla de marcas en papel. Necesita que ESTA sección tenga un color
+    // de fondo explícito y distinto, porque el pseudo-elemento lo hereda: con
+    // los dos fondos iguales el festón existe pero no se ve.
     <section
       aria-labelledby="como-funciona"
-      className="border-y border-linea bg-papel-2"
+      className="orilla-ondulada bg-papel-2"
     >
       <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 lg:py-24">
-        <h2
-          id="como-funciona"
-          className="ancho max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
-        >
-          De tu mensaje a tu bodega, en tres pasos
-        </h2>
+        <Revelar>
+          <h2
+            id="como-funciona"
+            className="ancho max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+          >
+            De tu mensaje a tu bodega, en tres pasos
+          </h2>
+        </Revelar>
 
-        <div className="mt-12 lg:grid lg:grid-cols-12 lg:gap-16">
-          <ol className="lg:col-span-7">
-            {PASOS.map((paso, i) => {
-              const esActivo = i === activo;
-              return (
-                <li
-                  key={paso.titulo}
-                  data-paso={i}
-                  ref={(n) => {
-                    refs.current[i] = n;
-                  }}
-                  className="border-t border-linea py-8 first:border-t-0 first:pt-0 lg:py-14"
+        {/*
+          Los dos cheurones que unen las tres tarjetas.
+
+          Explican: tres tarjetas en fila no dicen por sí solas que son una
+          SECUENCIA, y ese es justo el argumento de la sección.
+
+          La primera versión de esto era una línea que cruzaba por detrás y
+          se dibujaba con el scroll. No funcionó, y por dos razones que vale
+          la pena dejar escritas: las tarjetas son opacas, así que la línea
+          solo asomaba en los 24px de hueco entre una y otra, y encima iba en
+          `bg-linea`, que sobre el papel tintado de esta sección da 1.28:1.
+          Estaba ahí y no se veía.
+
+          Un cheurón METIDO en el hueco sí se ve, y además dice "entonces",
+          que es más de lo que decía la línea. Aparecen en secuencia con el
+          scroll, cada uno con su propio retraso, para que el orden se lea.
+
+          Solo en escritorio (`md:`): en celular las tarjetas se apilan y no
+          hay hueco horizontal que ocupar.
+        */}
+        <div className="relative mt-12">
+          {[1, 2].map((n) => (
+            <div
+              key={n}
+              aria-hidden="true"
+              style={{ left: `${(n * 100) / 3}%` }}
+              className="paso-flecha absolute top-[3.4rem] hidden -translate-x-1/2 text-tinta-2/45 md:block"
+            >
+              <CaretRightIcon size={20} weight="bold" />
+            </div>
+          ))}
+
+          <ol className="grid gap-6 md:grid-cols-3">
+          {PASOS.map((paso, i) => {
+            const piel = SABORES[paso.color];
+            return (
+              <Revelar key={paso.titulo} retraso={i * 80} como="li">
+                {/* `grupo-sticker`: al pasar el cursor por la tarjeta, el
+                    número girado se endereza y crece, como si alguien lo
+                    acomodara con el dedo. */}
+                <div
+                  className={`grupo-sticker h-full rounded-blanda p-7 ${piel.pastel}`}
                 >
-                  <div className="flex items-baseline gap-4">
+                  <div className="flex items-center gap-4">
                     <span
                       aria-hidden="true"
-                      className={`cifra text-sm font-bold transition-colors duration-300 ease-salida ${
-                        esActivo ? "text-rojo-fuerte" : "text-tinta-2"
-                      }`}
+                      className={`sticker cifra flex size-12 shrink-0 items-center justify-center rounded-pill text-xl font-extrabold ${piel.relleno} ${piel.texto}`}
                     >
                       {i + 1}
                     </span>
-                    <h3 className="ancho text-[clamp(1.375rem,2.6vw,2rem)] font-extrabold leading-tight tracking-tight">
-                      {paso.titulo}
-                    </h3>
+                    {/*
+                      En tinta secundaria y no en el acento del sabor: el
+                      mango saturado sobre el pastel de mango da 1.78:1, muy
+                      por debajo del 3:1 que WCAG 1.4.11 pide a un objeto
+                      gráfico, y el icono del paso 2 se borraba. Usar el
+                      acento en dos pasos y tinta en el otro se vería como un
+                      descuido.
+
+                      Al pasar el cursor se inclina en sentido CONTRARIO al
+                      sticker del número. Que las dos piezas se muevan en
+                      direcciones opuestas hace que la tarjeta se sienta
+                      armada por partes y no escalada entera.
+                    */}
+                    <paso.Icono
+                      size={34}
+                      weight="duotone"
+                      aria-hidden="true"
+                      className="icono-paso text-tinta-2"
+                    />
                   </div>
-                  <p className="ml-8 mt-3 max-w-[46ch] text-lg leading-relaxed text-tinta">
+
+                  <h3 className="ancho mt-6 text-xl font-extrabold leading-tight tracking-tight">
+                    {paso.titulo}
+                  </h3>
+                  <p className="mt-2 font-semibold leading-relaxed text-tinta">
                     {paso.texto}
                   </p>
-                  <p className="ml-8 mt-2.5 max-w-[52ch] leading-relaxed text-tinta-2">
+                  <p className="mt-3 leading-relaxed text-tinta-2">
                     {paso.detalle}
                   </p>
-                </li>
-              );
-            })}
-          </ol>
-
-          {/*
-            El visual persistente. `aria-hidden` porque no aporta información
-            nueva: el icono ilustra el paso que el texto de al lado ya dice.
-          */}
-          <div
-            aria-hidden="true"
-            className="hidden lg:col-span-5 lg:block"
-          >
-            <div className="sticky top-28">
-              <div className="flex aspect-square items-center justify-center rounded-caja bg-carbon">
-                <div className="text-center">
-                  <IconoActivo
-                    size={92}
-                    weight="light"
-                    className="mx-auto text-ambar transition-opacity duration-300 ease-salida"
-                    key={activo}
-                  />
-                  <p className="ancho mt-8 text-3xl font-extrabold leading-tight tracking-tight text-papel">
-                    {PASOS[activo].titulo}
-                  </p>
-                  <div className="mt-8 flex justify-center gap-2">
-                    {PASOS.map((p, i) => (
-                      <span
-                        key={p.titulo}
-                        className={`h-0.5 w-10 transition-colors duration-300 ease-salida ${
-                          i === activo ? "bg-ambar" : "bg-linea-oscura"
-                        }`}
-                      />
-                    ))}
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </Revelar>
+            );
+          })}
+          </ol>
         </div>
+
+        <Revelar>
+          <div className="mt-10">
+            <BotonCotizar origen="Inicio" />
+          </div>
+        </Revelar>
       </div>
     </section>
   );

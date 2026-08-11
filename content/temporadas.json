@@ -1,0 +1,109 @@
+{
+  "_esquema": {
+    "_proposito": "Las siete temporadas que mueven el dulce en México. La referencia que mandó el cliente (Azúcar Dulcerías) usa las temporadas como FILTRO de catálogo, porque vende al consumidor final. Aquí el visitante es un negocio, así que la temporada no filtra productos: dice CUÁNDO hay que levantar el pedido para llegar a tiempo. Ese es el dato que un dueño de tienda no tiene y por el que abre WhatsApp.",
+    "slug": "string. URL futura: /temporadas/{slug}. No cambiar una vez publicado.",
+    "nombre": "string. Como se muestra.",
+    "cuando": "string. La fecha en palabras, para leer.",
+    "mesPico": "number 1-12. Mes de la fecha pico. Con diaPico se calcula la fecha de corte y cuál es la temporada próxima. NO se escribe el año en ningún lado: el sitio no puede envejecer.",
+    "diaPico": "number 1-31.",
+    "semanasAntes": "number. Semanas de anticipación con las que conviene levantar el pedido. La fecha de corte se DERIVA de mesPico, diaPico y este número; nunca se escribe a mano.",
+    "queRota": "string. Qué se mueve en esa temporada y por qué. PENDIENTE DE REVISIÓN del cliente.",
+    "categorias": "string[]. Slugs de content/categorias.json. Enlaza el rail de temporadas con la rejilla de categorías.",
+    "color": "string. Sabor de la paleta. Dos temporadas contiguas en el rail nunca comparten sabor.",
+    "icono": "string. Icono de Phosphor sin el sufijo Icon. Lista blanca en components/IconoCategoria.tsx.",
+    "textoRevisado": "boolean. false mientras el cliente no confirme anticipación y surtido."
+  },
+  "temporadas": [
+    {
+      "slug": "san-valentin",
+      "nombre": "San Valentín",
+      "cuando": "14 de febrero",
+      "mesPico": 2,
+      "diaPico": 14,
+      "semanasAntes": 6,
+      "queRota": "Chocolate en caja, gomita de corazón y malvavisco de color. Es la temporada de ticket más alto del primer trimestre: el mismo cliente que compra de a peso entre semana se lleva una caja completa.",
+      "categorias": ["gomitas", "obleas-y-dulce-tradicional"],
+      "color": "fresa",
+      "icono": "Heart",
+      "textoRevisado": false
+    },
+    {
+      "slug": "dia-del-nino",
+      "nombre": "Día del Niño",
+      "cuando": "30 de abril",
+      "mesPico": 4,
+      "diaPico": 30,
+      "semanasAntes": 5,
+      "queRota": "Bolsa surtida y dulce con juguete. Compran escuelas, salones y papás, casi siempre en volumen y con una semana de aviso. Quien no tiene la bolsa armada el 25 de abril, ya no vendió.",
+      "categorias": ["paletas", "gomitas", "enchilados"],
+      "color": "cielo",
+      "icono": "Balloon",
+      "textoRevisado": false
+    },
+    {
+      "slug": "dia-de-las-madres",
+      "nombre": "Día de las Madres",
+      "cuando": "10 de mayo",
+      "mesPico": 5,
+      "diaPico": 10,
+      "semanasAntes": 4,
+      "queRota": "Chocolate, dulce tradicional y presentación de regalo. En México el 10 de mayo no se recorre al domingo, así que la venta se concentra en un solo día y el desabasto no se recupera.",
+      "categorias": ["obleas-y-dulce-tradicional", "gomitas"],
+      "color": "uva",
+      "icono": "Flower",
+      "textoRevisado": false
+    },
+    {
+      "slug": "regreso-a-clases",
+      "nombre": "Regreso a clases",
+      "cuando": "Agosto",
+      "mesPico": 8,
+      "diaPico": 25,
+      "semanasAntes": 5,
+      "queRota": "Enchilado, paleta y cacahuate en presentación de una moneda. Es la temporada que reactiva la venta diaria de la tiendita de escuela después de dos meses muertos.",
+      "categorias": ["enchilados", "paletas", "cacahuates"],
+      "color": "limon",
+      "icono": "Backpack",
+      "textoRevisado": false
+    },
+    {
+      "slug": "fiestas-patrias",
+      "nombre": "Fiestas Patrias",
+      "cuando": "15 y 16 de septiembre",
+      "mesPico": 9,
+      "diaPico": 15,
+      "semanasAntes": 5,
+      "queRota": "Dulce típico, palanqueta, cocada y botana para kermés. Se surte a escuelas, comités vecinales y salones, que piden por lista y pagan de una vez.",
+      "categorias": ["obleas-y-dulce-tradicional", "botana", "cacahuates"],
+      "color": "fresa",
+      "icono": "Flag",
+      "textoRevisado": false
+    },
+    {
+      "slug": "dia-de-muertos",
+      "nombre": "Día de Muertos",
+      "cuando": "1 y 2 de noviembre",
+      "mesPico": 11,
+      "diaPico": 2,
+      "semanasAntes": 6,
+      "queRota": "Calaverita de azúcar, dulce de ofrenda y tradicional. La demanda arranca desde mediados de octubre y el producto de ofrenda no se vende después del 2: lo que sobra, sobra un año.",
+      "categorias": ["obleas-y-dulce-tradicional", "gomitas"],
+      "color": "mango",
+      "icono": "Skull",
+      "textoRevisado": false
+    },
+    {
+      "slug": "navidad-y-reyes",
+      "nombre": "Navidad y Reyes",
+      "cuando": "Posadas, Navidad y 6 de enero",
+      "mesPico": 12,
+      "diaPico": 16,
+      "semanasAntes": 8,
+      "queRota": "Bolsa de posada, colación, piñata y dulce de regalo. Es la temporada más grande del año y la de mayor anticipación: en diciembre la producción de los proveedores ya está comprometida.",
+      "categorias": ["gomitas", "paletas", "obleas-y-dulce-tradicional", "enchilados"],
+      "color": "menta",
+      "icono": "Tree",
+      "textoRevisado": false
+    }
+  ]
+}

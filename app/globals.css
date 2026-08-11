@@ -1,12 +1,29 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   GRUPO NITAMY. Sistema de diseño "Bodega editorial"
+   GRUPO NITAMY. Sistema de diseño "Dulcería seria"
    --------------------------------------------------------------------------
-   Restricción de negocio: quien decide la compra es un empresario evaluando a
-   un proveedor para un pedido de decenas de miles de pesos. La interfaz es
-   sobria; la saturación cromática viene de la fotografía de producto y de los
-   logos de las 20 marcas, nunca de fondos amplios de color de marca.
+   Revisión de agosto 2026. El cliente mandó ocho referencias (Azúcar
+   Dulcerías, Súper Dulces, Haribo, SmartSweets, Treat Street) y todas son
+   dulcerías a color: círculos de categoría, rails de temporada, rejillas de
+   marca, tarjetas con manchas de color detrás del producto.
+
+   El giro respecto a la primera versión, que era deliberadamente sobria:
+
+     ANTES  el color venía solo de la foto de producto; la interfaz era papel,
+            tinta y un rojo de acento. Radio de 4px en todo.
+     AHORA  la interfaz TAMBIÉN pone color, pero en piezas acotadas y
+            repetibles (círculo, ficha, sticker, mancha), nunca en fondos de
+            página completos. Radio grande, que es lo que hace que algo se
+            lea como dulcería y no como ferretería.
+
+   Lo que NO cambia, porque no es estética sino negocio: quien decide la
+   compra es un empresario evaluando a un proveedor para un pedido de decenas
+   de miles de pesos. Por eso el cuerpo de texto sigue siendo tinta sobre
+   papel, las cifras siguen siendo sobrias y no hay carrito ni precios: cada
+   pieza a color termina en WhatsApp, no en "agregar al carrito". Las
+   referencias son B2C con carrito; se toma su lenguaje visual, no su
+   mecánica de venta.
    ========================================================================== */
 
 @theme {
@@ -50,6 +67,49 @@
   --color-borde-campo: #8b8378;
   --color-borde-campo-oscuro: #6e6459;
 
+  /* --- Paleta de dulce ---------------------------------------------------
+     Seis sabores. Cada uno viene en tres piezas y hay que usarlas así:
+
+       --color-X          RELLENO saturado: círculo de categoría, sticker,
+                          ficha de temporada, mancha detrás del producto.
+       --color-X-claro    fondo pastel de tarjeta. Todos aguantan `tinta`
+                          encima con holgura (>=12:1), así que el texto de
+                          una tarjeta pastel siempre es tinta.
+       --color-X-encima   lo ÚNICO que puede ir encima del relleno saturado.
+                          No es capricho: mango y limón no aguantan blanco
+                          (2.04:1 y 3.66:1) y por eso llevan tinta. Los otros
+                          cuatro llevan blanco. `npm run contraste` verifica
+                          los 34 pares nuevos y truena si alguien mueve un
+                          tono; los números de aquí salen de ahí.
+
+     La regla que evita que esto degenere en confeti: en una misma sección,
+     el color es función del DATO (la categoría, la temporada), nunca una
+     decisión suelta por tarjeta. Si el color no codifica nada, va en papel.
+  */
+  --color-fresa: #e0245e;
+  --color-fresa-claro: #ffe1e9;
+  --color-fresa-encima: #ffffff;
+
+  --color-mango: #f5a524;
+  --color-mango-claro: #ffeecc;
+  --color-mango-encima: #14110f;
+
+  --color-menta: #007a74;
+  --color-menta-claro: #d4f1ee;
+  --color-menta-encima: #ffffff;
+
+  --color-uva: #6b3fc4;
+  --color-uva-claro: #eae2fb;
+  --color-uva-encima: #ffffff;
+
+  --color-cielo: #1f6fd0;
+  --color-cielo-claro: #dcebfb;
+  --color-cielo-encima: #ffffff;
+
+  --color-limon: #5a9500;
+  --color-limon-claro: #e8f4cd;
+  --color-limon-encima: #14110f;
+
   /* --- Tipografía. Una sola familia, dos expresiones. --------------------
      Archivo variable con eje de ancho. El ancho expandido lee como letrero
      de caja y de camión, que es el registro de un distribuidor.
@@ -57,24 +117,63 @@
   */
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
-  /* --- Radio. Un solo sistema, documentado y aplicado en todo. -----------
-     Botones: pill completo. Todo lo demás: 4px. Sin excepciones.
+  /* --- Radio. El cambio de un solo token que repinta el sitio entero. ----
+     La primera versión tenía 4px en todo. Cuatro píxeles se leen como
+     software administrativo; ninguna de las ocho referencias del cliente
+     baja de 16. Subir `--radius-caja` cambia de golpe las tarjetas, las
+     fotos y los campos sin tocar un solo componente.
+
+       caja      12px  tarjetas, campos, fotos. El valor de trabajo.
+       blanda    24px  bloques grandes: hero, ficha de temporada, secciones
+                       de color. A este tamaño el radio se nota de lejos.
+       burbuja   40px  solo el contenedor de foto de producto.
+       pill            botones y píldoras de navegación.
+
+     Regla para no perder el ritmo: el radio crece con la caja, nunca al
+     revés. Un chip de 32px de alto con radio 24 se ve deformado.
   */
   --radius-nada: 0px;
-  --radius-caja: 4px;
+  --radius-caja: 12px;
+  --radius-blanda: 24px;
+  --radius-burbuja: 40px;
   --radius-pill: 9999px;
 
-  /* --- Curvas. Las nativas de CSS son demasiado débiles. ----------------- */
+  /* --- Curvas. Las nativas de CSS son demasiado débiles. -----------------
+     Regla que gobierna cuál usar:
+
+       entra o sale de pantalla  -> salida (arranca rápido, se siente vivo)
+       se mueve dentro de la pantalla -> entrada-salida
+       cambio de color u hover   -> suave
+       movimiento constante      -> linear (la marquesina)
+
+     `ease-in` NO existe en este archivo a propósito: arranca lento justo en
+     el instante en que el usuario está mirando, y hace que 200ms se sientan
+     como 400.
+  */
   --ease-salida: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-entrada-salida: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-suave: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Con un rebote mínimo, solo para el sticker y el icono de categoría. */
+  --ease-resorte: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Variables no expuestas como utilidades de Tailwind */
+/* Variables no expuestas como utilidades de Tailwind.
+
+   Las duraciones salen de con qué frecuencia se ve cada cosa, no del gusto:
+
+     press   160ms  se ve cientos de veces. Tiene que ser casi instantáneo.
+     ui      200ms  hover, acordeón, cambio de pestaña. Bajo los 300ms.
+     reveal  500ms  aparición al entrar a la página. Se ve UNA vez por
+                    visita, así que aquí sí se puede respirar.
+     idle    lentísimo. Es movimiento ambiental que no pide atención; a
+                    menos de 10s se convierte en un tic molesto.
+*/
 :root {
   --dur-press: 160ms;
   --dur-ui: 200ms;
   --dur-reveal: 500ms;
   --marquesina-dur: 46s;
+  --dur-idle: 19s;
 }
 
 /* --------------------------------------------------------------------------
@@ -127,9 +226,33 @@ body {
 /* --------------------------------------------------------------------------
    Movimiento
    --------------------------------------------------------------------------
-   Sin librería de animación. El presupuesto es JS inicial < 150 KB
-   comprimido en celular de gama media dentro de una bodega con señal
-   irregular; Motion pesa ~40 KB gzip y todo esto se hace con CSS.
+   REGLA DE PRESUPUESTO RETIRADA (decisión de Manolo, 11 ago 2026).
+
+   Hasta hoy este archivo prohibía cualquier librería de animación porque el
+   brief fijaba un tope de 150 KB de JS inicial. Ese tope ya no aplica: las
+   fuentes de animación del proyecto pasan a ser ui.unlumen.com y
+   reactbits.dev/pro, las dos construidas sobre Motion.
+
+   Lo que NO cambia es el criterio de cuándo usar cada cosa, y aquí el dato
+   medido en este proyecto (no una estimación):
+
+     hoy, solo CSS                 133 KB
+     + motion/react                175 KB   (+42 KB por un solo fade)
+     + LazyMotion, la vía ligera   172 KB   (la mitigación solo ahorra 3 KB)
+
+   Cuarenta y dos kilobytes siguen siendo cuarenta y dos kilobytes aunque ya
+   no haya techo, y el usuario real sigue siendo un comprador en una bodega
+   con señal irregular. Así que la regla nueva es de OPORTUNIDAD, no de tope:
+
+     CSS      todo lo predeterminado: apariciones, hover, scroll, acordeones,
+              marquesinas. Además corre fuera del hilo principal, así que no
+              pierde cuadros mientras la página carga.
+     Motion   cuando el efecto de verdad lo pide: física de resorte,
+              gestos de arrastre, animaciones de layout interrumpibles.
+              Eso CSS no lo hace, y ahí los 42 KB se justifican.
+
+   Todo lo que sigue en este archivo se hizo con CSS porque cae en el primer
+   grupo, no porque estuviera prohibido lo otro.
 
    Reglas: solo transform y opacity. Cero `transition: all`. Cero `ease-in`
    (arranca lento justo en el instante que el usuario está mirando).
@@ -228,6 +351,767 @@ body {
 }
 
 /* --------------------------------------------------------------------------
+   Piezas de dulcería
+   --------------------------------------------------------------------------
+   Las cinco formas que traen las referencias del cliente. Son utilidades y
+   no componentes porque se aplican a cosas distintas (una foto, un título,
+   una sección) y no cargan estructura propia.
+   -------------------------------------------------------------------------- */
+
+/* --- Mancha ---------------------------------------------------------------
+   El fondo orgánico detrás del recorte de producto. Es lo que separa "foto
+   de catálogo" de "foto de dulcería": un círculo perfecto se lee como
+   plantilla, una mancha irregular se lee como diseño.
+
+   Ocho valores de border-radius, no cuatro: con cuatro sale un óvalo. La
+   variante `.mancha-b` invierte el eje para que dos manchas contiguas no se
+   vean calcadas. */
+.mancha {
+  border-radius: 62% 38% 46% 54% / 54% 46% 54% 46%;
+}
+
+.mancha-b {
+  border-radius: 38% 62% 54% 46% / 46% 54% 46% 54%;
+}
+
+/* --- Sticker --------------------------------------------------------------
+   La etiqueta girada de "Temporada" y "Más pedido". El giro es de 4 grados y
+   no de 12: pasando de ahí el texto pierde legibilidad y la etiqueta se
+   vuelve un adorno. */
+.sticker {
+  transform: rotate(-4deg);
+  transform-origin: center;
+}
+
+/* --- Punteado -------------------------------------------------------------
+   Trama de puntos para las bandas de color. Sin ella, un bloque de color
+   plano de 400px de alto se ve como un error de CSS; con ella se lee como
+   papel de envoltura. Un solo gradiente radial repetido: cero peso. */
+.punteado {
+  background-image: radial-gradient(currentColor 1.5px, transparent 1.6px);
+  background-size: 22px 22px;
+  opacity: 0.14;
+}
+
+/* --- Orilla ondulada ------------------------------------------------------
+   El festón entre secciones que usa Treat Street. Se hace con una máscara de
+   gradientes radiales sobre un pseudo-elemento: ni markup extra ni imagen.
+
+   Va SIEMPRE en el elemento de abajo y asoma hacia arriba. Puesto en el de
+   arriba, el festón tapa contenido cuando la sección es corta. */
+.orilla-ondulada {
+  position: relative;
+}
+
+.orilla-ondulada::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -13px;
+  height: 14px;
+  background-color: inherit;
+  -webkit-mask-image: radial-gradient(
+    circle at 14px 14px,
+    #000 13px,
+    transparent 13.5px
+  );
+  mask-image: radial-gradient(
+    circle at 14px 14px,
+    #000 13px,
+    transparent 13.5px
+  );
+  -webkit-mask-size: 28px 28px;
+  mask-size: 28px 28px;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+}
+
+/* --- Carrusel de arrastre -------------------------------------------------
+   Las reseñas y las fichas de temporada se recorren con el dedo en celular.
+   Scroll-snap nativo: cero JavaScript, cero librería de carrusel, y el
+   teclado y el lector de pantalla siguen funcionando porque no hay nada
+   escondido, solo desplazado. */
+.carrusel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.carrusel::-webkit-scrollbar {
+  display: none;
+}
+
+.carrusel > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+/* ==========================================================================
+   Capa de movimiento
+   ==========================================================================
+   Cada animación de aquí abajo responde a "¿por qué se mueve esto?". Las
+   razones válidas son cuatro: dar acuse de recibo (feedback), indicar un
+   cambio de estado, evitar un salto brusco, y explicar. "Se ve bien" no es
+   una razón cuando el usuario lo va a ver muchas veces al día.
+
+   Tres reglas que se aplican a todo el bloque:
+
+     1. Solo `transform`, `opacity` y `filter`. Nada que dispare layout.
+     2. Todo hover va detrás de `(hover: hover) and (pointer: fine)`. En
+        táctil el hover se dispara al tocar y deja el estado pegado.
+     3. Todo respeta `prefers-reduced-motion` (ver el bloque del final).
+   ========================================================================== */
+
+/* --- Deriva ambiental ------------------------------------------------------
+   Las manchas del hero se mueven muy despacio, como papel de envoltura que
+   respira. Es decorativo puro y por eso es lentísimo: a 19 segundos el ojo
+   no lo persigue, solo registra que la página está viva.
+
+   Dos manchas con la MISMA animación se verían como un bloque; por eso la de
+   atrás la corre al revés (`alternate-reverse`) y con otra duración.
+
+   El giro de partida entra por `--giro-base` y no por una clase de Tailwind.
+   Motivo: `rotate-6` y la animación escriben las dos la MISMA propiedad
+   `transform`, y la animación gana; la mancha perdería su inclinación inicial
+   en cuanto arrancara. Metiendo el giro dentro del fotograma, la animación
+   parte de donde debe. */
+@keyframes derivar {
+  from {
+    transform: translate3d(0, 0, 0) rotate(var(--giro-base, 0deg)) scale(1);
+  }
+  to {
+    transform: translate3d(1.5%, -2%, 0)
+      rotate(calc(var(--giro-base, 0deg) + 5deg)) scale(1.04);
+  }
+}
+
+.deriva {
+  animation: derivar var(--dur-idle) var(--ease-suave) infinite alternate;
+}
+
+.deriva-lenta {
+  animation: derivar calc(var(--dur-idle) * 1.45) var(--ease-suave) infinite
+    alternate-reverse;
+}
+
+/* --- Flotar ----------------------------------------------------------------
+   Para la marca de agua del panel de temporadas. Solo desplazamiento
+   vertical: la marca de agua está recortada por el borde del panel y
+   cualquier giro delataría el recorte. */
+@keyframes flotar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-14px);
+  }
+}
+
+.flota {
+  animation: flotar calc(var(--dur-idle) * 0.55) var(--ease-suave) infinite
+    alternate;
+}
+
+/* --- Cabecera al hacer scroll ----------------------------------------------
+   Cambio de estado: separa la barra pegajosa del contenido cuando ya hay
+   contenido debajo. Sin esto, al hacer scroll el header y la página se funden
+   en una sola mancha y el usuario pierde de vista dónde termina la barra.
+
+   Se hace con línea de tiempo de SCROLL, no con un listener de JavaScript.
+   Un `onScroll` en React que hace `setState` re-renderiza el árbol en cada
+   cuadro del scroll, que es exactamente lo que no queremos en un celular de
+   gama media. Esto corre fuera del hilo principal y cuesta cero bytes de JS.
+
+   `animation-range` en píxeles absolutos: la sombra entra en los primeros
+   80px de scroll y ahí se queda. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cabecera-scroll {
+      animation: sombraCabecera linear both;
+      animation-timeline: scroll();
+      animation-range: 0 80px;
+    }
+  }
+}
+
+@keyframes sombraCabecera {
+  to {
+    box-shadow: 0 1px 0 var(--color-linea), 0 8px 24px -16px rgb(20 17 15 / 0.5);
+  }
+}
+
+/* --- Aparición del panel de temporadas -------------------------------------
+   Evita un salto brusco: al cambiar de pestaña, el panel entero cambia de
+   color, de título, de texto y de icono a la vez. Sin transición se lee como
+   un parpadeo, no como un cambio.
+
+   El desenfoque es el truco que hace que funcione. En un fundido cruzado sin
+   blur el ojo alcanza a ver DOS estados distintos superpuestos; el blur los
+   mezcla y el cerebro lo interpreta como un solo objeto transformándose. Se
+   queda en 6px: por encima de eso se nota el desenfoque en sí, y en Safari
+   además es caro.
+
+   Es corto (220ms) porque el usuario acaba de hacer clic y está esperando la
+   respuesta. Toda la información llega antes de que registre la espera. */
+@keyframes panelEntra {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(6px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel-entra {
+    animation: panelEntra 220ms var(--ease-salida) both;
+  }
+}
+
+/* --- Barrido de brillo en el CTA -------------------------------------------
+   El único adorno del botón primario. Un destello cruza el botón al pasar el
+   cursor, como el celofán de un dulce.
+
+   `clip-path` en vez de mover un div: la franja se recorta contra la forma
+   del botón sin necesitar `overflow: hidden`, que en un botón con radio de
+   píldora recorta también el anillo de foco.
+
+   Solo en hover y solo con puntero fino: no es información, es personalidad,
+   y en táctil no hay hover que valga. */
+@keyframes barrer {
+  from {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  @media (prefers-reduced-motion: no-preference) {
+    .brillo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brillo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgb(255 255 255 / 0.28),
+        transparent
+      );
+      transform: translateX(-120%) skewX(-20deg);
+    }
+
+    .brillo:hover::after {
+      animation: barrer 650ms var(--ease-suave);
+    }
+  }
+}
+
+/* --- Acordeón de preguntas -------------------------------------------------
+   `<details>` nativo abre de golpe: la respuesta aparece y empuja todo lo de
+   abajo en un solo cuadro. Es el caso de libro de "cambio brusco".
+
+   Animar su altura era imposible en CSS hasta hace poco porque `height: auto`
+   no es interpolable. Ahora sí, con dos piezas nuevas:
+
+     interpolate-size: allow-keywords   permite interpolar hacia `auto`
+     ::details-content                  da acceso al contenido desplegable
+     transition-behavior: allow-discrete anima `content-visibility`, que es
+                                        discreta y si no, cortaría el fundido
+
+   Donde el navegador no soporte esto, el bloque entero no aplica y el
+   acordeón abre de golpe: exactamente como se comporta hoy. Degradación
+   correcta, cero riesgo. */
+@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
+
+    details.acordeon::details-content {
+      block-size: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition:
+        block-size var(--dur-ui) var(--ease-salida),
+        opacity var(--dur-ui) var(--ease-salida),
+        content-visibility var(--dur-ui) allow-discrete;
+    }
+
+    details.acordeon[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+}
+
+/* --- Atenuar los hermanos --------------------------------------------------
+   Al pasar el cursor por una ficha de la rejilla, las DEMÁS bajan a 0.4 de
+   opacidad. Idea tomada de `hover-expand` de unlumen.
+
+   La parte que vale de ese componente no es que la ficha señalada crezca, que
+   es lo obvio, sino que las otras se apaguen. Con veintiún logotipos a todo
+   color compitiendo entre sí, destacar uno subiéndolo no alcanza: hay que
+   bajar el resto. Es la diferencia entre subirle el volumen a un instrumento
+   y bajárselo a la orquesta.
+
+   Se hace con `:has()`, que permite a un contenedor reaccionar a que alguno
+   de sus hijos esté en hover. Sin `:has()` esto necesitaba JavaScript con
+   estado por tarjeta; hoy son tres líneas de CSS.
+
+   Va con `@supports` porque donde no exista `:has()` no pasa nada: se queda
+   el levantar la ficha, que ya funciona solo. */
+@supports selector(:has(*)) {
+  @media (hover: hover) and (pointer: fine) {
+    .rejilla-atenua > * {
+      transition: opacity var(--dur-ui) var(--ease-suave);
+    }
+
+    .rejilla-atenua:has(> *:hover) > *:not(:hover) {
+      opacity: 0.4;
+    }
+  }
+}
+
+/* --- Levantar una ficha ----------------------------------------------------
+   Acuse de recibo en las rejillas de marca y de producto: la ficha se levanta
+   2px y la foto crece un pelo. Dos píxeles suenan a nada y son justo el
+   umbral en el que el elemento se siente "tomable" sin que la rejilla baile.
+
+   La sombra se transiciona junto al transform. Es la única propiedad fuera de
+   transform/opacity de todo el archivo, y se acepta porque `box-shadow` no
+   dispara layout, solo repintado, y aquí es un elemento a la vez. */
+@media (hover: hover) and (pointer: fine) {
+  .ficha {
+    transition:
+      transform var(--dur-ui) var(--ease-salida),
+      box-shadow var(--dur-ui) var(--ease-salida),
+      border-color var(--dur-ui) var(--ease-salida);
+  }
+
+  .ficha:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -20px rgb(20 17 15 / 0.55);
+  }
+
+  .ficha-medio {
+    transition: transform 320ms var(--ease-salida);
+  }
+
+  .ficha:hover .ficha-medio {
+    transform: scale(1.05);
+  }
+}
+
+/* --- Enderezar el sticker --------------------------------------------------
+   Los stickers viven girados 4 grados. Al pasar el cursor se enderezan y
+   crecen un poco, como si alguien los acomodara con el dedo.
+
+   La curva tiene rebote (`--ease-resorte`) y es el único lugar del sitio
+   donde se usa: un sticker de papel rebota, un menú no. */
+@media (hover: hover) and (pointer: fine) {
+  .sticker {
+    transition: transform var(--dur-ui) var(--ease-resorte);
+  }
+
+  .grupo-sticker:hover .sticker {
+    transform: rotate(0deg) scale(1.06);
+  }
+}
+
+/* --- Pop del icono de categoría --------------------------------------------
+   El círculo crece y el icono se inclina. Que se muevan por separado (y no el
+   círculo con todo adentro) es lo que hace que se lea como un objeto con
+   partes y no como una imagen escalada. */
+@media (hover: hover) and (pointer: fine) {
+  .circulo-cat {
+    transition: transform var(--dur-ui) var(--ease-resorte);
+  }
+
+  .grupo-cat:hover .circulo-cat {
+    transform: scale(1.09);
+  }
+
+  .icono-cat {
+    transition: transform var(--dur-ui) var(--ease-resorte);
+  }
+
+  .grupo-cat:hover .icono-cat {
+    transform: rotate(-8deg) scale(1.08);
+  }
+}
+
+/* --- Odómetro --------------------------------------------------------------
+   Los dígitos ruedan hasta su valor, como el cuentakilómetros de un coche.
+   Idea tomada de `animate-digits` de unlumen, rehecha en CSS.
+
+   Cómo funciona: cada dígito es una VENTANA de 1em de alto con `overflow:
+   hidden`, y dentro una cinta vertical con los números. Mover la cinta
+   `-N em` deja el número N en la ventana. Eso es todo; no hay JavaScript.
+
+   La cinta trae el 0-9 DOS VECES, veinte celdas. Así cada dígito arranca
+   arriba del todo y da una vuelta completa antes de aterrizar, que es lo que
+   da la sensación de máquina tragamonedas. Con una sola serie, un dígito que
+   acaba en 0 no se movería nada y se vería roto al lado de los demás.
+
+   El escalonado va por dígito (`--i`), de derecha a izquierda como cae un
+   contador real: las unidades paran primero.
+
+   Dónde se usa: los días que faltan para la fecha de corte de una temporada.
+   Es el único número del sitio por el que alguien abre WhatsApp, y merece ser
+   lo que más se mueve de la página. */
+.odometro {
+  display: inline-flex;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.odometro-ventana {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odometro-cinta {
+  display: flex;
+  flex-direction: column;
+  /* Estado final: sin animación, el número correcto ya está puesto. Es la
+     misma regla que gobierna el resto del sitio, el contenido nunca depende
+     de que la animación corra. */
+  transform: translateY(calc(var(--d) * -1em));
+}
+
+.odometro-cinta > span {
+  display: block;
+  height: 1em;
+}
+
+@keyframes rodar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    /* +10 = una vuelta completa antes de aterrizar en el dígito. */
+    transform: translateY(calc((var(--d) + 10) * -1em));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .odometro-cinta {
+    animation: rodar 900ms var(--ease-entrada-salida) both;
+    animation-delay: calc(var(--i) * 80ms);
+  }
+}
+
+/* --- Barra de avance de lectura --------------------------------------------
+   Hilo de 2px en el borde inferior del header que crece conforme se baja.
+
+   Orientación, no adorno: esta home mide doce secciones y en celular son
+   varias pantallas de scroll. Sin una referencia de avance, el visitante no
+   sabe si le faltan dos secciones o diez, y eso es justo lo que hace que
+   alguien abandone a media página.
+
+   Línea de tiempo de scroll del documento: llega a 100% cuando el scroll
+   llega al final. Cero JavaScript, y corre fuera del hilo principal. */
+@keyframes avanzar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.avance {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .avance {
+      animation: avanzar linear both;
+      animation-timeline: scroll();
+    }
+  }
+}
+
+/* --- Paralaje del producto del hero ----------------------------------------
+   El recorte se desplaza un poco más despacio que la mancha que lo contiene
+   mientras la página baja. Es el truco más viejo del libro y sigue
+   funcionando: dos planos a distinta velocidad se leen como profundidad.
+
+   Muy poco recorrido (5%) y solo vertical. El paralaje llamativo marea y
+   además delata el recorte de la mancha al asomar el borde de la foto. */
+@keyframes paralaje {
+  from {
+    transform: translateY(-2.5%) scale(1.06);
+  }
+  to {
+    transform: translateY(2.5%) scale(1.06);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .paralaje {
+      animation: paralaje linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* --- Menú de celular -------------------------------------------------------
+   Aparecía de golpe, montado por React sin transición. Es el elemento más
+   grande que se abre en toda la interfaz de celular y el salto se nota.
+
+   Baja desde arriba porque de arriba viene: el menú sale del botón del
+   header. La dirección de entrada tiene que coincidir con el origen o el
+   movimiento desorienta en vez de orientar. */
+@keyframes menuBaja {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu-baja {
+    animation: menuBaja var(--dur-ui) var(--ease-salida) both;
+  }
+
+  /* Las filas entran escalonadas detrás del panel. 40ms entre una y otra:
+     lo justo para que se lea como cascada y no como retraso. */
+  .menu-baja li {
+    animation: surgir 260ms var(--ease-salida) both;
+    animation-delay: calc(60ms + var(--i, 0) * 40ms);
+  }
+}
+
+/* --- Cheurones que unen los tres pasos -------------------------------------
+   Entran en secuencia conforme la sección aparece, con un empujón hacia la
+   derecha: el sentido del movimiento ES el mensaje, porque dice hacia dónde
+   sigue el proceso.
+
+   El segundo va 140ms detrás del primero. Ese retraso es lo que convierte
+   dos adornos en una secuencia leída de izquierda a derecha; si entraran a
+   la vez, no dirían nada sobre el orden. */
+@keyframes flechaEntra {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0) translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .paso-flecha {
+    opacity: 0;
+  }
+
+  /* El `-translate-x-1/2` de Tailwind lo centra en el hueco; la animación
+     tiene que reponerlo en cada fotograma o el cheurón salta media anchura
+     al arrancar. Por eso `translate(-50%, 0)` va dentro del keyframe. */
+  @supports (animation-timeline: view()) {
+    .paso-flecha {
+      animation: flechaEntra linear both;
+      animation-timeline: view();
+      animation-range: entry 15% entry 60%;
+    }
+
+    /*
+      El desfase del segundo cheurón se hace corriendo su RANGO, no con
+      `animation-delay`.
+
+      En una animación con línea de tiempo de scroll, `animation-delay` no
+      hace nada: el avance lo marca la posición del scroll, no el reloj, así
+      que no hay tiempo que retrasar. El equivalente correcto es empezar más
+      tarde dentro del recorrido.
+    */
+    .paso-flecha:nth-of-type(2) {
+      animation-range: entry 30% entry 75%;
+    }
+  }
+}
+
+/* --- Entrada lateral en secuencia ------------------------------------------
+   Las tres celdas del acrónimo entran deslizándose desde la izquierda, una
+   detrás de otra, guiadas por el scroll. Idea tomada de `side-by-side-slide`
+   de unlumen.
+
+   Aquí sí EXPLICA, no adorna: NITAMY se arma leyendo NIshikawa, TAma-Roca y
+   Miguelito en ese orden, y es el mejor activo narrativo que tiene la marca.
+   Que las tres aparezcan a la vez desperdicia la historia; que entren en
+   orden la cuenta.
+
+   El escalonado se hace corriendo el `animation-range` de cada celda, no con
+   `animation-delay`: con línea de tiempo de scroll el avance lo marca la
+   posición y `animation-delay` no hace nada. */
+@keyframes entraLado {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .entra-lado {
+      animation: entraLado linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 55%;
+    }
+
+    .entra-lado:nth-child(2) {
+      animation-range: entry 22% entry 67%;
+    }
+
+    .entra-lado:nth-child(3) {
+      animation-range: entry 34% entry 79%;
+    }
+  }
+}
+
+/* --- Presionable -----------------------------------------------------------
+   Acuse de recibo para lo que se toca y no es un botón: pestañas del rail,
+   tarjetas de segmento, tarjetas de recurso.
+
+   0.985 y no 0.97 como los botones: son superficies grandes, y a 0.97 una
+   tarjeta de 400px se hunde de forma exagerada. Cuanto más grande el
+   elemento, menor el porcentaje para que el gesto se sienta igual. */
+.presionable {
+  transition: transform var(--dur-press) var(--ease-salida);
+}
+
+.presionable:active {
+  transform: scale(0.985);
+}
+
+/* --- Enlace de texto -------------------------------------------------------
+   Los enlaces del pie cambiaban de color de golpe: `hover:text-tinta` sin
+   transición. Son unos veinte y es de las cosas que no se ven pero se
+   sienten.
+
+   Además del color, un subrayado que crece desde la izquierda. Se hace con
+   un fondo de 1px escalado en X, no con `text-decoration`, para poder
+   animarlo y para que no se pegue a las colas de las letras. */
+.enlace {
+  position: relative;
+  transition: color var(--dur-ui) var(--ease-suave);
+}
+
+.enlace::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-ui) var(--ease-salida);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .enlace:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* El subrayado sí aparece al enfocar con teclado: quien navega así necesita
+   la misma señal que quien usa el ratón, y el anillo de foco por sí solo no
+   distingue un enlace de un botón. */
+.enlace:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* --- Foto dentro de un bloque de color -------------------------------------
+   Los tres bloques del panel de categorías no tenían ninguna reacción. La
+   foto crece y se inclina; el bloque no se mueve, para que la rejilla de al
+   lado no baile. */
+@media (hover: hover) and (pointer: fine) {
+  .foto-bloque {
+    transition: transform 380ms var(--ease-salida);
+  }
+
+  .grupo-bloque:hover .foto-bloque {
+    transform: scale(1.09) rotate(-4deg);
+  }
+}
+
+/* --- Chip ------------------------------------------------------------------
+   Las píldoras de "qué surtir" del panel de temporadas. Suben 1px. Es el
+   movimiento más pequeño del sitio y es a propósito: son informativas, no
+   son el destino. */
+@media (hover: hover) and (pointer: fine) {
+  .chip {
+    transition: transform var(--dur-ui) var(--ease-salida);
+  }
+
+  .chip:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* --- Logotipo del header ---------------------------------------------------
+   Micro-giro al pasar el cursor. Es el único guiño de toda la barra y por eso
+   funciona: si la marca entera se moviera, el header se volvería inquieto. */
+@media (hover: hover) and (pointer: fine) {
+  .marca-logo {
+    transition: transform 300ms var(--ease-resorte);
+  }
+
+  .grupo-marca:hover .marca-logo {
+    transform: rotate(-8deg) scale(1.08);
+  }
+}
+
+/* --- Logos de la marquesina ------------------------------------------------
+   Ya subían de opacidad al pasar el cursor; ahora además crecen. Con el
+   desfile detenido (que ya pasaba en hover), el logo que interesa se separa
+   de la fila. */
+@media (hover: hover) and (pointer: fine) {
+  .logo-desfile {
+    transition:
+      opacity var(--dur-ui) var(--ease-suave),
+      transform var(--dur-ui) var(--ease-salida);
+  }
+
+  .logo-desfile:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* --- Icono del paso --------------------------------------------------------
+   El icono de cada tarjeta de "cómo funciona" se inclina al pasar por la
+   tarjeta, en sentido contrario al sticker del número. Que las dos piezas se
+   muevan en direcciones opuestas es lo que hace que la tarjeta se sienta
+   armada por partes. */
+@media (hover: hover) and (pointer: fine) {
+  .icono-paso {
+    transition: transform 300ms var(--ease-resorte);
+  }
+
+  .grupo-sticker:hover .icono-paso {
+    transform: rotate(6deg) scale(1.1);
+  }
+}
+
+/* --------------------------------------------------------------------------
    Movimiento reducido
    --------------------------------------------------------------------------
    Movimiento reducido significa menos movimiento y más suave, no cero
@@ -248,6 +1132,42 @@ body {
 
   .marquesina {
     overflow-x: auto;
+  }
+
+  /*
+    El movimiento ambiental se apaga por completo, no se acelera.
+
+    La regla `*` de abajo pone la duración en 0.01ms, y para una animación
+    `alternate` eso significa saltar al fotograma final y quedarse ahí: las
+    manchas se quedarían torcidas y la marca de agua desplazada, para
+    siempre. `animation: none` las deja en su posición de reposo, que es lo
+    correcto. Estas tres no comunican nada, así que quitarlas no cuesta
+    información.
+  */
+  .deriva,
+  .deriva-lenta,
+  .flota {
+    animation: none;
+    transform: none;
+  }
+
+  /*
+    Estas dos parten de `scaleX(0)` porque su animación las hace crecer. Sin
+    la animación se quedarían invisibles, así que se dibujan enteras.
+
+    La distinción importa: la barra de avance sin movimiento no informa de
+    nada y se oculta; los cheurones de los pasos SÍ informan (dicen que los
+    tres pasos son una secuencia y hacia dónde va), así que se muestran
+    quietos. Reducir movimiento es quitar movimiento, no quitar información.
+  */
+  .avance {
+    animation: none;
+    opacity: 0;
+  }
+
+  .paso-flecha {
+    animation: none;
+    opacity: 1;
   }
 
   *,

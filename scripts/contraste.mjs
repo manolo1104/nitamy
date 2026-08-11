@@ -24,6 +24,20 @@ const C = {
   bordeCampo: "#8b8378",
   bordeCampoOscuro: "#6e6459",
   blanco: "#ffffff",
+
+  // Paleta de dulce, agosto 2026.
+  fresa: "#e0245e",
+  fresaClaro: "#ffe1e9",
+  mango: "#f5a524",
+  mangoClaro: "#ffeecc",
+  menta: "#007a74",
+  mentaClaro: "#d4f1ee",
+  uva: "#6b3fc4",
+  uvaClaro: "#eae2fb",
+  cielo: "#1f6fd0",
+  cieloClaro: "#dcebfb",
+  limon: "#5a9500",
+  limonClaro: "#e8f4cd",
 };
 
 function canalLineal(v) {
@@ -74,6 +88,68 @@ const PARES = [
   [C.bordeCampoOscuro, C.carbon, "borde de control en sección oscura", 3, "control"],
   [C.rojo, C.papel, "anillo de foco sobre papel", 3, "control"],
   [C.ambar, C.carbon, "anillo de foco en la sección oscura", 3, "control"],
+
+  // --- Paleta de dulce -----------------------------------------------------
+  // Cada sabor declara en globals.css un token `-encima`: lo único que puede
+  // ir sobre su relleno saturado. Aquí se verifica sabor por sabor, porque no
+  // todos aguantan lo mismo. Mango y limón NO aguantan blanco (2.04:1 y
+  // 3.66:1); por eso llevan tinta y por eso están abajo en PROHIBIDOS.
+  [C.blanco, C.fresa, "texto sobre relleno de fresa", 4.5],
+  [C.tinta, C.mango, "texto sobre relleno de mango", 4.5],
+  [C.blanco, C.menta, "texto sobre relleno de menta", 4.5],
+  [C.blanco, C.uva, "texto sobre relleno de uva", 4.5],
+  [C.blanco, C.cielo, "texto sobre relleno de cielo", 4.5],
+  [C.tinta, C.limon, "texto sobre relleno de limón", 4.5],
+
+  // Los pasteles son fondo de tarjeta y siempre llevan tinta encima.
+  [C.tinta, C.fresaClaro, "texto sobre tarjeta pastel de fresa", 4.5],
+  [C.tinta, C.mangoClaro, "texto sobre tarjeta pastel de mango", 4.5],
+  [C.tinta, C.mentaClaro, "texto sobre tarjeta pastel de menta", 4.5],
+  [C.tinta, C.uvaClaro, "texto sobre tarjeta pastel de uva", 4.5],
+  [C.tinta, C.cieloClaro, "texto sobre tarjeta pastel de cielo", 4.5],
+  [C.tinta, C.limonClaro, "texto sobre tarjeta pastel de limón", 4.5],
+
+  // El texto secundario también aparece dentro de las tarjetas pastel.
+  [C.tinta2, C.fresaClaro, "texto secundario sobre pastel de fresa", 4.5],
+  [C.tinta2, C.mangoClaro, "texto secundario sobre pastel de mango", 4.5],
+  [C.tinta2, C.mentaClaro, "texto secundario sobre pastel de menta", 4.5],
+  [C.tinta2, C.uvaClaro, "texto secundario sobre pastel de uva", 4.5],
+  [C.tinta2, C.cieloClaro, "texto secundario sobre pastel de cielo", 4.5],
+  [C.tinta2, C.limonClaro, "texto secundario sobre pastel de limón", 4.5],
+
+  // El relleno saturado como icono o borde sobre su propio pastel: es objeto
+  // gráfico, umbral 3:1 (WCAG 1.4.11), no 4.5:1.
+  //
+  // El mango NO está en esta lista y no es un olvido: da 1.78:1 sobre su
+  // propio pastel y está abajo, en PROHIBIDOS. Es la razón de que los iconos
+  // sobre tarjeta pastel vayan en tinta secundaria y no en el acento del
+  // sabor (ver ComoFunciona.tsx).
+  [C.fresa, C.fresaClaro, "icono de fresa sobre su pastel", 3, "control"],
+  [C.menta, C.mentaClaro, "icono de menta sobre su pastel", 3, "control"],
+  [C.uva, C.uvaClaro, "icono de uva sobre su pastel", 3, "control"],
+  [C.cielo, C.cieloClaro, "icono de cielo sobre su pastel", 3, "control"],
+  [C.limon, C.limonClaro, "icono de limón sobre su pastel", 3, "control"],
+
+  // Texto de apoyo dentro de una tarjeta pastel. Va SIEMPRE en tinta, nunca
+  // en el acento del sabor: ver los prohibidos de abajo.
+  [C.tinta2, C.mentaClaro, "enlace de tarjeta sobre pastel de menta", 4.5],
+  [C.tinta2, C.cieloClaro, "enlace de tarjeta sobre pastel de cielo", 4.5],
+
+  // El odómetro de la cuenta regresiva. Va sobre una caja `bg-papel/80`
+  // encima del pastel de la temporada, así que el fondo efectivo está entre
+  // el papel y el pastel; se comprueba contra los dos extremos. Es texto de
+  // 40-56px, o sea texto grande: umbral 3:1.
+  [C.rojo, C.papel, "odómetro sobre la caja de papel", 3, "grande"],
+  [C.rojo, C.mangoClaro, "odómetro en el peor pastel de fondo", 3, "grande"],
+  [C.rojo, C.limonClaro, "odómetro sobre pastel de limón", 3, "grande"],
+
+  // Los círculos de categoría son rellenos saturados sobre papel: tienen que
+  // distinguirse del fondo, otra vez umbral de objeto gráfico.
+  [C.fresa, C.papel, "círculo de categoría en fresa", 3, "control"],
+  [C.menta, C.papel, "círculo de categoría en menta", 3, "control"],
+  [C.uva, C.papel, "círculo de categoría en uva", 3, "control"],
+  [C.cielo, C.papel, "círculo de categoría en cielo", 3, "control"],
+  [C.limon, C.papel, "círculo de categoría en limón", 3, "control"],
 ];
 
 /**
@@ -85,6 +161,20 @@ const PROHIBIDOS = [
   [C.ambar, C.papel, "ámbar como texto sobre papel"],
   [C.ambar, C.papel2, "ámbar como texto sobre sección tintada"],
   [C.rojo, C.papel, "rojo de marca como texto NORMAL sobre papel"],
+  // La razón de que mango y limón lleven tinta encima y no blanco.
+  [C.blanco, C.mango, "blanco sobre relleno de mango"],
+  [C.blanco, C.limon, "blanco sobre relleno de limón"],
+  // Y la razón de que el mango nunca sea círculo suelto sobre papel: no se
+  // despega del fondo. En la rejilla de categorías va con borde de tinta.
+  // Umbral 3 porque es objeto gráfico, no texto.
+  [C.mango, C.papel, "mango como círculo sin borde sobre papel", 3],
+  // El mango sobre su propio pastel es el peor par de toda la paleta. Por
+  // esto los iconos de tarjeta van en tinta y no en el acento del sabor.
+  [C.mango, C.mangoClaro, "acento de mango sobre su propio pastel", 3],
+  // Menta y cielo aguantan como icono (3:1) pero NO como texto de 14px sobre
+  // su pastel. Es la razón de que los enlaces de tarjeta vayan en tinta.
+  [C.menta, C.mentaClaro, "acento de menta como texto sobre su pastel", 4.5],
+  [C.cielo, C.cieloClaro, "acento de cielo como texto sobre su pastel", 4.5],
 ];
 
 /**
@@ -115,14 +205,16 @@ for (const [frente, fondo, uso, umbral, tipo] of PARES) {
   );
 }
 
-console.log("\n  Prohibidos a propósito (deben reprobar 4.5:1):\n");
-for (const [frente, fondo, uso] of PROHIBIDOS) {
+console.log("\n  Prohibidos a propósito (deben REPROBAR su umbral):\n");
+for (const [frente, fondo, uso, umbral = 4.5] of PROHIBIDOS) {
   const r = razon(frente, fondo);
-  if (r >= 4.5) {
+  if (r >= umbral) {
     fallos++;
-    console.log(`  RARO  ${r.toFixed(2).padStart(5)}:1  ${uso} ya pasa; la regla que lo prohíbe sobra`);
+    console.log(
+      `  RARO  ${r.toFixed(2).padStart(5)}:1  ${uso} ya pasa ${umbral}:1; la regla que lo prohíbe sobra`,
+    );
   } else {
-    console.log(`  OK    ${r.toFixed(2).padStart(5)}:1  ${uso}`);
+    console.log(`  OK    ${r.toFixed(2).padStart(5)}:1  ${uso} (umbral ${umbral}:1)`);
   }
 }
 

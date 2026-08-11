@@ -84,6 +84,16 @@ export const EMPRESA = {
 export const FUNDACION = 1995;
 export const ANIO_RAZON_SOCIAL = 1999;
 
+/**
+ * Proveedores con los que Nitamy trabaja. Sale del documento institucional
+ * del cliente, no de una estimación.
+ *
+ * Vive aquí y no en un componente porque aparece en dos lugares (la barra de
+ * cifras y el encabezado de la rejilla de marcas) y dos números distintos
+ * para lo mismo en la misma página destruyen la credibilidad de los dos.
+ */
+export const PROVEEDORES = 26;
+
 export function aniosOperando(hoy: Date = new Date()): number {
   return hoy.getFullYear() - FUNDACION;
 }
@@ -257,10 +267,35 @@ export const PEDIDO_MINIMO: PorDefinir<{
  *  producto propio, que cambiaría el argumento de venta de forma importante. */
 export const MAQUILA_PROPIA: PorDefinir<boolean> = PENDIENTE;
 
-/** Prueba social. El componente existe y está construido; se muestra solo
- *  cuando esto deje de estar pendiente. */
+/**
+ * Prueba social. El componente existe y está construido; se muestra solo
+ * cuando esto deje de estar pendiente.
+ *
+ * Agosto 2026: el cliente mandó como referencia un carrusel de reseñas CON
+ * ESTRELLAS y pidió algo así. El componente ya las dibuja, pero hay dos
+ * cosas que decidir antes de que esto se pueda llenar:
+ *
+ *   1. De dónde salen. Una calificación en un sitio B2B tiene que venir de
+ *      un cliente real que la haya dado; no se inventa ni se estima. Si
+ *      Nitamy no tiene reseñas juntadas, el camino corto es pedírselas por
+ *      WhatsApp a los diez clientes más antiguos.
+ *   2. `estrellas` es opcional a propósito. Un testimonio firmado sin
+ *      calificación sigue sirviendo; una calificación sin nombre ni negocio
+ *      detrás, no. Si solo hay una de las dos, que sea la cita.
+ *
+ * Mientras siga en PENDIENTE, la sección entera no renderiza. Nunca se
+ * inventa un testimonio: un mayorista que lee una cita falsa y busca al
+ * negocio que la firma es un cliente perdido.
+ */
 export const TESTIMONIOS: PorDefinir<
-  Array<{ cita: string; nombre: string; puesto: string; negocio: string }>
+  Array<{
+    cita: string;
+    nombre: string;
+    puesto: string;
+    negocio: string;
+    /** 1 a 5. Se omite si el cliente no dio calificación explícita. */
+    estrellas?: number;
+  }>
 > = PENDIENTE;
 
 /** Tiempos de entrega por zona, para el mapa de cobertura. */

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { PROVEEDORES } from "@/config/nitamy";
 import { MARCAS, MARCAS_CON_LOGO, TOTAL_MARCAS } from "@/lib/contenido";
 import { LogoMarca } from "../LogoMarca";
@@ -58,7 +59,16 @@ export function SeccionMarcas() {
             subiéndolo no alcanza; hay que bajar el resto. */}
         <ul className="rejilla-atenua mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {visibles.map((marca, i) => (
-            <Revelar key={marca.slug} retraso={Math.min(i, 7) * 40} como="li">
+            // Cada ficha se SELLA al entrar en pantalla, en vez de subir como
+            // el resto de la página. El giro alterna de signo para que la
+            // rejilla no se vea impresa por una máquina.
+            <li
+              key={marca.slug}
+              className="sello"
+              style={
+                { "--giro-sello": `${i % 2 ? 2.4 : -2.4}deg` } as React.CSSProperties
+              }
+            >
               <Link
                 href={`/marcas/${marca.slug}`}
                 className="ficha group flex h-full flex-col overflow-hidden rounded-caja border border-linea bg-papel hover:border-tinta active:scale-[0.99]"
@@ -70,13 +80,16 @@ export function SeccionMarcas() {
                     pasan de largo y basta reconocerlos, aquí el visitante los
                     está mirando de frente y a 44 la ficha se veía vacía. */}
                 <span className="ficha-medio flex aspect-[16/9] items-center justify-center px-6 py-5">
-                  <LogoMarca marca={marca} alto={64} />
+                  {/* Origen del morph hacia la página de la marca. */}
+                  <ViewTransition name={`marca-${marca.slug}`}>
+                    <LogoMarca marca={marca} alto={64} />
+                  </ViewTransition>
                 </span>
                 <span className="border-t border-linea px-4 py-3 text-center text-sm font-semibold text-tinta">
                   {marca.nombre}
                 </span>
               </Link>
-            </Revelar>
+            </li>
           ))}
         </ul>
 

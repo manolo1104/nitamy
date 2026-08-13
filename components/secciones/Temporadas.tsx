@@ -32,8 +32,20 @@ import { Revelar } from "../Revelar";
  * JavaScript.
  */
 
+/**
+ * Dónde cae una fecha dentro del año, de 0 a 1.
+ *
+ * Se calcula en el SERVIDOR y viaja como número. Si el cliente lo calculara
+ * por su cuenta, el HTML del servidor y el del navegador podrían diferir en
+ * el cambio de día y React marcaría un error de hidratación.
+ */
+function posicionEnElAnio(mes: number, dia: number): number {
+  return (mes - 1 + (dia - 1) / 31) / 12;
+}
+
 export function Temporadas() {
   const calculadas = temporadasPorCercania();
+  const hoy = new Date();
 
   /*
     Los iconos se RENDERIZAN AQUÍ y viajan ya resueltos al rail.
@@ -50,6 +62,7 @@ export function Temporadas() {
     cuando: t.cuando,
     queRota: t.queRota,
     color: t.color,
+    posicion: posicionEnElAnio(t.mesPico, t.diaPico),
     icono: <IconoCategoria nombre={t.icono} size={22} />,
     iconoGrande: <IconoCategoria nombre={t.icono} size={260} />,
     estado: t.estado,
@@ -89,7 +102,10 @@ export function Temporadas() {
         </Revelar>
 
         <div className="mt-10">
-          <RailTemporadas temporadas={vistas} />
+          <RailTemporadas
+            temporadas={vistas}
+            posicionHoy={posicionEnElAnio(hoy.getMonth() + 1, hoy.getDate())}
+          />
         </div>
       </div>
     </section>

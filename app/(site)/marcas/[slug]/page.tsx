@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 import { BotonEnlace } from "@/components/Boton";
 import { BotonCotizar } from "@/components/calificador/BotonCotizar";
 import { Migajas } from "@/components/DatosEstructurados";
@@ -117,8 +118,16 @@ export default async function PaginaDeMarca(
             </div>
 
             <div className="lg:col-span-5">
+              {/*
+                Destino del morph. El mismo `name` que la ficha de la que
+                se vino, así que el navegador entiende que es EL MISMO logo
+                y lo mueve y lo escala de un sitio a otro en vez de
+                desaparecerlo y aparecerlo.
+              */}
               <div className="flex items-center justify-center rounded-caja border border-linea bg-papel-2 p-10">
-                <LogoMarca marca={marca} alto={96} />
+                <ViewTransition name={`marca-${marca.slug}`}>
+                  <LogoMarca marca={marca} alto={96} />
+                </ViewTransition>
               </div>
               <dl className="mt-4 divide-y divide-linea border-y border-linea text-sm">
                 <div className="flex justify-between gap-4 py-3">

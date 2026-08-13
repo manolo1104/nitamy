@@ -5,6 +5,7 @@ import {
   TruckIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { BotonCotizar } from "../calificador/BotonCotizar";
+import { Reflector } from "../Reflector";
 import { Revelar } from "../Revelar";
 import { SABORES } from "@/lib/sabores";
 import type { Sabor } from "@/lib/contenido";
@@ -16,15 +17,15 @@ import type { Sabor } from "@/lib/contenido";
  * cliente: número en un sticker de color, icono, y el texto debajo. Tres
  * columnas, se lee de un vistazo.
  *
- * Lo que se fue, y por qué vale la pena decirlo: la versión anterior tenía un
- * visual pegado con `position: sticky` que se sincronizaba con la lista
- * mediante un IntersectionObserver. Se veía bien y no era gratis, costaba un
- * componente de cliente entero. La forma nueva dice lo mismo en menos
- * espacio, con la estética que el cliente pidió, y es un componente de
- * SERVIDOR: cero JavaScript al navegador y un `useEffect` menos que mantener.
+ * Lo que se fue: la versión anterior tenía un visual pegado con
+ * `position: sticky` sincronizado con la lista por un IntersectionObserver.
+ * Se veía bien y costaba un `useEffect` que mantener. La forma nueva dice lo
+ * mismo en menos espacio y con la estética que el cliente pidió.
  *
- * Cuando un rediseño elimina código en vez de agregarlo, es que la
- * dirección es la correcta.
+ * Esta sección era de servidor puro. Dejó de serlo al envolver cada tarjeta
+ * en `Reflector`, que necesita saber dónde está el puntero. El texto y los
+ * iconos se siguen renderizando en el servidor; lo único que baja al
+ * navegador es el rastreo del cursor.
  *
  * El número va en el sticker girado y no como un `<h3>` numerado porque
  * `<ol>` ya numera para el lector de pantalla; el sticker es la versión
@@ -104,7 +105,55 @@ export function ComoFunciona() {
           Solo en escritorio (`md:`): en celular las tarjetas se apilan y no
           hay hueco horizontal que ocupar.
         */}
-        <div className="relative mt-12">
+        {/*
+          La pista del pedido. Es la hermana de la ruta del camión de la
+          sección de cobertura, y a propósito: las dos cuentan un trayecto y
+          las dos las empuja el scroll, así que el visitante ya sabe leerla
+          cuando llega aquí.
+
+          Lo que viaja es EL PEDIDO, y va cambiando de forma por el camino:
+          sale como mensaje de WhatsApp, se vuelve cotización y llega como
+          camión. Eso es literalmente lo que dicen los tres pasos, contado
+          sin una sola palabra más.
+
+          Solo en escritorio: en celular las tarjetas se apilan y no hay
+          trayecto horizontal que recorrer.
+        */}
+        <div
+          aria-hidden="true"
+          className="pista-pedido relative mt-12 hidden h-16 md:block"
+        >
+          <div className="absolute inset-x-0 top-8 h-px bg-linea" />
+          <div className="absolute inset-x-0 top-[1.9rem] h-0.5 overflow-hidden">
+            <div className="raya-pista h-full w-[200%] bg-[repeating-linear-gradient(90deg,var(--color-borde-campo)_0_10px,transparent_10px_24px)] opacity-40" />
+          </div>
+
+          {/* Las tres paradas coinciden con el centro de cada tarjeta. */}
+          {[1, 3, 5].map((n) => (
+            <span
+              key={n}
+              style={{ left: `${(n * 100) / 6}%` }}
+              className="absolute top-[1.55rem] size-2.5 -translate-x-1/2 rounded-pill bg-linea ring-4 ring-papel-2"
+            />
+          ))}
+
+          {/* El pedido. Tres caras que se relevan en el camino. */}
+          <div className="pedido-viaja absolute top-2 left-0 w-12">
+            <span className="relative flex size-12 items-center justify-center rounded-pill bg-carbon text-ambar shadow-[0_10px_24px_-12px_rgb(20_17_15/0.9)]">
+              <span className="pedido-cara pedido-cara-1 absolute">
+                <ChatCircleTextIcon size={24} weight="fill" />
+              </span>
+              <span className="pedido-cara pedido-cara-2 absolute">
+                <ReceiptIcon size={24} weight="fill" />
+              </span>
+              <span className="pedido-cara pedido-cara-3 absolute">
+                <TruckIcon size={24} weight="fill" />
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div className="relative mt-6">
           {[1, 2].map((n) => (
             <div
               key={n}
@@ -123,8 +172,10 @@ export function ComoFunciona() {
               <Revelar key={paso.titulo} retraso={i * 80} como="li">
                 {/* `grupo-sticker`: al pasar el cursor por la tarjeta, el
                     número girado se endereza y crece, como si alguien lo
-                    acomodara con el dedo. */}
-                <div
+                    acomodara con el dedo.
+                    `Reflector`: además, un brillo sigue al cursor dentro de
+                    la tarjeta. */}
+                <Reflector
                   className={`grupo-sticker h-full rounded-blanda p-7 ${piel.pastel}`}
                 >
                   <div className="flex items-center gap-4">
@@ -164,7 +215,7 @@ export function ComoFunciona() {
                   <p className="mt-3 leading-relaxed text-tinta-2">
                     {paso.detalle}
                   </p>
-                </div>
+                </Reflector>
               </Revelar>
             );
           })}

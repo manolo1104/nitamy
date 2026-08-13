@@ -2,6 +2,7 @@ import { TruckIcon, PackageIcon } from "@phosphor-icons/react/dist/ssr";
 import { ESTADOS, ESTADOS_CON_FLOTILLA } from "@/lib/estados";
 import { TIEMPOS_ENTREGA_POR_ZONA, estaPendiente } from "@/config/nitamy";
 import { BotonCotizar } from "../calificador/BotonCotizar";
+import { Ruta } from "../cobertura/Ruta";
 import { Revelar } from "../Revelar";
 
 /**
@@ -41,7 +42,12 @@ export function Cobertura() {
         </p>
       </Revelar>
 
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
+      {/* El camión recorre la ruta y va dejando entregas conforme se baja
+          por la página. Va aquí, entre el argumento y las dos tarjetas de
+          servicio: ilustra lo que el párrafo acaba de decir. */}
+      <Ruta />
+
+      <div className="mt-4 grid gap-6 lg:grid-cols-2">
         <Revelar>
           <div className="flex h-full flex-col rounded-caja border-2 border-rojo bg-papel p-7">
             <TruckIcon

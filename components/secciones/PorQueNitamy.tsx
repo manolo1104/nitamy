@@ -52,6 +52,35 @@ export function PorQueNitamy() {
           </h2>
         </Revelar>
 
+        {/*
+          El nombre armándose.
+
+          Las tres sílabas llegan cada una desde el lado donde está su marca
+          en la fila de abajo (NI de la izquierda, TA de abajo, MY de la
+          derecha) y encajan para formar NITAMY. Lo empuja el scroll.
+
+          Es la mejor historia que tiene esta empresa y estaba contada solo
+          con texto. Verla ensamblarse hace el argumento en un segundo:
+          el nombre no lo inventó una agencia, lo formaron tres proveedores.
+
+          `aria-hidden` porque el párrafo de abajo ya lo explica con palabras
+          y el acrónimo repetido sería ruido para un lector de pantalla.
+        */}
+        <div
+          aria-hidden="true"
+          className="ensamble mt-14 flex items-baseline justify-center gap-0 overflow-hidden"
+        >
+          <span className="ensamble-ni ancho text-[clamp(3rem,11vw,7rem)] font-extrabold leading-none tracking-[-0.04em] text-ambar">
+            NI
+          </span>
+          <span className="ensamble-ta ancho text-[clamp(3rem,11vw,7rem)] font-extrabold leading-none tracking-[-0.04em] text-papel">
+            TA
+          </span>
+          <span className="ensamble-my ancho text-[clamp(3rem,11vw,7rem)] font-extrabold leading-none tracking-[-0.04em] text-ambar">
+            MY
+          </span>
+        </div>
+
         {/* El acrónimo. La sílaba que aporta cada marca va en ámbar; el resto
             del nombre en papel al 55%, que sigue pasando AA sobre carbón. */}
         <Revelar retraso={80}>

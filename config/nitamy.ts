@@ -353,6 +353,20 @@ export function pendientesSinResolver(): string[] {
 
 export const SITIO = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.gruponitamy.com",
+  /**
+   * ¿Dejamos que Google levante el sitio?
+   *
+   * Arranca en NO a propósito. Mientras el cliente no confirme el segundo
+   * WhatsApp (viene con 12 dígitos en el brief y en el PDF), un sitio
+   * indexado es peor que ningún sitio: Google fija esa versión, la sirve con
+   * el teléfono equivocado y encima le compite a gruponitamy.com por su
+   * propio nombre.
+   *
+   * Para abrirlo: `NEXT_PUBLIC_PERMITIR_INDEXACION=true` en Vercel y volver a
+   * desplegar. Se hornea en el build (es `NEXT_PUBLIC_`), así que cambiar la
+   * variable sin redesplegar no surte efecto.
+   */
+  indexable: process.env.NEXT_PUBLIC_PERMITIR_INDEXACION === "true",
   nombre: "Grupo Nitamy",
   descripcion:
     "Distribuidor mayorista de dulces, cacahuate, tamarindo y botana. Surte todo tu anaquel con un solo proveedor.",

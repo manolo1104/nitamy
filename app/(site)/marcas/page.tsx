@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Migajas } from "@/components/DatosEstructurados";
+import { ViewTransition } from "react";
 import { LogoMarca } from "@/components/LogoMarca";
 import { Revelar } from "@/components/Revelar";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
@@ -78,7 +79,9 @@ export default function IndiceDeMarcas() {
                       className="flex h-full flex-col rounded-caja border border-linea p-5 transition-[border-color,transform] duration-200 ease-salida hover:border-tinta active:scale-[0.99]"
                     >
                       <div className="flex h-11 items-center">
-                        <LogoMarca marca={marca} alto={36} />
+                        <ViewTransition name={`marca-${marca.slug}`}>
+                          <LogoMarca marca={marca} alto={36} />
+                        </ViewTransition>
                       </div>
                       <h3 className="ancho mt-4 text-base font-extrabold tracking-tight">
                         {marca.nombre}

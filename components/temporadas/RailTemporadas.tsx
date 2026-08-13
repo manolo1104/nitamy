@@ -65,7 +65,13 @@ export type TemporadaVista = {
   corteLegible: string;
   picoLegible: string;
   categorias: CategoriaVista[];
+  /** Dónde cae su fecha pico dentro del año, de 0 a 1. Lo calcula el
+   *  servidor: si lo hiciera el cliente habría error de hidratación al
+   *  cambiar el día. */
+  posicion: number;
 };
+
+const MESES = ["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
 
 /** El texto corto del rail. Se lee de reojo, así que no pasa de tres palabras. */
 function resumenDeCorte(t: TemporadaVista): string {
@@ -90,8 +96,11 @@ function frameDeCorte(t: TemporadaVista): string {
 
 export function RailTemporadas({
   temporadas,
+  posicionHoy,
 }: {
   temporadas: TemporadaVista[];
+  /** Dónde está hoy dentro del año, de 0 a 1. */
+  posicionHoy: number;
 }) {
   const [activa, setActiva] = useState(0);
   const idBase = useId();
@@ -130,7 +139,97 @@ export function RailTemporadas({
   const piel = SABORES[t.color];
 
   return (
-    <div className="lg:grid lg:grid-cols-12 lg:gap-10">
+    <>
+      {/*
+        El calendario del año.
+
+        Las siete temporadas puestas sobre los doce meses, más una marca en
+        el día de hoy. Es el mapa que le faltaba a la sección: el rail de
+        abajo dice cuántos días quedan para cada una, pero no dónde está uno
+        parado en el año ni cómo se reparten.
+
+        La línea se DIBUJA con el scroll y los pines aparecen a su paso, así
+        que el año se recorre de enero a diciembre mientras el visitante
+        baja. Y son botones: al picar un pin se selecciona esa temporada
+        abajo, así que el calendario no solo informa, navega.
+
+        Solo desde `sm`: en celular, doce meses en el ancho de un teléfono
+        dejan los pines a menos de 25px unos de otros, por debajo del objetivo
+        táctil mínimo. Ahí el rail de abajo ya hace ese trabajo.
+      */}
+      <div className="calendario relative mb-14 hidden pt-6 sm:block">
+        <p className="sr-only">
+          Las siete temporadas a lo largo del año. Cada pin selecciona su
+          temporada.
+        </p>
+
+        {/* Riel del año: el gris de fondo y encima la línea que se dibuja. */}
+        <div className="absolute inset-x-0 top-[3.1rem] h-0.5 bg-linea" />
+        <div className="absolute inset-x-0 top-[3.1rem] h-0.5 overflow-hidden">
+          <div className="calendario-linea h-full w-full origin-left bg-tinta-2/45" />
+        </div>
+
+        <div aria-hidden="true" className="flex pt-10">
+          {MESES.map((m, i) => (
+            <span
+              key={`${m}-${i}`}
+              className="cifra flex-1 text-center text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-tinta-2/70"
+            >
+              {m}
+            </span>
+          ))}
+        </div>
+
+        {/* Dónde estamos hoy. */}
+        <div
+          style={{ left: `${posicionHoy * 100}%` }}
+          className="absolute top-[2.5rem] -translate-x-1/2"
+        >
+          <span
+            aria-hidden="true"
+            className="block size-3 rounded-pill border-2 border-papel-2 bg-tinta"
+          />
+          <span className="absolute left-1/2 top-[-1.3rem] -translate-x-1/2 whitespace-nowrap text-[0.625rem] font-bold uppercase tracking-[0.14em] text-tinta">
+            Hoy
+          </span>
+        </div>
+
+        {/* Un pin por temporada, en su fecha real del año. */}
+        {temporadas.map((item, n) => {
+          const suPiel = SABORES[item.color];
+          const esta = n === activa;
+          return (
+            <button
+              key={`pin-${item.slug}`}
+              type="button"
+              // `setActiva` y no `irA`: `irA` además mueve el foco a la
+              // pestaña del rail, y quien acaba de picar un pin del
+              // calendario espera que el foco se quede en el pin.
+              onClick={() => setActiva(n)}
+              aria-pressed={esta}
+              style={
+                {
+                  left: `${item.posicion * 100}%`,
+                  // `--pos` reparte el retraso de aparición según la fecha
+                  // real de la temporada. Ver la nota en globals.css.
+                  "--pos": item.posicion,
+                } as React.CSSProperties
+              }
+              className="calendario-pin absolute top-[2.55rem] -translate-x-1/2 p-1"
+            >
+              <span className="sr-only">{item.nombre}</span>
+              <span
+                aria-hidden="true"
+                className={`block rounded-pill border-2 border-papel-2 transition-all duration-200 ease-resorte ${suPiel.relleno} ${
+                  esta ? "size-5" : "size-3.5"
+                }`}
+              />
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="lg:grid lg:grid-cols-12 lg:gap-10">
       {/*
         En celular el rail se recorre con el dedo, en escritorio se apila.
         `.carrusel` da scroll-snap nativo: cero librería de carrusel y nada
@@ -341,6 +440,7 @@ export function RailTemporadas({
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

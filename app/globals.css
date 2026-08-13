@@ -181,7 +181,21 @@
    -------------------------------------------------------------------------- */
 
 html {
-  scroll-behavior: smooth;
+  /*
+    SIN `scroll-behavior: smooth`, y es un arreglo, no un olvido.
+
+    Lo tenía, y rompía la navegación entre páginas: al hacer clic en una
+    marca de la rejilla, el App Router pide volver arriba, el navegador lo
+    convierte en un desplazamiento animado y la animación se pierde en el
+    cambio de ruta. Resultado medido: se navegaba a /marcas/nishikawa y el
+    visitante aterrizaba en el scroll 3883, a media página de productos, sin
+    haber visto ni el título.
+
+    Y no servía para nada: el sitio no tiene un solo enlace de ancla
+    (`href="#..."`), que es el único caso donde el desplazamiento suave
+    aporta algo. Se quita el que rompía y se conserva `scroll-padding-top`,
+    que no cuesta nada y deja listo el día que haya anclas.
+  */
   /* El header pegajoso mide 68px; los anclajes no deben quedar debajo. */
   scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
@@ -654,6 +668,640 @@ body {
   }
 }
 
+/* ==========================================================================
+   Transiciones entre páginas
+   ==========================================================================
+   Cuando se hace clic en una marca de la rejilla, su logotipo NO desaparece
+   para reaparecer arriba en la página nueva: se mueve y crece hasta su sitio.
+   Es el patrón de "elemento compartido" de la API de View Transitions, que
+   React expone con `<ViewTransition name>` y que Next 16 activa solo en cada
+   navegación.
+
+   Por qué importa en este sitio: la rejilla tiene veintiún logotipos muy
+   parecidos entre sí en tamaño y forma. Sin la continuidad visual, el
+   visitante llega a la página nueva sin estar seguro de haber picado el
+   correcto y tiene que releer el título para confirmarlo. Con el morph, esa
+   duda no existe.
+
+   El resto de la página hace un fundido corto por debajo. 220ms: es una
+   navegación, no un espectáculo, y el contenido tiene que estar legible ya.
+   ========================================================================== */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease-salida);
+}
+
+/* El logotipo que viaja va por encima del fundido del resto de la página; si
+   no, se pierde detrás del contenido nuevo a media transición. */
+::view-transition-group(*) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-entrada-salida);
+}
+
+/*
+  Sin movimiento, sin transición.
+
+  `animation: none` en los pseudo-elementos corta el morph y el fundido de
+  golpe, que es lo correcto: una navegación instantánea nunca marea.
+*/
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* --- Titular revelado ------------------------------------------------------
+   Cada palabra sube y gira sobre su eje horizontal, como el panel de
+   horarios de una estación al voltearse. Escalonadas, así que la frase se
+   arma de izquierda a derecha mientras se lee.
+
+   `perspective` va en el `<h1>` y no en cada palabra: con una perspectiva
+   por palabra, cada una tendría su propio punto de fuga y el giro se vería
+   plano. Con una sola, todas comparten el mismo ojo y el volumen se lee.
+
+   `backface-visibility: hidden` evita el parpadeo del subpíxel a mitad del
+   giro en WebKit.
+
+   Punto de partida: el titular está VISIBLE por defecto y la animación solo
+   se aplica con `prefers-reduced-motion: no-preference`. Si algo falla, el
+   peor caso es un titular quieto y legible, que es exactamente lo que se
+   quiere que pase. */
+.titular {
+  perspective: 800px;
+}
+
+.titular-palabra {
+  display: inline-block;
+  position: relative;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+
+@keyframes voltearPalabra {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em) rotateX(-75deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+/* El rayón de marcador. Va DETRÁS del texto (`z-index: -1`) y con
+   `mix-blend-mode: multiply` para que se vea como tinta sobre papel y no
+   como una caja de color tapando la letra.
+
+   El `border-radius` de ocho valores y el giro de medio grado son lo que lo
+   salva de parecer un `<mark>`: un plumón real no deja un rectángulo. */
+.titular-trazo {
+  position: absolute;
+  z-index: -1;
+  left: -0.12em;
+  right: -0.12em;
+  bottom: 0.04em;
+  height: 0.42em;
+  background-color: var(--color-mango);
+  border-radius: 42% 58% 62% 38% / 55% 45% 55% 45%;
+  transform: rotate(-0.5deg) scaleX(0);
+  transform-origin: left center;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .titular-palabra {
+    animation: voltearPalabra 620ms var(--ease-salida) both;
+    animation-delay: calc(var(--i) * 55ms);
+  }
+
+  @keyframes rayar {
+    to {
+      transform: rotate(-0.5deg) scaleX(1);
+    }
+  }
+
+  .titular-trazo {
+    animation: rayar 420ms var(--ease-entrada-salida) both;
+    /* Arranca cuando la última palabra ya aterrizó: `--total` palabras por
+       55ms de paso, más la duración de la última. */
+    animation-delay: calc(var(--total) * 55ms + 420ms);
+  }
+}
+
+/* Sin movimiento el marcador se dibuja igual, porque señala cuál es el
+   argumento y eso es información, no adorno. Simplemente aparece puesto. */
+@media (prefers-reduced-motion: reduce) {
+  .titular-trazo {
+    transform: rotate(-0.5deg) scaleX(1);
+  }
+}
+
+/* --- La ruta del camión ----------------------------------------------------
+   La sección de cobertura presume "flotilla propia", y un icono de camión
+   quieto no es una flotilla: es un icono. Este camión recorre la ruta y va
+   dejando entregas mientras el visitante baja por la página.
+
+   Lo mueve el SCROLL, no un temporizador, y ahí está la diferencia. El
+   visitante empuja el camión: avanza a su ritmo y se detiene cuando él se
+   detiene. Un camión en bucle sería un GIF; este es una barra de progreso
+   disfrazada de reparto.
+
+   El avance y el rebote van en DOS elementos anidados a propósito. El avance
+   depende del scroll y el rebote del reloj; si compartieran `transform`, el
+   último en aplicarse borraría al otro. Es el mismo error que ya se cometió
+   dos veces en este proyecto con `rotate-6`.
+
+   Sin soporte de línea de tiempo de scroll, el bloque entero no aplica: el
+   camión se queda quieto al inicio con las entregas visibles. Sigue siendo
+   una ilustración correcta, que es la degradación que se busca. */
+
+/*
+   El recorrido se mide en `cqw`, unidades del CONTENEDOR, no en `vw`.
+
+   La primera versión usaba `calc(100vw - 100%)` y estaba mal: la ruta vive
+   dentro de un contenedor de 1400px con padding, así que en una pantalla
+   ancha el camión se pasaba del borde derecho por la diferencia entre el
+   viewport y el contenedor. Con `cqw` el destino es exactamente el ancho de
+   la ruta menos el ancho del propio camión, en cualquier pantalla.
+
+   Requiere `container-type: inline-size` en `.ruta`, que está más abajo.
+*/
+@keyframes conducir {
+  from {
+    transform: translateX(-12cqw);
+  }
+  to {
+    transform: translateX(calc(100cqw - 152px));
+  }
+}
+
+@keyframes girarRueda {
+  to {
+    transform: rotate(1080deg);
+  }
+}
+
+@keyframes rodarSuelo {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rebotar {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.4deg);
+  }
+  50% {
+    transform: translateY(-1.5px) rotate(0.4deg);
+  }
+}
+
+@keyframes soltarEntrega {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* En reposo las entregas no existen todavía: las deja el camión al pasar. */
+.entrega {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* El rebote de la suspensión sí va por reloj: da señal de vida aunque el
+     visitante no esté haciendo scroll. Es de 1.5px, apenas perceptible. */
+  .camion-rebota {
+    animation: rebotar 1.5s ease-in-out infinite;
+  }
+
+  @supports (animation-timeline: view()) {
+    .ruta {
+      /* Nombra la línea de tiempo para que los hijos la compartan. Sin esto
+         cada uno mediría su propia caja y el camión, las ruedas y las
+         entregas irían desincronizados. */
+      view-timeline-name: --ruta;
+    }
+
+    /* Con esto `100cqw` dentro de la ruta es el ancho de la ruta, que es lo
+       que necesita el recorrido del camión para no pasarse del contenedor. */
+    .ruta {
+      container-type: inline-size;
+    }
+
+    .camion-avanza,
+    .rueda,
+    .raya-ruta,
+    .entrega {
+      animation-timeline: --ruta;
+      animation-range: cover 12% cover 88%;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+
+    .camion-avanza {
+      animation-name: conducir;
+    }
+
+    .rueda {
+      animation-name: girarRueda;
+    }
+
+    .raya-ruta {
+      animation-name: rodarSuelo;
+    }
+
+    /* Cada entrega aparece justo después de que el camión pasa por su
+       parada. Los tramos salen de dónde está cada poste (34% y 68% del
+       ancho), trasladados al recorrido del scroll. */
+    .entrega-1 {
+      animation-name: soltarEntrega;
+      animation-range: cover 34% cover 44%;
+    }
+
+    .entrega-2 {
+      animation-name: soltarEntrega;
+      animation-range: cover 60% cover 70%;
+    }
+  }
+}
+
+/* Sin movimiento: el camión se queda al inicio y las entregas se ven. La
+   ilustración informa igual, solo que quieta. */
+@media (prefers-reduced-motion: reduce) {
+  .entrega {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+/* --- El calendario del año -------------------------------------------------
+   La línea de los doce meses se dibuja de enero a diciembre con el scroll, y
+   los siete pines de temporada van apareciendo a su paso.
+
+   Cada pin tiene su propio tramo del recorrido, calculado desde su posición
+   en el año: el de San Valentín aparece casi al principio y el de Navidad al
+   final. No es un escalonado decorativo, es el calendario recorriéndose.
+
+   Ese reparto NO se puede hacer en CSS, porque depende de la fecha de cada
+   temporada. Lo pone el componente en `--pos` (0 a 1) y aquí se convierte en
+   el tramo. Es el mismo motivo por el que el escalonado de los cheurones sí
+   está en CSS y este no: allá era fijo, aquí sale del dato. */
+@keyframes dibujarAnio {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes brotarPin {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.calendario-linea {
+  transform: scaleX(0);
+}
+
+.calendario-pin {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .calendario {
+      view-timeline-name: --calendario;
+    }
+
+    .calendario-linea {
+      animation: dibujarAnio linear both;
+      animation-timeline: --calendario;
+      animation-range: entry 30% cover 40%;
+    }
+
+    /*
+      Los pines comparten el mismo tramo que la línea y aparecen conforme
+      esta los alcanza. `animation-range` no acepta variables, así que el
+      reparto por fecha se hace con el retraso NEGATIVO de una animación de
+      tiempo normal: no es scroll-driven, es una cascada que arranca cuando
+      la sección entra. Se ve igual y funciona en más navegadores.
+    */
+    .calendario-pin {
+      animation: brotarPin 420ms var(--ease-resorte) both;
+      animation-delay: calc(220ms + var(--pos, 0) * 900ms);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calendario-linea {
+    transform: scaleX(1);
+  }
+
+  .calendario-pin {
+    opacity: 1;
+  }
+}
+
+/* --- La banda transportadora -----------------------------------------------
+   Tercera narrativa de scroll, hermana del camión y de la pista del pedido.
+   Aquí lo que desfila es producto real de las ocho líneas.
+
+   Tres movimientos coordinados y uno independiente:
+
+     carga      la fila de producto avanza con el scroll
+     rodadura   las marcas de la banda corren a la MISMA velocidad, porque la
+                carga va encima de ellas y no puede patinar
+     rodillos   giran con el scroll, en el mismo sentido
+     bamboleo   cada pieza se mece por RELOJ, no por scroll: una caja sobre
+                una banda se mueve aunque la banda esté parada un segundo
+
+   La carga va duplicada en el marcado y se desplaza un 50%, que es el mismo
+   truco de la marquesina de logotipos: el bucle empalma sin salto y no se ve
+   la banda vacía al final del recorrido. */
+@keyframes avanzarCarga {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes girarRodillo {
+  to {
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes bambolear {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* El bamboleo es por reloj y con desfase por pieza, para que no reboten
+     todas a la vez como un coro. */
+  .banda-pieza {
+    animation: bambolear 2.4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.31s);
+  }
+
+  @supports (animation-timeline: view()) {
+    .banda {
+      view-timeline-name: --banda;
+    }
+
+    .banda-carga,
+    .banda-rodadura,
+    .banda-rodillo {
+      animation-timeline: --banda;
+      animation-range: cover 8% cover 92%;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+
+    .banda-carga,
+    .banda-rodadura {
+      animation-name: avanzarCarga;
+    }
+
+    .banda-rodillo {
+      animation-name: girarRodillo;
+    }
+  }
+}
+
+/* --- La pista del pedido ---------------------------------------------------
+   Hermana de la ruta del camión, y a propósito: las dos cuentan un trayecto
+   empujado por el scroll, así que cuando el visitante llega a la segunda ya
+   sabe leerla.
+
+   Lo que viaja va cambiando de forma por el camino (mensaje -> cotización ->
+   camión), que es exactamente lo que dicen los tres pasos. Las tres caras
+   están apiladas en el mismo punto y se relevan por tramos del recorrido;
+   por eso los tramos se solapan un poco, para que el relevo sea un fundido y
+   no un corte.
+
+   Las paradas están en 1/6, 3/6 y 5/6 del ancho, que es el centro de cada
+   tarjeta en una rejilla de tres columnas. El recorrido va de la primera a
+   la última, no de borde a borde: el pedido nace en el paso uno. */
+@keyframes viajarPedido {
+  from {
+    transform: translateX(calc(16.66cqw - 1.5rem));
+  }
+  to {
+    transform: translateX(calc(83.33cqw - 1.5rem));
+  }
+}
+
+@keyframes relevo {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  18%,
+  82% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pedido-cara {
+  opacity: 0;
+}
+
+/* La primera cara se ve de entrada, aunque no haya scroll todavía: el pedido
+   no puede estar vacío en reposo. */
+.pedido-cara-1 {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .pista-pedido {
+      container-type: inline-size;
+      view-timeline-name: --pista;
+    }
+
+    .pedido-viaja,
+    .raya-pista,
+    .pedido-cara {
+      animation-timeline: --pista;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+    }
+
+    .pedido-viaja {
+      animation-name: viajarPedido;
+      animation-range: cover 15% cover 85%;
+    }
+
+    .raya-pista {
+      animation-name: rodarSuelo;
+      animation-range: cover 15% cover 85%;
+    }
+
+    /* Un tercio del recorrido por cara, con solape en los bordes. */
+    .pedido-cara-1 {
+      animation-name: relevo;
+      animation-range: cover 12% cover 42%;
+    }
+
+    .pedido-cara-2 {
+      animation-name: relevo;
+      animation-range: cover 38% cover 65%;
+    }
+
+    .pedido-cara-3 {
+      animation-name: relevo;
+      animation-range: cover 61% cover 92%;
+    }
+  }
+}
+
+/* --- Reflector -------------------------------------------------------------
+   Un brillo que sigue al cursor dentro de la tarjeta. Idea de
+   `hover-feature-cards` de unlumen.
+
+   La posición llega en `--mx` y `--my`, que escribe el componente
+   `Reflector`; aquí solo se dibuja el degradado. El pseudo-elemento arranca
+   invisible y aparece al pasar el cursor, así que en reposo no hay nada
+   pintado y no cuesta nada.
+
+   `mix-blend-mode: soft-light` en vez de un blanco translúcido: sobre las
+   tarjetas pastel de los pasos, un velo blanco las lava y las tres acaban
+   pareciendo la misma. El modo de fusión aclara respetando el tono, así que
+   la tarjeta de menta sigue siendo verde debajo del reflejo. */
+.reflector {
+  position: relative;
+}
+
+.reflector::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  mix-blend-mode: soft-light;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / 0.9),
+    transparent 60%
+  );
+  transition: opacity 260ms var(--ease-suave);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reflector:hover::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* --- Bloques que entran alternados -----------------------------------------
+   Los tres bloques de color del panel de categorías llegan uno desde la
+   derecha, otro desde la izquierda y el tercero desde la derecha otra vez.
+
+   Alternar no es un capricho: los tres bloques están pegados sin separación,
+   y si entraran los tres del mismo lado se leerían como un solo objeto
+   deslizándose. Entrando en zigzag se ve que son tres piezas que se apilan,
+   que es lo que son.
+
+   Cada uno tiene su propio tramo del recorrido, corrido un 12%, así que la
+   pila se arma de arriba abajo. */
+@keyframes bloqueDer {
+  from {
+    opacity: 0;
+    transform: translateX(22%);
+  }
+}
+
+@keyframes bloqueIzq {
+  from {
+    opacity: 0;
+    transform: translateX(-22%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .bloque-zig {
+      animation-timeline: view();
+      animation-timing-function: var(--ease-salida);
+      animation-fill-mode: both;
+      animation-name: bloqueDer;
+      animation-range: entry 5% entry 55%;
+    }
+
+    .bloque-zig:nth-child(2) {
+      animation-name: bloqueIzq;
+      animation-range: entry 17% entry 67%;
+    }
+
+    .bloque-zig:nth-child(3) {
+      animation-range: entry 29% entry 79%;
+    }
+  }
+}
+
+/* --- Sello -----------------------------------------------------------------
+   Las fichas de marca no entran subiendo como el resto de la página: se
+   SELLAN. Bajan desde un poco más grandes, con un giro mínimo, y aterrizan
+   de golpe, como un sello de goma sobre papel.
+
+   El gesto dice algo que la rejilla necesita decir: estas veintiuna marcas
+   están autorizadas, no son logotipos recopilados de internet. Una entrada
+   suave diría "aquí hay unos logos"; el sello dice "estas están validadas".
+
+   La curva es `--ease-entrada-salida`, que frena en seco al final. Con la
+   curva suave de todo lo demás el sello se sentiría como un globo bajando.
+
+   El escalonado va por columna y no por índice absoluto: en una rejilla de
+   cuatro columnas, escalonar los doce en fila haría que la última tardara
+   medio segundo de más. Así cada fila se sella casi junta, de izquierda a
+   derecha. */
+@keyframes sellar {
+  from {
+    opacity: 0;
+    transform: scale(1.18) rotate(var(--giro-sello, -2deg));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sello {
+      animation: sellar 380ms var(--ease-entrada-salida) both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 45%;
+    }
+  }
+}
+
 /* --- Atenuar los hermanos --------------------------------------------------
    Al pasar el cursor por una ficha de la rejilla, las DEMÁS bajan a 0.4 de
    opacidad. Idea tomada de `hover-expand` de unlumen.
@@ -943,6 +1591,64 @@ body {
     */
     .paso-flecha:nth-of-type(2) {
       animation-range: entry 30% entry 75%;
+    }
+  }
+}
+
+/* --- El nombre que se arma -------------------------------------------------
+   NI, TA y MY llegan cada una desde el lado donde está su marca en la fila
+   de abajo y encajan para formar NITAMY.
+
+   Las tres terminan a la vez, no en cascada: lo que se quiere transmitir es
+   que ENCAJAN, y para eso tienen que llegar juntas. Una cascada diría
+   "primero uno, luego otro", que es otra historia.
+
+   Se acaba antes de que la palabra llegue al centro de la pantalla
+   (`cover 45%`), para que el visitante la vea ya montada y pueda leerla en
+   vez de perseguirla. */
+@keyframes encajarIzq {
+  from {
+    opacity: 0;
+    transform: translateX(-60%) rotate(-8deg);
+  }
+}
+
+@keyframes encajarAbajo {
+  from {
+    opacity: 0;
+    transform: translateY(70%) scale(0.8);
+  }
+}
+
+@keyframes encajarDer {
+  from {
+    opacity: 0;
+    transform: translateX(60%) rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .ensamble-ni,
+    .ensamble-ta,
+    .ensamble-my {
+      animation-timeline: view();
+      animation-range: entry 15% cover 45%;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      display: inline-block;
+    }
+
+    .ensamble-ni {
+      animation-name: encajarIzq;
+    }
+
+    .ensamble-ta {
+      animation-name: encajarAbajo;
+    }
+
+    .ensamble-my {
+      animation-name: encajarDer;
     }
   }
 }

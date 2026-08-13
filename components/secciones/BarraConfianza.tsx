@@ -1,7 +1,7 @@
 import { aniosOperando, PROVEEDORES } from "@/config/nitamy";
 import { ESTADOS } from "@/lib/estados";
 import { TOTAL_MARCAS } from "@/lib/contenido";
-import { Contador } from "../Contador";
+import { Odometro } from "../Odometro";
 import { Revelar } from "../Revelar";
 
 /**
@@ -39,8 +39,18 @@ export function BarraConfianza() {
           >
             {/* El rojo de marca aquí es texto grande en negrita, donde WCAG
                 pide 3:1 y da 4.49:1. En texto normal se usa rojo-fuerte. */}
-            <p className="ancho text-[clamp(2.5rem,6vw,3.5rem)] font-extrabold leading-none tracking-[-0.03em] text-rojo">
-              <Contador hasta={c.valor} sufijo={c.sufijo} />
+            {/*
+              Odómetro en vez del contador que subía de golpe.
+
+              Las dos cosas cuentan hacia arriba, pero el odómetro es el
+              mismo gesto que ya usa la cuenta regresiva de temporadas, y
+              repetirlo hace que el sitio se sienta de una pieza en vez de
+              una colección de trucos. Además no necesita JavaScript: el
+              contador viejo montaba un IntersectionObserver por cifra.
+            */}
+            <p className="ancho flex items-baseline text-[clamp(2.5rem,6vw,3.5rem)] font-extrabold leading-none tracking-[-0.03em] text-rojo">
+              <Odometro valor={c.valor} />
+              {c.sufijo}
             </p>
             <p className="mt-2 text-sm font-medium text-tinta-2">{c.pie}</p>
           </Revelar>

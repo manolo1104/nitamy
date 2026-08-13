@@ -33,7 +33,12 @@ export const metadata: Metadata = {
     siteName: SITIO.nombre,
     url: SITIO.url,
   },
-  robots: { index: true, follow: true },
+  // Ver `SITIO.indexable`: el sitio nace cerrado a buscadores hasta que el
+  // cliente confirme sus datos. Esta meta es la que de verdad mantiene la
+  // página FUERA del índice; el `Disallow` de robots.txt solo frena el
+  // rastreo. Van las dos porque también hay que frenar a los rastreadores de
+  // IA, que leen robots.txt y no siempre respetan la meta.
+  robots: { index: SITIO.indexable, follow: SITIO.indexable },
   formatDetection: { telephone: false },
 };
 

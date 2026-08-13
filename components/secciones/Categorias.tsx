@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CATEGORIAS } from "@/lib/contenido";
 import { BORDE_SILUETA, SABORES } from "@/lib/sabores";
+import { Banda } from "../categorias/Banda";
 import { IconoCategoria } from "../IconoCategoria";
 import { Revelar } from "../Revelar";
 
@@ -102,7 +103,7 @@ export function Categorias() {
               return (
                 <div
                   key={b.titulo}
-                  className={`grupo-bloque relative flex min-h-[9.5rem] items-center gap-4 overflow-hidden px-7 py-6 ${piel.relleno} ${piel.texto}`}
+                  className={`bloque-zig grupo-bloque relative flex min-h-[9.5rem] items-center gap-4 overflow-hidden px-7 py-6 ${piel.relleno} ${piel.texto}`}
                 >
                   <div
                     aria-hidden="true"
@@ -172,6 +173,10 @@ export function Categorias() {
           </div>
         </Revelar>
       </div>
+
+      {/* La banda cierra la sección: arriba se dicen las ocho líneas, aquí
+          desfila producto real de cada una. */}
+      <Banda />
     </section>
   );
 }

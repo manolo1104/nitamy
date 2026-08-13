@@ -1,5 +1,6 @@
 import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
+import { EtiquetaInterna } from "../EtiquetaInterna";
 import { Revelar } from "../Revelar";
 
 /**
@@ -95,9 +96,7 @@ function Articulo({
     >
       <div>
         {articulo.borrador && (
-          <p className="mb-4 inline-block rounded-pill bg-papel-2 px-3 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-rojo-fuerte">
-            Borrador, falta escribirlo
-          </p>
+          <EtiquetaInterna>Borrador, falta escribirlo</EtiquetaInterna>
         )}
         <h3
           className={`ancho font-extrabold leading-tight tracking-tight ${

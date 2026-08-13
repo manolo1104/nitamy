@@ -7,6 +7,7 @@ import { ViewTransition } from "react";
 import { BotonEnlace } from "@/components/Boton";
 import { BotonCotizar } from "@/components/calificador/BotonCotizar";
 import { Migajas } from "@/components/DatosEstructurados";
+import { EtiquetaInterna } from "@/components/EtiquetaInterna";
 import { LogoMarca } from "@/components/LogoMarca";
 import { Revelar } from "@/components/Revelar";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
@@ -160,9 +161,9 @@ export default async function PaginaDeMarca(
               Qué es {marca.nombre} y por qué rota
             </h2>
             {!marca.textoRevisado && (
-              <p className="mt-4 inline-block rounded-pill bg-papel-2 px-3 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-rojo-fuerte">
+              <EtiquetaInterna>
                 Texto borrador, falta que lo apruebe el cliente
-              </p>
+              </EtiquetaInterna>
             )}
             <div className="mt-5 space-y-4">
               {marca.descripcion.map((p) => (

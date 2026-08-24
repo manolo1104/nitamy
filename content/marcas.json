@@ -111,7 +111,7 @@
         },
         {
           "producto": "Salado 60 GR",
-          "presentacion": "1 paquete con 50 piezas de 80 gramos",
+          "presentacion": "1 paquete con 50 piezas de 60 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/nishikawa/salado-60-gr.webp"
@@ -195,7 +195,7 @@
         },
         {
           "producto": "Salado 70 GR",
-          "presentacion": "1 con 16 piezas de 70 gramos.",
+          "presentacion": "1 caja con 16 piezas de 70 gramos.",
           "piezasPorCaja": 16,
           "sellos": [],
           "foto": "/productos/nishikawa/salado-70-gr.webp"
@@ -369,7 +369,7 @@
       "productos": [
         {
           "producto": "Chamoy en polvo, sobres",
-          "presentacion": "1 bolsa con 50 sobres de 10 g; 500 g en total.",
+          "presentacion": "1 caja con 25 bolsas de 50 sobres de 10 g; 500 g por bolsa.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/miguelito/chamoy-en-polvo-sobres.webp"
@@ -383,7 +383,7 @@
         },
         {
           "producto": "Pulpa de 950 GR",
-          "presentacion": "1 caja con 12 íezas de 950 gramos.",
+          "presentacion": "1 caja con 12 piezas de 950 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/miguelito/pulpa-de-950-gr.webp"
@@ -627,11 +627,11 @@
           "foto": "/productos/miguelito/charly-paleta-pina.webp"
         },
         {
-          "producto": "Tira Cilosa",
+          "producto": "Tira Chilosa",
           "presentacion": "1 caja con 24 tiras de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": "/productos/miguelito/tira-cilosa.webp"
+          "foto": "/productos/miguelito/tira-chilosa.webp"
         },
         {
           "producto": "Miguelin Dulce",
@@ -690,11 +690,11 @@
           "foto": "/productos/miguelito/sorpresa-mix.webp"
         },
         {
-          "producto": "Chamoyaso MIX",
+          "producto": "Chamoyazo Mix",
           "presentacion": "1 caja con 12 piezas de 950 gramos.",
           "piezasPorCaja": 12,
           "sellos": [],
-          "foto": "/productos/miguelito/chamoyaso-mix.webp"
+          "foto": "/productos/miguelito/chamoyazo-mix.webp"
         },
         {
           "producto": "Chamagosa",
@@ -961,7 +961,7 @@
         },
         {
           "producto": "Salsa Sobre de 10 GR",
-          "presentacion": "1 caja con 10 bolsas de 60 piezas.",
+          "presentacion": "1 caja con 18 bolsas de 60 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/salsa-tamazula/salsa-sobre-de-10-gr.webp"
@@ -996,7 +996,7 @@
         },
         {
           "producto": "Costa Brava Galón",
-          "presentacion": "1 caja con 24 envases de 370 mililitros.",
+          "presentacion": "1 caja con 3 envases de 4 litros.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/salsa-tamazula/costa-brava-galon.webp"
@@ -1150,7 +1150,7 @@
         },
         {
           "producto": "Surtido Mix",
-          "presentacion": "1 caja con 10 bolsas de 50 piezas de 10 gramos.",
+          "presentacion": "1 caja con 10 bolsas de 50 piezas de 13 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/pipos/surtido-mix.webp"
@@ -1229,28 +1229,28 @@
         },
         {
           "producto": "Borrachito Chico",
-          "presentacion": "1 caja con 18 estuches de 24 piezas.",
+          "presentacion": "1 caja con 45 estuches de 24 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/dulces-tradicionales/borrachito-chico.webp"
         },
         {
-          "producto": "Borrachíto Grande",
-          "presentacion": "1 caja con 12 estuches de 60 piezas.",
+          "producto": "Borrachito Grande",
+          "presentacion": "1 caja con 18 estuches de 70 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/dulces-tradicionales/borrachito-grande.webp"
         },
         {
           "producto": "Paleta Mango",
-          "presentacion": "1 caja con 25 bolsas con 25 piezas",
+          "presentacion": "1 caja con 25 bolsas de 25 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/dulces-tradicionales/paleta-mango.webp"
         },
         {
           "producto": "Paleta Menta",
-          "presentacion": "1 caja con 25 bolsas con 25 piezas",
+          "presentacion": "1 caja con 25 bolsas de 30 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/dulces-tradicionales/paleta-menta.webp"
@@ -1462,11 +1462,11 @@
           "foto": "/productos/dulces-pillo/bibi-polviz-chile.webp"
         },
         {
-          "producto": "Bibi Polis Frutix",
-          "presentacion": "1 caja con 12 displáys de 12 piezas.",
+          "producto": "Bibi Polviz Frutix",
+          "presentacion": "1 caja con 12 displays de 12 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": "/productos/dulces-pillo/bibi-polis-frutix.webp"
+          "foto": "/productos/dulces-pillo/bibi-polviz-frutix.webp"
         }
       ],
       "datosDeEjemplo": false,
@@ -1615,28 +1615,28 @@
         },
         {
           "producto": "Tarugo con Chile",
-          "presentacion": "1 caja con 18 dsiplays con 80 piezas.",
+          "presentacion": "1 caja con 18 estuches de 80 piezas.",
           "piezasPorCaja": 80,
           "sellos": [],
           "foto": "/productos/productos-del-rey/tarugo-con-chile.webp"
         },
         {
           "producto": "T-Reyes mini lancita Tajín",
-          "presentacion": "1 caja con 18 displáys de 50 piezas",
+          "presentacion": "1 caja con 18 estuches de 50 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/productos-del-rey/t-reyes-mini-lancita-tajin.webp"
         },
         {
           "producto": "Lancita con Chile",
-          "presentacion": "1 caja con 6 displáys de 40 piezas.",
+          "presentacion": "1 caja con 6 estuches de 40 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/productos-del-rey/lancita-con-chile.webp"
         },
         {
           "producto": "Lancita con Azúcar",
-          "presentacion": "1 caja con 6 displáys de 40 piezas.",
+          "presentacion": "1 caja con 6 estuches de 40 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/productos-del-rey/lancita-con-azucar.webp"
@@ -1765,7 +1765,7 @@
         },
         {
           "producto": "Tamalito",
-          "presentacion": "1 caja con 30 bolsas con 20 piezas.",
+          "presentacion": "1 caja con 40 bolsas de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/dulces-guaz/tamalito.webp"
@@ -1899,49 +1899,49 @@
         },
         {
           "producto": "Calcalocas",
-          "presentacion": "1 caja con 28 bolsas de 40 piezas de 14 gramos.",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas de 14 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/chompys/calcalocas.webp"
         },
         {
           "producto": "Pulpinta",
-          "presentacion": "1 caja con 28 bolsas de 40 piezas de 14 gramos.",
+          "presentacion": "1 caja con 24 bolsas de 40 piezas de 14 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/chompys/pulpinta.webp"
         },
         {
-          "producto": "Futgolazo",
+          "producto": "Futgoliza",
           "presentacion": "1 caja con 28 bolsas de 40 piezas de 10 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": "/productos/chompys/futgolazo.webp"
+          "foto": "/productos/chompys/futgoliza.webp"
         },
         {
           "producto": "Dulce Vida Cítricos",
-          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "presentacion": "1 caja con 6 bolsas de 12 piezas de 7.5 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/chompys/dulce-vida-citricos.webp"
         },
         {
           "producto": "Dulce Vida Frutos Rojos",
-          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "presentacion": "1 caja con 6 bolsas de 12 piezas de 7.5 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/chompys/dulce-vida-frutos-rojos.webp"
         },
         {
           "producto": "Dulce Vida Sandía",
-          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "presentacion": "1 caja con 6 bolsas de 12 piezas de 7.5 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/chompys/dulce-vida-sandia.webp"
         },
         {
           "producto": "Dulce Vida Enchilado",
-          "presentacion": "1 caja con 6 bolsa de 12 pieza con 7.5 gramos.",
+          "presentacion": "1 caja con 6 bolsas de 12 piezas de 7.5 gramos.",
           "piezasPorCaja": null,
           "sellos": [],
           "foto": "/productos/chompys/dulce-vida-enchilado.webp"

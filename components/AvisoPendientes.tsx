@@ -25,7 +25,7 @@ export function AvisoPendientes() {
       className="fixed bottom-3 right-3 z-20 max-w-[19rem] rounded-caja border border-borde-campo bg-white/95 p-3 text-xs shadow-[0_8px_24px_rgba(20,17,15,0.14)] backdrop-blur-sm"
     >
       <details>
-        <summary className="cursor-pointer font-bold text-rojo-fuerte">
+        <summary className="cursor-pointer font-bold text-naranja-texto">
           {pendientes.length} datos pendientes del cliente
         </summary>
         <ul className="mt-2 space-y-1 text-tinta-2">

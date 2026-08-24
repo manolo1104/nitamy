@@ -27,95 +27,106 @@
    ========================================================================== */
 
 @theme {
-  /* --- Color. Una sola paleta para todo el proyecto. ---------------------
-     Verificada con `npm run contraste`, que sale con error si algún par en
-     uso reprueba. Los números de abajo los produce ese script, no una
-     estimación.
+  /* --- Color. La paleta del Manual de Marca de Nitamy (abril 2026). -----
+     Los seis colores son los del manual, sin retocar. Lo que el manual NO
+     resuelve, y hay que derivar, es cómo sobreviven en pantalla: es una
+     paleta de IMPRENTA y ninguno de los cuatro cromáticos aguanta ser
+     texto. Medido con `npm run contraste`, sobre papel:
 
-     El acento es un solo tono en dos valores, porque el rojo de la marca
-     (#d93516) da 4.49:1 sobre papel y reprueba AA para texto normal por un
-     pelo. La regla resultante:
+       naranja  #ee5a36  3.41:1        carmesí  #ed4363  3.76:1
+       amarillo #ffd028  1.47:1        celeste  #55bfee  2.08:1
 
-       --color-rojo         relleno (botones, bloques) y texto GRANDE
-                            (>=24px, o >=18.7px en negrita, donde AA pide 3:1).
-                            Blanco encima da 4.70:1.
-       --color-rojo-fuerte  cualquier texto rojo por debajo de ese tamaño,
-                            y el estado :active de los botones. 6.02:1 sobre
-                            papel.
+     AA pide 4.5:1 para texto normal. Los cuatro reprueban. De ahí las tres
+     reglas que gobiernan el sitio entero:
 
-     El ámbar da 2.04:1 sobre papel: NUNCA es texto sobre fondo claro. Solo
-     relleno, subrayado grueso o icono. Sobre carbón da 8.71:1 y ahí sí puede
-     ser texto.
+       1. El color de marca es RELLENO (bloque, círculo, píldora, sticker)
+          o texto GRANDE. Nunca texto pequeño sobre papel.
+       2. Encima de un relleno de marca va TINTA. Pasa en los cuatro con
+          holgura (6.15 / 5.58 / 14.30 / 10.07), así que es la única regla
+          que no hay que recordar color por color.
+       3. El PAPEL encima solo vale en naranja y carmesí, y solo en texto
+          grande: 3.41 y 3.76 superan el 3:1 que AA pide a partir de 24px,
+          o de 18.7px en negrita. En amarillo y celeste no se usa NUNCA
+          (1.47 y 2.08 son ilegibles). Así es como el manual pone el
+          logotipo blanco sobre los bloques de color, y por eso el logotipo
+          blanco solo existe en esas dos versiones.
   */
-  --color-papel: #fafaf8;
-  --color-papel-2: #f2f0eb;
-  --color-tinta: #14110f;
-  --color-tinta-2: #57514b;
-  --color-rojo: #d93516;
-  --color-rojo-fuerte: #b82a10;
-  --color-ambar: #f0a202;
-  --color-carbon: #16130f;
-  --color-carbon-2: #241f1a;
+  --color-naranja: #ee5a36;
+  --color-carmesi: #ed4363;
+  --color-amarillo: #ffd028;
+  --color-celeste: #55bfee;
+
+  /* El MISMO tono del manual, bajado en luminosidad hasta cruzar 4.5:1 y ni
+     un paso más, para no apagarlo. Es lo único que puede ser texto pequeño
+     en color: enlaces, antetítulos, cifras. No sustituye al color de marca
+     en un relleno; ahí siempre va el tono del manual. */
+  --color-naranja-texto: #d43812;
+  --color-carmesi-texto: #e0153c;
+  --color-amarillo-texto: #8d6e00;
+  --color-celeste-texto: #1179a8;
+
+  /* Fondo de tarjeta. Aguantan tinta (17.1:1) y tinta-2 (5.7:1) encima.
+     OJO: el `-texto` sobre su propio pastel da 3.9:1 y NO llega a AA; ahí
+     el color solo vale en texto grande y el cuerpo de la tarjeta va en
+     tinta. Es el mismo error que costó un bug con el mango en la versión
+     anterior, y por eso está escrito aquí. */
+  --color-naranja-pastel: #fce2dc;
+  --color-carmesi-pastel: #fce1e6;
+  --color-amarillo-pastel: #ffe78f;
+  --color-celeste-pastel: #ceedfa;
+
+  /* --- Neutros. El manual solo declara negro y blanco. -------------------
+     `papel` y `tinta` conservan el nombre, pero ya no son los de antes: el
+     papel crudo (#fafaf8) y la tinta parda (#14110f) de la versión anterior
+     eran una decisión propia, y el manual pide blanco y negro puros.
+
+     `papel-2` es el único neutro derivado, y a propósito NO es un gris: un
+     gris sería un color que el manual no declara. Es papel con un velo de
+     naranja, para poder alternar secciones sin salirse de la paleta.
+  */
+  --color-papel: #ffffff;
+  --color-papel-2: #fff6f3;
+  --color-tinta: #000000;
+  --color-tinta-2: #595959;
+  --color-carbon: #000000;
+  --color-carbon-2: #1a1a1a;
 
   /* Divisores decorativos. No son controles, así que WCAG 1.4.11 no les
      aplica; su trabajo es separar sin gritar. */
-  --color-linea: #e2ded6;
-  --color-linea-oscura: #3a332c;
+  --color-linea: #ece7e5;
+  --color-linea-oscura: #333333;
 
   /* Bordes de campos y controles. Estos SÍ caen en WCAG 1.4.11 y necesitan
-     3:1 contra su fondo. Por eso son bastante más oscuros que los divisores. */
-  --color-borde-campo: #8b8378;
-  --color-borde-campo-oscuro: #6e6459;
+     3:1 contra su fondo. Por eso son bastante más oscuros que los
+     divisores. */
+  --color-borde-campo: #767676;
+  --color-borde-campo-oscuro: #8a8a8a;
 
-  /* --- Paleta de dulce ---------------------------------------------------
-     Seis sabores. Cada uno viene en tres piezas y hay que usarlas así:
+  /* --- Tipografía. Las dos familias del manual que se pueden publicar. ---
+     El manual declara tres:
 
-       --color-X          RELLENO saturado: círculo de categoría, sticker,
-                          ficha de temporada, mancha detrás del producto.
-       --color-X-claro    fondo pastel de tarjeta. Todos aguantan `tinta`
-                          encima con holgura (>=12:1), así que el texto de
-                          una tarjeta pastel siempre es tinta.
-       --color-X-encima   lo ÚNICO que puede ir encima del relleno saturado.
-                          No es capricho: mango y limón no aguantan blanco
-                          (2.04:1 y 3.66:1) y por eso llevan tinta. Los otros
-                          cuatro llevan blanco. `npm run contraste` verifica
-                          los 34 pares nuevos y truena si alguien mueve un
-                          tono; los números de aquí salen de ahí.
+       PRINCIPAL       Peace Sans     display, titulares grandes
+       SECUNDARIA      Agrandir       subtítulos
+       COMPLEMENTARIA  Proxima Nova   cuerpo
 
-     La regla que evita que esto degenere en confeti: en una misma sección,
-     el color es función del DATO (la categoría, la temporada), nunca una
-     decisión suelta por tarjeta. Si el color no codifica nada, va en papel.
+     Peace Sans está bajo licencia SIL OFL y se puede incrustar en un sitio
+     comercial: es la fuente REAL de la marca, no un parecido. Se verificó
+     que trae los 413 glifos que el español necesita (¿ ¡ ñ y acentuadas),
+     que es donde suelen fallar las tipografías de display gratuitas.
+
+     Agrandir (Pangram Pangram) y Proxima Nova son de pago y no se pueden
+     servir desde aquí. En su lugar va Open Sauce One, también OFL: no es un
+     sustituto elegido a ojo, es la fuente con la que está compuesto el
+     PROPIO manual de marca (se leyó de las fuentes incrustadas del PDF).
+     Cubre los dos papeles con sus siete pesos.
+
+     Peace Sans tiene UN SOLO peso. Con `font-synthesis-weight: none` en el
+     body, un `font-extrabold` sobre un titular no lo engorda falsamente:
+     se queda en su trazo, que ya es pesadísimo. Es lo correcto, pero
+     explica por qué `.titular` no reacciona a las clases de peso.
   */
-  --color-fresa: #e0245e;
-  --color-fresa-claro: #ffe1e9;
-  --color-fresa-encima: #ffffff;
-
-  --color-mango: #f5a524;
-  --color-mango-claro: #ffeecc;
-  --color-mango-encima: #14110f;
-
-  --color-menta: #007a74;
-  --color-menta-claro: #d4f1ee;
-  --color-menta-encima: #ffffff;
-
-  --color-uva: #6b3fc4;
-  --color-uva-claro: #eae2fb;
-  --color-uva-encima: #ffffff;
-
-  --color-cielo: #1f6fd0;
-  --color-cielo-claro: #dcebfb;
-  --color-cielo-encima: #ffffff;
-
-  --color-limon: #5a9500;
-  --color-limon-claro: #e8f4cd;
-  --color-limon-encima: #14110f;
-
-  /* --- Tipografía. Una sola familia, dos expresiones. --------------------
-     Archivo variable con eje de ancho. El ancho expandido lee como letrero
-     de caja y de camión, que es el registro de un distribuidor.
-     Cero serif, cero Inter.
-  */
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-open-sauce), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-peace-sans), var(--font-open-sauce), ui-sans-serif, sans-serif;
 
   /* --- Radio. El cambio de un solo token que repinta el sitio entero. ----
      La primera versión tenía 4px en todo. Cuatro píxeles se leen como
@@ -217,24 +228,39 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Ancho expandido de Archivo. Solo para display, nunca para cuerpo:
-   el texto corrido expandido cansa a los 40 caracteres. */
-.ancho {
-  font-stretch: 118%;
+/* Las dos voces de display del manual.
+
+   `.titular` es Peace Sans, la TIPOGRAFÍA PRINCIPAL. Solo para titulares
+   grandes: es una fuente de display de un solo peso y trazo pesadísimo, y
+   por debajo de ~28px se cierra y deja de leerse. Los titulares chicos y
+   los títulos de tarjeta se quedan en Open Sauce en negrita, que es el
+   papel de la TIPOGRAFÍA SECUNDARIA del manual.
+
+   Peace Sans viene con el espaciado ya cerrado de fábrica. El `tracking`
+   negativo que llevaban los titulares estaba calibrado para Archivo y aquí
+   pega las letras, así que `.titular` lo devuelve a cero. Va con `!important`
+   a propósito: es la única forma de ganarle a la utilidad `tracking-[...]`
+   que viaja en el mismo `class`, y sin esto habría que editar 26 llamadas
+   y acordarse de la regla cada vez que se escribe un titular nuevo. */
+.titular {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0 !important;
 }
+
 
 /* --------------------------------------------------------------------------
    Foco visible. Nunca se elimina; se rediseña.
    -------------------------------------------------------------------------- */
 
 :focus-visible {
-  outline: 2px solid var(--color-rojo);
+  outline: 2px solid var(--color-naranja);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 .seccion-oscura :focus-visible {
-  outline-color: var(--color-ambar);
+  outline-color: var(--color-amarillo);
 }
 
 /* --------------------------------------------------------------------------
@@ -765,7 +791,7 @@ body {
   right: -0.12em;
   bottom: 0.04em;
   height: 0.42em;
-  background-color: var(--color-mango);
+  background-color: var(--color-amarillo);
   border-radius: 42% 58% 62% 38% / 55% 45% 55% 45%;
   transform: rotate(-0.5deg) scaleX(0);
   transform-origin: left center;
@@ -1190,7 +1216,7 @@ body {
    `mix-blend-mode: soft-light` en vez de un blanco translúcido: sobre las
    tarjetas pastel de los pasos, un velo blanco las lava y las tres acaban
    pareciendo la misma. El modo de fusión aclara respetando el tono, así que
-   la tarjeta de menta sigue siendo verde debajo del reflejo. */
+   la tarjeta celeste sigue siendo celeste debajo del reflejo. */
 .reflector {
   position: relative;
 }
@@ -1595,102 +1621,6 @@ body {
   }
 }
 
-/* --- El nombre que se arma -------------------------------------------------
-   NI, TA y MY llegan cada una desde el lado donde está su marca en la fila
-   de abajo y encajan para formar NITAMY.
-
-   Las tres terminan a la vez, no en cascada: lo que se quiere transmitir es
-   que ENCAJAN, y para eso tienen que llegar juntas. Una cascada diría
-   "primero uno, luego otro", que es otra historia.
-
-   Se acaba antes de que la palabra llegue al centro de la pantalla
-   (`cover 45%`), para que el visitante la vea ya montada y pueda leerla en
-   vez de perseguirla. */
-@keyframes encajarIzq {
-  from {
-    opacity: 0;
-    transform: translateX(-60%) rotate(-8deg);
-  }
-}
-
-@keyframes encajarAbajo {
-  from {
-    opacity: 0;
-    transform: translateY(70%) scale(0.8);
-  }
-}
-
-@keyframes encajarDer {
-  from {
-    opacity: 0;
-    transform: translateX(60%) rotate(8deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .ensamble-ni,
-    .ensamble-ta,
-    .ensamble-my {
-      animation-timeline: view();
-      animation-range: entry 15% cover 45%;
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      display: inline-block;
-    }
-
-    .ensamble-ni {
-      animation-name: encajarIzq;
-    }
-
-    .ensamble-ta {
-      animation-name: encajarAbajo;
-    }
-
-    .ensamble-my {
-      animation-name: encajarDer;
-    }
-  }
-}
-
-/* --- Entrada lateral en secuencia ------------------------------------------
-   Las tres celdas del acrónimo entran deslizándose desde la izquierda, una
-   detrás de otra, guiadas por el scroll. Idea tomada de `side-by-side-slide`
-   de unlumen.
-
-   Aquí sí EXPLICA, no adorna: NITAMY se arma leyendo NIshikawa, TAma-Roca y
-   Miguelito en ese orden, y es el mejor activo narrativo que tiene la marca.
-   Que las tres aparezcan a la vez desperdicia la historia; que entren en
-   orden la cuenta.
-
-   El escalonado se hace corriendo el `animation-range` de cada celda, no con
-   `animation-delay`: con línea de tiempo de scroll el avance lo marca la
-   posición y `animation-delay` no hace nada. */
-@keyframes entraLado {
-  from {
-    opacity: 0;
-    transform: translateX(-28px);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .entra-lado {
-      animation: entraLado linear both;
-      animation-timeline: view();
-      animation-range: entry 10% entry 55%;
-    }
-
-    .entra-lado:nth-child(2) {
-      animation-range: entry 22% entry 67%;
-    }
-
-    .entra-lado:nth-child(3) {
-      animation-range: entry 34% entry 79%;
-    }
-  }
-}
-
 /* --- Presionable -----------------------------------------------------------
    Acuse de recibo para lo que se toca y no es un botón: pestañas del rail,
    tarjetas de segmento, tarjetas de recurso.
@@ -1824,6 +1754,52 @@ body {
    información. Se conservan opacidad y color, que ayudan a comprender;
    se elimina todo desplazamiento.
    -------------------------------------------------------------------------- */
+
+/* --- Listas del blog -------------------------------------------------------
+   Los marcadores propios no son un capricho: `list-style` no se puede pintar
+   ni colocar con precisión, y en una columna de texto a 68 caracteres un
+   punto gris del navegador desaparece.
+
+   El `li` lleva `pl-7` desde el componente y el marcador va absoluto dentro
+   de ese hueco, así que la segunda línea de un punto largo alinea con la
+   primera en vez de meterse debajo del marcador. */
+.lista-punto,
+.lista-numerada {
+  list-style: none;
+  counter-reset: punto;
+}
+
+.lista-punto > li,
+.lista-numerada > li {
+  position: relative;
+}
+
+/* Un caramelo, no un punto: círculo relleno con un anillo del mismo rojo al
+   25%. A 8px es lo único que se distingue de una viñeta cualquiera. */
+.lista-punto > li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 0.66em;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--color-naranja);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-naranja) 14%, transparent);
+}
+
+.lista-numerada > li::before {
+  counter-increment: punto;
+  content: counter(punto);
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  font-weight: 800;
+  font-size: 0.95em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.015em;
+  color: var(--color-naranja-texto);
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {

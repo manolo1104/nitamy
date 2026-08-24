@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { PROVEEDORES } from "@/config/nitamy";
+import { MARCAS_DECLARADAS } from "@/config/nitamy";
 import { MARCAS, MARCAS_CON_LOGO, TOTAL_MARCAS } from "@/lib/contenido";
 import { LogoMarca } from "../LogoMarca";
 import { BotonEnlace } from "../Boton";
@@ -18,6 +18,11 @@ import { Revelar } from "../Revelar";
  *
  * Ahora la marquesina vive arriba, pegada al hero, como prueba rápida
  * (`BandaMarcas`), y aquí queda la rejilla, que sí es navegable.
+ *
+ * REUNIÓN 21 ago 2026: se retiró la cifra de proveedores y el conteo exacto
+ * de marcas. Ahora el argumento es "más de 30 marcas", que es lo que declara
+ * el cliente, y ningún botón promete un número que se pueda contar en
+ * pantalla (el catálogo publicado todavía trae 22).
  *
  * ORDEN: primero las marcas con logotipo real. No es estética, es que los
  * quince monogramas tipográficos intercalados hacen que la rejilla se lea
@@ -44,13 +49,14 @@ export function SeccionMarcas() {
         <Revelar>
           <h2
             id="marcas"
-            className="ancho max-w-[22ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+            className="titular max-w-[22ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
             Las marcas que tu cliente ya conoce, en un solo pedido
           </h2>
           <p className="mt-4 max-w-[54ch] leading-relaxed text-tinta-2">
-            {TOTAL_MARCAS} marcas de {PROVEEDORES} proveedores. Surtirlas
-            por separado son {TOTAL_MARCAS} trámites; aquí es uno.
+            Más de {MARCAS_DECLARADAS} marcas en un solo pedido. Surtirlas por
+            separado son {MARCAS_DECLARADAS} trámites, {MARCAS_DECLARADAS}
+            facturas y {MARCAS_DECLARADAS} pagos; aquí es uno de cada cosa.
           </p>
         </Revelar>
 
@@ -96,12 +102,12 @@ export function SeccionMarcas() {
         <Revelar>
           <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <BotonEnlace href="/marcas" variante="primario" tamano="grande">
-              Ver las {TOTAL_MARCAS} marcas
+              Ver el catálogo de marcas
             </BotonEnlace>
             {restantes > 0 && (
               <p className="text-sm text-tinta-2">
-                Aquí se ven {visibles.length}. Faltan {restantes} en el
-                catálogo.
+                Aquí se ven {visibles.length}. El catálogo completo está en la
+                página de marcas.
               </p>
             )}
           </div>
@@ -110,7 +116,7 @@ export function SeccionMarcas() {
               que falten logotipos, y decírselo resta credibilidad. */}
           {TOTAL_MARCAS - conLogo.length > 0 &&
             process.env.NODE_ENV !== "production" && (
-              <p className="mt-4 text-xs text-rojo-fuerte">
+              <p className="mt-4 text-xs text-naranja-texto">
                 Nota de desarrollo:{" "}
                 {TOTAL_MARCAS - conLogo.length === 1
                   ? "falta el logotipo de 1 marca"

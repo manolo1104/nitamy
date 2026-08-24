@@ -1,47 +1,28 @@
-import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRightIcon, ClockIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { EtiquetaInterna } from "../EtiquetaInterna";
+import { MiniaturaArticulo } from "../blog/PortadaArticulo";
+import { ARTICULOS } from "@/content/blog";
+import { CATEGORIAS_BLOG, minutosDeLectura, type Articulo } from "@/lib/blog";
 import { Revelar } from "../Revelar";
 
 /**
- * Recursos.
+ * Recursos, el asomo del blog en la home.
  *
  * Contenido de asesoría al detallista, no de producto. Es el diferenciador:
  * mientras la competencia publica fotos de gomitas, aquí se responden las
  * preguntas que el tendero de verdad tiene.
  *
- * Rejilla asimétrica de tres: el primero ocupa el doble. Los artículos aún no
- * están escritos, así que van marcados como borrador de forma visible. Un
- * enlace a un artículo vacío gasta la confianza que esta sección debería
- * construir.
+ * REUNIÓN 21 ago 2026. Esta sección enseñaba tres artículos que no existían,
+ * marcados como borrador, apuntando a /recursos y a tres URL que daban 404.
+ * Ahora sale del registro real del blog: se toman los tres primeros de
+ * `content/blog`, así que ordenar el registro reordena la home y no hay dos
+ * listas que se puedan desincronizar.
+ *
+ * Rejilla asimétrica de tres: el primero ocupa el doble.
  */
 
-export const ARTICULOS = [
-  {
-    slug: "que-vender-tras-el-cambio-en-la-regulacion-escolar",
-    titulo: "Qué sí puedes vender ahora que cambió la regulación escolar",
-    resumen:
-      "Qué producto se puede seguir vendiendo cerca de escuelas y con qué presentaciones, sin quedarte con inventario parado.",
-    borrador: true,
-  },
-  {
-    slug: "anaquel-de-dulce-que-rota-en-15-dias",
-    titulo: "Cómo armar un anaquel de dulce que rote en 15 días",
-    resumen:
-      "El orden, la proporción por categoría y los errores que dejan producto muerto.",
-    borrador: true,
-  },
-  {
-    slug: "20-productos-que-no-pueden-faltar-en-tu-tiendita",
-    titulo: "Los 20 productos que no pueden faltar en tu tiendita",
-    resumen:
-      "La lista base con la que arranca un punto de venta que apenas empieza.",
-    borrador: true,
-  },
-] as const;
-
 export function Recursos() {
-  const [principal, ...resto] = ARTICULOS;
+  const [principal, ...resto] = ARTICULOS.slice(0, 3);
 
   return (
     <section
@@ -52,15 +33,15 @@ export function Recursos() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2
             id="recursos"
-            className="ancho max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+            className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
             Cómo vender más dulce, no solo comprarlo
           </h2>
           <Link
-            href="/recursos"
-            className="inline-flex items-center gap-2 font-semibold text-rojo-fuerte"
+            href="/blog"
+            className="inline-flex items-center gap-2 font-semibold text-naranja-texto"
           >
-            Ver todos
+            Ver todas las guías
             <ArrowUpRightIcon size={17} aria-hidden="true" />
           </Link>
         </div>
@@ -68,12 +49,12 @@ export function Recursos() {
 
       <div className="mt-10 grid gap-4 lg:grid-cols-3">
         <Revelar className="lg:col-span-2">
-          <Articulo articulo={principal} destacado />
+          <Ficha articulo={principal} destacado />
         </Revelar>
         <div className="grid gap-4">
           {resto.map((a, i) => (
             <Revelar key={a.slug} retraso={(i + 1) * 70}>
-              <Articulo articulo={a} />
+              <Ficha articulo={a} />
             </Revelar>
           ))}
         </div>
@@ -82,24 +63,32 @@ export function Recursos() {
   );
 }
 
-function Articulo({
+function Ficha({
   articulo,
   destacado = false,
 }: {
-  articulo: (typeof ARTICULOS)[number];
+  articulo: Articulo;
   destacado?: boolean;
 }) {
   return (
     <Link
-      href={`/recursos/${articulo.slug}`}
-      className="ficha presionable group flex h-full flex-col justify-between rounded-caja border border-linea bg-papel p-6 hover:border-tinta lg:p-8"
+      href={`/blog/${articulo.slug}`}
+      className="ficha presionable group flex h-full flex-col justify-between overflow-hidden rounded-caja border border-linea bg-papel hover:border-tinta"
     >
       <div>
-        {articulo.borrador && (
-          <EtiquetaInterna>Borrador, falta escribirlo</EtiquetaInterna>
-        )}
+        {/* Solo en las chicas. La grande ya tiene la respuesta completa
+            debajo del resumen y con foto encima quedaría de dos pantallas. */}
+        {!destacado && <MiniaturaArticulo articulo={articulo} />}
+        <div className={destacado ? "p-6 pb-0 lg:p-8 lg:pb-0" : "p-6 pb-0"}>
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-bold uppercase tracking-[0.14em] text-naranja-texto">
+          {CATEGORIAS_BLOG[articulo.categoria]}
+          <span className="inline-flex items-center gap-1 font-medium normal-case tracking-normal text-tinta-2">
+            <ClockIcon size={14} aria-hidden="true" />
+            {minutosDeLectura(articulo)} min
+          </span>
+        </p>
         <h3
-          className={`ancho font-extrabold leading-tight tracking-tight ${
+          className={`mt-4 font-extrabold leading-tight tracking-tight ${
             destacado
               ? "max-w-[22ch] text-[clamp(1.375rem,2.6vw,2rem)]"
               : "text-lg"
@@ -114,8 +103,22 @@ function Articulo({
         >
           {articulo.resumen}
         </p>
+
+        {/*
+          Solo en la ficha grande: la celda estira hasta la altura de las dos
+          de al lado y sin esto quedaban 200px de aire entre el resumen y el
+          "Leer". Se rellena con la RESPUESTA del artículo, no con relleno
+          decorativo: enseñar la respuesta completa es justo lo que hace
+          entrar a leer el resto.
+        */}
+        {destacado && (
+          <p className="mt-7 max-w-[52ch] border-l-[3px] border-naranja pl-5 leading-relaxed text-tinta">
+            {articulo.enCorto}
+          </p>
+        )}
+        </div>
       </div>
-      <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-rojo-fuerte">
+      <span className={`mt-6 inline-flex items-center gap-2 pt-0 text-sm font-semibold text-naranja-texto ${destacado ? "p-6 lg:p-8 lg:pt-0" : "p-6"}`}>
         Leer
         <ArrowUpRightIcon
           size={15}

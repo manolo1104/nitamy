@@ -36,7 +36,7 @@ export function AbrirWhatsappDeRespaldo() {
       href={destino}
       target="_blank"
       rel="noopener noreferrer"
-      className="mt-8 inline-flex min-h-13 items-center justify-center gap-2 rounded-pill bg-rojo px-7 text-base font-semibold text-white transition-[transform,background-color] duration-[160ms] ease-salida hover:bg-rojo-fuerte active:scale-[0.97]"
+      className="mt-8 inline-flex min-h-13 items-center justify-center gap-2 rounded-pill bg-naranja px-7 text-base font-semibold text-white transition-[transform,background-color] duration-[160ms] ease-salida hover:bg-naranja-texto active:scale-[0.97]"
     >
       <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
       {url ? "Abrir mi mensaje en WhatsApp" : "Abrir WhatsApp"}

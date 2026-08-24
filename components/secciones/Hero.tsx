@@ -1,5 +1,5 @@
-import { aniosOperando } from "@/config/nitamy";
-import { MARCAS_FUNDADORAS, TOTAL_MARCAS } from "@/lib/contenido";
+import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
+import { MARCAS_FUNDADORAS } from "@/lib/contenido";
 import { retratos } from "@/lib/retratos";
 import { BotonEnlace } from "../Boton";
 import { BotonCotizar } from "../calificador/BotonCotizar";
@@ -33,14 +33,13 @@ import { Revelar } from "../Revelar";
 
 export function Hero() {
   const anios = aniosOperando();
-  const otras = TOTAL_MARCAS - MARCAS_FUNDADORAS.length;
   const lineas = retratos();
 
   return (
     <section className="relative overflow-hidden">
       <div
         aria-hidden="true"
-        className="punteado pointer-events-none absolute inset-0 text-fresa"
+        className="punteado pointer-events-none absolute inset-0 text-naranja"
       />
 
       <div className="relative mx-auto max-w-[1400px] px-5 pb-14 pt-12 sm:px-8 lg:pb-20 lg:pt-16">
@@ -57,7 +56,7 @@ export function Hero() {
         */}
         <VitrinaViva lineas={lineas}>
           <Revelar modo="entrada">
-            <p className="inline-flex items-center rounded-pill bg-fresa px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-fresa-encima">
+            <p className="inline-flex items-center rounded-pill bg-amarillo px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-tinta">
               Desde 1995
             </p>
           </Revelar>
@@ -68,17 +67,17 @@ export function Hero() {
           <TituloRevelado
             texto="Un solo proveedor para surtir todo tu anaquel de dulce"
             marcar="todo tu anaquel"
-            className="ancho mt-5 text-[clamp(2.25rem,4.6vw,3.5rem)] font-extrabold leading-[1.15] tracking-[-0.02em]"
+            className="titular mt-5 text-[clamp(2.25rem,4.6vw,3.5rem)] font-extrabold leading-[1.15] tracking-[-0.02em]"
           />
 
           <Revelar modo="entrada" retraso={120}>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-tinta-2">
-              {anios} años distribuyendo las marcas que el consumidor mexicano
-              ya busca:{" "}
+              Más de {anios} años distribuyendo las marcas que el consumidor
+              mexicano ya busca:{" "}
               <span className="font-semibold text-tinta">
                 {MARCAS_FUNDADORAS.map((m) => m.nombre).join(", ")}
               </span>{" "}
-              y {otras} más.
+              y más de {MARCAS_DECLARADAS} en total.
             </p>
           </Revelar>
 
@@ -86,7 +85,7 @@ export function Hero() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <BotonCotizar origen="Inicio" />
               <BotonEnlace href="/marcas" variante="secundario" tamano="grande">
-                Ver las {TOTAL_MARCAS} marcas
+                Ver el catálogo de marcas
               </BotonEnlace>
             </div>
           </Revelar>

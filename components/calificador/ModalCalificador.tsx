@@ -185,7 +185,7 @@ export function ModalCalificador({
           // disparador concreto, aparecen en medio de la pantalla.
           className="fixed left-1/2 top-1/2 z-50 max-h-[92dvh] w-[min(34rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-caja bg-white p-6 shadow-[0_24px_60px_rgba(20,17,15,0.22)] data-[state=open]:animate-[modalEntra_200ms_ease-out] sm:p-7"
         >
-          <Dialog.Title className="ancho text-2xl font-extrabold leading-tight tracking-tight">
+          <Dialog.Title className="text-2xl font-extrabold leading-tight tracking-tight">
             Cotiza por WhatsApp
           </Dialog.Title>
           <Dialog.Description className="mt-2 text-sm leading-relaxed text-tinta-2">
@@ -221,7 +221,7 @@ export function ModalCalificador({
                       }}
                       className={`min-h-11 rounded-pill border px-4 text-sm font-medium transition-[transform,background-color,border-color,color] duration-[160ms] ease-salida active:scale-[0.97] ${
                         activo
-                          ? "border-rojo bg-rojo text-white"
+                          ? "border-naranja bg-naranja text-white"
                           : "border-borde-campo text-tinta hover:border-tinta hover:bg-papel-2"
                       }`}
                     >
@@ -231,7 +231,7 @@ export function ModalCalificador({
                 })}
               </div>
               {errores.segmento && (
-                <p className="mt-2 text-sm font-medium text-rojo-fuerte">
+                <p className="mt-2 text-sm font-medium text-naranja-texto">
                   {errores.segmento}
                 </p>
               )}
@@ -266,7 +266,7 @@ export function ModalCalificador({
               {errores.estado && (
                 <p
                   id={`${id}-estado-error`}
-                  className="mt-2 text-sm font-medium text-rojo-fuerte"
+                  className="mt-2 text-sm font-medium text-naranja-texto"
                 >
                   {errores.estado}
                 </p>
@@ -300,7 +300,7 @@ export function ModalCalificador({
               {errores.interes && (
                 <p
                   id={`${id}-interes-error`}
-                  className="mt-2 text-sm font-medium text-rojo-fuerte"
+                  className="mt-2 text-sm font-medium text-naranja-texto"
                 >
                   {errores.interes}
                 </p>
@@ -348,7 +348,7 @@ export function ModalCalificador({
                   <Link
                     href="/aviso-de-privacidad"
                     target="_blank"
-                    className="font-semibold text-rojo-fuerte underline underline-offset-2"
+                    className="font-semibold text-naranja-texto underline underline-offset-2"
                   >
                     aviso de privacidad
                   </Link>
@@ -356,7 +356,7 @@ export function ModalCalificador({
                 </span>
               </label>
               {errores.consentimiento && (
-                <p className="mt-2 text-sm font-medium text-rojo-fuerte">
+                <p className="mt-2 text-sm font-medium text-naranja-texto">
                   {errores.consentimiento}
                 </p>
               )}

@@ -1,6 +1,10 @@
 import { TruckIcon, PackageIcon } from "@phosphor-icons/react/dist/ssr";
-import { ESTADOS, ESTADOS_CON_FLOTILLA } from "@/lib/estados";
-import { TIEMPOS_ENTREGA_POR_ZONA, estaPendiente } from "@/config/nitamy";
+import { ESTADOS_CON_COBERTURA, ESTADOS_CON_FLOTILLA } from "@/lib/estados";
+import {
+  COBERTURA_PORCENTAJE,
+  TIEMPOS_ENTREGA_POR_ZONA,
+  estaPendiente,
+} from "@/config/nitamy";
 import { BotonCotizar } from "../calificador/BotonCotizar";
 import { Ruta } from "../cobertura/Ruta";
 import { Revelar } from "../Revelar";
@@ -8,20 +12,29 @@ import { Revelar } from "../Revelar";
 /**
  * Cobertura.
  *
+ * REUNIÓN 21 ago 2026. Antes el titular decía "llegamos a los 32 estados".
+ * El cliente lo corrigió: es el 80% de la República. La cifra vive en
+ * COBERTURA_PORCENTAJE y el listado de entidades sale de
+ * ESTADOS_CON_COBERTURA, así que cuando el cliente diga qué estados quedan
+ * fuera se escriben en `ESTADOS_SIN_COBERTURA` y esta sección se corrige
+ * sola.
+ *
  * El brief pide un mapa de México con los estados marcados. No se dibuja uno
  * aquí a propósito: un mapa inventado con fronteras aproximadas es peor que
- * no tenerlo, y no hay trazo vectorial verificado de las 32 entidades en el
+ * no tenerlo, y no hay trazo vectorial verificado de las entidades en el
  * proyecto. El hueco queda documentado.
  *
  * Mientras tanto, esta versión resuelve la pregunta real del comprador, que
  * no es "cómo se ve el país" sino "¿llegan a mi estado y quién me lo lleva?".
- * Por eso se separa en dos niveles de servicio y se listan las 32 entidades:
- * el comprador busca la suya y termina de leer.
+ * Por eso se separa en dos niveles de servicio y se listan las entidades: el
+ * comprador busca la suya y termina de leer.
  */
 
 export function Cobertura() {
   const conTiempos = !estaPendiente(TIEMPOS_ENTREGA_POR_ZONA);
-  const foraneos = ESTADOS.filter((e) => !ESTADOS_CON_FLOTILLA.includes(e));
+  const foraneos = ESTADOS_CON_COBERTURA.filter(
+    (e) => !ESTADOS_CON_FLOTILLA.includes(e),
+  );
 
   return (
     <section
@@ -31,14 +44,16 @@ export function Cobertura() {
       <Revelar>
         <h2
           id="cobertura"
-          className="ancho max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+          className="titular max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
         >
-          Llegamos a los 32 estados, de dos maneras distintas
+          {COBERTURA_PORCENTAJE}% de cobertura en la República, de dos maneras
+          distintas
         </h2>
         <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-tinta-2">
           La diferencia importa: donde tenemos unidades propias controlamos la
           ruta completa. Donde no, trabajamos con transportistas que elegimos
-          por cobertura y por cumplimiento.
+          por cobertura y por cumplimiento. Si tu estado no aparece,
+          pregúntanos: casi siempre hay manera.
         </p>
       </Revelar>
 
@@ -49,14 +64,14 @@ export function Cobertura() {
 
       <div className="mt-4 grid gap-6 lg:grid-cols-2">
         <Revelar>
-          <div className="flex h-full flex-col rounded-caja border-2 border-rojo bg-papel p-7">
+          <div className="flex h-full flex-col rounded-caja border-2 border-naranja bg-papel p-7">
             <TruckIcon
               size={30}
               weight="light"
               aria-hidden="true"
-              className="text-rojo-fuerte"
+              className="text-naranja-texto"
             />
-            <h3 className="ancho mt-5 text-2xl font-extrabold leading-tight tracking-tight">
+            <h3 className="mt-5 text-2xl font-extrabold leading-tight tracking-tight">
               Flotilla propia
             </h3>
             <p className="mt-2.5 leading-relaxed text-tinta-2">
@@ -67,7 +82,7 @@ export function Cobertura() {
               {ESTADOS_CON_FLOTILLA.map((e) => (
                 <li
                   key={e}
-                  className="rounded-pill bg-rojo px-4 py-1.5 text-sm font-semibold text-white"
+                  className="rounded-pill bg-naranja px-4 py-1.5 text-sm font-semibold text-white"
                 >
                   {e}
                 </li>
@@ -99,12 +114,12 @@ export function Cobertura() {
               aria-hidden="true"
               className="text-tinta-2"
             />
-            <h3 className="ancho mt-5 text-2xl font-extrabold leading-tight tracking-tight">
+            <h3 className="mt-5 text-2xl font-extrabold leading-tight tracking-tight">
               Red de transporte a foráneo
             </h3>
             <p className="mt-2.5 leading-relaxed text-tinta-2">
-              Los otros {foraneos.length} estados, con transportistas
-              seleccionados por cobertura y confiabilidad.
+              El resto de la República, con transportistas seleccionados por
+              cobertura y confiabilidad.
             </p>
             <ul className="mt-6 flex flex-wrap gap-1.5">
               {foraneos.map((e) => (
@@ -142,7 +157,7 @@ export function Cobertura() {
       </Revelar>
 
       {/*
-        Hueco documentado. Cuando exista trazo vectorial verificado de las 32
+        Hueco documentado. Cuando exista trazo vectorial verificado de las
         entidades, el mapa entra aquí sin tocar el resto de la sección.
         Requisitos: SVG con un path por entidad, `id` con el slug del estado,
         y roles ARIA para que sea navegable con teclado. No usar imagen

@@ -1,21 +1,52 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import localFont from "next/font/local";
 import { SITIO } from "@/config/nitamy";
 import "./globals.css";
 
 /**
- * Una sola familia para todo el sitio.
+ * Las tipografías del Manual de Marca, servidas desde el propio dominio.
  *
- * Archivo es una grotesca con eje de ancho variable. El ancho expandido lee
- * como letrero de caja y de camión, que es exactamente el registro de un
- * distribuidor mayorista; el ancho normal sirve para el texto corrido. Dos
- * voces distintas con un solo webfont, que es lo que el presupuesto de
- * rendimiento permite.
+ * Van con `next/font/local` y no desde Google porque NINGUNA de las dos está
+ * en Google Fonts. Los archivos viven en `app/fuentes/` (172 KB en total) y
+ * son .woff2 bajados de Fontsource, que publica las dos bajo SIL OFL.
+ * Servirlas desde aquí también evita el salto a un tercero en el primer
+ * pintado, que es lo que hacía la versión anterior.
+ *
+ * Peace Sans es la TIPOGRAFÍA PRINCIPAL del manual, la de verdad: es libre
+ * incluso para uso comercial. Trae un solo peso, que es normal en una fuente
+ * de display, y su trazo ya es pesadísimo.
+ *
+ * Open Sauce One cubre los otros dos papeles del manual (Agrandir y Proxima
+ * Nova, ambas de pago). No es un parecido elegido a ojo: es la fuente con la
+ * que está compuesto el propio manual, leída de las fuentes incrustadas del
+ * PDF.
+ *
+ * Se cargan CINCO pesos y ninguna cursiva, y eso es una decisión medida, no
+ * un descuido. `next/font/local` precarga TODO lo que se declara aquí, se use
+ * o no: la cursiva estaba declarada, no aparece ni una vez en el sitio, y aun
+ * así se bajaba en cada página. Son 24 KB por visita para nada, y el usuario
+ * de este sitio es un comprador en una bodega con señal irregular. Los cinco
+ * pesos que quedan sí están todos en uso (400, 500, 600, 700 y 800).
+ *
+ * `display: "swap"` en las dos: el texto se lee desde el primer cuadro con
+ * la fuente del sistema y salta a la definitiva al llegar. En una bodega con
+ * señal irregular eso es la diferencia entre leer y esperar.
  */
-const archivo = Archivo({
-  subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+const peaceSans = localFont({
+  src: [{ path: "./fuentes/peace-sans-400.woff2", weight: "400", style: "normal" }],
+  variable: "--font-peace-sans",
+  display: "swap",
+});
+
+const openSauce = localFont({
+  src: [
+    { path: "./fuentes/open-sauce-one-400.woff2", weight: "400", style: "normal" },
+    { path: "./fuentes/open-sauce-one-500.woff2", weight: "500", style: "normal" },
+    { path: "./fuentes/open-sauce-one-600.woff2", weight: "600", style: "normal" },
+    { path: "./fuentes/open-sauce-one-700.woff2", weight: "700", style: "normal" },
+    { path: "./fuentes/open-sauce-one-800.woff2", weight: "800", style: "normal" },
+  ],
+  variable: "--font-open-sauce",
   display: "swap",
 });
 
@@ -43,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fafaf8",
+  themeColor: "#ffffff",
   colorScheme: "light",
 };
 
@@ -51,7 +82,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es-MX" className={archivo.variable}>
+    <html lang="es-MX" className={`${peaceSans.variable} ${openSauce.variable}`}>
       {/*
         Sin script de arranque. Todo el movimiento del sitio es CSS puro y
         parte de estado visible, así que no hay nada que desbloquear antes

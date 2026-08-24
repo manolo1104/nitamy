@@ -36,7 +36,7 @@ export function CtaFinal({ origen }: { origen: string }) {
           se ve alrededor de las letras, no sobre ellas. */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:py-28">
         <Revelar>
-          <h2 className="ancho max-w-[20ch] text-[clamp(1.875rem,4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
+          <h2 className="titular max-w-[20ch] text-[clamp(1.875rem,4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
             Manda un mensaje y te cotizamos hoy
           </h2>
           <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-tinta-2">

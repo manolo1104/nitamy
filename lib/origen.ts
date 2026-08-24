@@ -15,7 +15,7 @@ const FIJAS: Record<string, string> = {
   "/mayoristas": "Mayoristas",
   "/tiendas": "Tiendas y dulcerías",
   "/cadenas": "Cadenas de autoservicio",
-  "/eventos": "Eventos",
+  "/blog": "Blog",
   "/cobertura": "Cobertura",
   "/nosotros": "Nosotros",
   "/contacto": "Contacto",

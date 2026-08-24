@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import { CATEGORIAS } from "@/lib/contenido";
-import { BORDE_SILUETA, SABORES } from "@/lib/sabores";
+import { BORDE_SILUETA, PIELES } from "@/lib/colores";
 import { Banda } from "../categorias/Banda";
 import { IconoCategoria } from "../IconoCategoria";
 import { Revelar } from "../Revelar";
@@ -25,7 +25,7 @@ import { Revelar } from "../Revelar";
  *      hace la venta.
  *
  * El color de cada círculo sale del JSON de contenido, no de este archivo:
- * la categoría lleva el mismo sabor aquí, en la ficha de temporada que la
+ * la categoría lleva el mismo color aquí, en la ficha de temporada que la
  * menciona y en su propia página. El color codifica el dato.
  */
 
@@ -40,7 +40,7 @@ export function Categorias() {
           <Revelar>
             <h2
               id="categorias"
-              className="ancho max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+              className="titular max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
             >
               ¿Qué línea te falta surtir?
             </h2>
@@ -52,7 +52,7 @@ export function Categorias() {
 
           <ul className="mt-10 grid gap-x-6 gap-y-7 sm:grid-cols-2">
             {CATEGORIAS.map((c, i) => {
-              const piel = SABORES[c.color];
+              const piel = PIELES[c.color];
               return (
                 <Revelar key={c.slug} retraso={i * 40} como="li">
                   {/* El círculo crece y el icono se inclina por separado. Que
@@ -72,7 +72,7 @@ export function Categorias() {
                       />
                     </span>
                     <span className="min-w-0">
-                      <span className="ancho block text-lg font-extrabold leading-tight tracking-tight">
+                      <span className="block text-lg font-extrabold leading-tight tracking-tight">
                         {c.nombre}
                       </span>
                       <span className="mt-1 block text-sm leading-relaxed text-tinta-2">
@@ -99,7 +99,7 @@ export function Categorias() {
         <Revelar retraso={120} className="mt-14 lg:col-span-5 lg:mt-0">
           <div className="overflow-hidden rounded-blanda">
             {BLOQUES.map((b) => {
-              const piel = SABORES[b.color];
+              const piel = PIELES[b.color];
               return (
                 <div
                   key={b.titulo}
@@ -110,7 +110,7 @@ export function Categorias() {
                     className="punteado pointer-events-none absolute inset-0"
                   />
                   <div className="relative min-w-0 flex-1">
-                    <p className="ancho text-2xl font-extrabold leading-tight tracking-tight">
+                    <p className="text-2xl font-extrabold leading-tight tracking-tight">
                       {b.titulo}
                     </p>
                     <p className="mt-1.5 max-w-[24ch] text-sm leading-relaxed opacity-90">
@@ -161,13 +161,13 @@ export function Categorias() {
               href="/categorias"
               className="group flex items-center justify-between gap-4 bg-carbon px-7 py-6 text-papel"
             >
-              <span className="ancho text-lg font-extrabold tracking-tight">
+              <span className="text-lg font-extrabold tracking-tight">
                 Ver las ocho líneas
               </span>
               <ArrowRightIcon
                 size={22}
                 aria-hidden="true"
-                className="shrink-0 text-ambar transition-transform duration-200 ease-salida group-hover:translate-x-1"
+                className="shrink-0 text-amarillo transition-transform duration-200 ease-salida group-hover:translate-x-1"
               />
             </Link>
           </div>
@@ -193,20 +193,20 @@ const BLOQUES = [
     foto: "/foto/producto-surtido.png",
     // El derrame se corta a ras del marco. Sin mancha se le ven los bordes.
     recortar: true,
-    color: "fresa",
+    color: "naranja",
   },
   {
     titulo: "Presentación de mostrador",
     texto: "Piezas por caja y sellos NOM-051 en cada cotización.",
     foto: "/foto/producto-envueltos.png",
     recortar: false,
-    color: "mango",
+    color: "celeste",
   },
   {
     titulo: "Volumen para eventos",
     texto: "Bolsa de posada, mesa de dulces y kermés, armadas a la medida.",
     foto: "/foto/producto-paletas.png",
     recortar: false,
-    color: "uva",
+    color: "carmesi",
   },
 ] as const;

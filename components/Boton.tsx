@@ -27,21 +27,31 @@ const BASE = [
 ].join(" ");
 
 const VARIANTES: Record<Variante, string> = {
-  // Blanco sobre rojo da 4.70:1. Al presionar pasa al rojo fuerte, 6.22:1.
+  // Tinta sobre el naranja del manual da 6.15:1. El blanco daría 3.41 y
+  // REPRUEBA AA a este tamaño: el naranja de la marca no aguanta texto
+  // blanco salvo en display grande. Y no es solo una cuestión de contraste,
+  // es de coherencia: la píldora de navegación activa, los círculos de
+  // categoría y las fichas de temporada ya llevan tinta encima del relleno,
+  // así que un botón con blanco sería la única pieza que se sale de la regla.
+  //
+  // Al pasar el cursor cambia al amarillo del manual (14.30:1) en vez de
+  // oscurecerse. Oscurecer era lo obvio, pero el naranja oscurecido deja la
+  // tinta en 4.37 y se cae por debajo del mínimo justo en el estado que el
+  // usuario está mirando. El salto naranja -> amarillo, además, es de dulce.
   //
   // `brillo` hace cruzar un destello al pasar el cursor, como el celofán de
   // un dulce. Solo en el primario: si todos los botones brillaran, el gesto
   // dejaría de señalar cuál es la acción principal. Solo con puntero fino, y
   // se apaga con movimiento reducido.
   primario:
-    "brillo bg-rojo text-white hover:bg-rojo-fuerte active:bg-rojo-fuerte",
+    "brillo bg-naranja text-tinta hover:bg-amarillo active:bg-amarillo",
   // Borde de control, no divisor decorativo: necesita 3:1 contra el papel.
   secundario:
     "border border-borde-campo text-tinta hover:border-tinta hover:bg-papel-2",
-  fantasma: "text-rojo-fuerte hover:bg-papel-2",
-  // Para la sección oscura. El ámbar sobre carbón da 8.71:1.
+  fantasma: "text-naranja-texto hover:bg-papel-2",
+  // Para la sección oscura. El amarillo del manual sobre carbón da 14.30:1.
   claro:
-    "border border-borde-campo-oscuro text-papel hover:border-ambar hover:text-ambar",
+    "border border-borde-campo-oscuro text-papel hover:border-amarillo hover:text-amarillo",
 };
 
 const TAMANOS: Record<Tamano, string> = {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { retratos } from "@/lib/retratos";
-import { SABORES } from "@/lib/sabores";
+import { PIELES } from "@/lib/colores";
 
 /**
  * La banda transportadora.
@@ -39,7 +39,7 @@ export function Banda() {
       <div className="absolute inset-x-0 bottom-[3.25rem] overflow-hidden">
         <div className="banda-carga flex w-max items-end gap-10 pl-6 sm:gap-16">
           {carga.map((l, i) => {
-            const piel = SABORES[l.color];
+            const piel = PIELES[l.color];
             return (
               <div
                 key={`${l.slug}-${i}`}

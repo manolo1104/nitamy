@@ -1,7 +1,7 @@
 import { StarIcon } from "@phosphor-icons/react/dist/ssr";
 import { TESTIMONIOS, estaPendiente } from "@/config/nitamy";
-import type { Sabor } from "@/lib/contenido";
-import { SABORES } from "@/lib/sabores";
+import type { ColorMarca } from "@/lib/contenido";
+import { PIELES } from "@/lib/colores";
 import { Revelar } from "../Revelar";
 
 /**
@@ -21,10 +21,10 @@ import { Revelar } from "../Revelar";
  * si estuvieran en columna.
  */
 
-/** Los sabores rotan por posición para que dos tarjetas vecinas nunca
- *  coincidan. El color aquí no codifica ningún dato, así que es lo único del
- *  sitio donde se asigna por índice y no desde el contenido. */
-const ROTACION: Sabor[] = ["fresa", "cielo", "mango", "uva", "menta", "limon"];
+/** Los cuatro colores del manual rotan por posición para que dos tarjetas
+ *  vecinas nunca coincidan. El color aquí no codifica ningún dato, así que es
+ *  lo único del sitio donde se asigna por índice y no desde el contenido. */
+const ROTACION: ColorMarca[] = ["naranja", "celeste", "carmesi", "amarillo"];
 
 function Estrellas({ cuantas }: { cuantas: number }) {
   const enteras = Math.max(0, Math.min(5, Math.round(cuantas)));
@@ -40,7 +40,7 @@ function Estrellas({ cuantas }: { cuantas: number }) {
           size={18}
           weight={i < enteras ? "fill" : "regular"}
           aria-hidden="true"
-          className={i < enteras ? "text-rojo" : "text-tinta-2/40"}
+          className={i < enteras ? "text-naranja" : "text-tinta-2/40"}
         />
       ))}
     </p>
@@ -61,7 +61,7 @@ export function PruebaSocial() {
           <Revelar>
             <h2
               id="prueba-social"
-              className="ancho max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+              className="titular max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
             >
               Lo dicen los negocios que ya se surten aquí
             </h2>
@@ -70,7 +70,7 @@ export function PruebaSocial() {
 
         <ul className="carrusel mt-10 gap-5 px-5 pb-2 sm:px-8">
           {TESTIMONIOS.map((t, i) => {
-            const piel = SABORES[ROTACION[i % ROTACION.length]];
+            const piel = PIELES[ROTACION[i % ROTACION.length]];
             return (
               <li key={`${t.negocio}-${t.nombre}`} className="w-[19rem] sm:w-[22rem]">
                 <figure

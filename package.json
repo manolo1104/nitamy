@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "contraste": "node scripts/contraste.mjs",
-    "sin-guion-largo": "node scripts/sin-guion-largo.mjs"
+    "sin-guion-largo": "node scripts/sin-guion-largo.mjs",
+    "fotos-blog": "python3 scripts/fotos-blog.py",
+    "fotos-blog-candidatas": "python3 scripts/fotos-blog.py --candidatas"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

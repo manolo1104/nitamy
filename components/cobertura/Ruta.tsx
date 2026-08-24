@@ -64,7 +64,7 @@ export function Ruta() {
             className={`entrega entrega-${i + 1} absolute bottom-5 left-1/2 -translate-x-1/2`}
           >
             <span className="flex flex-col items-center gap-1">
-              <span className="flex size-8 items-center justify-center rounded-caja bg-mango text-mango-encima shadow-[0_6px_16px_-10px_rgb(20_17_15/0.8)]">
+              <span className="flex size-8 items-center justify-center rounded-caja bg-amarillo text-tinta shadow-[0_6px_16px_-10px_rgb(20_17_15/0.8)]">
                 <PackageIcon size={17} weight="fill" />
               </span>
               <span className="whitespace-nowrap text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-tinta-2">
@@ -97,7 +97,7 @@ export function Ruta() {
               strokeWidth="2.5"
             />
             {/* Franja de marca */}
-            <rect x="3" y="26" width="122" height="13" className="fill-rojo" />
+            <rect x="3" y="26" width="122" height="13" className="fill-naranja" />
             <text
               x="64"
               y="36.5"
@@ -114,17 +114,17 @@ export function Ruta() {
             {/* Cabina */}
             <path
               d="M125 20 h28 l24 22 v16 h-52 z"
-              className="fill-rojo stroke-tinta"
+              className="fill-naranja stroke-tinta"
               strokeWidth="2.5"
               strokeLinejoin="round"
             />
             {/* Parabrisas */}
             <path
               d="M131 25 h20 l16 15 h-36 z"
-              className="fill-cielo-claro"
+              className="fill-celeste-pastel"
             />
             {/* Faro */}
-            <rect x="170" y="46" width="7" height="6" rx="2" className="fill-mango" />
+            <rect x="170" y="46" width="7" height="6" rx="2" className="fill-amarillo" />
 
             {/* Ruedas. `transform-box: fill-box` es obligatorio: sin él el
                 origen de la rotación es el del SVG entero y la rueda gira

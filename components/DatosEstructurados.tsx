@@ -51,7 +51,7 @@ export function OrganizacionYNegocio() {
     name: EMPRESA.nombre,
     legalName: EMPRESA.razonSocial,
     url: SITIO.url,
-    logo: `${SITIO.url}/brand/nitamy-logo.png`,
+    logo: `${SITIO.url}/brand/nitamy-color.webp`,
     foundingDate: String(FUNDACION),
     founder: { "@type": "Person", name: EMPRESA.fundador },
     description: SITIO.descripcion,
@@ -73,7 +73,7 @@ export function OrganizacionYNegocio() {
     name: EMPRESA.nombre,
     parentOrganization: { "@id": `${SITIO.url}/#organizacion` },
     url: SITIO.url,
-    image: `${SITIO.url}/brand/nitamy-logo.png`,
+    image: `${SITIO.url}/brand/nitamy-color.webp`,
     telephone: `+52${CONTACTO.telefono}`,
     priceRange: "$$",
     address: {
@@ -136,6 +136,86 @@ export function PreguntasFrecuentes(
           "@type": "Question",
           name: f.pregunta,
           acceptedAnswer: { "@type": "Answer", text: f.respuesta },
+        })),
+      }}
+    />
+  );
+}
+
+/**
+ * Un artículo del blog.
+ *
+ * Se declara `BlogPosting` y no `Article` a secas: es el tipo que Google
+ * entiende como contenido editorial recurrente, y el que hace que el artículo
+ * pueda aparecer con fecha en resultados y en respuestas generadas.
+ *
+ * El autor es la ORGANIZACIÓN, no una persona inventada. Firmar con un nombre
+ * ficticio para "humanizar" el blog es exactamente el tipo de señal falsa que
+ * un buscador cruza contra el resto del sitio y castiga. Nitamy sí es el
+ * autor: el contenido sale de treinta años distribuyendo.
+ *
+ * `image` se omite a propósito mientras no exista una imagen por artículo.
+ * Declarar una imagen que no corresponde al artículo es peor que no declarar
+ * ninguna.
+ */
+export function ArticuloDeBlog({
+  titulo,
+  descripcion,
+  ruta,
+  publicado,
+  actualizado,
+  seccion,
+}: {
+  titulo: string;
+  descripcion: string;
+  ruta: string;
+  publicado: string;
+  actualizado: string;
+  seccion: string;
+}) {
+  return (
+    <Bloque
+      datos={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": `${SITIO.url}${ruta}#articulo`,
+        headline: titulo,
+        description: descripcion,
+        url: `${SITIO.url}${ruta}`,
+        mainEntityOfPage: { "@type": "WebPage", "@id": `${SITIO.url}${ruta}` },
+        datePublished: publicado,
+        dateModified: actualizado,
+        articleSection: seccion,
+        inLanguage: SITIO.idioma,
+        author: { "@id": `${SITIO.url}/#organizacion` },
+        publisher: { "@id": `${SITIO.url}/#organizacion` },
+      }}
+    />
+  );
+}
+
+/** El blog completo, para la página índice. */
+export function BlogDeSitio({
+  articulos,
+}: {
+  articulos: Array<{ slug: string; titulo: string; publicado: string }>;
+}) {
+  return (
+    <Bloque
+      datos={{
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "@id": `${SITIO.url}/blog#blog`,
+        name: `Blog de ${EMPRESA.nombre}`,
+        url: `${SITIO.url}/blog`,
+        inLanguage: SITIO.idioma,
+        publisher: { "@id": `${SITIO.url}/#organizacion` },
+        blogPost: articulos.map((a) => ({
+          "@type": "BlogPosting",
+          "@id": `${SITIO.url}/blog/${a.slug}#articulo`,
+          headline: a.titulo,
+          url: `${SITIO.url}/blog/${a.slug}`,
+          datePublished: a.publicado,
         })),
       }}
     />

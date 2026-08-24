@@ -7,24 +7,21 @@ import { ComoFunciona } from "@/components/secciones/ComoFunciona";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
 import { Faq } from "@/components/secciones/Faq";
 import { Hero } from "@/components/secciones/Hero";
-import { PorQueNitamy } from "@/components/secciones/PorQueNitamy";
 import { PruebaSocial } from "@/components/secciones/PruebaSocial";
 import { Recursos } from "@/components/secciones/Recursos";
 import { RuteoSegmentos } from "@/components/secciones/RuteoSegmentos";
 import { SeccionMarcas } from "@/components/secciones/SeccionMarcas";
 import { Temporadas } from "@/components/secciones/Temporadas";
-import { aniosOperando } from "@/config/nitamy";
-import { TOTAL_MARCAS } from "@/lib/contenido";
+import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
 
 /**
  * Home.
  *
- * Doce secciones, y ninguna repite la familia de layout de la anterior: el
- * split del hero, la banda de logos, la banda de cifras, la rejilla de
- * círculos con panel de bloques, la rejilla de segmentos, el rail de
- * temporadas, el mosaico de marcas, las tres tarjetas de pasos, la sección
- * oscura, las columnas de cobertura, el carrusel de reseñas, la rejilla
- * asimétrica de recursos y el acordeón.
+ * Ninguna sección repite la familia de layout de la anterior: el split del
+ * hero, la banda de logos, la banda de cifras, la rejilla de círculos con
+ * panel de bloques, la rejilla de segmentos, el rail de temporadas, el
+ * mosaico de marcas, las tres tarjetas de pasos, las columnas de cobertura,
+ * el carrusel de reseñas, la rejilla asimétrica de recursos y el acordeón.
  *
  * Un solo eyebrow en toda la página, el "Desde 1995" del hero. Poner una
  * etiqueta en versalitas encima de cada título es lo que hace que todas las
@@ -35,9 +32,16 @@ import { TOTAL_MARCAS } from "@/lib/contenido";
  * sección saturada toca a otra saturada:
  *
  *   hero con manchas → banda de logos → cifras → categorías (color en los
- *   círculos y el panel) → segmentos, en papel y sin color → temporadas
- *   (color) → marcas, en papel → pasos (tarjetas de color) → por qué, en
- *   carbón → cobertura, en papel → reseñas (color) → recursos → FAQ → CTA.
+ *   círculos y el panel) → segmentos (celda principal en carbón) → temporadas
+ *   (color) → marcas, en papel → pasos (papel tintado, tarjetas de color) →
+ *   cobertura, en papel → reseñas (color) → recursos → FAQ → CTA.
+ *
+ * REUNIÓN 21 ago 2026: se eliminó la sección oscura que iba entre los pasos y
+ * cobertura. Primero perdió la historia del nombre y luego el cliente la quitó
+ * completa. Comprobado que no rompe el ritmo: los pasos van en papel tintado
+ * y cobertura en papel, así que siguen alternando y no se funden en una sola
+ * mancha. La única parada en carbón que queda arriba es la celda de
+ * mayoristas en el ruteo de segmentos.
  *
  * Y el fondo alterna papel y papel tintado para que dos secciones seguidas
  * nunca se fundan en una sola mancha. Si alguien mete una sección nueva, va
@@ -46,7 +50,7 @@ import { TOTAL_MARCAS } from "@/lib/contenido";
 
 export const metadata: Metadata = {
   title: "Distribuidor mayorista de dulces en México",
-  description: `Surte todo tu anaquel con un solo proveedor. ${aniosOperando()} años distribuyendo ${TOTAL_MARCAS} marcas de dulce, cacahuate, tamarindo y botana desde CDMX a toda la República. Cotiza por WhatsApp.`,
+  description: `Surte todo tu anaquel con un solo proveedor. Más de ${aniosOperando()} años distribuyendo más de ${MARCAS_DECLARADAS} marcas de dulce, cacahuate, tamarindo y botana desde CDMX a toda la República. Cotiza por WhatsApp.`,
   alternates: { canonical: "/" },
 };
 
@@ -74,7 +78,6 @@ export default function Inicio() {
       <Temporadas />
       <SeccionMarcas />
       <ComoFunciona />
-      <PorQueNitamy />
       <Cobertura />
       <PruebaSocial />
       <Recursos />

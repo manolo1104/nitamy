@@ -84,19 +84,27 @@ export type Marca = {
 };
 
 /**
- * Los seis sabores de la paleta. El color CODIFICA el dato: una categoría
- * lleva el mismo sabor en la rejilla de la home, en la ficha de temporada que
- * la menciona y en su propia página. Por eso vive en el JSON de contenido y
- * no en el componente.
+ * Los cuatro colores cromáticos del Manual de Marca. El color CODIFICA el
+ * dato: una categoría lleva el mismo color en la rejilla de la home, en la
+ * ficha de temporada que la menciona y en su propia página. Por eso vive en
+ * el JSON de contenido y no en el componente.
+ *
+ * Eran seis y eran de una paleta propia anterior al manual; dos de ellos, el
+ * morado y el verde, no existen en la marca. Al bajar a cuatro, las ocho
+ * categorías y las siete temporadas repiten color de dos en dos. Se reparten
+ * a mano y no por índice, con dos condiciones: que dos vecinas nunca
+ * coincidan (ni de lado ni en la fila de abajo de la rejilla) y que el color
+ * no contradiga al producto, que es por lo que el cempasúchil de Día de
+ * Muertos va en naranja y el tamarindo en amarillo.
  */
-export type Sabor = "fresa" | "mango" | "menta" | "uva" | "cielo" | "limon";
+export type ColorMarca = "naranja" | "carmesi" | "amarillo" | "celeste";
 
 export type Categoria = {
   slug: string;
   nombre: string;
   resumen: string;
   descripcion: string;
-  color: Sabor;
+  color: ColorMarca;
   icono: string;
   textoRevisado: boolean;
 };
@@ -110,7 +118,7 @@ export type Temporada = {
   semanasAntes: number;
   queRota: string;
   categorias: string[];
-  color: Sabor;
+  color: ColorMarca;
   icono: string;
   textoRevisado: boolean;
 };

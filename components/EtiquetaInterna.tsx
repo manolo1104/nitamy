@@ -17,7 +17,7 @@ export function EtiquetaInterna({ children }: { children: React.ReactNode }) {
   if (process.env.NODE_ENV === "production") return null;
 
   return (
-    <p className="mb-4 inline-block rounded-pill bg-papel-2 px-3 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-rojo-fuerte">
+    <p className="mb-4 inline-block rounded-pill bg-papel-2 px-3 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-naranja-texto">
       {children}
     </p>
   );

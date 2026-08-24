@@ -89,7 +89,7 @@ export function Temporadas() {
         <Revelar>
           <h2
             id="temporadas"
-            className="ancho max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+            className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
             La temporada no se pierde por falta de ganas, se pierde por pedir
             tarde

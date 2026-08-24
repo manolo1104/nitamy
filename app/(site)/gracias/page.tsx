@@ -23,7 +23,7 @@ export default function Gracias() {
   return (
     <section className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:py-28">
       <div className="max-w-[52ch]">
-        <h1 className="ancho text-[clamp(2rem,4.4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
+        <h1 className="titular text-[clamp(2rem,4.4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
           Listo. Solo presiona enviar en WhatsApp
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-tinta-2">
@@ -34,7 +34,7 @@ export default function Gracias() {
         <AbrirWhatsappDeRespaldo />
 
         <div className="mt-12 border-t border-linea pt-8">
-          <h2 className="ancho text-xl font-extrabold tracking-tight">
+          <h2 className="text-xl font-extrabold tracking-tight">
             Nuestro horario
           </h2>
           <dl className="mt-4 max-w-sm space-y-2 text-[0.9375rem]">

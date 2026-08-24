@@ -39,7 +39,7 @@ export function LogoMarca({ marca, alto = 44 }: Props) {
     <span
       // aria-hidden no: el nombre de la marca es información real para quien
       // usa lector de pantalla, y aquí el texto ES el logo.
-      className="ancho flex items-center rounded-caja border border-linea bg-papel-2 px-4 font-bold uppercase tracking-[0.06em] text-tinta-2"
+      className="flex items-center rounded-caja border border-linea bg-papel-2 px-4 font-bold uppercase tracking-[0.06em] text-tinta-2"
       style={{ height: alto, fontSize: Math.round(alto * 0.34) }}
     >
       {marca.nombre}

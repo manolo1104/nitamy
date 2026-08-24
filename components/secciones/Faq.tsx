@@ -30,7 +30,7 @@ export function Faq() {
           <Revelar className="lg:col-span-4">
             <h2
               id="faq"
-              className="ancho text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em] lg:sticky lg:top-28"
+              className="titular text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em] lg:sticky lg:top-28"
             >
               Lo que casi siempre nos preguntan
             </h2>

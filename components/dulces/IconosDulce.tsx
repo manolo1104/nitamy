@@ -15,7 +15,7 @@
  * Reglas del set, para que los ocho se vean de la misma familia:
  *
  *   - Lienzo de 48x48, con la figura respirando 4px por lado.
- *   - Relleno de la paleta de sabores, contorno en tinta de 2.5.
+ *   - Relleno con los cuatro colores del manual, contorno en tinta de 2.5.
  *   - `stroke-linejoin: round`: las esquinas duras hacen que un dulce
  *     parezca una herramienta.
  *   - Silueta chunky. A tamaño de estela pasan volando y el detalle fino
@@ -37,7 +37,7 @@ export function DulcePaleta() {
   return (
     <svg {...BASE} aria-hidden="true">
       <path d="M24 30v13" className="stroke-tinta" fill="none" />
-      <circle cx="24" cy="18" r="14" className="fill-fresa stroke-tinta" />
+      <circle cx="24" cy="18" r="14" className="fill-carmesi stroke-tinta" />
       <path
         d="M24 18a3.2 3.2 0 1 1 3.2 3.2 6.4 6.4 0 1 1-6.4-6.4 9.6 9.6 0 1 1 9.6 9.6"
         fill="none"
@@ -79,7 +79,7 @@ export function DulceGomita() {
       <path
         d={cuerpo}
         fill="none"
-        className="stroke-uva"
+        className="stroke-celeste"
         strokeWidth="10.5"
         strokeLinecap="round"
       />
@@ -87,7 +87,7 @@ export function DulceGomita() {
       <path
         d={cuerpo}
         fill="none"
-        className="stroke-fresa-claro"
+        className="stroke-carmesi-pastel"
         strokeWidth="3"
         strokeLinecap="round"
         strokeDasharray="2.5 5"
@@ -101,7 +101,7 @@ export function DulceGomita() {
 export function DulceEnvuelto() {
   return (
     <svg {...BASE} aria-hidden="true">
-      <g className="fill-mango stroke-tinta">
+      <g className="fill-amarillo stroke-tinta">
         <path d="M14 24 4 16v16z" />
         <path d="M34 24l10-8v16z" />
         <ellipse cx="24" cy="24" rx="10.5" ry="9" />
@@ -130,16 +130,16 @@ export function DulceChile() {
       <path
         d="M28 13c7 2 12 9 11 17-1 9-9 15-17 14-4-.5-6-3-5.5-6
            .5-3 3.5-4 6.5-4.5 4-.7 6-3 6.5-7 .4-3-.4-7-1.5-13.5z"
-        className="fill-rojo stroke-tinta"
+        className="fill-naranja stroke-tinta"
       />
       <path
         d="M28 13c-4-3-9-3.5-13-1.5 2.5 3.5 7 5.5 11 5"
-        className="fill-limon stroke-tinta"
+        className="fill-amarillo stroke-tinta"
       />
       <path
         d="M28 13c1-3.5 3.5-6 7-7"
         fill="none"
-        className="stroke-limon"
+        className="stroke-amarillo"
         strokeWidth="3"
       />
     </svg>
@@ -153,7 +153,7 @@ export function DulceCacahuate() {
       <path
         d="M18 6c6 0 9 4 9 8s-3 5-3 10 4 6 4 11-4 9-10 9-11-5-11-11c0-5 4-7 4-12S12 6 18 6z"
         transform="rotate(-24 24 24)"
-        className="fill-mango stroke-tinta"
+        className="fill-amarillo stroke-tinta"
       />
       <g className="fill-tinta" opacity="0.55">
         <circle cx="20" cy="17" r="1.3" />
@@ -168,8 +168,8 @@ export function DulceCacahuate() {
 export function DulceTamarindo() {
   return (
     <svg {...BASE} aria-hidden="true">
-      <circle cx="24" cy="26" r="16" className="fill-rojo-fuerte stroke-tinta" />
-      <g className="fill-limon">
+      <circle cx="24" cy="26" r="16" className="fill-naranja-texto stroke-tinta" />
+      <g className="fill-amarillo">
         <circle cx="18" cy="20" r="1.8" />
         <circle cx="30" cy="22" r="1.8" />
         <circle cx="24" cy="31" r="1.8" />
@@ -192,13 +192,13 @@ export function DulceMalvavisco() {
     <svg {...BASE} aria-hidden="true">
       <path
         d="M9 16h30v17a7 7 0 0 1-7 7H16a7 7 0 0 1-7-7z"
-        className="fill-fresa-claro stroke-tinta"
+        className="fill-carmesi-pastel stroke-tinta"
       />
       <ellipse cx="24" cy="16" rx="15" ry="7" className="fill-papel stroke-tinta" />
       <path
         d="M15 27h18"
         fill="none"
-        className="stroke-fresa"
+        className="stroke-carmesi"
         strokeWidth="3"
         opacity="0.6"
       />
@@ -212,9 +212,9 @@ export function DulceBolsa() {
     <svg {...BASE} aria-hidden="true">
       <path
         d="M11 17h26l-2.5 24a4 4 0 0 1-4 3.5H17.5a4 4 0 0 1-4-3.5z"
-        className="fill-menta stroke-tinta"
+        className="fill-celeste stroke-tinta"
       />
-      <path d="M11 17l4-8h18l4 8" className="fill-menta stroke-tinta" />
+      <path d="M11 17l4-8h18l4 8" className="fill-celeste stroke-tinta" />
       <g className="fill-papel">
         <circle cx="19" cy="27" r="3" />
         <circle cx="29" cy="31" r="3" />
@@ -225,7 +225,7 @@ export function DulceBolsa() {
 }
 
 /**
- * El set completo, en el orden en que sale de la estela. Alterna sabores y
+ * El set completo, en el orden en que sale de la estela. Alterna colores y
  * siluetas para que dos piezas seguidas nunca se parezcan: si salieran la
  * gomita y el osito juntos, la estela se vería repetida.
  */

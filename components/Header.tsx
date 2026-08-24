@@ -17,6 +17,12 @@ import { BotonCotizar } from "./calificador/BotonCotizar";
  *
  * Altura 68px, en una sola línea en escritorio. Un nav de dos líneas o que se
  * come el 15% del viewport es diseño roto.
+ *
+ * Con seis enlaces la fila va justa entre 1024 y 1280px, así que en esa franja
+ * se aprieta el padding de las píldoras, el hueco de la fila y el margen del
+ * CTA, y desde xl se devuelve el aire. Medido a 1024px: con cinco enlaces
+ * sobraban 81px, con seis y sin apretar quedaban 17, que es margen de error de
+ * una fuente. Apretando quedan 33.
  */
 
 const ENLACES = [
@@ -25,6 +31,8 @@ const ENLACES = [
   { href: "/mayoristas", texto: "Mayoristas" },
   { href: "/cobertura", texto: "Cobertura" },
   { href: "/nosotros", texto: "Nosotros" },
+  // REUNIÓN 21 ago 2026: el cliente lo pidió a la derecha de "Nosotros".
+  { href: "/blog", texto: "Blog" },
 ];
 
 export function Header() {
@@ -55,23 +63,20 @@ export function Header() {
     // tiempo de scroll en CSS y no con un listener: un `onScroll` que hace
     // `setState` re-renderiza este árbol en cada cuadro del desplazamiento.
     <header className="cabecera-scroll sticky top-0 z-30 border-b border-linea bg-papel/92 backdrop-blur-md">
-      <div className="mx-auto flex h-17 max-w-[1400px] items-center gap-6 px-5 sm:px-8">
+      <div className="mx-auto flex h-17 max-w-[1400px] items-center gap-4 px-5 sm:px-8 xl:gap-6">
         <Link
           href="/"
           className="grupo-marca flex shrink-0 items-center gap-2.5"
           aria-label="Grupo Nitamy, ir al inicio"
         >
           <Image
-            src="/brand/nitamy-logo.png"
+            src="/brand/nitamy-color.webp"
             alt=""
-            width={40}
-            height={40}
+            width={900}
+            height={763}
             priority
-            className="marca-logo size-10 object-contain"
+            className="marca-logo h-11 w-auto object-contain sm:h-12"
           />
-          <span className="ancho text-[1.0625rem] font-extrabold leading-none tracking-tight">
-            Grupo Nitamy
-          </span>
         </Link>
 
         {/*
@@ -93,12 +98,12 @@ export function Header() {
               key={e.href}
               href={e.href}
               aria-current={ruta.startsWith(e.href) ? "page" : undefined}
-              className="rounded-pill px-4 py-2 text-[0.9375rem] font-medium text-tinta-2 transition-colors duration-200 ease-salida hover:bg-papel-2 hover:text-tinta aria-[current=page]:bg-fresa aria-[current=page]:font-semibold aria-[current=page]:text-fresa-encima"
+              className="rounded-pill px-3 py-2 text-[0.9375rem] xl:px-4 font-medium text-tinta-2 transition-colors duration-200 ease-salida hover:bg-papel-2 hover:text-tinta aria-[current=page]:bg-naranja aria-[current=page]:font-semibold aria-[current=page]:text-tinta"
             >
               {e.texto}
             </Link>
           ))}
-          <BotonCotizar origen={origen} tamano="normal" className="ml-3" />
+          <BotonCotizar origen={origen} tamano="normal" className="ml-1 xl:ml-3" />
         </nav>
 
         <button
@@ -121,7 +126,7 @@ export function Header() {
       */}
       <div
         aria-hidden="true"
-        className="avance absolute inset-x-0 bottom-0 h-0.5 bg-fresa"
+        className="avance absolute inset-x-0 bottom-0 h-0.5 bg-naranja"
       />
 
       {abierto && (

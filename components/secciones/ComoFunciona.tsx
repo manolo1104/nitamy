@@ -7,8 +7,8 @@ import {
 import { BotonCotizar } from "../calificador/BotonCotizar";
 import { Reflector } from "../Reflector";
 import { Revelar } from "../Revelar";
-import { SABORES } from "@/lib/sabores";
-import type { Sabor } from "@/lib/contenido";
+import { PIELES } from "@/lib/colores";
+import type { ColorMarca } from "@/lib/contenido";
 
 /**
  * Cómo funciona: tres pasos.
@@ -39,7 +39,7 @@ const PASOS = [
     detalle:
       "Marcas, categorías o el surtido completo. Si no sabes por dónde empezar, te decimos qué rota en negocios como el tuyo.",
     Icono: ChatCircleTextIcon,
-    color: "cielo",
+    color: "celeste",
   },
   {
     titulo: "Te cotizamos el mismo día",
@@ -47,7 +47,7 @@ const PASOS = [
     detalle:
       "La cotización trae piezas por caja y sellos NOM-051 de cada presentación, para que sepas exactamente qué llega a tu anaquel.",
     Icono: ReceiptIcon,
-    color: "mango",
+    color: "amarillo",
   },
   {
     titulo: "Te lo entregamos",
@@ -55,14 +55,14 @@ const PASOS = [
     detalle:
       "En la zona metropolitana controlamos la ruta de punta a punta. Para el resto del país trabajamos con transportistas elegidos por cobertura y cumplimiento.",
     Icono: TruckIcon,
-    color: "menta",
+    color: "naranja",
   },
 ] as const satisfies ReadonlyArray<{
   titulo: string;
   texto: string;
   detalle: string;
   Icono: typeof TruckIcon;
-  color: Sabor;
+  color: ColorMarca;
 }>;
 
 export function ComoFunciona() {
@@ -79,7 +79,7 @@ export function ComoFunciona() {
         <Revelar>
           <h2
             id="como-funciona"
-            className="ancho max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
+            className="titular max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
             De tu mensaje a tu bodega, en tres pasos
           </h2>
@@ -139,7 +139,7 @@ export function ComoFunciona() {
 
           {/* El pedido. Tres caras que se relevan en el camino. */}
           <div className="pedido-viaja absolute top-2 left-0 w-12">
-            <span className="relative flex size-12 items-center justify-center rounded-pill bg-carbon text-ambar shadow-[0_10px_24px_-12px_rgb(20_17_15/0.9)]">
+            <span className="relative flex size-12 items-center justify-center rounded-pill bg-carbon text-amarillo shadow-[0_10px_24px_-12px_rgb(20_17_15/0.9)]">
               <span className="pedido-cara pedido-cara-1 absolute">
                 <ChatCircleTextIcon size={24} weight="fill" />
               </span>
@@ -167,7 +167,7 @@ export function ComoFunciona() {
 
           <ol className="grid gap-6 md:grid-cols-3">
           {PASOS.map((paso, i) => {
-            const piel = SABORES[paso.color];
+            const piel = PIELES[paso.color];
             return (
               <Revelar key={paso.titulo} retraso={i * 80} como="li">
                 {/* `grupo-sticker`: al pasar el cursor por la tarjeta, el
@@ -181,16 +181,16 @@ export function ComoFunciona() {
                   <div className="flex items-center gap-4">
                     <span
                       aria-hidden="true"
-                      className={`sticker cifra flex size-12 shrink-0 items-center justify-center rounded-pill text-xl font-extrabold ${piel.relleno} ${piel.texto}`}
+                      className={`sticker cifra flex size-12 shrink-0 items-center justify-center rounded-pill text-xl font-extrabold ${piel.profundo} ${piel.profundoTexto}`}
                     >
                       {i + 1}
                     </span>
                     {/*
-                      En tinta secundaria y no en el acento del sabor: el
-                      mango saturado sobre el pastel de mango da 1.78:1, muy
+                      En tinta secundaria y no en el color de la marca: el
+                      amarillo del manual sobre su propio pastel da 1.19:1, muy
                       por debajo del 3:1 que WCAG 1.4.11 pide a un objeto
-                      gráfico, y el icono del paso 2 se borraba. Usar el
-                      acento en dos pasos y tinta en el otro se vería como un
+                      gráfico, y el icono del paso 2 se borraba. Usar el color
+                      en dos pasos y tinta en el otro se vería como un
                       descuido.
 
                       Al pasar el cursor se inclina en sentido CONTRARIO al
@@ -206,7 +206,7 @@ export function ComoFunciona() {
                     />
                   </div>
 
-                  <h3 className="ancho mt-6 text-xl font-extrabold leading-tight tracking-tight">
+                  <h3 className="mt-6 text-xl font-extrabold leading-tight tracking-tight">
                     {paso.titulo}
                   </h3>
                   <p className="mt-2 font-semibold leading-relaxed text-tinta">

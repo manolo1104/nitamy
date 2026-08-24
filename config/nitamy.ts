@@ -85,17 +85,64 @@ export const FUNDACION = 1995;
 export const ANIO_RAZON_SOCIAL = 1999;
 
 /**
- * Proveedores con los que Nitamy trabaja. Sale del documento institucional
- * del cliente, no de una estimación.
+ * Cuántas marcas declara el cliente que distribuye.
  *
- * Vive aquí y no en un componente porque aparece en dos lugares (la barra de
- * cifras y el encabezado de la rejilla de marcas) y dos números distintos
- * para lo mismo en la misma página destruyen la credibilidad de los dos.
+ * REUNIÓN 21 ago 2026. El cliente pidió dos cambios en las cifras y los dos
+ * viven aquí:
+ *
+ *   1. Se retiró la cifra de proveedores (antes 26+). El argumento se cuenta
+ *      con marcas, que es lo que el comprador reconoce en su anaquel; el
+ *      número de proveedores es información interna de Nitamy.
+ *   2. La cifra de marcas la declara el cliente: MÁS DE 30.
+ *
+ * ✅ RESUELTO el 23 ago 2026 con el CATÁLOGO (`CAT.NITAMY.pdf`, 78 pp.).
+ * Durante dos sesiones esto fue una tensión abierta: el sitio afirmaba "+30"
+ * pero `content/marcas.json` solo tenía 22, y un visitante las puede contar.
+ *
+ * Las páginas 2 y 3 del catálogo son la rejilla oficial de "NUESTRAS MARCAS"
+ * y traen **37 logotipos** (20 en la primera, 14 en la segunda y 3 más bajo
+ * el rótulo TEMPORADA). Descontando que Nishikawa aparece dos veces (la marca
+ * y su versión exclusiva para Nitamy), quedan **36 marcas distintas**. O sea
+ * que "+30" no solo es cierto: se queda corto.
+ *
+ * Lo que el sitio todavía no puede ENSEÑAR son las ~14 que faltan en el JSON:
+ * Sandy, Jovy, Yens, Checolines, Cisne, W.L.A., La Coculense, Los Reyes,
+ * H. Díaz, Amarantos, Orquídea, Dulces Kokito, Rikaleche y una decimoquinta
+ * cuyo logotipo no se lee ni a 200 dpi. Faltan sus logotipos y sus productos.
+ *
+ * ⚠️ Y al revés: **Obleas Kevin NO aparece en el catálogo**, ni en la rejilla
+ * de marcas ni en ninguna de las 78 páginas. Ya se sospechaba (no existe en
+ * el sitio anterior, ni con logo, ni con productos, ni en dos búsquedas web);
+ * el catálogo lo confirma. Hay que preguntarle al cliente antes de publicar:
+ * hoy ocupa una de las 22 fichas y no tiene ni un producto.
+ *
+ * En cuanto lleguen las que faltan y entren al JSON, esta constante se puede
+ * borrar y volver a derivar todo de `TOTAL_MARCAS`.
  */
-export const PROVEEDORES = 26;
+export const MARCAS_DECLARADAS = 30;
+
+/**
+ * Porcentaje de la República al que llegan.
+ *
+ * REUNIÓN 21 ago 2026: antes el sitio decía "los 32 estados". El cliente
+ * corrigió a 80% de cobertura nacional, que es más honesto y sigue siendo un
+ * argumento fuerte frente a un proveedor local.
+ */
+export const COBERTURA_PORCENTAJE = 80;
 
 export function aniosOperando(hoy: Date = new Date()): number {
   return hoy.getFullYear() - FUNDACION;
+}
+
+/**
+ * Los años como los quiere el cliente: "+31", no "31".
+ *
+ * REUNIÓN 21 ago 2026. El "+" no es adorno: la empresa se fundó en 1995 pero
+ * el fundador ya operaba antes, así que "31" leído como cifra exacta se queda
+ * corto. Sigue derivándose de FUNDACION, así que en 2027 dirá +32 solo.
+ */
+export function aniosOperandoTexto(hoy: Date = new Date()): string {
+  return `+${aniosOperando(hoy)}`;
 }
 
 export const HITOS = [
@@ -124,23 +171,54 @@ export const HITOS = [
    ========================================================================== */
 
 /**
- * ATENCIÓN, dato por confirmar antes de publicar.
+ * 🔴 ATENCIÓN, DATO SIN RESOLVER. Es lo más grave que queda por publicar.
  *
- * El brief y el documento institucional imprimen el segundo WhatsApp como
- * "(55) 5529 4946 74", que son 12 dígitos y no corresponde a ningún formato
- * mexicano válido. La lectura más probable es que el número sea 5529494674
- * (10 dígitos) y que el "(55)" sea un error de formato arrastrado.
+ * Hay TRES documentos del cliente y cada uno dice algo distinto del segundo
+ * número. Cuadro completo al 23 ago 2026:
  *
- * Se implementa con ese supuesto. Un WhatsApp equivocado anula el propósito
- * completo del sitio, así que hay que confirmarlo con el cliente.
+ *   documento                    fijo              segundo número
+ *   ---------------------------  ----------------  --------------------------
+ *   brief                        (55) 5693 2483    (55) 3555 0738
+ *                                                  y (55) 5529 4946 74
+ *   PDF institucional (17 pp.)   (55) 5693 2483    (55) 3555 0738
+ *                                                  y (55) 5529494674
+ *   CATÁLOGO (78 pp., el más     (55) 5693 2483    (55) 3571 5740
+ *   reciente)                                      ← y ningún otro
+ *
+ * Lo único firme es el fijo: (55) 5693 2483 aparece igual en los tres.
+ *
+ * De los otros: "5529494674" son 12 dígitos con el (55) y no es un número
+ * mexicano válido, así que ese se descarta. Quedan enfrentados 3555 0738,
+ * que es el que este sitio usa hoy y viene de los dos documentos viejos, y
+ * 3571 5740, que es el ÚNICO que imprime el catálogo nuevo. No son un error
+ * de tecleo uno del otro: 35550738 y 35715740 no se parecen lo bastante.
+ *
+ * NO se cambia solo. Un WhatsApp equivocado no degrada el sitio, lo anula:
+ * todas las conversiones caen en un número que no es del cliente. Tiene que
+ * decirlo él. Mientras tanto se queda el que ya estaba, que es el que más
+ * documentos respaldan.
  */
 export const WHATSAPP_POR_CONFIRMAR = true;
+
+/**
+ * El del catálogo, guardado para que no se pierda mientras el cliente decide.
+ * NO se usa en ninguna página todavía.
+ */
+export const WHATSAPP_SEGUN_CATALOGO = "5535715740";
 
 export const CONTACTO = {
   telefono: "5556932483",
   telefonoLegible: "(55) 5693 2483",
   whatsappGeneral: "5535550738",
   whatsappGeneralLegible: "(55) 3555 0738",
+  /**
+   * Los dos correos que el catálogo imprime en su contraportada. El sitio no
+   * tenía ninguno. Se prefiere el del dominio propio para lo que se publica:
+   * un yahoo en un sitio B2B resta credibilidad frente a un comprador de
+   * cadena, y además el dominio propio es el que se puede verificar.
+   */
+  correo: "contacto@gruponitamy.com",
+  correoAlterno: "gruponitamy@yahoo.com.mx",
   instagram: "grupo_nitamy_mx",
   instagramUrl: "https://www.instagram.com/grupo_nitamy_mx/",
   facebook: "Grupo Nitamy",
@@ -178,16 +256,16 @@ export const HORARIO = {
 /* ==========================================================================
    Segmentos de comprador
    ==========================================================================
-   El visitante nunca es un consumidor final. Son cuatro perfiles de comprador
-   de negocio, en orden de prioridad comercial.
+   El visitante nunca es un consumidor final. Son tres perfiles de comprador
+   de negocio, en orden de prioridad comercial, más "otro" para el modal.
+
+   REUNIÓN 21 ago 2026: se retiró "Organizo eventos". Nitamy le vende a
+   negocios que revenden, no a quien monta una fiesta. Un organizador de
+   eventos que pedía por WhatsApp gastaba tiempo de ventas en un ticket que no
+   se repite.
    ========================================================================== */
 
-export type ClaveSegmento =
-  | "mayorista"
-  | "tienda"
-  | "cadena"
-  | "eventos"
-  | "otro";
+export type ClaveSegmento = "mayorista" | "tienda" | "cadena" | "otro";
 
 export const SEGMENTOS = [
   {
@@ -218,15 +296,6 @@ export const SEGMENTOS = [
     ruta: "/cadenas",
   },
   {
-    clave: "eventos",
-    etiqueta: "Eventos y mesas de dulces",
-    tarjeta: "Organizo eventos",
-    bajada: "Bolsas y mesas armadas a la medida",
-    dolor: "Armar bolsas a mano",
-    argumento: "Presentaciones armadas a la medida",
-    ruta: "/eventos",
-  },
-  {
     clave: "otro",
     etiqueta: "Otro",
     tarjeta: "Otro tipo de negocio",
@@ -245,7 +314,7 @@ export const SEGMENTOS = [
   ruta: string;
 }>;
 
-/** Los cuatro que se muestran en el ruteo de la home. `otro` solo vive en el modal. */
+/** Los tres que se muestran en el ruteo de la home. `otro` solo vive en el modal. */
 export const SEGMENTOS_VISIBLES = SEGMENTOS.filter((s) => s.clave !== "otro");
 
 /* ==========================================================================

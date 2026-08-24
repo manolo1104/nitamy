@@ -7,7 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { CONTACTO, EMPRESA, HORARIO, aniosOperando } from "@/config/nitamy";
-import { CATEGORIAS, MARCAS_FUNDADORAS, TOTAL_MARCAS } from "@/lib/contenido";
+import { CATEGORIAS, MARCAS_FUNDADORAS } from "@/lib/contenido";
 import { enlaceWhatsappSimple } from "@/lib/whatsapp";
 
 /**
@@ -28,19 +28,17 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2.5">
               <Image
-                src="/brand/nitamy-logo.png"
+                src="/brand/nitamy-color.webp"
                 alt=""
-                width={44}
-                height={44}
-                className="size-11 object-contain"
+                width={900}
+                height={763}
+                className="h-10 w-auto object-contain"
               />
-              <span className="ancho text-lg font-extrabold leading-none tracking-tight">
-                Grupo Nitamy
-              </span>
             </div>
             <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-tinta-2">
-              {EMPRESA.razonSocial}. {anios} años distribuyendo confitería,
-              cacahuate, tamarindo y botana a negocios de toda la República.
+              {EMPRESA.razonSocial}. Más de {anios} años distribuyendo
+              confitería, cacahuate, tamarindo y botana a negocios de toda la
+              República.
             </p>
             <p className="mt-3 text-sm font-medium text-tinta">
               {EMPRESA.filosofia}
@@ -57,7 +55,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
                 <Link href="/marcas" className="enlace text-tinta-2 hover:text-tinta">
-                  Las {TOTAL_MARCAS} marcas
+                  Todas las marcas
                 </Link>
               </li>
               {MARCAS_FUNDADORAS.map((m) => (
@@ -107,13 +105,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/eventos" className="enlace text-tinta-2 hover:text-tinta">
-                  Eventos
-                </Link>
-              </li>
-              <li>
-                <Link href="/recursos" className="enlace text-tinta-2 hover:text-tinta">
-                  Recursos
+                <Link href="/blog" className="enlace text-tinta-2 hover:text-tinta">
+                  Blog
                 </Link>
               </li>
             </ul>

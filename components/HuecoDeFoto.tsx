@@ -93,7 +93,7 @@ export function HuecoDeFoto({
       />
 
       <div className="relative">
-        <p className="text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-rojo-fuerte">
+        <p className="text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-naranja-texto">
           Falta foto: {etiqueta}
         </p>
         <p className="mt-1.5 text-sm font-semibold leading-snug text-tinta">

@@ -5,8 +5,8 @@ import { ViewTransition } from "react";
 import { LogoMarca } from "@/components/LogoMarca";
 import { Revelar } from "@/components/Revelar";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
-import { aniosOperando } from "@/config/nitamy";
-import { CATEGORIAS, TOTAL_MARCAS, marcasDeCategoria } from "@/lib/contenido";
+import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
+import { CATEGORIAS, marcasDeCategoria } from "@/lib/contenido";
 
 /**
  * Índice de marcas.
@@ -18,8 +18,8 @@ import { CATEGORIAS, TOTAL_MARCAS, marcasDeCategoria } from "@/lib/contenido";
  */
 
 export const metadata: Metadata = {
-  title: `Las ${TOTAL_MARCAS} marcas que distribuimos`,
-  description: `Catálogo completo de marcas de dulce, cacahuate, tamarindo y botana que Grupo Nitamy distribuye al mayoreo en México. Un pedido, un pago, una factura.`,
+  title: `Las marcas de dulce que distribuimos al mayoreo`,
+  description: `Más de ${MARCAS_DECLARADAS} marcas de dulce, cacahuate, tamarindo y botana que Grupo Nitamy distribuye al mayoreo en México. Un pedido, un pago, una factura.`,
   alternates: { canonical: "/marcas" },
 };
 
@@ -35,12 +35,12 @@ export default function IndiceDeMarcas() {
 
       <section className="border-b border-linea">
         <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-12 sm:px-8 lg:pb-16 lg:pt-16">
-          <h1 className="ancho max-w-[20ch] text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
-            Las {TOTAL_MARCAS} marcas que distribuimos
+          <h1 className="titular max-w-[20ch] text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
+            Las marcas que distribuimos
           </h1>
           <p className="mt-5 max-w-[56ch] text-lg leading-relaxed text-tinta-2">
-            {aniosOperando()} años construyendo este catálogo. Todas se surten
-            en un solo pedido, con una factura y un pago.
+            Más de {aniosOperando()} años construyendo este catálogo. Todas se
+            surten en un solo pedido, con una factura y un pago.
           </p>
         </div>
       </section>
@@ -59,7 +59,7 @@ export default function IndiceDeMarcas() {
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <h2
                   id={`cat-${categoria.slug}`}
-                  className="ancho text-[clamp(1.375rem,2.4vw,1.875rem)] font-extrabold leading-tight tracking-[-0.02em]"
+                  className="text-[clamp(1.375rem,2.4vw,1.875rem)] font-extrabold leading-tight tracking-[-0.02em]"
                 >
                   <Link
                     href={`/categorias/${categoria.slug}`}
@@ -83,7 +83,7 @@ export default function IndiceDeMarcas() {
                           <LogoMarca marca={marca} alto={36} />
                         </ViewTransition>
                       </div>
-                      <h3 className="ancho mt-4 text-base font-extrabold tracking-tight">
+                      <h3 className="mt-4 text-base font-extrabold tracking-tight">
                         {marca.nombre}
                       </h3>
                       <p className="mt-1.5 text-sm leading-relaxed text-tinta-2">

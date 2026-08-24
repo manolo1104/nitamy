@@ -69,7 +69,7 @@ export default function AvisoDePrivacidad() {
   return (
     <section className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 lg:py-24">
       <div className="max-w-[68ch]">
-        <h1 className="ancho text-[clamp(2rem,4.4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
+        <h1 className="titular text-[clamp(2rem,4.4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
           Aviso de privacidad
         </h1>
 
@@ -82,7 +82,7 @@ export default function AvisoDePrivacidad() {
 
         {SECCIONES.map((s) => (
           <div key={s.titulo} className="mt-10">
-            <h2 className="ancho text-xl font-extrabold tracking-tight">
+            <h2 className="text-xl font-extrabold tracking-tight">
               {s.titulo}
             </h2>
             {s.parrafos.map((p) => (

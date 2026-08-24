@@ -1,4 +1,4 @@
-import { CATEGORIAS, MARCAS, type Sabor } from "./contenido";
+import { CATEGORIAS, MARCAS, type ColorMarca } from "./contenido";
 
 /**
  * Una foto real que representa a cada línea del catálogo.
@@ -16,7 +16,7 @@ import { CATEGORIAS, MARCAS, type Sabor } from "./contenido";
 const RETRATO: Record<string, string> = {
   enchilados: "/productos/chaca-chaca/rielito-en-trozo-en-bolsa.webp",
   cacahuates: "/productos/nishikawa/japon-s-60-gr.webp",
-  tamarindo: "/productos/grupo-frato/palebola.webp",
+  tamarindo: "/productos/tama-roca/pellizco.webp",
   gomitas: "/productos/dulces-guaz/comesaurio.webp",
   paletas: "/productos/alvbro/paleta-hueso.webp",
   salsas: "/productos/salsa-tamazula/salsa-roja-370-ml.webp",
@@ -27,7 +27,7 @@ const RETRATO: Record<string, string> = {
 export type Retrato = {
   slug: string;
   nombre: string;
-  color: Sabor;
+  color: ColorMarca;
   foto: string;
   /** De quién es la foto. Se muestra: es prueba, no adorno. */
   marca: string;

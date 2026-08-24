@@ -1,8 +1,8 @@
 "use client";
 
 import { type ReactNode, useId, useRef, useState } from "react";
-import type { Sabor } from "@/lib/contenido";
-import { BORDE_SILUETA, SABORES } from "@/lib/sabores";
+import type { ColorMarca } from "@/lib/contenido";
+import { BORDE_SILUETA, PIELES } from "@/lib/colores";
 import { BotonCotizar } from "../calificador/BotonCotizar";
 import { Odometro } from "../Odometro";
 
@@ -45,7 +45,7 @@ import { Odometro } from "../Odometro";
 export type CategoriaVista = {
   slug: string;
   nombre: string;
-  color: Sabor;
+  color: ColorMarca;
   /** Icono ya renderizado en el servidor. Ver la nota de arriba. */
   icono: ReactNode;
 };
@@ -55,7 +55,7 @@ export type TemporadaVista = {
   nombre: string;
   cuando: string;
   queRota: string;
-  color: Sabor;
+  color: ColorMarca;
   /** Icono chico, para la pestaña del rail. */
   icono: ReactNode;
   /** El mismo icono en grande, para la marca de agua del panel. */
@@ -136,7 +136,7 @@ export function RailTemporadas({
   }
 
   const t = temporadas[activa];
-  const piel = SABORES[t.color];
+  const piel = PIELES[t.color];
 
   return (
     <>
@@ -196,7 +196,7 @@ export function RailTemporadas({
 
         {/* Un pin por temporada, en su fecha real del año. */}
         {temporadas.map((item, n) => {
-          const suPiel = SABORES[item.color];
+          const suPiel = PIELES[item.color];
           const esta = n === activa;
           return (
             <button
@@ -244,7 +244,7 @@ export function RailTemporadas({
         className="carrusel -mx-5 gap-3 px-5 pb-2 lg:col-span-4 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0 lg:pb-0"
       >
         {temporadas.map((item, i) => {
-          const suPiel = SABORES[item.color];
+          const suPiel = PIELES[item.color];
           const seleccionada = i === activa;
           return (
             <button
@@ -274,7 +274,7 @@ export function RailTemporadas({
               </span>
               <span className="min-w-0 flex-1">
                 <span
-                  className={`ancho block truncate font-extrabold leading-tight tracking-tight ${
+                  className={`block truncate font-extrabold leading-tight tracking-tight ${
                     seleccionada ? "text-tinta" : "text-tinta-2"
                   }`}
                 >
@@ -282,7 +282,7 @@ export function RailTemporadas({
                 </span>
                 <span
                   className={`cifra mt-0.5 block text-xs font-semibold ${
-                    item.estado === "abierta" ? "text-tinta-2" : "text-rojo-fuerte"
+                    item.estado === "abierta" ? "text-tinta-2" : "text-naranja-texto"
                   }`}
                 >
                   {resumenDeCorte(item)}
@@ -346,7 +346,7 @@ export function RailTemporadas({
           <div className="relative">
             <div className="flex flex-wrap items-center gap-3">
               <span
-                className={`sticker inline-flex items-center rounded-pill px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${piel.relleno} ${piel.texto}`}
+                className={`sticker inline-flex items-center rounded-pill px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${piel.profundo} ${piel.profundoTexto}`}
               >
                 Temporada
               </span>
@@ -355,7 +355,7 @@ export function RailTemporadas({
               </span>
             </div>
 
-            <h3 className="ancho mt-5 text-[clamp(1.75rem,3.2vw,2.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
+            <h3 className="titular mt-5 text-[clamp(1.75rem,3.2vw,2.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
               {t.nombre}
             </h3>
 
@@ -379,15 +379,17 @@ export function RailTemporadas({
             <div className="mt-6 max-w-[54ch] rounded-caja bg-papel/80 px-5 py-4">
               {t.estado !== "tarde" && t.diasParaCorte > 0 && (
                 <p className="flex items-baseline gap-3">
-                  {/* En rojo de marca, NO en el acento del sabor. El acento
-                      sobre este fondo no alcanza ni el 3:1 que WCAG pide a
-                      texto grande: el mango da 1.78:1 sobre su pastel y 1.95
-                      sobre papel. El rojo da 4.49 y ya es el color de las
-                      cifras grandes en la barra de credibilidad, así que
-                      además unifica. */}
+                  {/* En `naranja-texto`, NO en el naranja del manual y
+                      tampoco en el acento de la temporada. Este odómetro va
+                      encima del PASTEL de su temporada, y ahí el naranja del
+                      manual da 2.77:1: por debajo del 3:1 que WCAG pide
+                      incluso a texto grande. `naranja-texto` da 3.90:1 sobre
+                      cualquiera de los cuatro pasteles, y de paso es el mismo
+                      color de las cifras grandes de la barra de credibilidad,
+                      así que además unifica. */}
                   <Odometro
                     valor={t.diasParaCorte}
-                    className="ancho text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold tracking-[-0.03em] text-rojo"
+                    className="titular text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold tracking-[-0.03em] text-naranja-texto"
                   />
                   <span className="text-sm font-semibold leading-tight text-tinta-2">
                     {t.diasParaCorte === 1 ? "día" : "días"}
@@ -412,12 +414,12 @@ export function RailTemporadas({
                 </p>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {t.categorias.map((c) => {
-                    const cPiel = SABORES[c.color];
+                    const cPiel = PIELES[c.color];
                     return (
                       <li key={c.slug}>
                         <span className="chip inline-flex items-center gap-2 rounded-pill bg-papel px-3.5 py-2 text-sm font-semibold text-tinta">
                           <span
-                            className={`flex size-6 items-center justify-center rounded-pill ${cPiel.relleno} ${cPiel.texto}`}
+                            className={`flex size-6 items-center justify-center rounded-pill ${cPiel.relleno} ${cPiel.texto} ${BORDE_SILUETA}`}
                           >
                             {c.icono}
                           </span>

@@ -11,8 +11,8 @@ import {
   useTransform,
 } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Sabor } from "@/lib/contenido";
-import { SABORES } from "@/lib/sabores";
+import type { ColorMarca } from "@/lib/contenido";
+import { BORDE_SILUETA, PIELES } from "@/lib/colores";
 
 /**
  * La vitrina del hero.
@@ -46,7 +46,7 @@ import { SABORES } from "@/lib/sabores";
 export type LineaVitrina = {
   slug: string;
   nombre: string;
-  color: Sabor;
+  color: ColorMarca;
   /** Foto real de producto, del catálogo del cliente. */
   foto: string;
   /** Marca y producto de esa foto. Se muestra: es prueba, no adorno. */
@@ -171,7 +171,7 @@ export function VitrinaViva({
   }, [lineas.length]);
 
   const activa = lineas[i];
-  const piel = SABORES[activa.color];
+  const piel = PIELES[activa.color];
   const queSigue = lineas[(i + 1) % lineas.length];
 
   return (
@@ -286,7 +286,7 @@ export function VitrinaViva({
                 transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
                 className="whitespace-nowrap rounded-pill bg-carbon px-4 py-2 text-sm font-semibold text-papel shadow-[0_10px_30px_-18px_rgb(20_17_15/0.9)]"
               >
-                <span className="text-ambar">{activa.marca}</span>{" "}
+                <span className="text-amarillo">{activa.marca}</span>{" "}
                 <span className="text-papel/70">·</span> {activa.producto}
               </motion.p>
             </AnimatePresence>
@@ -333,7 +333,7 @@ export function VitrinaViva({
           className="mt-4 flex flex-wrap gap-2"
         >
           {lineas.map((l, n) => {
-            const suPiel = SABORES[l.color];
+            const suPiel = PIELES[l.color];
             const esta = n === i;
             return (
               <button
@@ -346,7 +346,7 @@ export function VitrinaViva({
                 onFocus={() => elegir(n)}
                 className={`presionable rounded-pill px-4 py-2 text-sm font-semibold transition-colors duration-200 ease-salida ${
                   esta
-                    ? `${suPiel.relleno} ${suPiel.texto}`
+                    ? `${suPiel.relleno} ${suPiel.texto} ${BORDE_SILUETA}`
                     : "bg-papel-2 text-tinta-2 hover:bg-linea hover:text-tinta"
                 }`}
               >
@@ -368,7 +368,7 @@ export function VitrinaViva({
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: RITMO / 1000, ease: "linear" }}
-              className={`h-full origin-left ${piel.relleno}`}
+              className={`h-full origin-left ${piel.profundo}`}
             />
           </div>
         )}

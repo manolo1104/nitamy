@@ -39,7 +39,7 @@ export function Recursos() {
           </h2>
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 font-semibold text-naranja-texto"
+            className="enlace inline-flex items-center gap-2 font-semibold text-naranja-texto"
           >
             Ver todas las guías
             <ArrowUpRightIcon size={17} aria-hidden="true" />

@@ -159,7 +159,7 @@ export function Footer() {
                 href={CONTACTO.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center rounded-caja border border-linea text-tinta-2 transition-colors duration-200 ease-salida hover:border-tinta hover:text-tinta"
+                className="presionable flex size-11 items-center justify-center rounded-caja border border-linea text-tinta-2 transition-[color,border-color,transform] duration-200 ease-salida hover:border-tinta hover:text-tinta"
               >
                 <InstagramLogoIcon size={20} aria-hidden="true" />
                 <span className="sr-only">Instagram de Grupo Nitamy</span>
@@ -168,7 +168,7 @@ export function Footer() {
                 href={CONTACTO.facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center rounded-caja border border-linea text-tinta-2 transition-colors duration-200 ease-salida hover:border-tinta hover:text-tinta"
+                className="presionable flex size-11 items-center justify-center rounded-caja border border-linea text-tinta-2 transition-[color,border-color,transform] duration-200 ease-salida hover:border-tinta hover:text-tinta"
               >
                 <FacebookLogoIcon size={20} aria-hidden="true" />
                 <span className="sr-only">Facebook de Grupo Nitamy</span>

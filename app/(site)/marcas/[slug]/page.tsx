@@ -92,7 +92,7 @@ export default async function PaginaDeMarca(
       <section className="border-b border-linea">
         <div className="mx-auto max-w-[1400px] px-5 pb-14 pt-8 sm:px-8 lg:pb-20 lg:pt-12">
           <nav aria-label="Ruta" className="text-sm text-tinta-2">
-            <Link href="/marcas" className="hover:text-tinta">
+            <Link href="/marcas" className="enlace hover:text-tinta">
               Marcas
             </Link>
             <span className="px-2" aria-hidden="true">

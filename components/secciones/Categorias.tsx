@@ -60,7 +60,7 @@ export function Categorias() {
                       es lo que hace que se lea como un objeto con partes. */}
                   <Link
                     href={`/categorias/${c.slug}`}
-                    className="grupo-cat group flex items-start gap-4"
+                    className="grupo-cat presionable group flex items-start gap-4"
                   >
                     <span
                       className={`circulo-cat flex size-14 shrink-0 items-center justify-center rounded-pill ${piel.relleno} ${piel.texto} ${BORDE_SILUETA}`}
@@ -159,7 +159,7 @@ export function Categorias() {
 
             <Link
               href="/categorias"
-              className="group flex items-center justify-between gap-4 bg-carbon px-7 py-6 text-papel"
+              className="presionable group flex items-center justify-between gap-4 bg-carbon px-7 py-6 text-papel"
             >
               <span className="text-lg font-extrabold tracking-tight">
                 Ver las ocho líneas

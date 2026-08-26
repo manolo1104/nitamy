@@ -66,7 +66,7 @@ export function Header() {
       <div className="mx-auto flex h-17 max-w-[1400px] items-center gap-4 px-5 sm:px-8 xl:gap-6">
         <Link
           href="/"
-          className="grupo-marca flex shrink-0 items-center gap-2.5"
+          className="grupo-marca presionable flex shrink-0 items-center gap-2.5"
           aria-label="Grupo Nitamy, ir al inicio"
         >
           <Image
@@ -98,7 +98,17 @@ export function Header() {
               key={e.href}
               href={e.href}
               aria-current={ruta.startsWith(e.href) ? "page" : undefined}
-              className="rounded-pill px-3 py-2 text-[0.9375rem] xl:px-4 font-medium text-tinta-2 transition-colors duration-200 ease-salida hover:bg-papel-2 hover:text-tinta aria-[current=page]:bg-naranja aria-[current=page]:font-semibold aria-[current=page]:text-tinta"
+              /*
+                `active:scale-[0.97]` y no el 0.985 de `.presionable`: la
+                píldora del menú es chica, y cuanto más pequeño el elemento
+                más porcentaje hace falta para que el gesto se sienta igual.
+                Es el mismo valor que usan los botones.
+
+                La transición se nombra propiedad por propiedad en vez de
+                `transition-colors`, que no incluye `transform` y dejaba el
+                hundido sin animar.
+              */
+              className="rounded-pill px-3 py-2 text-[0.9375rem] xl:px-4 font-medium text-tinta-2 transition-[color,background-color,transform] duration-200 ease-salida hover:bg-papel-2 hover:text-tinta active:scale-[0.97] aria-[current=page]:bg-naranja aria-[current=page]:font-semibold aria-[current=page]:text-tinta"
             >
               {e.texto}
             </Link>
@@ -141,7 +151,12 @@ export function Header() {
                 <li key={e.href} style={{ "--i": i } as React.CSSProperties}>
                   <Link
                     href={e.href}
-                    className="flex min-h-13 items-center text-base font-medium text-tinta"
+                    /*
+                      El barrido por HTML no encuentra estas filas porque el
+                      panel solo existe con el menú abierto. Y son justo las
+                      más tocadas del sitio: en celular, este ES el menú.
+                    */
+                    className="presionable flex min-h-13 items-center text-base font-medium text-tinta"
                   >
                     {e.texto}
                   </Link>

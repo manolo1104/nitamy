@@ -220,8 +220,22 @@ export function RailTemporadas({
               <span className="sr-only">{item.nombre}</span>
               <span
                 aria-hidden="true"
-                className={`block rounded-pill border-2 border-papel-2 transition-all duration-200 ease-resorte ${suPiel.relleno} ${
-                  esta ? "size-5" : "size-3.5"
+                /*
+                  El pin crece con `transform`, no cambiando `size`.
+
+                  Antes eran `size-3.5` y `size-5` con `transition-all`, que es
+                  lo único de este tipo en todo el proyecto y rompía la regla
+                  que el propio globals.css declara. Animar el tamaño obliga al
+                  navegador a recalcular layout y a repintar en cada cuadro;
+                  `transform` corre en la GPU y no toca ninguno de los dos.
+
+                  El tamaño base es el GRANDE y el inactivo se encoge a 0.7
+                  (0.875rem / 1.25rem, los dos valores de antes exactos), y no
+                  al revés: así el pin activo, que es el que el ojo mira, se
+                  dibuja a su tamaño natural con el borde nítido.
+                */
+                className={`block size-5 rounded-pill border-2 border-papel-2 transition-transform duration-200 ease-resorte ${suPiel.relleno} ${
+                  esta ? "scale-100" : "scale-[0.7]"
                 }`}
               />
             </button>

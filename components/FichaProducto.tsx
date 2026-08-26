@@ -51,7 +51,7 @@ export function FichaProducto({ producto: p, marca, mostrarMarca = false }: Prop
         {mostrarMarca && (
           <Link
             href={`/marcas/${marca.slug}`}
-            className="text-xs font-bold uppercase tracking-[0.14em] text-naranja-texto hover:underline"
+            className="enlace text-xs font-bold uppercase tracking-[0.14em] text-naranja-texto"
           >
             {marca.nombre}
           </Link>

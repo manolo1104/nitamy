@@ -348,7 +348,7 @@ export function ModalCalificador({
                   <Link
                     href="/aviso-de-privacidad"
                     target="_blank"
-                    className="font-semibold text-naranja-texto underline underline-offset-2"
+                    className="presionable font-semibold text-naranja-texto underline underline-offset-2"
                   >
                     aviso de privacidad
                   </Link>

@@ -49,7 +49,7 @@ export function CtaFinal({ origen }: { origen: string }) {
               O márcanos al{" "}
               <a
                 href={`tel:+52${CONTACTO.telefono}`}
-                className="cifra font-semibold text-tinta underline underline-offset-4"
+                className="presionable cifra font-semibold text-tinta underline underline-offset-4"
               >
                 {CONTACTO.telefonoLegible}
               </a>

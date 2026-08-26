@@ -63,7 +63,7 @@ export default function IndiceDeMarcas() {
                 >
                   <Link
                     href={`/categorias/${categoria.slug}`}
-                    className="underline-offset-[6px] hover:underline"
+                    className="enlace"
                   >
                     {categoria.nombre}
                   </Link>

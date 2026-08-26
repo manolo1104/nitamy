@@ -124,7 +124,7 @@ export default async function PaginaDeArticulo(
         <header className="border-b border-linea">
           <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-8 sm:px-8 lg:pb-16 lg:pt-12">
             <nav aria-label="Ruta" className="text-sm text-tinta-2">
-              <Link href="/blog" className="hover:text-tinta">
+              <Link href="/blog" className="enlace hover:text-tinta">
                 Blog
               </Link>
               <span className="px-2" aria-hidden="true">

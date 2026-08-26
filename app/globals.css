@@ -1,5 +1,34 @@
 @import "tailwindcss";
 
+/* --------------------------------------------------------------------------
+   `hover:` solo donde de verdad hay un puntero
+   --------------------------------------------------------------------------
+   En un teléfono, tocar algo dispara `:hover` y el estado se QUEDA PEGADO
+   hasta que el dedo toca otra cosa. La tarjeta que se acaba de pulsar sigue
+   levantada, con el borde encendido, como si el cursor estuviera encima. Es
+   el usuario real de este sitio: un comprador en su bodega, con el celular.
+
+   Tailwind 4 ya envuelve `hover:` en `(hover: hover)` por su cuenta, y eso
+   resuelve el caso del teléfono común. Falta el híbrido: la laptop con
+   pantalla táctil y el iPad con lápiz declaran que SÍ pueden hacer hover, así
+   que pasan ese filtro y vuelven a dejar el estado pegado al tocar con el
+   dedo. `pointer: fine` es el que los distingue.
+
+   Se redefine el variant entero en vez de ir componente por componente:
+   son 64 `hover:` repartidos en 21 archivos, y una regla que hay que
+   acordarse de repetir 64 veces es una regla que se va a romper.
+
+   Lo escrito a mano en este archivo ya lleva las dos condiciones; esto pone
+   a las utilidades de Tailwind al mismo nivel.
+   -------------------------------------------------------------------------- */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
 /* ==========================================================================
    GRUPO NITAMY. Sistema de diseño "Dulcería seria"
    --------------------------------------------------------------------------
@@ -387,6 +416,29 @@ body {
 @media (hover: hover) and (pointer: fine) {
   .marquesina:hover .marquesina-pista {
     animation-play-state: paused;
+  }
+}
+
+/* Con movimiento reducido, la marquesina se detiene.
+
+   Era la única animación del sitio que corría en bucle infinito sin guarda, y
+   es justo el tipo de movimiento que provoca mareo: horizontal, constante y
+   sin final. Las demás animaciones del archivo sí la tenían; esta se pasó.
+
+   Parada no basta: con `animation: none` la pista se queda en su posición
+   inicial y la mitad de los logos queda fuera del recorte, sin forma de
+   llegar a ellos. Por eso además se vuelve una tira que se puede recorrer con
+   el dedo o con el teclado. Los logos duplicados ya salen del recorrido por
+   su `aria-hidden` y su `tabIndex={-1}`, así que no se llega dos veces a la
+   misma marca. */
+@media (prefers-reduced-motion: reduce) {
+  .marquesina {
+    overflow-x: auto;
+  }
+
+  .marquesina-pista {
+    animation: none;
+    will-change: auto;
   }
 }
 

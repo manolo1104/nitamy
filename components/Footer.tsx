@@ -37,8 +37,8 @@ export function Footer() {
             </div>
             <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-tinta-2">
               {EMPRESA.razonSocial}. Más de {anios} años distribuyendo
-              confitería, cacahuate, tamarindo y botana a negocios de toda la
-              República.
+              confitería, cacahuate, tamarindo y botana a negocios
+              establecidos en la República Mexicana.
             </p>
             <p className="mt-3 text-sm font-medium text-tinta">
               {EMPRESA.filosofia}

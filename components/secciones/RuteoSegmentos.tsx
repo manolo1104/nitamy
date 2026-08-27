@@ -51,7 +51,7 @@ export function RuteoSegmentos() {
           id="segmentos"
           className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
         >
-          Dinos qué negocio tienes y te decimos cómo te surtimos
+          Cada tipo de negocio se abastece de forma distinta
         </h2>
       </Revelar>
 
@@ -65,7 +65,7 @@ export function RuteoSegmentos() {
           >
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-amarillo">
-                El caso más común
+                El perfil más frecuente
               </p>
               <h3 className="titular mt-4 text-[clamp(1.5rem,3vw,2.25rem)] font-extrabold leading-tight tracking-tight text-papel">
                 {principal.tarjeta}
@@ -76,8 +76,9 @@ export function RuteoSegmentos() {
             </div>
             <div className="border-t border-linea-oscura pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
               <p className="text-sm leading-relaxed text-papel/70">
-                Abrir ocho cuentas para llenar un anaquel cuesta tiempo y
-                complica el pago. Aquí es un pedido, un pago y un envío.
+                Operar ocho cuentas para llenar un anaquel consume tiempo y
+                complica la administración. Con nosotros es un pedido, un pago
+                y un envío.
               </p>
               <span className="mt-5 inline-flex items-center gap-2 font-semibold text-amarillo">
                 Ver cómo funciona

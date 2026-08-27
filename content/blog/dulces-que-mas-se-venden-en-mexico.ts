@@ -90,7 +90,7 @@ export const articulo: Articulo = {
     {
       tipo: "parrafo",
       texto:
-        "La categoría de doble uso: se vende de a peso para consumo inmediato y se vende en bolsa de volumen para armar bolsas de fiesta y mesas de dulces. Esa segunda venta es la que sube el ticket sin que tengas que meter producto nuevo.",
+        "La categoría de doble uso: se vende de a peso para consumo inmediato y en bolsa de volumen para quien compra por bulto. Esa segunda venta es la que sube el ticket sin que tengas que meter producto nuevo al anaquel.",
     },
 
     {
@@ -173,7 +173,7 @@ export const articulo: Articulo = {
     {
       pregunta: "¿Qué presentación de dulce conviene tener en una tienda?",
       respuesta:
-        "Al menos dos por producto: una presentación individual de mostrador que se pueda pagar con una sola moneda, que es la que sostiene la venta diaria, y una de volumen para clientes que arman bolsas de fiesta o mesas de dulces. Con una sola presentación se atiende a la mitad de la clientela.",
+        "Al menos dos por producto: una presentación individual de mostrador que se pueda pagar con una sola moneda, que es la que sostiene la venta diaria, y una de volumen para el cliente que compra por bulto. Con una sola presentación se atiende a la mitad de la clientela.",
     },
     {
       pregunta: "¿Cuántas categorías de dulce debe tener un anaquel?",

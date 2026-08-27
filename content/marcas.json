@@ -56,8 +56,7 @@
       "compradores": [
         "tienda",
         "mayorista",
-        "cadena",
-        "eventos"
+        "cadena"
       ],
       "productos": [
         {
@@ -246,21 +245,19 @@
       "logo": "/marcas/tama-roca.svg",
       "categorias": [
         "tamarindo",
-        "enchilados",
-        "gomitas"
+        "enchilados"
       ],
       "fundadora": true,
       "resumen": "Dulce de tamarindo enchilado, el sabor base del dulce mexicano.",
       "descripcion": [
         "Tama-Roca trabaja el tamarindo enchilado, que es la columna vertebral del dulce mexicano de tiendita. Pulpa de tamarindo con chile y sal, en las presentaciones que el consumidor de a pie ya reconoce.",
-        "Es producto de rotación alta y precio accesible, lo que lo vuelve una de las líneas más rentables por metro de anaquel. Funciona igual de bien en tiendita de barrio que en mesa de dulces.",
+        "Es producto de rotación alta y precio accesible, lo que lo vuelve una de las líneas más rentables por metro de anaquel. Funciona igual de bien en el mostrador de una tiendita que en el volumen de un distribuidor.",
         "Es una de las tres marcas que dan nombre a Grupo Nitamy."
       ],
       "porQueRota": "Precio accesible y sabor de consumo diario: el volumen compensa el margen unitario.",
       "compradores": [
         "tienda",
-        "mayorista",
-        "eventos"
+        "mayorista"
       ],
       "productos": [
         {
@@ -351,7 +348,8 @@
       "nombreCompleto": "Miguelito Polvo Enchilado",
       "categorias": [
         "enchilados",
-        "tamarindo"
+        "tamarindo",
+        "paletas"
       ],
       "fundadora": true,
       "resumen": "El polvo enchilado que acompaña fruta, botana y paleta.",
@@ -363,8 +361,7 @@
       "porQueRota": "Complementa otros productos del anaquel en lugar de competir con ellos: sube el ticket promedio.",
       "compradores": [
         "tienda",
-        "mayorista",
-        "eventos"
+        "mayorista"
       ],
       "productos": [
         {
@@ -727,12 +724,11 @@
       "resumen": "Paletas y confitería infantil de rotación rápida.",
       "descripcion": [
         "Candy Pop maneja paletas y confitería de formato pequeño, la que se vende de una en una en el mostrador. Es compra por impulso pura: precio bajo, decisión inmediata.",
-        "Es de las líneas que mejor funcionan para llenar la caja registradora de un punto de venta pequeño y para armar bolsas de fiesta."
+        "Es de las líneas que mejor funcionan para sostener la venta diaria de un punto de venta pequeño y para surtir volumen a quien revende."
       ],
       "porQueRota": "Precio de una moneda y decisión de compra inmediata en el mostrador.",
       "compradores": [
         "tienda",
-        "eventos",
         "mayorista"
       ],
       "productos": [
@@ -860,15 +856,14 @@
       "categorias": [
         "gomitas"
       ],
-      "resumen": "Malvaviscos y gomitas para anaquel y para mesa de dulces.",
+      "resumen": "Malvaviscos y gomitas, en pieza de mostrador y en volumen.",
       "descripcion": [
-        "Productos Rivera trabaja malvaviscos y gomitas, que son la base de cualquier mesa de dulces y una categoría de peso en el anaquel de dulcería.",
-        "Se venden tanto en presentación individual para mostrador como en bolsa de volumen para eventos, lo que permite surtir dos tipos de cliente con una sola marca."
+        "Productos Rivera trabaja malvaviscos y gomitas, una categoría de peso en el anaquel de cualquier dulcería y de rotación constante en el mostrador.",
+        "Se venden tanto en presentación individual para mostrador como en bolsa de volumen para reventa, lo que permite atender dos tipos de cliente con una sola marca."
       ],
-      "porQueRota": "Sirve a dos mercados con la misma marca: mostrador por pieza y volumen para eventos.",
+      "porQueRota": "Sirve a dos mercados con la misma marca: mostrador por pieza y bulto para reventa.",
       "compradores": [
         "tienda",
-        "eventos",
         "mayorista",
         "cadena"
       ],
@@ -909,8 +904,7 @@
       "nombreCompleto": "Salsa Tamazula y Valentina",
       "logo": "/marcas/salsa-tamazula.webp",
       "categorias": [
-        "salsas",
-        "botana"
+        "salsas"
       ],
       "resumen": "Salsa picante embotellada, artículo de despensa y de botana.",
       "descripcion": [
@@ -1074,18 +1068,17 @@
       "slug": "charly",
       "nombre": "Charly",
       "categorias": [
-        "gomitas",
+        "botana",
         "paletas"
       ],
       "resumen": "Confitería infantil con presentación llamativa.",
       "descripcion": [
         "Charly trabaja confitería dirigida a público infantil, con presentaciones y empaque que compiten por atención en el anaquel.",
-        "Funciona bien en dulcerías de fiesta y en tiendas cercanas a escuelas, donde la decisión de compra la toma el consumidor final frente al producto."
+        "Funciona bien en dulcerías y en tiendas cercanas a escuelas, donde la decisión de compra la toma el consumidor final frente al producto."
       ],
       "porQueRota": "El empaque hace el trabajo de venta en el anaquel.",
       "compradores": [
         "tienda",
-        "eventos",
         "mayorista"
       ],
       "productos": [
@@ -1126,8 +1119,7 @@
       "slug": "pipos",
       "nombre": "Pipos",
       "categorias": [
-        "botana",
-        "cacahuates"
+        "botana"
       ],
       "resumen": "Botana salada y semillas para acompañar.",
       "descripcion": [
@@ -1168,38 +1160,12 @@
       "fuenteProductos": "gruponitamy.com, agosto 2026"
     },
     {
-      "slug": "obleas-kevin",
-      "nombre": "Obleas Kevin",
-      "categorias": [
-        "obleas-y-dulce-tradicional"
-      ],
-      "resumen": "Obleas con cajeta, dulce tradicional mexicano.",
-      "descripcion": [
-        "Obleas Kevin trabaja el dulce tradicional de oblea con cajeta, una categoría con demanda estable y competencia baja.",
-        "Es de los productos que diferencian un anaquel: casi ninguna cadena grande lo surte bien, y el consumidor que lo busca es fiel."
-      ],
-      "porQueRota": "Competencia baja y consumidor fiel: diferencia el anaquel frente a la cadena grande.",
-      "compradores": [
-        "tienda",
-        "mayorista",
-        "eventos"
-      ],
-      "productos": [],
-      "datosDeEjemplo": true,
-      "textoRevisado": false,
-      "relacionadas": [
-        "dulces-tradicionales",
-        "portico",
-        "dulces-guaz"
-      ],
-      "sellosVerificados": false,
-      "notaInterna": "SIN EVIDENCIA DE QUE EXISTA. No aparece en el sitio del cliente (su sitemap lista 20 marcas y esta no esta), no tiene logotipo, no tiene productos, y dos busquedas web no devuelven nada con ese nombre. Salio solo de la lista del PDF institucional. Ojo: Cabadas, que si esta en el catalogo y si tiene productos, es un fabricante conocido de oblea con cajeta; puede que 'Obleas Kevin' sea un error de transcripcion o una marca regional diminuta. PREGUNTAR AL CLIENTE antes de publicar: una marca fantasma infla la cifra que el sitio presume."
-    },
-    {
       "slug": "dulces-tradicionales",
       "nombre": "Dulces Tradicionales",
       "categorias": [
-        "obleas-y-dulce-tradicional"
+        "obleas-y-dulce-tradicional",
+        "paletas",
+        "cacahuates"
       ],
       "resumen": "Dulce típico mexicano: palanquetas, cocadas y jamoncillo.",
       "descripcion": [
@@ -1209,8 +1175,7 @@
       "porQueRota": "Clientela definida y precio estable, con poca guerra de precios.",
       "compradores": [
         "tienda",
-        "mayorista",
-        "eventos"
+        "mayorista"
       ],
       "productos": [
         {
@@ -1301,7 +1266,6 @@
       "datosDeEjemplo": false,
       "textoRevisado": false,
       "relacionadas": [
-        "obleas-kevin",
         "portico",
         "dulces-guaz"
       ],
@@ -1313,7 +1277,7 @@
       "slug": "betamex",
       "nombre": "Betamex",
       "categorias": [
-        "botana",
+        "tamarindo",
         "enchilados"
       ],
       "resumen": "Botana y producto enchilado para punto de venta.",
@@ -1384,8 +1348,7 @@
       "slug": "cabadas",
       "nombre": "Cabadas",
       "categorias": [
-        "obleas-y-dulce-tradicional",
-        "paletas"
+        "obleas-y-dulce-tradicional"
       ],
       "resumen": "Dulcería tradicional en presentaciones de mostrador.",
       "descripcion": [
@@ -1430,7 +1393,6 @@
       "textoRevisado": false,
       "relacionadas": [
         "dulces-tradicionales",
-        "obleas-kevin",
         "portico"
       ],
       "logo": "/marcas/cabadas.webp",
@@ -1441,8 +1403,7 @@
       "slug": "dulces-pillo",
       "nombre": "Dulces Pillo",
       "categorias": [
-        "enchilados",
-        "paletas"
+        "enchilados"
       ],
       "resumen": "Dulce enchilado y paleta de rotación diaria.",
       "descripcion": [
@@ -1484,17 +1445,15 @@
       "slug": "dulces-liz",
       "nombre": "Dulces Liz",
       "categorias": [
-        "gomitas",
-        "paletas"
+        "gomitas"
       ],
-      "resumen": "Gomitas y confitería para dulcería y evento.",
+      "resumen": "Gomitas y confitería para dulcería, en pieza y en volumen.",
       "descripcion": [
-        "Dulces Liz surte gomitas y confitería en formatos que funcionan tanto en dulcería como en armado de bolsas para evento."
+        "Dulces Liz surte gomitas y confitería en formatos que funcionan tanto en la venta de a peso del mostrador como en el bulto que compra quien revende."
       ],
-      "porQueRota": "Un solo producto sirve al anaquel y a la mesa de dulces.",
+      "porQueRota": "Un solo producto sirve al anaquel de a peso y a la venta por bulto.",
       "compradores": [
         "tienda",
-        "eventos",
         "mayorista"
       ],
       "productos": [
@@ -1549,7 +1508,7 @@
       "slug": "portico",
       "nombre": "Portico",
       "categorias": [
-        "obleas-y-dulce-tradicional"
+        "enchilados"
       ],
       "resumen": "Dulce tradicional y de temporada.",
       "descripcion": [
@@ -1558,8 +1517,7 @@
       "porQueRota": "Base estable todo el año con picos de temporada.",
       "compradores": [
         "tienda",
-        "mayorista",
-        "eventos"
+        "mayorista"
       ],
       "productos": [
         {
@@ -1581,8 +1539,7 @@
       "textoRevisado": false,
       "relacionadas": [
         "dulces-tradicionales",
-        "cabadas",
-        "obleas-kevin"
+        "cabadas"
       ],
       "logo": "/marcas/portico.webp",
       "sellosVerificados": false,
@@ -1592,8 +1549,8 @@
       "slug": "productos-del-rey",
       "nombre": "Productos del Rey",
       "categorias": [
-        "botana",
-        "cacahuates"
+        "tamarindo",
+        "enchilados"
       ],
       "resumen": "Botana y semilla en presentaciones de volumen.",
       "descripcion": [
@@ -1657,8 +1614,8 @@
       "slug": "dulces-karla",
       "nombre": "Dulces Karla",
       "categorias": [
-        "gomitas",
-        "enchilados"
+        "tamarindo",
+        "gomitas"
       ],
       "resumen": "Confitería enchilada y gomita para dulcería.",
       "descripcion": [
@@ -1667,7 +1624,6 @@
       "porQueRota": "El enchilado es la categoría de mayor rotación en dulcería mexicana.",
       "compradores": [
         "tienda",
-        "eventos",
         "mayorista"
       ],
       "productos": [
@@ -1729,7 +1685,7 @@
       "slug": "dulces-guaz",
       "nombre": "Dulces Guaz",
       "categorias": [
-        "obleas-y-dulce-tradicional",
+        "enchilados",
         "tamarindo"
       ],
       "resumen": "Dulce regional y de tamarindo.",
@@ -1789,8 +1745,7 @@
       "textoRevisado": false,
       "relacionadas": [
         "tama-roca",
-        "dulces-tradicionales",
-        "obleas-kevin"
+        "dulces-tradicionales"
       ],
       "logo": "/marcas/dulces-guaz.webp",
       "sellosVerificados": false,
@@ -1802,18 +1757,95 @@
       "categorias": [
         "gomitas"
       ],
-      "resumen": "Confitado y gragea para mesa de dulces y decoración.",
+      "resumen": "Confitado y gragea para dulcería y repostería.",
       "descripcion": [
-        "Confitados Finos trabaja confitado y gragea, producto de mesa de dulces y de decoración de repostería."
+        "Confitados Finos trabaja confitado y gragea, producto de dulcería y de decoración de repostería."
       ],
-      "porQueRota": "Sirve a repostería y a eventos, dos mercados fuera del anaquel clásico.",
+      "porQueRota": "Abre la venta a repostería y panadería, un canal fuera del anaquel clásico.",
       "compradores": [
-        "eventos",
         "mayorista",
         "tienda"
       ],
-      "productos": [],
-      "datosDeEjemplo": true,
+      "productos": [
+        {
+          "producto": "Confi-Chispas Surtidas",
+          "presentacion": "Presentación por confirmar",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Confi-Gum",
+          "presentacion": "Presentación por confirmar",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Confi-Twister",
+          "presentacion": "Presentación por confirmar",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configragea Colores",
+          "presentacion": "1 caja con 25 bolsas de 1 kg.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configranillo Chocolate",
+          "presentacion": "1 caja con 20 bolsas de 250 g.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configranillo Multicolor",
+          "presentacion": "1 caja con 20 bolsas de 250 g.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configranillo Rosa",
+          "presentacion": "1 caja con 20 bolsas de 250 g.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configranillo Azul",
+          "presentacion": "1 caja con 20 bolsas de 250 g.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configranillo Blanco",
+          "presentacion": "1 caja con 20 bolsas de 250 g.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configlass 1 kg",
+          "presentacion": "1 caja con 24 bolsas de 1 kg.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        },
+        {
+          "producto": "Configlass 500 g",
+          "presentacion": "1 caja con 46 bolsas de 500 g.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": null
+        }
+      ],
+      "datosDeEjemplo": false,
       "textoRevisado": false,
       "relacionadas": [
         "rivera",
@@ -1821,7 +1853,9 @@
         "dulces-liz"
       ],
       "logo": "/marcas/confitados-finos.webp",
-      "sellosVerificados": false
+      "sellosVerificados": false,
+      "fuenteProductos": "CAT.NITAMY.pdf pp. 40-43, agosto 2026",
+      "notaInterna": "Productos tomados del catalogo el 26 ago 2026: la ficha estaba VACIA y el catalogo le dedica cuatro paginas. Faltan las FOTOS: no existen en el sitio anterior (que para esta marca usaba stock de Unsplash) y las del catalogo son de 120-190 px, solo sirven para identificar. PREGUNTAR AL CLIENTE: la linea de esta marca es gragea, granillo, azucar glass y popotes de dulce, o sea insumo de reposteria y decoracion, y NINGUNA de las 8 lineas del sitio la describe. Hoy esta en 'gomitas' porque es donde menos desentona, pero no es gomita. Las pp. 44-46 traen gomitas de grenetina (Mini Gummi Bears, Fantasy Gummy, Frutastika, Coni Lokos, Mini Sharks) que NO se le asignaron: son de una marca que todavia no esta en el JSON."
     },
     {
       "slug": "alvbro",
@@ -1870,7 +1904,8 @@
       "slug": "chompys",
       "nombre": "Chompys",
       "categorias": [
-        "botana",
+        "paletas",
+        "gomitas",
         "enchilados"
       ],
       "resumen": "Botana enchilada en presentación individual.",

@@ -35,7 +35,7 @@ export function Recursos() {
             id="recursos"
             className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
-            Cómo vender más dulce, no solo comprarlo
+            Criterios para vender más, no solo para comprar mejor
           </h2>
           <Link
             href="/blog"

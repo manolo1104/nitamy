@@ -88,7 +88,7 @@ export const articulo: Articulo = {
     {
       tipo: "parrafo",
       texto:
-        "Gomita de sabor, gomita enchilada, malvavisco de color, malvavisco cubierto. La categoría de doble uso: se vende de a peso para consumo inmediato y en bolsa de volumen para armar bolsas de fiesta y mesas de dulces.",
+        "Gomita de sabor, gomita enchilada, malvavisco de color, malvavisco cubierto. La categoría de doble uso: se vende de a peso para consumo inmediato y en bolsa de volumen para quien compra por bulto.",
     },
     {
       tipo: "parrafo",
@@ -182,7 +182,7 @@ export const articulo: Articulo = {
     {
       tipo: "cta",
       texto:
-        "Dinos qué categorías te faltan y te mandamos el catálogo de esas, con presentaciones y piezas por caja.",
+        "Indícanos qué líneas te faltan y te enviamos el catálogo correspondiente, con sus presentaciones y su empaque.",
       etiqueta: "Pedir catálogo por categoría",
     },
   ],

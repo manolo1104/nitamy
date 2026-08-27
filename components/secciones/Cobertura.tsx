@@ -1,5 +1,4 @@
 import { TruckIcon, PackageIcon } from "@phosphor-icons/react/dist/ssr";
-import { ESTADOS_CON_COBERTURA, ESTADOS_CON_FLOTILLA } from "@/lib/estados";
 import {
   COBERTURA_PORCENTAJE,
   TIEMPOS_ENTREGA_POR_ZONA,
@@ -12,29 +11,42 @@ import { Revelar } from "../Revelar";
 /**
  * Cobertura.
  *
- * REUNIÓN 21 ago 2026. Antes el titular decía "llegamos a los 32 estados".
- * El cliente lo corrigió: es el 80% de la República. La cifra vive en
- * COBERTURA_PORCENTAJE y el listado de entidades sale de
- * ESTADOS_CON_COBERTURA, así que cuando el cliente diga qué estados quedan
- * fuera se escriben en `ESTADOS_SIN_COBERTURA` y esta sección se corrige
- * sola.
+ * 🔴 26 AGO 2026: SE RETIRÓ EL LISTADO DE ENTIDADES, y esto es lo que hay que
+ * entender antes de volver a meterlo.
+ *
+ * La sección enseñaba dos listas de chips: los estados con flotilla propia y,
+ * al lado, las otras treinta entidades como "red de transporte a foráneo".
+ * Esa segunda lista se derivaba de `ESTADOS_CON_COBERTURA`, que a su vez
+ * restaba `ESTADOS_SIN_COBERTURA`, un arreglo VACÍO porque el cliente nunca
+ * dijo qué entidades quedan fuera. Resultado: el titular decía 80% y debajo se
+ * enumeraban los 32 estados. Un comprador de Baja California leía su estado en
+ * la lista y escribía; ventas tenía que decirle que no.
+ *
+ * Instrucción del cliente: no mencionar entidades. La sección ahora argumenta
+ * el TAMAÑO de la red sin comprometer un mapa, que es lo único que se puede
+ * sostener mientras `ESTADOS_SIN_COBERTURA` siga vacío.
+ *
+ * ⚠️ NO volver a listar entidades hasta que el cliente entregue las que
+ * quedan fuera. El arreglo sigue existiendo en `lib/estados.ts` con la nota;
+ * `ESTADOS` completo se sigue usando en el selector del calificador, que es
+ * otra cosa: ahí el visitante DECLARA dónde está, no se le promete nada.
  *
  * El brief pide un mapa de México con los estados marcados. No se dibuja uno
  * aquí a propósito: un mapa inventado con fronteras aproximadas es peor que
  * no tenerlo, y no hay trazo vectorial verificado de las entidades en el
- * proyecto. El hueco queda documentado.
- *
- * Mientras tanto, esta versión resuelve la pregunta real del comprador, que
- * no es "cómo se ve el país" sino "¿llegan a mi estado y quién me lo lleva?".
- * Por eso se separa en dos niveles de servicio y se listan las entidades: el
- * comprador busca la suya y termina de leer.
+ * proyecto. Con el listado fuera, el mapa además pasó de hueco a mala idea:
+ * pintar entidades es exactamente la promesa que se acaba de retirar.
  */
+
+/** Lo que sustituye a la lista de chips: por qué la red aguanta el volumen. */
+const RED = [
+  "Rutas consolidadas hacia el centro, el bajío, el norte y el sureste.",
+  "Transportistas seleccionados por cobertura y cumplimiento, no por tarifa.",
+  "Foráneo operando desde 1999, no una capacidad improvisada.",
+];
 
 export function Cobertura() {
   const conTiempos = !estaPendiente(TIEMPOS_ENTREGA_POR_ZONA);
-  const foraneos = ESTADOS_CON_COBERTURA.filter(
-    (e) => !ESTADOS_CON_FLOTILLA.includes(e),
-  );
 
   return (
     <section
@@ -46,14 +58,14 @@ export function Cobertura() {
           id="cobertura"
           className="titular max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
         >
-          {COBERTURA_PORCENTAJE}% de cobertura en la República, de dos maneras
-          distintas
+          {COBERTURA_PORCENTAJE}% de cobertura en la República, con dos niveles
+          de servicio
         </h2>
         <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-tinta-2">
-          La diferencia importa: donde tenemos unidades propias controlamos la
-          ruta completa. Donde no, trabajamos con transportistas que elegimos
-          por cobertura y por cumplimiento. Si tu estado no aparece,
-          pregúntanos: casi siempre hay manera.
+          La diferencia es operativa: donde tenemos unidades propias
+          controlamos la ruta completa; en el resto del país entregamos a
+          través de una red de transporte consolidada a lo largo de más de dos
+          décadas. Consúltanos por tu zona y te confirmamos cómo llega.
         </p>
       </Revelar>
 
@@ -75,32 +87,22 @@ export function Cobertura() {
               Flotilla propia
             </h3>
             <p className="mt-2.5 leading-relaxed text-tinta-2">
-              Nosotros cargamos, nosotros entregamos. Si algo se atrasa, lo
-              sabemos antes que tú.
+              Cargamos y entregamos nosotros en el área metropolitana de la
+              Ciudad de México. Si algo se atrasa, lo sabemos antes que tú.
             </p>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {ESTADOS_CON_FLOTILLA.map((e) => (
-                <li
-                  key={e}
-                  className="rounded-pill bg-naranja px-4 py-1.5 text-sm font-semibold text-white"
-                >
-                  {e}
-                </li>
-              ))}
-            </ul>
 
             <ul className="mt-7 space-y-3 border-t border-linea pt-6 text-[0.9375rem] leading-relaxed text-tinta-2">
               <li>
-                Tú tratas con nosotros de principio a fin, no con una
-                paquetería intermediaria.
+                Tratas con nosotros de principio a fin, no con una paquetería
+                intermediaria.
               </li>
               <li>
                 Podemos ajustar la ruta si necesitas la entrega en un horario
                 distinto al de tu zona.
               </li>
               <li>
-                La mercancía va acomodada como pediste, no revuelta con la de
-                otros clientes.
+                La mercancía va acomodada conforme a tu orden, no revuelta con
+                la de otros clientes.
               </li>
             </ul>
           </div>
@@ -121,14 +123,10 @@ export function Cobertura() {
               El resto de la República, con transportistas seleccionados por
               cobertura y confiabilidad.
             </p>
-            <ul className="mt-6 flex flex-wrap gap-1.5">
-              {foraneos.map((e) => (
-                <li
-                  key={e}
-                  className="rounded-pill border border-linea bg-papel px-3 py-1 text-[0.8125rem] text-tinta-2"
-                >
-                  {e}
-                </li>
+
+            <ul className="mt-7 space-y-3 border-t border-linea pt-6 text-[0.9375rem] leading-relaxed text-tinta-2">
+              {RED.map((r) => (
+                <li key={r}>{r}</li>
               ))}
             </ul>
           </div>
@@ -143,7 +141,8 @@ export function Cobertura() {
             ) : (
               <>
                 Los tiempos de entrega dependen de la zona y del volumen.
-                Pregúntanos por el tuyo y te lo confirmamos con la cotización.
+                Consúltanos por el tuyo y te lo confirmamos junto con la
+                cotización.
               </>
             )}
           </p>
@@ -155,14 +154,6 @@ export function Cobertura() {
           />
         </div>
       </Revelar>
-
-      {/*
-        Hueco documentado. Cuando exista trazo vectorial verificado de las
-        entidades, el mapa entra aquí sin tocar el resto de la sección.
-        Requisitos: SVG con un path por entidad, `id` con el slug del estado,
-        y roles ARIA para que sea navegable con teclado. No usar imagen
-        rasterizada: el comprador tiene que poder buscar su estado.
-      */}
     </section>
   );
 }

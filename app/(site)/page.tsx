@@ -50,7 +50,7 @@ import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
 
 export const metadata: Metadata = {
   title: "Distribuidor mayorista de dulces en México",
-  description: `Surte todo tu anaquel con un solo proveedor. Más de ${aniosOperando()} años distribuyendo más de ${MARCAS_DECLARADAS} marcas de dulce, cacahuate, tamarindo y botana desde CDMX a toda la República. Cotiza por WhatsApp.`,
+  description: `Surte todo tu anaquel con un solo proveedor. Más de ${aniosOperando()} años distribuyendo más de ${MARCAS_DECLARADAS} marcas de dulce, cacahuate, tamarindo y botana desde CDMX a la República. Solicita tu cotización por WhatsApp.`,
   alternates: { canonical: "/" },
 };
 

@@ -62,8 +62,11 @@ Los cinco logos de marca que el PDF traía en alta (p. 13), extraídos con trans
 **Faltan 15 logos** de las marcas restantes: Miguelito, Grupo Frato, Betamex,
 Cabadas, Dulces Pillo, Dulces Liz, Dulces Tradicionales, Portico, Productos del
 Rey, Dulces Karla, Pipos, Dulces Guaz, Chaca Chaca, Charly, Confitados Finos,
-Alvbro, Chompys, Obleas Kevin. Mientras llegan, `MarquesinaMarcas` los
-renderiza como monograma tipográfico.
+Alvbro, Chompys. Mientras llegan, `MarquesinaMarcas` los renderiza como
+monograma tipográfico.
+
+(Obleas Kevin salió de la lista el 26 ago 2026: se retiró del catálogo del
+sitio porque no aparece en ninguna de las 78 páginas de `CAT.NITAMY.pdf`.)
 
 ## `productos/` — 🔴 el desfase de una posición (corregido el 23 ago 2026)
 

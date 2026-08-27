@@ -45,8 +45,9 @@ export function Categorias() {
               ¿Qué línea te falta surtir?
             </h2>
             <p className="mt-4 max-w-[52ch] leading-relaxed text-tinta-2">
-              Ocho líneas que cubren el anaquel completo de una dulcería. Todas
-              salen del mismo pedido, del mismo pago y del mismo envío.
+              Ocho líneas que cubren el anaquel completo de una dulcería. Las
+              ocho se atienden con el mismo pedido, el mismo pago y el mismo
+              envío.
             </p>
           </Revelar>
 
@@ -189,7 +190,7 @@ export function Categorias() {
 const BLOQUES = [
   {
     titulo: "Surtido completo",
-    texto: "Enchilado, cacahuate, tamarindo, gomita y botana en un pedido.",
+    texto: "Enchilado, cacahuate, tamarindo, gomita y botana en un solo pedido.",
     foto: "/foto/producto-surtido.png",
     // El derrame se corta a ras del marco. Sin mancha se le ven los bordes.
     recortar: true,
@@ -197,14 +198,14 @@ const BLOQUES = [
   },
   {
     titulo: "Presentación de mostrador",
-    texto: "Piezas por caja y sellos NOM-051 en cada cotización.",
+    texto: "Vitrolero, display y tira, listos para exhibirse en tu punto de venta.",
     foto: "/foto/producto-envueltos.png",
     recortar: false,
     color: "celeste",
   },
   {
-    titulo: "Volumen para eventos",
-    texto: "Bolsa de posada, mesa de dulces y kermés, armadas a la medida.",
+    titulo: "Volumen para reventa",
+    texto: "Granel, caja de sobres y bulto cerrado para quien revende.",
     foto: "/foto/producto-paletas.png",
     recortar: false,
     color: "carmesi",

@@ -34,24 +34,24 @@ import type { ColorMarca } from "@/lib/contenido";
 
 const PASOS = [
   {
-    titulo: "Nos dices qué necesitas",
+    titulo: "Nos indicas qué necesitas",
     texto: "Por WhatsApp, en un minuto.",
     detalle:
-      "Marcas, categorías o el surtido completo. Si no sabes por dónde empezar, te decimos qué rota en negocios como el tuyo.",
+      "Marcas, líneas completas o el surtido íntegro. Si todavía no defines el pedido, te indicamos qué rota en negocios del mismo giro.",
     Icono: ChatCircleTextIcon,
     color: "celeste",
   },
   {
-    titulo: "Te cotizamos el mismo día",
+    titulo: "Te cotizamos con rapidez",
     texto: "Con precios, presentaciones y tiempo de entrega.",
     detalle:
-      "La cotización trae piezas por caja y sellos NOM-051 de cada presentación, para que sepas exactamente qué llega a tu anaquel.",
+      "La cotización detalla el precio y el empaque de cada presentación, para que sepas exactamente qué llega a tu anaquel.",
     Icono: ReceiptIcon,
     color: "amarillo",
   },
   {
     titulo: "Te lo entregamos",
-    texto: "Flotilla propia en CDMX y Estado de México.",
+    texto: "Con flotilla propia en CDMX y Estado de México.",
     detalle:
       "En la zona metropolitana controlamos la ruta de punta a punta. Para el resto del país trabajamos con transportistas elegidos por cobertura y cumplimiento.",
     Icono: TruckIcon,

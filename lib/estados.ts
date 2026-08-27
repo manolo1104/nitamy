@@ -52,13 +52,21 @@ export function tieneFlotillaPropia(estado: string): boolean {
  * REUNIÓN 21 ago 2026. El cliente corrigió la cobertura: no son los 32
  * estados, es el 80% de la República. Falta que diga CUÁLES quedan fuera.
  *
- * Mientras la lista esté vacía, la sección de cobertura enseña las entidades
- * a las que sí se llega SIN prometer que son todas: el titular dice 80% y el
- * pie lo aclara. En cuanto el cliente mande los nombres, se escriben aquí y
- * las fichas desaparecen solas, sin tocar un componente.
+ * 🔴 26 AGO 2026: EL SITIO YA NO ENUMERA ENTIDADES EN NINGUNA PÁGINA. La
+ * sección de cobertura listaba los estados derivados de `ESTADOS_CON_COBERTURA`
+ * y, con este arreglo vacío, eso era la lista COMPLETA de los 32: el titular
+ * decía 80% y debajo se prometían todos. Instrucción del cliente: hablar del
+ * tamaño de la red, no de un mapa. Ver la nota larga en
+ * `components/secciones/Cobertura.tsx`.
  *
- * ⚠️ NO rellenar esto a ojo. Un estado marcado como "no llegamos" cuando sí
- * se llega es un cliente perdido, y al revés es una promesa que no se cumple.
+ * ⚠️ NO rellenar esto a ojo, y NO volver a listar entidades en el sitio hasta
+ * que el cliente entregue las que quedan fuera. Un estado marcado como "no
+ * llegamos" cuando sí se llega es un cliente perdido, y al revés es una
+ * promesa que no se cumple.
+ *
+ * `ESTADOS` (los 32) SÍ se sigue usando, y es otra cosa: alimenta el selector
+ * del calificador y la validación de `/api/lead`. Ahí el visitante DECLARA
+ * dónde está; no se le promete cobertura.
  */
 export const ESTADOS_SIN_COBERTURA: readonly string[] = [];
 

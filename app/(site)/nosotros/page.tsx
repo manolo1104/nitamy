@@ -65,13 +65,14 @@ export default function PaginaDeNosotros() {
         <div className="mx-auto max-w-[1400px] px-5 pb-14 pt-10 sm:px-8 lg:pb-20 lg:pt-14">
           <Revelar>
             <h1 className="titular max-w-[22ch] text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
-              Llevamos más de {anios} años surtiendo el mismo anaquel
+              Más de {anios} años abasteciendo el mismo anaquel
             </h1>
             <p className="mt-5 max-w-[58ch] text-lg leading-relaxed text-tinta-2">
               {EMPRESA.razonSocial} nació en {FUNDACION} en Iztapalapa, Ciudad
               de México, con una bodega, tres proveedores y un cliente. Hoy
               distribuye más de {MARCAS_DECLARADAS} marcas de confitería,
-              cacahuate, tamarindo y botana a negocios de toda la República.
+              cacahuate, tamarindo y botana a negocios establecidos de la
+              República Mexicana.
             </p>
             <p className="mt-6 max-w-[52ch] border-l-2 border-naranja pl-5 text-lg font-semibold leading-relaxed text-tinta">
               {EMPRESA.filosofia}.

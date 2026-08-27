@@ -137,7 +137,7 @@ export const articulo: Articulo = {
     {
       tipo: "cta",
       texto:
-        "Si necesitas armar una lista para cooperativa escolar, mándanos qué te piden y te decimos qué tenemos con el desglose de sellos por presentación.",
+        "Si necesitas integrar una lista para cooperativa escolar, envíanos el requerimiento y te respondemos con la disponibilidad y el desglose de sellos por presentación.",
       etiqueta: "Armar lista para escuela",
     },
   ],

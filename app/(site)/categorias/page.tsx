@@ -67,7 +67,7 @@ export default function PaginaDeCategorias() {
               Las ocho líneas que llenan un anaquel
             </h1>
             <p className="mt-5 max-w-[58ch] text-lg leading-relaxed text-tinta-2">
-              Una dulcería no se surte por marca, se surte por hueco. Estas son
+              Una dulcería no se surte por marca, se surte por línea. Estas son
               las ocho líneas con las que se arma un anaquel completo, y las
               ocho salen del mismo pedido, del mismo pago y del mismo envío.
             </p>

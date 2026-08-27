@@ -144,7 +144,7 @@ export const articulo: Articulo = {
       tipo: "destacado",
       titulo: "Lo que casi nadie hace y funciona",
       texto:
-        "Cuatro semanas antes de cada temporada, manda un mensaje a los clientes que te compraron en volumen la vez pasada. No una promoción: un recordatorio de que ya es hora de apartar. Son los pedidos más grandes del año y la mayoría se pierde por no preguntar.",
+        "Cuatro semanas antes de cada temporada, contacta a los clientes que te compraron en volumen la vez anterior. No una promoción: un recordatorio de que ya es momento de apartar. Son los pedidos más grandes del año y la mayoría se pierde por no preguntar.",
     },
 
     {
@@ -169,7 +169,7 @@ export const articulo: Articulo = {
     {
       tipo: "cta",
       texto:
-        "¿Ya sabes qué temporada sigue y todavía no levantas el pedido? Escríbenos y te decimos qué hay disponible y para cuándo podemos entregarlo.",
+        "Si ya identificaste la temporada que sigue y aún no levantas el pedido, escríbenos: te confirmamos disponibilidad y fecha de entrega.",
       etiqueta: "Apartar mi pedido de temporada",
     },
   ],

@@ -180,7 +180,7 @@ export const articulo: Articulo = {
     {
       tipo: "cta",
       texto:
-        "Mándanos tu lista de compra mensual y te decimos cuánto de ella se cubre con un solo pedido. Sin compromiso.",
+        "Envíanos tu lista de compra mensual y te indicamos qué proporción se cubre con un solo pedido. Sin compromiso.",
       etiqueta: "Comparar mi lista",
     },
   ],

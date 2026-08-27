@@ -91,13 +91,14 @@ export function Temporadas() {
             id="temporadas"
             className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
-            La temporada no se pierde por falta de ganas, se pierde por pedir
-            tarde
+            La venta de temporada se define en la fecha del pedido, no en la
+            de la fiesta
           </h2>
           <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-            En diciembre la producción de los proveedores ya está comprometida
-            desde octubre. Estas son las siete temporadas que mueven el dulce
-            en México y con cuánta anticipación conviene levantar cada pedido.
+            En diciembre la producción de los fabricantes ya está comprometida
+            desde octubre. Estas son las siete temporadas que concentran la
+            venta extraordinaria de dulce en México y la anticipación con la
+            que conviene levantar cada pedido.
           </p>
         </Revelar>
 

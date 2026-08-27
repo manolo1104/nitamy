@@ -54,9 +54,10 @@ export function SeccionMarcas() {
             Las marcas que tu cliente ya conoce, en un solo pedido
           </h2>
           <p className="mt-4 max-w-[54ch] leading-relaxed text-tinta-2">
-            Más de {MARCAS_DECLARADAS} marcas en un solo pedido. Surtirlas por
-            separado son {MARCAS_DECLARADAS} trámites, {MARCAS_DECLARADAS}
-            facturas y {MARCAS_DECLARADAS} pagos; aquí es uno de cada cosa.
+            Más de {MARCAS_DECLARADAS} marcas en una sola orden. Contratarlas
+            por separado significa {MARCAS_DECLARADAS} altas,{" "}
+            {MARCAS_DECLARADAS} facturas y {MARCAS_DECLARADAS} pagos; con
+            nosotros es uno de cada uno.
           </p>
         </Revelar>
 
@@ -106,7 +107,7 @@ export function SeccionMarcas() {
             </BotonEnlace>
             {restantes > 0 && (
               <p className="text-sm text-tinta-2">
-                Aquí se ven {visibles.length}. El catálogo completo está en la
+                Se muestran {visibles.length}. El catálogo completo está en la
                 página de marcas.
               </p>
             )}

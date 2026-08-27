@@ -13,8 +13,8 @@
       "pendiente": false
     },
     {
-      "pregunta": "¿A qué estados llegan y en cuánto tiempo?",
-      "respuesta": "Llegamos a toda la República. En la Ciudad de México y el Estado de México entregamos con flotilla propia, así que controlamos la ruta de punta a punta. Para el resto del país trabajamos con una red de transporte contratada, seleccionada por cobertura y confiabilidad.",
+      "pregunta": "¿A qué zonas llegan y en cuánto tiempo?",
+      "respuesta": "Operamos con dos niveles de servicio. En el área metropolitana de la Ciudad de México entregamos con flotilla propia y controlamos la ruta de punta a punta. En el resto del país trabajamos con una red de transporte contratada, seleccionada por cobertura y confiabilidad. Consúltanos por tu zona y te confirmamos cómo y en cuánto tiempo llega.",
       "pendiente": false,
       "_parcial": "Los tiempos por zona dependen de TIEMPOS_ENTREGA_POR_ZONA. Mientras esté pendiente, la respuesta habla de cobertura pero no promete días."
     },
@@ -31,17 +31,17 @@
     },
     {
       "pregunta": "¿Puedo recoger en su CEDIS?",
-      "respuesta": "Sí. Nuestro centro de distribución está en Iztapalapa, Ciudad de México. Coordina la recolección por WhatsApp para que tu pedido esté armado cuando llegues.",
+      "respuesta": "Sí. Nuestro centro de distribución se encuentra en Iztapalapa, Ciudad de México. Coordina la recolección por WhatsApp para que tu pedido esté preparado a tu llegada.",
       "pendiente": false
     },
     {
       "pregunta": "¿Manejan producto sin sellos de advertencia?",
-      "respuesta": "Sí. Dentro de las marcas que distribuimos hay producto que no lleva sellos NOM-051. En cada página de marca puedes ver qué sellos trae cada presentación, y en la cotización te marcamos cuáles cumplen con lo que necesitas para tu punto de venta.",
+      "respuesta": "Sí. Dentro de las marcas que distribuimos hay producto que no lleva sellos NOM-051. En cada página de marca se indica qué sellos trae cada presentación, y en la cotización señalamos cuáles cumplen con el requisito de tu punto de venta.",
       "pendiente": false
     },
     {
       "pregunta": "¿Puedo pedir presentaciones armadas o displays?",
-      "respuesta": "Sí. Empaquetamos y acondicionamos producto según lo que tu punto de venta necesita: bolsas armadas, presentaciones listas para anaquel y displays. Dinos qué formato buscas y lo cotizamos.",
+      "respuesta": "Sí. Acondicionamos producto conforme al formato que requiere tu punto de venta: presentaciones listas para anaquel, displays y agrupaciones por volumen. Indícanos el formato que necesitas y lo cotizamos.",
       "pendiente": false
     }
   ]

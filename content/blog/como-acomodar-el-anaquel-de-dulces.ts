@@ -202,7 +202,7 @@ export const articulo: Articulo = {
     {
       tipo: "cta",
       texto:
-        "Si tras la revisión te faltan categorías completas para armar los bloques, escríbenos y te decimos qué tenemos disponible.",
+        "Si tras la revisión te faltan líneas completas para armar los bloques, escríbenos y te confirmamos la disponibilidad de cada una.",
       etiqueta: "Completar mi anaquel",
     },
   ],

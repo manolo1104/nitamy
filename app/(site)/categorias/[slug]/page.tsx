@@ -18,7 +18,7 @@ import {
   categoriaPorSlug,
   marcasDeCategoria,
 } from "@/lib/contenido";
-import { contarProductos, formatosDeCategoria } from "@/lib/formatos";
+import { contarProductos } from "@/lib/formatos";
 
 /**
  * Página de una línea del anaquel.
@@ -28,16 +28,15 @@ import { contarProductos, formatosDeCategoria } from "@/lib/formatos";
  * tiene una marca en la cabeza, tiene un hueco en el anaquel.
  *
  * Todo se DERIVA. Las marcas salen del campo `categorias` de marcas.json, los
- * productos de esas marcas, los formatos del catálogo (`lib/formatos.ts`) y
- * las temporadas del cruce que ya trae temporadas.json. Agregar una categoría
- * es agregar un objeto al JSON: esta plantilla no se toca.
+ * productos de esas marcas y las temporadas del cruce que ya trae
+ * temporadas.json. Agregar una categoría es agregar un objeto al JSON: esta
+ * plantilla no se toca.
  *
- * ⚠️ La sección de FORMATOS es la aportación del catálogo del cliente
- * (`CAT.NITAMY.pdf`) y es lo que esta página tiene y la de marca no. El
- * catálogo no describe el dulce por sabor sino por cómo viene empacado, y ese
- * es el eje real de una compra de mayoreo: quien surte un mostrador busca
- * vitrolero y display, quien revende busca granel y caja de sobres. Ver la
- * nota larga en `lib/formatos.ts`.
+ * ⚠️ 26 ago 2026: se retiró la sección "Cómo llega esta línea", que listaba
+ * los formatos de empaque derivados del catálogo. Salió por decisión del
+ * cliente al reenfocar el sitio a B2B puro. `lib/formatos.ts` SIGUE VIVO y lo
+ * usan las tres páginas de segmento, donde el formato sí separa a un
+ * comprador de otro; aquí solo repetía el dato para todo el mundo.
  */
 
 export function generateStaticParams() {
@@ -55,7 +54,7 @@ export async function generateMetadata(
 
   return {
     title: `${categoria.nombre} al mayoreo | Distribuidor en México`,
-    description: `Distribuimos ${categoria.nombre.toLowerCase()} al mayoreo desde CDMX a toda la República: ${marcas.length} marcas en un solo pedido. ${categoria.resumen}`,
+    description: `Distribuimos ${categoria.nombre.toLowerCase()} al mayoreo desde CDMX a la República: ${marcas.length} ${marcas.length === 1 ? "marca" : "marcas"} en un solo pedido. ${categoria.resumen}`,
     alternates: { canonical: `/categorias/${categoria.slug}` },
     openGraph: {
       title: `${categoria.nombre} al mayoreo, distribuidor en México`,
@@ -77,7 +76,6 @@ export default async function PaginaDeCategoria(
   const productos = marcas.flatMap((m) =>
     m.productos.map((p) => ({ producto: p, marca: m })),
   );
-  const formatos = formatosDeCategoria(slug);
   const temporadas = TEMPORADAS.filter((t) => t.categorias.includes(slug));
   const otras = CATEGORIAS.filter((c) => c.slug !== slug);
   const piel = PIELES[categoria.color];
@@ -157,50 +155,13 @@ export default async function PaginaDeCategoria(
                 </div>
               </dl>
               <p className="mt-4 text-sm leading-relaxed text-tinta-2">
-                Piezas por caja y sellos NOM-051 de cada presentación van en la
+                El precio y el empaque de cada presentación se detallan en la
                 cotización.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Formatos: lo que aporta el catálogo ----------------------------- */}
-      {formatos.length > 0 && (
-        <section className="border-b border-linea bg-papel-2">
-          <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:py-20">
-            <Revelar>
-              <h2 className="titular text-[clamp(1.5rem,2.8vw,2.25rem)] font-extrabold leading-tight tracking-[-0.02em]">
-                Cómo llega esta línea
-              </h2>
-              <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-                El formato es la decisión de compra: no es lo mismo surtir un
-                mostrador que revender por bulto. Estos son los que manejamos
-                en {categoria.nombre.toLowerCase()}.
-              </p>
-            </Revelar>
-
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {formatos.map((f, i) => (
-                <Revelar key={f.clave} retraso={i * 45} como="li">
-                  <div className="ficha flex h-full flex-col rounded-caja border border-linea bg-papel p-6">
-                    <h3 className="text-base font-extrabold uppercase tracking-[0.08em] text-tinta">
-                      {f.plural}
-                    </h3>
-                    <p className="mt-2 flex-1 leading-relaxed text-tinta-2">
-                      {f.queEs}
-                    </p>
-                    <p className="cifra mt-4 text-sm font-semibold text-naranja-texto">
-                      {f.cuantos}{" "}
-                      {f.cuantos === 1 ? "presentación" : "presentaciones"}
-                    </p>
-                  </div>
-                </Revelar>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
 
       {/* Marcas de la línea ---------------------------------------------- */}
       {marcas.length > 0 && (

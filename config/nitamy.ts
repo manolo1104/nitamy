@@ -110,11 +110,13 @@ export const ANIO_RAZON_SOCIAL = 1999;
  * H. Díaz, Amarantos, Orquídea, Dulces Kokito, Rikaleche y una decimoquinta
  * cuyo logotipo no se lee ni a 200 dpi. Faltan sus logotipos y sus productos.
  *
- * ⚠️ Y al revés: **Obleas Kevin NO aparece en el catálogo**, ni en la rejilla
- * de marcas ni en ninguna de las 78 páginas. Ya se sospechaba (no existe en
- * el sitio anterior, ni con logo, ni con productos, ni en dos búsquedas web);
- * el catálogo lo confirma. Hay que preguntarle al cliente antes de publicar:
- * hoy ocupa una de las 22 fichas y no tiene ni un producto.
+ * ✅ RESUELTO 26 ago 2026: **Obleas Kevin se retiró del sitio.** No aparecía
+ * en la rejilla de marcas ni en ninguna de las 78 páginas del catálogo, no
+ * tenía logotipo, no tenía un solo producto, no está en el sitemap del sitio
+ * anterior y dos búsquedas web no devolvieron nada. Ocupaba una de las 22
+ * fichas y estaba vacía. El JSON pasó de 22 a 21 marcas; `MARCAS_DECLARADAS`
+ * no cambia porque el catálogo trae 36 y "+30" se queda corto de todas
+ * formas.
  *
  * En cuanto lleguen las que faltan y entren al JSON, esta constante se puede
  * borrar y volver a derivar todo de `TOTAL_MARCAS`.
@@ -272,9 +274,9 @@ export const SEGMENTOS = [
     clave: "mayorista",
     etiqueta: "Mayorista o distribuidor",
     tarjeta: "Soy mayorista o distribuidor",
-    bajada: "Surte volumen con envío a tu estado",
-    dolor: "Abrir ocho cuentas para surtir un anaquel",
-    argumento: "Un pedido, un pago, envío a tu estado",
+    bajada: "Volumen con entrega en tu zona",
+    dolor: "Operar ocho cuentas para surtir un anaquel",
+    argumento: "Un pedido, un pago, una entrega",
     ruta: "/mayoristas",
   },
   {
@@ -282,15 +284,15 @@ export const SEGMENTOS = [
     etiqueta: "Tienda o dulcería",
     tarjeta: "Tengo una tienda o dulcería",
     bajada: "Entrega directa en CDMX y Estado de México",
-    dolor: "No tener tiempo de ir a surtirse",
-    argumento: "Flotilla propia, te lo llevamos",
+    dolor: "Perder días de venta para ir a surtirse",
+    argumento: "Nosotros llevamos el pedido a tu tienda",
     ruta: "/tiendas",
   },
   {
     clave: "cadena",
     etiqueta: "Cadena de autoservicio",
     tarjeta: "Represento una cadena",
-    bajada: "Cumplimiento, factura y abasto continuo",
+    bajada: "Cumplimiento, facturación y abasto continuo",
     dolor: "Riesgo de desabasto y de incumplimiento",
     argumento: "Abasto continuo, documentación en regla",
     ruta: "/cadenas",
@@ -299,7 +301,7 @@ export const SEGMENTOS = [
     clave: "otro",
     etiqueta: "Otro",
     tarjeta: "Otro tipo de negocio",
-    bajada: "Cuéntanos qué necesitas surtir",
+    bajada: "Indícanos qué necesitas surtir",
     dolor: "",
     argumento: "",
     ruta: "/contacto",

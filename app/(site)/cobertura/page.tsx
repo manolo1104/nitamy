@@ -7,15 +7,13 @@ import { Revelar } from "@/components/Revelar";
 import { Cobertura } from "@/components/secciones/Cobertura";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
 import { COBERTURA_PORCENTAJE, HORARIO, aniosOperando } from "@/config/nitamy";
-import { ESTADOS_CON_FLOTILLA } from "@/lib/estados";
 
 /**
  * Página de cobertura.
  *
- * Reutiliza tal cual la sección `<Cobertura />` de la home, que ya tiene el
- * mapa, la ruta animada y las dos listas de estados. Copiarla aquí habría
- * dejado dos versiones del mismo dato y la lista de estados es justo la que
- * va a cambiar en cuanto el cliente diga qué entidades quedan fuera.
+ * Reutiliza tal cual la sección `<Cobertura />` de la home, que ya tiene la
+ * ruta animada y los dos niveles de servicio. Copiarla aquí habría dejado dos
+ * versiones del mismo argumento.
  *
  * Lo que esta página agrega y la home no puede es el DETALLE: qué cambia en
  * la práctica entre entregar con flotilla propia y entregar con transportista,
@@ -25,6 +23,9 @@ import { ESTADOS_CON_FLOTILLA } from "@/lib/estados";
  * `TIEMPOS_ENTREGA_POR_ZONA` está como PENDIENTE en `config/nitamy.ts`: el
  * cliente no los ha dado. Publicar "48 horas a todo el país" porque suena
  * bien es exactamente la promesa que después no se cumple y quema la cuenta.
+ *
+ * ⚠️ 26 ago 2026: tampoco se enumeran entidades, ni aquí ni en la sección que
+ * embebe. Ver la nota larga en `components/secciones/Cobertura.tsx`.
  */
 
 export const metadata: Metadata = {
@@ -44,19 +45,19 @@ const DIFERENCIAS = [
     Icono: TruckIcon,
     titulo: "Dónde controlamos la ruta",
     texto:
-      "En Ciudad de México y Estado de México cargamos y entregamos nosotros. Si algo se atrasa lo sabemos antes que tú, y podemos ajustar el horario de entrega si tu zona lo necesita.",
+      "En el área metropolitana cargamos y entregamos nosotros. Si algo se atrasa lo sabemos antes que tú, y podemos ajustar el horario de entrega si tu operación lo requiere.",
   },
   {
     Icono: PackageIcon,
     titulo: "Cómo llega la mercancía",
     texto:
-      "Acomodada como la pediste, no revuelta con la de otros clientes. En foráneo va con transportistas que elegimos por cobertura y por cumplimiento, no por precio.",
+      "Acomodada conforme a tu orden, no revuelta con la de otros clientes. En foráneo viaja con transportistas seleccionados por cobertura y cumplimiento, no por tarifa.",
   },
   {
     Icono: ClockIcon,
     titulo: "Cuánto tarda",
     texto:
-      "Depende de la zona y del volumen, y por eso no publicamos una cifra: el tiempo real de tu zona te lo confirmamos junto con la cotización, no después.",
+      "Depende de la zona y del volumen, y por eso no publicamos una cifra: el tiempo real de tu zona se confirma junto con la cotización, no después.",
   },
 ];
 
@@ -76,14 +77,13 @@ export default function PaginaDeCobertura() {
         <div className="mx-auto max-w-[1400px] px-5 pb-14 pt-10 sm:px-8 lg:pb-20 lg:pt-14">
           <Revelar>
             <h1 className="titular max-w-[20ch] text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
-              ¿Llegamos a tu estado?
+              Una red de distribución construida en {anios} años
             </h1>
             <p className="mt-5 max-w-[58ch] text-lg leading-relaxed text-tinta-2">
-              Casi siempre sí, y llevamos {anios} años haciéndolo. Lo que
-              cambia según dónde estés no es si llega, es quién lo lleva: en la
-              zona metropolitana son nuestras propias unidades y en el resto
-              del país es una red de transporte. Abajo está el mapa completo y
-              qué implica cada una.
+              Entregamos con dos niveles de servicio y la diferencia es
+              operativa, no comercial: en el área metropolitana con unidades
+              propias, y en el resto del país a través de una red de transporte
+              consolidada desde 1999. Abajo está qué implica cada uno.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <BotonCotizar origen="/cobertura" />
@@ -95,7 +95,7 @@ export default function PaginaDeCobertura() {
         </div>
       </section>
 
-      {/* El mapa y las dos listas de estados, sin duplicar el dato. */}
+      {/* Los dos niveles de servicio y la ruta, sin duplicar el argumento. */}
       <Cobertura />
 
       <section className="border-b border-linea bg-papel-2">
@@ -135,10 +135,10 @@ export default function PaginaDeCobertura() {
                   Llevamos foráneo desde 1999
                 </h2>
                 <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-                  La expansión fuera del área metropolitana empezó el mismo año
-                  en que la empresa se constituyó, con Morelia, Mérida, San Luis
-                  Potosí y Saltillo. No es una capacidad que se improvisó para
-                  un cliente: es como se creció.
+                  La expansión fuera del área metropolitana comenzó el mismo
+                  año en que la empresa se constituyó. No es una capacidad
+                  improvisada para atender una cuenta: es la forma en que
+                  creció la operación.
                 </p>
               </Revelar>
             </div>
@@ -163,8 +163,8 @@ export default function PaginaDeCobertura() {
                     ))}
                   </dl>
                   <p className="mt-5 text-sm leading-relaxed text-tinta-2">
-                    Entrega directa con unidades propias en{" "}
-                    {ESTADOS_CON_FLOTILLA.join(" y ")}.
+                    Entrega directa con unidades propias en el área
+                    metropolitana de la Ciudad de México.
                   </p>
                 </div>
               </Revelar>

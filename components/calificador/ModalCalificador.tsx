@@ -186,18 +186,18 @@ export function ModalCalificador({
           className="fixed left-1/2 top-1/2 z-50 max-h-[92dvh] w-[min(34rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-caja bg-white p-6 shadow-[0_24px_60px_rgba(20,17,15,0.22)] data-[state=open]:animate-[modalEntra_200ms_ease-out] sm:p-7"
         >
           <Dialog.Title className="text-2xl font-extrabold leading-tight tracking-tight">
-            Cotiza por WhatsApp
+            Solicita tu cotización
           </Dialog.Title>
           <Dialog.Description className="mt-2 text-sm leading-relaxed text-tinta-2">
-            Tres datos y te mandamos al chat con el mensaje ya escrito. No
-            pedimos teléfono ni correo.
+            Tres datos y abrimos el chat con el mensaje ya redactado. No
+            solicitamos teléfono ni correo electrónico.
           </Dialog.Description>
 
           {fueraDeHorario && (
             <p className="mt-4 rounded-caja border border-borde-campo bg-papel-2 p-3 text-sm leading-relaxed text-tinta">
               <strong className="font-semibold">{horario?.mensaje}</strong>{" "}
               {horario?.proximaApertura} Puedes mandar el mensaje de todos modos
-              y te contestamos en cuanto abramos.
+              y te respondemos al iniciar operaciones.
             </p>
           )}
 
@@ -205,7 +205,7 @@ export function ModalCalificador({
             {/* 1. Segmento ------------------------------------------------ */}
             <fieldset>
               <legend className="text-sm font-semibold text-tinta">
-                ¿Qué tipo de negocio tienes?
+                ¿Qué tipo de negocio representas?
               </legend>
               <div className="mt-2.5 flex flex-wrap gap-2">
                 {SEGMENTOS.map((s) => {
@@ -243,7 +243,7 @@ export function ModalCalificador({
                 htmlFor={`${id}-estado`}
                 className="block text-sm font-semibold text-tinta"
               >
-                ¿En qué estado estás?
+                ¿En qué estado opera tu negocio?
               </label>
               <select
                 id={`${id}-estado`}
@@ -282,8 +282,8 @@ export function ModalCalificador({
                 ¿Qué te interesa cotizar?
               </label>
               <p className="mt-1 text-xs text-tinta-2">
-                Marcas, categorías o el surtido completo. Entre más claro, más
-                rápida la respuesta.
+                Marcas, líneas completas o el surtido íntegro. Cuanto más
+                preciso, más rápida la respuesta.
               </p>
               <textarea
                 id={`${id}-interes`}

@@ -57,7 +57,7 @@ export async function generateMetadata(
 
   return {
     title: `${marca.nombre} al mayoreo | Distribuidor en México`,
-    description: `Distribuimos ${marca.nombre} al mayoreo desde CDMX a toda la República. Cotiza por WhatsApp y recibe precios el mismo día. Más de ${aniosOperando()} años surtiendo negocios.`,
+    description: `Distribuimos ${marca.nombre} al mayoreo desde CDMX a la República. Solicita tu cotización por WhatsApp. Más de ${aniosOperando()} años abasteciendo negocios establecidos.`,
     alternates: { canonical: `/marcas/${marca.slug}` },
     openGraph: {
       title: `${marca.nombre} al mayoreo, distribuidor en México`,
@@ -191,9 +191,9 @@ export default async function PaginaDeMarca(
                 className="mt-0.5 shrink-0 text-naranja-texto"
               />
               <p className="leading-relaxed text-tinta">
-                Falta el catálogo de presentaciones de {marca.nombre}. Pídelo
-                por WhatsApp y te mandamos productos, piezas por caja y sellos
-                de cada presentación.
+                El catálogo de presentaciones de {marca.nombre} aún no está
+                publicado. Solicítalo por WhatsApp y te enviamos el detalle de
+                cada presentación con su empaque y su etiquetado.
               </p>
             </div>
           ) : (

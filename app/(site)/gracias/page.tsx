@@ -15,7 +15,7 @@ import { CONTACTO, HORARIO } from "@/config/nitamy";
  */
 
 export const metadata: Metadata = {
-  title: "Listo, ya te mandamos a WhatsApp",
+  title: "Tu mensaje está listo en WhatsApp",
   robots: { index: false, follow: false },
 };
 
@@ -24,11 +24,11 @@ export default function Gracias() {
     <section className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:py-28">
       <div className="max-w-[52ch]">
         <h1 className="titular text-[clamp(2rem,4.4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
-          Listo. Solo presiona enviar en WhatsApp
+          Listo. Solo resta enviar el mensaje en WhatsApp
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-tinta-2">
-          Abrimos el chat con tu mensaje ya escrito. Si la ventana no se abrió
-          sola, aquí está el enlace.
+          Abrimos el chat con tu mensaje ya redactado. Si la ventana no se
+          abrió de forma automática, este es el enlace.
         </p>
 
         <AbrirWhatsappDeRespaldo />
@@ -46,7 +46,7 @@ export default function Gracias() {
             ))}
           </dl>
           <p className="mt-5 text-[0.9375rem] leading-relaxed text-tinta-2">
-            Si prefieres marcar, el teléfono es{" "}
+            Si prefieres comunicarte por teléfono:{" "}
             <a
               href={`tel:+52${CONTACTO.telefono}`}
               className="presionable cifra font-semibold text-tinta underline underline-offset-4"
@@ -59,7 +59,7 @@ export default function Gracias() {
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <BotonEnlace href="/marcas" variante="secundario">
-            Seguir viendo marcas
+            Ver el catálogo de marcas
           </BotonEnlace>
           <BotonEnlace href="/" variante="fantasma">
             Volver al inicio

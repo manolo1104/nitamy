@@ -55,12 +55,12 @@ export default function IndiceDelBlog() {
       <section className="border-b border-linea">
         <div className="mx-auto max-w-[1400px] px-5 pb-12 pt-12 sm:px-8 lg:pb-16 lg:pt-16">
           <h1 className="titular max-w-[22ch] text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
-            Cómo vender más dulce, no solo comprarlo
+            Criterios para vender más, no solo para comprar mejor
           </h1>
           <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-tinta-2">
-            Lo que contestamos todos los días por WhatsApp, escrito para que no
+            Lo que respondemos a diario por WhatsApp, documentado para que no
             tengas que preguntarlo. Sin recetas de folleto: cuentas, fechas y
-            criterios que puedes aplicar el mismo día.
+            criterios aplicables desde el primer pedido.
           </p>
         </div>
       </section>

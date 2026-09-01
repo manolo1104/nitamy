@@ -24,6 +24,19 @@ export const metadata: Metadata = {
 };
 
 export default function IndiceDeMarcas() {
+  /**
+   * En qué categoría se dibuja por primera vez cada marca. Se recorre en el
+   * mismo orden que la página, así que coincide con lo que ve el visitante.
+   */
+  const primeraAparicion = new Map<string, string>();
+  for (const categoria of CATEGORIAS) {
+    for (const marca of marcasDeCategoria(categoria.slug)) {
+      if (!primeraAparicion.has(marca.slug)) {
+        primeraAparicion.set(marca.slug, categoria.slug);
+      }
+    }
+  }
+
   return (
     <>
       <Migajas
@@ -45,6 +58,14 @@ export default function IndiceDeMarcas() {
         </div>
       </section>
 
+      {/*
+        Una marca puede pertenecer a varias categorías, así que en esta página
+        se dibuja una vez por cada una. El nombre de `ViewTransition` tiene que
+        ser único en el documento: si se repite, React desactiva el morph y
+        avisa por consola, así que el origen del morph se marca solo en la
+        primera aparición de cada marca. Las demás son la misma tarjeta sin
+        transición, que es exactamente lo que se quiere: un solo origen.
+      */}
       {CATEGORIAS.map((categoria) => {
         const marcas = marcasDeCategoria(categoria.slug);
         if (marcas.length === 0) return null;
@@ -79,9 +100,13 @@ export default function IndiceDeMarcas() {
                       className="flex h-full flex-col rounded-caja border border-linea p-5 transition-[border-color,transform] duration-200 ease-salida hover:border-tinta active:scale-[0.99]"
                     >
                       <div className="flex h-11 items-center">
-                        <ViewTransition name={`marca-${marca.slug}`}>
+                        {primeraAparicion.get(marca.slug) === categoria.slug ? (
+                          <ViewTransition name={`marca-${marca.slug}`}>
+                            <LogoMarca marca={marca} alto={36} />
+                          </ViewTransition>
+                        ) : (
                           <LogoMarca marca={marca} alto={36} />
-                        </ViewTransition>
+                        )}
                       </div>
                       <h3 className="mt-4 text-base font-extrabold tracking-tight">
                         {marca.nombre}

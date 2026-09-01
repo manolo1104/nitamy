@@ -52,6 +52,20 @@ export type Producto = {
   sellos: SelloNom051[];
   /** Ruta en /public/productos/. `null` mientras no haya foto. */
   foto: string | null;
+  /**
+   * Las líneas a las que pertenece ESTE producto, no su marca.
+   *
+   * La categoría era un dato de marca, y la página de categoría listaba todos
+   * los productos de cada marca que la tuviera. Con Miguelito eso significaba
+   * que /categorias/chamoy-y-polvos mostraba también sus raquetas y sus
+   * paletas, y /categorias/reposteria mostraba las gomitas de Confitados
+   * Finos junto al azúcar glass. Un comprador que entra a una línea espera
+   * ver esa línea.
+   *
+   * Se llena desde la sección del catálogo donde sale el producto. Si falta,
+   * se hereda la de la marca, que es el comportamiento anterior.
+   */
+  categorias?: string[];
 };
 
 export type Marca = {
@@ -170,6 +184,22 @@ export function categoriaPorSlug(slug: string): Categoria | undefined {
 
 export function marcasDeCategoria(slug: string): Marca[] {
   return MARCAS.filter((m) => m.categorias.includes(slug));
+}
+
+/**
+ * Los productos de una línea, con su marca al lado.
+ *
+ * Filtra por la categoría del PRODUCTO. Un producto sin `categorias` propias
+ * hereda las de su marca, así que el contenido viejo sigue funcionando.
+ */
+export function productosDeCategoria(
+  slug: string,
+): { producto: Producto; marca: Marca }[] {
+  return marcasDeCategoria(slug).flatMap((marca) =>
+    marca.productos
+      .filter((p) => (p.categorias ?? marca.categorias).includes(slug))
+      .map((producto) => ({ producto, marca })),
+  );
 }
 
 export function marcasRelacionadas(marca: Marca): Marca[] {

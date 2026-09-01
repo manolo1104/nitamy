@@ -125,7 +125,7 @@ export const articulo: Articulo = {
     {
       tipo: "parrafo",
       texto:
-        "**Qué cuidar al surtir:** es artículo de despensa, no de antojo, así que rota más despacio pero **te trae al cliente a la tienda**. Alguien que entra por su salsa se lleva dulce de paso. En esta categoría, [Salsa Tamazula](/marcas/salsa-tamazula) es la que el cliente busca por nombre.",
+        "**Qué cuidar al surtir:** es artículo de despensa, no de antojo, así que rota más despacio pero **te trae al cliente a la tienda**. Alguien que entra por su salsa se lleva dulce de paso. En esta categoría, [Valentina](/marcas/salsa-tamazula) es la que el cliente busca por nombre.",
     },
 
     {

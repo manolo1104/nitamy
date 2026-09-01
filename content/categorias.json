@@ -80,6 +80,24 @@
       "color": "amarillo",
       "icono": "Popcorn",
       "textoRevisado": false
+    },
+    {
+      "slug": "chamoy-y-polvos",
+      "nombre": "Chamoy y polvos",
+      "resumen": "Pulpa, polvo y sazonador, el insumo que el punto de venta prepara.",
+      "descripcion": "Chamoy en pulpa y en polvo, sazonadores y dulce en polvo. Es la única línea del catálogo que el punto de venta no sólo revende: la usa para preparar, así que el consumo es por reposición y no depende de que el cliente final elija una marca.",
+      "color": "naranja",
+      "icono": "Drop",
+      "textoRevisado": false
+    },
+    {
+      "slug": "reposteria",
+      "nombre": "Repostería",
+      "resumen": "Azúcar glass, gragea y granillo: insumo, no dulce.",
+      "descripcion": "Azúcar glass, gragea y granillo para decorar. No es dulce de reventa: es insumo de panadería y repostería, y por eso abre un cliente distinto al del anaquel, con pedido recurrente y por peso.",
+      "color": "celeste",
+      "icono": "Cake",
+      "textoRevisado": false
     }
   ]
 }

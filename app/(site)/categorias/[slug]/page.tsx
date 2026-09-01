@@ -17,6 +17,7 @@ import {
   TEMPORADAS,
   categoriaPorSlug,
   marcasDeCategoria,
+  productosDeCategoria,
 } from "@/lib/contenido";
 import { contarProductos } from "@/lib/formatos";
 
@@ -73,9 +74,11 @@ export default async function PaginaDeCategoria(
   if (!categoria) notFound();
 
   const marcas = marcasDeCategoria(slug);
-  const productos = marcas.flatMap((m) =>
-    m.productos.map((p) => ({ producto: p, marca: m })),
-  );
+  const productos = productosDeCategoria(slug);
+  const porMarca = new Map<string, number>();
+  for (const { marca } of productos) {
+    porMarca.set(marca.slug, (porMarca.get(marca.slug) ?? 0) + 1);
+  }
   const temporadas = TEMPORADAS.filter((t) => t.categorias.includes(slug));
   const otras = CATEGORIAS.filter((c) => c.slug !== slug);
   const piel = PIELES[categoria.color];
@@ -184,9 +187,12 @@ export default async function PaginaDeCategoria(
                     <h3 className="mt-5 font-extrabold tracking-tight text-tinta">
                       {m.nombre}
                     </h3>
+                    {/* Las de ESTA línea, no todas las de la marca: debajo
+                        se listan filtradas y las dos cifras tienen que
+                        contar lo mismo. */}
                     <p className="cifra mt-1 text-sm text-tinta-2">
-                      {m.productos.length}{" "}
-                      {m.productos.length === 1
+                      {porMarca.get(m.slug) ?? 0}{" "}
+                      {(porMarca.get(m.slug) ?? 0) === 1
                         ? "presentación"
                         : "presentaciones"}
                     </p>

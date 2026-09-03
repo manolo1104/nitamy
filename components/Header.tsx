@@ -18,16 +18,19 @@ import { BotonCotizar } from "./calificador/BotonCotizar";
  * Altura 68px, en una sola línea en escritorio. Un nav de dos líneas o que se
  * come el 15% del viewport es diseño roto.
  *
- * Con seis enlaces la fila va justa entre 1024 y 1280px, así que en esa franja
- * se aprieta el padding de las píldoras, el hueco de la fila y el margen del
- * CTA, y desde xl se devuelve el aire. Medido a 1024px: con cinco enlaces
- * sobraban 81px, con seis y sin apretar quedaban 17, que es margen de error de
- * una fuente. Apretando quedan 33.
+ * Entre 1024 y 1280px la fila va justa, así que en esa franja se aprieta el
+ * padding de las píldoras, el hueco de la fila y el margen del CTA, y desde
+ * xl se devuelve el aire. Medido a 1024px: con cinco enlaces sobraban 81px,
+ * con seis y sin apretar quedaban 17, que es margen de error de una fuente.
+ * Apretando quedan 33.
+ *
+ * 2 SEP 2026: "Categorías" salió del menú a petición del cliente. Las páginas
+ * /categorias siguen existiendo (las enlazan la portada, el pie y las
+ * páginas de segmento); sólo dejan de ocupar sitio en la barra.
  */
 
 const ENLACES = [
   { href: "/marcas", texto: "Marcas" },
-  { href: "/categorias", texto: "Categorías" },
   { href: "/mayoristas", texto: "Mayoristas" },
   { href: "/cobertura", texto: "Cobertura" },
   { href: "/nosotros", texto: "Nosotros" },

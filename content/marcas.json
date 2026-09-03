@@ -48,9 +48,9 @@
       "fundadora": true,
       "resumen": "El cacahuate japonés que definió la categoría en México.",
       "descripcion": [
-        "Nishikawa es la marca que introdujo el cacahuate japonés al mercado mexicano y sigue siendo la referencia de la categoría. Es cacahuate cubierto con una capa de harina de trigo y salsa de soya, la receta que trajo Yoshigei Nakatani a México en los años cuarenta.",
+        "Nishikawa es la referencia del cacahuate japonés en México: cacahuate cubierto con una capa crujiente de harina de trigo y salsa de soya, en japonés, salado y enchilado, de la bolsa de 40 gramos al kilo.",
         "En el anaquel es un producto de rotación constante y compra por impulso. No depende de temporada, no depende de moda, y el consumidor lo busca por nombre. Para un punto de venta pequeño, es de los artículos que se venden solos.",
-        "Es una de las tres marcas que dan nombre a Grupo Nitamy y una de las tres que le creyeron al proyecto en 1995."
+        "Es una de las tres marcas que dan nombre a Grupo Nitamy y una de las tres que le creyeron al proyecto en 1995. Además tiene la línea Exclusivo Grupo Nitamy: multipacks con sobres de salsa Valentina que solo se consiguen aquí."
       ],
       "porQueRota": "El consumidor lo pide por nombre y la compra es por impulso, no por temporada.",
       "compradores": [
@@ -531,9 +531,9 @@
         "gomitas",
         "paletas"
       ],
-      "resumen": "Paletas y confitería infantil de rotación rápida.",
+      "resumen": "Malvavisco y paleta de caramelo de rotación rápida.",
       "descripcion": [
-        "Candy Pop maneja paletas y confitería de formato pequeño, la que se vende de una en una en el mostrador. Es compra por impulso pura: precio bajo, decisión inmediata.",
+        "CP Products maneja malvavisco (Malvalleno Mix y Coffi's) y paleta de caramelo de formato pequeño (Super Super Tira, Súper Rebanada, Bolitochas y Rebanaditas), la que se vende de una en una en el mostrador. Es compra por impulso pura: precio bajo, decisión inmediata.",
         "Es de las líneas que mejor funcionan para sostener la venta diaria de un punto de venta pequeño y para surtir volumen a quien revende."
       ],
       "porQueRota": "Precio de una moneda y decisión de compra inmediata en el mostrador.",
@@ -553,8 +553,8 @@
           ]
         },
         {
-          "producto": "Malva Coffi's",
-          "presentacion": "1 caja con 12 bolsas de 50 piezas. Sabor café.",
+          "producto": "Coffi's",
+          "presentacion": "1 caja con 12 bolsas de 50 piezas. Malvavisco sabor café.",
           "piezasPorCaja": null,
           "sellos": [
             "exceso-calorias",
@@ -647,7 +647,7 @@
       ],
       "resumen": "Salsa picante embotellada y en sobre, artículo de despensa.",
       "descripcion": [
-        "Valentina es una de las salsas embotelladas más vendidas de México y la fabrica Salsa Tamazula, en Guadalajara. Es producto de despensa, no de impulso: el consumidor la compra por reposición, con una frecuencia predecible.",
+        "Valentina es la salsa picante jalisciense que el consumidor conoce por nombre. Es producto de despensa, no de impulso: se compra por reposición, con una frecuencia predecible.",
         "En el catálogo ocupa tres páginas: botella de litro, de 370 y de 250 mililitros en roja y negra, el sobre en tres gramajes para quien vende comida preparada, y el chile en polvo. El galón de Costa Brava cubre al cliente de food service."
       ],
       "porQueRota": "Se compra por reposición, no por antojo: es la línea más predecible del catálogo.",
@@ -810,10 +810,10 @@
         "chamoy-y-polvos"
       ],
       "fundadora": true,
-      "resumen": "El polvo enchilado que acompaña fruta, botana y paleta.",
+      "resumen": "Polvo enchilado, pulpa de chamoy, paletas y raquetas: la marca que acompaña fruta, botana y paleta.",
       "descripcion": [
-        "Miguelito es polvo de chile con sal y ácido, el que se le pone a la fruta, a la paleta y al vaso de botana. Es un producto que no compite con el resto del anaquel: lo complementa, y por eso la venta cruzada es alta.",
-        "Para un punto de venta que ya mueve fruta picada o raspados, es un artículo que se agrega al ticket sin esfuerzo.",
+        "Miguelito es el polvo de chile con sal y ácido que se le pone a la fruta, a la paleta y al vaso de botana, y alrededor de él una línea completa: pulpa de chamoy en tarro, sobre y botella, polvos de nueve sabores en 250 y 980 gramos, sazonador, paletas Charly, Chilosa, Chamagosa y Miguelín, raquetas y los kits Sorpresa Mix y Chamoyazo.",
+        "El polvo no compite con el resto del anaquel: lo complementa, y por eso la venta cruzada es alta. Para un punto de venta que ya mueve fruta picada o raspados, es un artículo que se agrega al ticket sin esfuerzo.",
         "Es una de las tres marcas que dan nombre a Grupo Nitamy."
       ],
       "porQueRota": "Complementa otros productos del anaquel en lugar de competir con ellos: sube el ticket promedio.",
@@ -1351,11 +1351,11 @@
         "tamarindo",
         "paletas"
       ],
-      "resumen": "Botana y producto enchilado para punto de venta.",
+      "resumen": "Tarugos y banderillas de tamarindo con chile, y la paleta Gesto.",
       "descripcion": [
-        "Betamex maneja botana y producto enchilado en presentaciones de punto de venta."
+        "Betamex trabaja el tamarindo con chile: tarugo en vitrolero y en bolsa, Tamarrico, banderilla envuelta, corta y larga, y lancita, todo en estuche de 50 piezas. Completa con la paleta Gesto y Mini Gesto."
       ],
-      "porQueRota": "Formato de mostrador con precio de impulso.",
+      "porQueRota": "Tamarindo con chile en estuche y vitrolero: formato de mostrador con precio de impulso.",
       "compradores": [
         "tienda",
         "mayorista"
@@ -1388,7 +1388,7 @@
           ]
         },
         {
-          "producto": "Beta Tamarrico",
+          "producto": "Tamarrico",
           "presentacion": "1 caja con 16 bolsas de 50 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
@@ -1441,7 +1441,7 @@
           ]
         },
         {
-          "producto": "Banderilla larga Tamarrico",
+          "producto": "Banderilla larga",
           "presentacion": "1 caja con 6 estuches de 50 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
@@ -1482,9 +1482,9 @@
         "gomitas",
         "paletas"
       ],
-      "resumen": "Confitería enchilada y gomita para dulcería.",
+      "resumen": "Vasitos de tamarindo, paletas de gomita y gomitas.",
       "descripcion": [
-        "Dulces Karla trabaja confitería enchilada y gomita, con formatos de dulcería y de bolsa."
+        "Dulces Karla trabaja el vasito de tamarindo en tres tamaños y la variante Tamango con goma, más las paletas de gomita Gomi King Mango y Fire Kids Sandía y la gomita Mangomis en bolsa de 540 gramos."
       ],
       "porQueRota": "El enchilado es la categoría de mayor rotación en dulcería mexicana.",
       "compradores": [
@@ -1587,11 +1587,11 @@
         "enchilados",
         "tamarindo"
       ],
-      "resumen": "Botana y semilla en presentaciones de volumen.",
+      "resumen": "Lancitas y tarugos de tamarindo en estuche.",
       "descripcion": [
-        "Productos del Rey surte botana y semilla en presentaciones de volumen para punto de venta."
+        "Productos del Rey (línea Tama-Reyes) surte lancitas y tarugos de tamarindo, con chile y con azúcar, en estuche de 40 a 80 piezas, más la Mini Lanzita Tajín en estuche de 50."
       ],
-      "porQueRota": "Presentación de volumen con costo por pieza bajo.",
+      "porQueRota": "Estuche de 40 a 80 piezas: volumen con costo por pieza bajo.",
       "compradores": [
         "mayorista",
         "tienda",
@@ -1672,9 +1672,9 @@
         "enchilados",
         "chamoy-y-polvos"
       ],
-      "resumen": "Dulce enchilado y paleta de rotación diaria.",
+      "resumen": "Bibi Polviz: dulce en polvo en biberón, chile y Frutix.",
       "descripcion": [
-        "Dulces Pillo trabaja dulce enchilado y paleta, categorías de rotación diaria en tiendita."
+        "Dulces Pillo trae el Bibi Polviz, dulce en polvo en biberón, en display de 12 piezas y caja de 144, en sabor chile y Frutix."
       ],
       "porQueRota": "Rotación diaria y reposición constante.",
       "compradores": [
@@ -1724,11 +1724,11 @@
         "gomitas",
         "paletas"
       ],
-      "resumen": "Dulce regional y de tamarindo.",
+      "resumen": "Paletas Cache Kangurin y Kachetada, y dulces en tira.",
       "descripcion": [
-        "Dulces Guaz surte dulce regional y de tamarindo, categorías con demanda arraigada."
+        "Dulces Guaz trabaja la paleta de caramelo suave Cache Kangurin y Kachetada, natural y con chamoy, en bolsa de 20 y de 5 piezas, más los dulces en tira Devora-Guaz, Comesaurio y Unicomeme en tiras de 10."
       ],
-      "porQueRota": "Demanda arraigada que no depende de publicidad.",
+      "porQueRota": "Paleta de impulso con empaque llamativo y precio de mostrador.",
       "compradores": [
         "tienda",
         "mayorista"
@@ -2044,12 +2044,12 @@
       "categorias": [
         "gomitas"
       ],
-      "resumen": "Gomita de grenetina y paleta, de bolsa de kilo a pieza suelta.",
+      "resumen": "Gomita de grenetina: ositos, aros, figuras, de la bolsa individual al kilo.",
       "descripcion": [
-        "Jovy es la línea más ancha de gomita del catálogo: doce referencias entre gomita de grenetina, ositos, aros ácidos y paleta.",
-        "Cubre los dos formatos que un punto de venta necesita al mismo tiempo: la bolsa de un kilo para vender a granel y la bolsa de 40 piezas para vender de a peso."
+        "Jovy es la línea de gomita de grenetina del catálogo: Fantasy Gummy Mix, Mini Gummi Bears, Frutastika, los aros Fantasy Gummy Rings normales y sour, Coni Lokos y Mini Sharks.",
+        "Cubre desde la bolsa individual para convivir (Fantasy Gummy Mix y Mini Gummi Bears, en piezas de 15 g) hasta la bolsa de 500 g y de 1 kg para vender a granel."
       ],
-      "porQueRota": "Doce referencias que cubren granel y pieza suelta con un solo proveedor.",
+      "porQueRota": "Siete referencias de gomita con un solo proveedor, en bolsa individual, de 500 g y de 1 kg.",
       "compradores": [
         "mayorista",
         "tienda"
@@ -2145,11 +2145,11 @@
         "gomitas",
         "paletas"
       ],
-      "resumen": "Botana enchilada en presentación individual.",
+      "resumen": "Paletas de caramelo macizo, gomitas y la línea Dulce Vida sin azúcar.",
       "descripcion": [
-        "Chompys maneja botana enchilada en presentación individual para punto de venta."
+        "Chompys trabaja paleta de caramelo macizo (Futgoliza, Lov'u, Piña Caribeña, Calcalocas y Pulpinta), gomitas (Salsimangos y Ahijolotl) y la línea Dulce Vida sin azúcar, endulzada con stevia, en bites de café y paletas de cuatro sabores."
       ],
-      "porQueRota": "Presentación individual que se vende de una en una en el mostrador.",
+      "porQueRota": "Paleta de impulso en bolsa de 40 piezas, más la única línea sin azúcar del catálogo.",
       "compradores": [
         "tienda",
         "mayorista"
@@ -2182,8 +2182,8 @@
           ]
         },
         {
-          "producto": "Pina Caribena",
-          "presentacion": "1 caja con 28 bolsas de 40 piezas. Sabor pina con chile.",
+          "producto": "Piña Caribeña",
+          "presentacion": "1 caja con 28 bolsas de 40 piezas. Sabor piña con chile.",
           "piezasPorCaja": null,
           "sellos": [
             "exceso-calorias",
@@ -2253,7 +2253,7 @@
           ]
         },
         {
-          "producto": "Dulce Vida Citricos, sin azucar",
+          "producto": "Dulce Vida Cítricos, sin azúcar",
           "presentacion": "1 caja con 6 bolsas de 12 piezas. Endulzado con stevia.",
           "piezasPorCaja": null,
           "sellos": [],
@@ -2263,7 +2263,7 @@
           ]
         },
         {
-          "producto": "Dulce Vida Frutos Rojos, sin azucar",
+          "producto": "Dulce Vida Frutos Rojos, sin azúcar",
           "presentacion": "1 caja con 6 bolsas de 12 piezas. Endulzado con stevia.",
           "piezasPorCaja": null,
           "sellos": [],
@@ -2273,7 +2273,7 @@
           ]
         },
         {
-          "producto": "Dulce Vida Enchilados, sin azucar",
+          "producto": "Dulce Vida Enchilados, sin azúcar",
           "presentacion": "1 caja con 6 bolsas de 12 piezas. Endulzado con stevia.",
           "piezasPorCaja": null,
           "sellos": [],
@@ -2283,7 +2283,7 @@
           ]
         },
         {
-          "producto": "Dulce Vida Sandia con chile, sin azucar",
+          "producto": "Dulce Vida Sandía con chile, sin azúcar",
           "presentacion": "1 caja con 6 bolsas de 12 piezas. Endulzado con stevia.",
           "piezasPorCaja": null,
           "sellos": [],
@@ -2382,10 +2382,10 @@
       ],
       "resumen": "Tamarindo confitado en bolsa de 500 g.",
       "descripcion": [
-        "Checolines es tamarindo confitado, una sola presentación de 500 gramos que se surte por caja de 12.5 kilos.",
-        "Es producto de granel: se vende por peso en el mostrador y aguanta el manejo del día."
+        "Checolines es tamarindo confitado, una sola presentación en bolsa de 500 gramos que se surte por caja de 25 bolsas, 12.5 kilos.",
+        "Es producto de mostrador con nombre propio: el consumidor lo pide por marca y aguanta el manejo del día."
       ],
-      "porQueRota": "Granel de tamarindo, la venta por peso que no necesita empaque.",
+      "porQueRota": "Una sola referencia, bolsa sellada de 500 g: se surte por caja de 12.5 kilos.",
       "compradores": [
         "mayorista",
         "tienda"
@@ -2417,11 +2417,11 @@
         "enchilados",
         "chamoy-y-polvos"
       ],
-      "resumen": "Dulce tradicional y de temporada.",
+      "resumen": "Dulce en polvo: Polvo Tico y Yekitos.",
       "descripcion": [
-        "Portico maneja dulce tradicional, con líneas que se refuerzan en temporada."
+        "Pórtico maneja dulce en polvo: Polvo Tico Grande, con sal y chile, en bolsa de 25 piezas, y Yekitos, picosito de sabores surtidos, en bolsa de 100."
       ],
-      "porQueRota": "Base estable todo el año con picos de temporada.",
+      "porQueRota": "Dulce en polvo de precio bajo con reposición constante.",
       "compradores": [
         "tienda",
         "mayorista"
@@ -2474,12 +2474,12 @@
       "categorias": [
         "botana"
       ],
-      "resumen": "Confitería infantil con presentación llamativa.",
+      "resumen": "Palomitas y churritos: botana salada poblana.",
       "descripcion": [
-        "Charly trabaja confitería dirigida a público infantil, con presentaciones y empaque que compiten por atención en el anaquel.",
-        "Funciona bien en dulcerías y en tiendas cercanas a escuelas, donde la decisión de compra la toma el consumidor final frente al producto."
+        "Charly Botanas trae palomitas Movie Pop's y churritos Churrus, enchilado y salado, en caja de 20 y 25 piezas de 100 gramos.",
+        "Es botana de mostrador: acompaña bebida y le da al punto de venta una venta distinta a la del dulce."
       ],
-      "porQueRota": "El empaque hace el trabajo de venta en el anaquel.",
+      "porQueRota": "Botana salada que abre una segunda ocasión de consumo en un anaquel de dulce.",
       "compradores": [
         "tienda",
         "mayorista"
@@ -2581,8 +2581,8 @@
       ],
       "resumen": "Pulpa clara y vaso de tamarindo.",
       "descripcion": [
-        "Fábrica de Dulces Cisne surte tamarindo en dos formatos: la pulpa clara en bolsa de 20 piezas y el Vaso Memito.",
-        "Es tamarindo de preparación, el que se usa para hacer y el que se vende ya listo, con la misma marca."
+        "Fábrica de Dulces Cisne surte tamarindo en dos formatos: la pulpa clara acidulada con sal, en bolsa de 20 piezas, y el Vaso Memito Chico, en bolsa de 20 vasitos.",
+        "Es tamarindo tradicional con nombre propio: el consumidor lo pide por marca."
       ],
       "porQueRota": "Tamarindo tradicional con nombre propio: el consumidor lo pide por marca.",
       "compradores": [
@@ -2634,9 +2634,9 @@
         "enchilados",
         "tamarindo"
       ],
-      "resumen": "Dulce enchilado en barra, de los clásicos de tiendita.",
+      "resumen": "Rielitos y pulpa de tamarindo, 100% frutas naturales.",
       "descripcion": [
-        "Chaca Chaca es dulce enchilado en barra, uno de los productos que el consumidor mexicano identifica sin necesidad de publicidad.",
+        "Chaca Chaca es el rielito de frutas con sal y chile, uno de los productos que el consumidor mexicano identifica sin necesidad de publicidad, en tira, en trozo y en bolsa, más la pulpa de tamarindo en porciones.",
         "Es de los artículos que sostienen la venta diaria de una tiendita: precio bajo, sabor reconocido y compra repetida."
       ],
       "porQueRota": "Producto reconocido sin publicidad, con compra repetida entre semana.",
@@ -2672,7 +2672,7 @@
           ]
         },
         {
-          "producto": "Rielito Chaca Trozo en bolsa",
+          "producto": "Rielito Chaca Trozo",
           "presentacion": "1 caja con 32 bolsas de 400 g.",
           "piezasPorCaja": 32,
           "sellos": [
@@ -2715,7 +2715,6 @@
       "nombre": "W.L.A. Dulces",
       "nombreCompleto": "W.L.A., barquillos con malvavisco",
       "categorias": [
-        "gomitas",
         "obleas-y-dulce-tradicional"
       ],
       "resumen": "Barquillo con malvavisco, seis sabores.",
@@ -2736,7 +2735,6 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "gomitas",
             "obleas-y-dulce-tradicional"
           ]
         },
@@ -2747,7 +2745,6 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "gomitas",
             "obleas-y-dulce-tradicional"
           ]
         },
@@ -2758,7 +2755,6 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "gomitas",
             "obleas-y-dulce-tradicional"
           ]
         },
@@ -2769,7 +2765,6 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "gomitas",
             "obleas-y-dulce-tradicional"
           ]
         },
@@ -2783,7 +2778,6 @@
           ],
           "foto": null,
           "categorias": [
-            "gomitas",
             "obleas-y-dulce-tradicional"
           ]
         },
@@ -2797,7 +2791,6 @@
           ],
           "foto": null,
           "categorias": [
-            "gomitas",
             "obleas-y-dulce-tradicional"
           ]
         }
@@ -2814,10 +2807,10 @@
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],
-      "resumen": "Borrachines, frutilenas y dulce de coco de Cocula.",
+      "resumen": "Borrachines, frutilenas y dulce de coco de tradición tapatía.",
       "descripcion": [
-        "La Coculense es dulce tradicional jalisciense: los borrachines de leche en sus tres sabores, las frutilenas de camote, las barricoquinas de coco y el guayaroll.",
-        "Es la línea que distingue un anaquel del de la cadena grande, que casi nunca la surte."
+        "La Coculense es dulce tradicional tapatío: los borrachines de leche en sus tres sabores (surtidos, rompope y tequila), las frutilenas de camote, las barricoquinas de coco y el guayaroll.",
+        "Es la línea que distingue un anaquel: dulce con consumidor fiel que no compite por precio, compite por sabor."
       ],
       "porQueRota": "Dulce regional con consumidor fiel: no compite por precio, compite por sabor.",
       "compradores": [
@@ -2906,11 +2899,11 @@
       "categorias": [
         "gomitas"
       ],
-      "resumen": "Gomitas y confitería para dulcería, en pieza y en volumen.",
+      "resumen": "Gomita de grenetina tipo vela, de agua y de leche, en estuche de 180.",
       "descripcion": [
-        "Dulces Liz surte gomitas y confitería en formatos que funcionan tanto en la venta de a peso del mostrador como en el bulto que compra quien revende."
+        "Dulces Liz hace la gomita de grenetina tipo vela, de agua y de leche, en estuche de 180 piezas, 12 estuches por caja."
       ],
-      "porQueRota": "Un solo producto sirve al anaquel de a peso y a la venta por bulto.",
+      "porQueRota": "Un solo formato de 180 piezas que se vende por pieza en el mostrador.",
       "compradores": [
         "tienda",
         "mayorista"
@@ -2958,7 +2951,7 @@
       "categorias": [
         "paletas"
       ],
-      "resumen": "Paleta de mango y de menta, bolsa de 25.",
+      "resumen": "Paleta de mango, bolsa de 25, y de menta, bolsa de 30.",
       "descripcion": [
         "Los Reyes surte dos paletas clásicas de caramelo, mango y menta, en bolsa de 25 y 30 piezas.",
         "Es paleta de precio de una moneda, la compra de impulso más simple que hay."
@@ -3098,7 +3091,7 @@
       "resumen": "Amaranto en cuadro y hostia en tres cortes.",
       "descripcion": [
         "Amarantos cubre dos líneas del dulce tradicional: el cuadro de amaranto en dos tamaños y la hostia en estuche, colchón y recorte.",
-        "La hostia de recorte es producto de granel y precio bajo; el cuadro de amaranto se vende por pieza."
+        "La hostia de recorte, en bolsa de 24 piezas, es la de precio bajo; el cuadro de amaranto se vende por pieza."
       ],
       "porQueRota": "Dos líneas tradicionales con un solo proveedor y un solo pedido.",
       "compradores": [
@@ -3303,9 +3296,9 @@
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],
-      "resumen": "Dulcería tradicional en presentaciones de mostrador.",
+      "resumen": "Cajeta en obleas, cuatro tamaños de 100 a 700 g.",
       "descripcion": [
-        "Cabadas surte dulcería tradicional en presentaciones pensadas para mostrador y venta por pieza."
+        "Cabadas hace cajeta en obleas en cuatro tamaños: mini de 100 g, económica de 270 g, mediana de 500 g y grande de 700 g, todas con 10 piezas por empaque."
       ],
       "porQueRota": "Venta por pieza con margen sano para el detallista.",
       "compradores": [
@@ -3371,9 +3364,9 @@
       "categorias": [
         "botana"
       ],
-      "resumen": "Botana salada y semillas para acompañar.",
+      "resumen": "Botana salada: donitas, rotinis y anillos.",
       "descripcion": [
-        "Pipos maneja botana salada y semillas, categoría que acompaña bebida y que se mueve fuerte los fines de semana.",
+        "Pipos maneja botana salada, donitas con sal y limón y el Surtido Mix de donitas, rotinis y anillos enchilados y naturales, en paquetes de 10 bolsas. El catálogo la marca como línea por temporada.",
         "Complementa bien un anaquel dominado por dulce: le da al punto de venta una segunda ocasión de consumo."
       ],
       "porQueRota": "Segunda ocasión de consumo en un anaquel que suele ser solo dulce.",
@@ -3467,7 +3460,8 @@
       "textoRevisado": false,
       "relacionadas": [],
       "sellosVerificados": false,
-      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), p. 74"
+      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), p. 74",
+      "notaInterna": "La p. 75 del catálogo (Día de Muertos) trae tres estuches de figuras de malvavisco sin logotipo en la página ni legible en el empaque: 'Día de Muertos 50 piezas' (16 estuches · 50 piezas), 'Día de Muertos Impreso' (16 estuches · 40 piezas) y 'Día de Muertos 25 piezas' (caja con 32 estuches). Van entre Risa (p. 74) y Big Boy (p. 76); pueden ser Risa o Rivera. NO se publicaron: falta que el cliente diga de quién son."
     },
     {
       "slug": "big-boy",
@@ -3513,12 +3507,12 @@
       "categorias": [
         "gomitas"
       ],
-      "resumen": "Malvaviscos y gomitas, en pieza de mostrador y en volumen.",
+      "resumen": "Malvaviscos y gomitas, marca del catálogo de temporada.",
       "descripcion": [
-        "Productos Rivera trabaja malvaviscos y gomitas, una categoría de peso en el anaquel de cualquier dulcería y de rotación constante en el mostrador.",
-        "Se venden tanto en presentación individual para mostrador como en bolsa de volumen para reventa, lo que permite atender dos tipos de cliente con una sola marca."
+        "Productos Rivera es la marca de malvaviscos y gomitas del catálogo de temporada 2026 de Grupo Nitamy.",
+        "Está en el índice del catálogo, pero sus presentaciones no vienen en las páginas de producto: se cotizan directo."
       ],
-      "porQueRota": "Sirve a dos mercados con la misma marca: mostrador por pieza y bulto para reventa.",
+      "porQueRota": "Malvavisco y gomita de temporada; las presentaciones se cotizan por WhatsApp.",
       "compradores": [
         "tienda",
         "mayorista",
@@ -3533,7 +3527,8 @@
         "charly"
       ],
       "sellosVerificados": false,
-      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), índice p. 3"
+      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), índice p. 3",
+      "notaInterna": "Sin páginas de producto en CAT.NITAMY.pdf (solo el logotipo en la portada de temporada, p. 73, y en el índice, p. 3). La p. 75 trae tres estuches de figuras de malvavisco de Día de Muertos SIN marca visible; pueden ser Risa o Rivera. No se asignaron a nadie hasta que el cliente confirme."
     }
   ]
 }

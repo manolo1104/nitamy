@@ -24,9 +24,13 @@ import { BotonCotizar } from "./calificador/BotonCotizar";
  * con seis y sin apretar quedaban 17, que es margen de error de una fuente.
  * Apretando quedan 33.
  *
- * 2 SEP 2026: "Categorías" salió del menú a petición del cliente. Las páginas
- * /categorias siguen existiendo (las enlazan la portada, el pie y las
- * páginas de segmento); sólo dejan de ocupar sitio en la barra.
+ * 2 SEP 2026: "Categorías" salió del menú a petición del cliente.
+ *
+ * 5 SEP 2026: y salió del sitio entero. Se borraron las páginas /categorias y
+ * todos los enlaces que llevaban a ellas (la sección de la home, el pie, las
+ * páginas de segmento y cobertura). Las líneas se siguen VIENDO -agrupan
+ * /marcas, salen como etiquetas en /nosotros y en los segmentos, y el rail de
+ * temporadas dice cuál surtir- pero ya no son un destino navegable.
  */
 
 const ENLACES = [

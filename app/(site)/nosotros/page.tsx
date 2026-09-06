@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { BotonEnlace } from "@/components/Boton";
 import { BotonCotizar } from "@/components/calificador/BotonCotizar";
 import { Migajas } from "@/components/DatosEstructurados";
@@ -179,21 +178,25 @@ export default function PaginaDeNosotros() {
             Qué distribuimos
           </h2>
           <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-            Ocho líneas que cubren el anaquel completo de una dulcería, con{" "}
-            {COBERTURA_PORCENTAJE}% de cobertura en la República y entrega
-            directa en la zona metropolitana.
+            {CATEGORIAS.length} líneas que cubren el anaquel completo de una
+            dulcería, con {COBERTURA_PORCENTAJE}% de cobertura en la República
+            y entrega directa en la zona metropolitana.
           </p>
         </Revelar>
 
         <ul className="mt-8 flex flex-wrap gap-3">
+          {/*
+            5 sep 2026: eran enlaces a /categorias y ahora son etiquetas. El
+            cliente retiró esa sección del sitio, así que las líneas se siguen
+            enseñando -son el argumento de que cubrimos el anaquel entero-
+            pero ya no llevan a ningún lado. Mismo patrón que los chips de
+            "Qué surtir" del rail de temporadas, que nunca fueron enlaces.
+          */}
           {CATEGORIAS.map((c) => (
             <li key={c.slug}>
-              <Link
-                href={`/categorias/${c.slug}`}
-                className="chip presionable inline-flex items-center rounded-pill border border-linea bg-papel px-4 py-2.5 font-semibold text-tinta transition-colors duration-200 ease-salida hover:bg-papel-2"
-              >
+              <span className="chip inline-flex items-center rounded-pill border border-linea bg-papel px-4 py-2.5 font-semibold text-tinta">
                 {c.nombre}
-              </Link>
+              </span>
             </li>
           ))}
         </ul>

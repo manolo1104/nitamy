@@ -176,11 +176,11 @@ export default async function PaginaDeMarca(
         </div>
       </section>
 
-      {/* Presentaciones y sellos ----------------------------------------- */}
+      {/* Presentaciones ---------------------------------------------------- */}
       <section className="border-y border-linea bg-papel-2">
         <div className="mx-auto max-w-[1400px] px-5 py-16 sm:px-8 lg:py-20">
           <h2 className="titular text-[clamp(1.5rem,2.8vw,2.25rem)] font-extrabold leading-tight tracking-[-0.02em]">
-            Presentaciones y sellos NOM-051
+            Presentaciones
           </h2>
 
           {marca.productos.length === 0 ? (
@@ -193,7 +193,7 @@ export default async function PaginaDeMarca(
               <p className="leading-relaxed text-tinta">
                 El catálogo de presentaciones de {marca.nombre} aún no está
                 publicado. Solicítalo por WhatsApp y te enviamos el detalle de
-                cada presentación con su empaque y su etiquetado.
+                cada presentación con su empaque.
               </p>
             </div>
           ) : (

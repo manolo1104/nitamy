@@ -11,7 +11,9 @@ import { ETIQUETA_SELLO, type Marca, type Producto } from "@/lib/contenido";
  * que lleva dentro, y son justo las que no pueden divergir:
  *
  *   1. La cifra de piezas por caja solo sale cuando NO hay ambigüedad.
- *   2. Los sellos NOM-051 solo se afirman cuando el cliente los confirmó.
+ *   2. Los sellos NOM-051 no se muestran (instrucción del cliente, 4 sep
+ *      2026) y el bloque solo revive si algún día `sellosVerificados` es
+ *      true. Nunca se afirma nada de etiquetado sin el dato del cliente.
  *
  * La diferencia entre los dos usos es `mostrarMarca`: en la página de una
  * marca sobra decir de quién es cada producto, y en la de una categoría es lo
@@ -85,33 +87,38 @@ export function FichaProducto({ producto: p, marca, mostrarMarca = false }: Prop
           <p className="mt-3 leading-relaxed text-tinta">{p.presentacion}</p>
         )}
 
-        <div className="mt-auto border-t border-linea pt-4">
-          {/*
-            "Sin sellos de advertencia" solo se dice cuando el cliente
-            confirmó los sellos. El catálogo que salió de su sitio anterior no
-            los trae, y afirmar que un producto no tiene sellos NOM-051 sin el
-            dato es una afirmación sobre etiquetado regulado que un comprador
-            de cadena va a creer.
-          */}
-          {!marca.sellosVerificados ? (
-            <p className="text-sm text-tinta-2">Sellos NOM-051 en la cotización</p>
-          ) : p.sellos.length === 0 || p.sellos[0] === "sin-sellos" ? (
-            <p className="text-sm font-semibold text-tinta">
-              Sin sellos de advertencia
-            </p>
-          ) : (
-            <ul className="flex flex-wrap gap-1.5">
-              {p.sellos.map((s) => (
-                <li
-                  key={s}
-                  className="rounded-caja bg-carbon px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide text-papel"
-                >
-                  {ETIQUETA_SELLO[s]}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {/*
+          4 sep 2026: la tarjeta ya NO dice "Sellos NOM-051 en la cotización".
+          El cliente lo pidió fuera: la norma no es parte de lo que se cotiza y
+          la leyenda salía en los ~250 productos del sitio, porque hoy ninguna
+          marca tiene `sellosVerificados`.
+
+          El bloque sobrevive para el día en que el cliente entregue los sellos
+          reales por presentación, y entonces se muestran. Lo que NO puede
+          volver es afirmar algo sobre etiquetado sin el dato: por eso el
+          bloque entero se monta solo si `sellosVerificados` es true, en vez de
+          tener una rama de respaldo que diga cualquier otra cosa.
+        */}
+        {marca.sellosVerificados && (
+          <div className="mt-auto border-t border-linea pt-4">
+            {p.sellos.length === 0 || p.sellos[0] === "sin-sellos" ? (
+              <p className="text-sm font-semibold text-tinta">
+                Sin sellos de advertencia
+              </p>
+            ) : (
+              <ul className="flex flex-wrap gap-1.5">
+                {p.sellos.map((s) => (
+                  <li
+                    key={s}
+                    className="rounded-caja bg-carbon px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wide text-papel"
+                  >
+                    {ETIQUETA_SELLO[s]}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

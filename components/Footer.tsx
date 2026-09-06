@@ -7,7 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { CONTACTO, EMPRESA, HORARIO, aniosOperando } from "@/config/nitamy";
-import { CATEGORIAS, MARCAS_FUNDADORAS } from "@/lib/contenido";
+import { MARCAS_FUNDADORAS } from "@/lib/contenido";
 import { enlaceWhatsappSimple } from "@/lib/whatsapp";
 
 /**
@@ -65,16 +65,6 @@ export function Footer() {
                     className="enlace text-tinta-2 hover:text-tinta"
                   >
                     {m.nombre}
-                  </Link>
-                </li>
-              ))}
-              {CATEGORIAS.slice(0, 3).map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    href={`/categorias/${c.slug}`}
-                    className="enlace text-tinta-2 hover:text-tinta"
-                  >
-                    {c.nombre}
                   </Link>
                 </li>
               ))}

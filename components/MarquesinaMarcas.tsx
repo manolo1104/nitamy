@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MARCAS } from "@/lib/contenido";
+import { MARCAS_VISIBLES } from "@/lib/contenido";
 import { LogoMarca } from "./LogoMarca";
 
 /**
@@ -20,14 +20,14 @@ import { LogoMarca } from "./LogoMarca";
 export function MarquesinaMarcas() {
   // La segunda copia es puramente visual: el lector de pantalla ya leyó la
   // primera y repetir 23 marcas sería ruido.
-  const pista = [...MARCAS, ...MARCAS];
+  const pista = [...MARCAS_VISIBLES, ...MARCAS_VISIBLES];
 
   return (
     <div
       className="marquesina relative overflow-hidden"
       // El grupo es una lista de marcas; el desfile es presentación.
       role="group"
-      aria-label={`${MARCAS.length} marcas distribuidas`}
+      aria-label={`${MARCAS_VISIBLES.length} marcas distribuidas`}
     >
       {/* Degradados que desvanecen los extremos: sin ellos los logos se
           cortan a media letra contra el borde del viewport. */}
@@ -42,7 +42,7 @@ export function MarquesinaMarcas() {
 
       <ul className="marquesina-pista flex w-max items-center gap-10 py-2 sm:gap-16">
         {pista.map((marca, i) => {
-          const duplicado = i >= MARCAS.length;
+          const duplicado = i >= MARCAS_VISIBLES.length;
           return (
             <li
               key={`${marca.slug}-${i}`}

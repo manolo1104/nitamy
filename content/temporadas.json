@@ -8,7 +8,7 @@
     "diaPico": "number 1-31.",
     "semanasAntes": "number. Semanas de anticipación con las que conviene levantar el pedido. La fecha de corte se DERIVA de mesPico, diaPico y este número; nunca se escribe a mano.",
     "queRota": "string. Qué se mueve en esa temporada y por qué. PENDIENTE DE REVISIÓN del cliente.",
-    "categorias": "string[]. Slugs de content/categorias.json. Enlaza el rail de temporadas con la rejilla de categorías.",
+    "categorias": "string[]. Slugs de content/categorias.json. Alimenta el bloque \"Que surtir\" del rail de temporadas, que los pinta como etiquetas sin enlace.",
     "color": "string. Sabor de la paleta. Dos temporadas contiguas en el rail nunca comparten sabor.",
     "icono": "string. Icono de Phosphor sin el sufijo Icon. Lista blanca en components/IconoCategoria.tsx.",
     "textoRevisado": "boolean. false mientras el cliente no confirme anticipación y surtido."
@@ -99,7 +99,7 @@
       "mesPico": 12,
       "diaPico": 16,
       "semanasAntes": 8,
-      "queRota": "Bolsa de posada, colación, piñata y dulce de regalo. Es la temporada más grande del año y la de mayor anticipación: en diciembre la producción de los proveedores ya está comprometida.",
+      "queRota": "Colación, piñata y dulce de regalo. Es la temporada más grande del año y la de mayor anticipación: en diciembre la producción de los proveedores ya está comprometida.",
       "categorias": ["gomitas", "paletas", "obleas-y-dulce-tradicional", "enchilados"],
       "color": "celeste",
       "icono": "Tree",

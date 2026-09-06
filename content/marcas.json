@@ -5,7 +5,7 @@
     "nombre": "string. Como se escribe la marca.",
     "nombreCompleto": "string opcional. Nombre largo o descriptivo, para el H1 y el title.",
     "logo": "string opcional. Ruta en /public/marcas/. Los 20 logos del sitio vivo venian con fondo BLANCO OPACO; se les quito por inundacion desde los bordes y se guardaron en WebP con alfa. Si falta, se renderiza un monograma.",
-    "categorias": "string[]. Slugs de content/categorias.json. Se DERIVA de la union de `categorias` de sus productos: no se escribe a mano. Genera el enlazado interno.",
+    "categorias": "string[]. Slugs de content/categorias.json. Se DERIVA de la union de `categorias` de sus productos: no se escribe a mano. Es el eje con el que /marcas agrupa las marcas.",
     "fundadora": "boolean. true solo para Nishikawa, Tama-Roca y Miguelito, los tres proveedores que dan nombre a Nitamy.",
     "resumen": "string. Una línea. Se usa en la marquesina, en el índice y en la meta description.",
     "descripcion": "string[]. Dos o tres párrafos: qué es la marca y por qué rota.",
@@ -13,6 +13,7 @@
     "compradores": "ClaveSegmento[]. Quién la compra. Cruza con SEGMENTOS de config/nitamy.ts.",
     "productos": "Producto[]. { producto, presentacion, piezasPorCaja, sellos, foto, categorias }. `categorias` es la linea de ESE producto, no la de su marca: la pagina de categoria filtra por ahi, para que /categorias/reposteria no muestre las gomitas de Confitados Finos. `piezasPorCaja` es number|null: solo se llena cuando el catalogo lo dice sin ambiguedad. 'caja con 16 bolsas de 12 piezas' queda en null porque no se sabe si son 16 o 192.",
     "datosDeEjemplo": "boolean. true mientras `productos` no venga del cliente. Muestra un aviso en la página.",
+    "ocultaDelIndice": "boolean opcional. true esconde la marca de TODOS los listados (indice /marcas, pagina de categoria, marquesina de la home, marcas relacionadas y sitemap). Su pagina /marcas/{slug} sigue viva y sigue cotizando por WhatsApp: lo que se evita es mandar a un visitante desde un listado a una ficha sin una sola presentacion. Se apaga poniendolo en false, no borrando datos.",
     "textoRevisado": "boolean. true cuando el cliente aprobó `descripcion`. Mientras sea false, es borrador.",
     "relacionadas": "string[]. Slugs de otras marcas, para el enlazado interno.",
     "sellosVerificados": "boolean. Los sellos NOM-051 NO vienen del sitio viejo. Mientras esto sea false, la pagina NO afirma 'sin sellos de advertencia': decir eso sin dato es una afirmacion regulada y falsa. Solo se pone true cuando el cliente entregue los sellos reales por presentacion.",
@@ -108,8 +109,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-40-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -119,8 +119,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-60-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -130,8 +129,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/salado-60-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -141,8 +139,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/enchilado-60-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -152,8 +149,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-80-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -163,8 +159,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-200-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -174,8 +169,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/salado-200-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -185,8 +179,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/enchilado-200-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -196,8 +189,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-190-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -207,8 +199,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-70-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -218,8 +209,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/salado-70-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -229,8 +219,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/enchilado-70-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -240,8 +229,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-1-kg.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -254,8 +242,7 @@
           ],
           "foto": null,
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -265,8 +252,7 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -276,8 +262,7 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -287,8 +272,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/paquete-japones-60-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -298,8 +282,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/paquete-salado-60-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -309,8 +292,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/paquete-enchilado-60-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -320,8 +302,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/paquete-japones-80-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -331,8 +312,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/paquete-japones-40-gr.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -342,8 +322,7 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -353,8 +332,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-40-gr-con-salsa.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         },
         {
@@ -364,8 +342,7 @@
           "sellos": [],
           "foto": "/productos/nishikawa/japones-120-g-presentacion-8-7.webp",
           "categorias": [
-            "cacahuates",
-            "botana"
+            "cacahuates"
           ]
         }
       ],
@@ -529,11 +506,12 @@
       "logo": "/marcas/candy-pop.webp",
       "categorias": [
         "gomitas",
-        "paletas"
+        "paletas",
+        "caramelo-y-confiteria"
       ],
       "resumen": "Malvavisco y paleta de caramelo de rotación rápida.",
       "descripcion": [
-        "CP Products maneja malvavisco (Malvalleno Mix y Coffi's) y paleta de caramelo de formato pequeño (Super Super Tira, Súper Rebanada, Bolitochas y Rebanaditas), la que se vende de una en una en el mostrador. Es compra por impulso pura: precio bajo, decisión inmediata.",
+        "CP Products maneja malvavisco (Malvalleno Mix y Coffi's), paleta de caramelo de formato pequeño (Super Super Tira, Súper Rebanada y Rebanaditas) y caramelo en bolita (Bolitochas). Es producto que se vende de una en una en el mostrador: compra por impulso pura, precio bajo y decisión inmediata.",
         "Es de las líneas que mejor funcionan para sostener la venta diaria de un punto de venta pequeño y para surtir volumen a quien revende."
       ],
       "porQueRota": "Precio de una moneda y decisión de compra inmediata en el mostrador.",
@@ -593,7 +571,7 @@
           "sellos": [],
           "foto": "/productos/candy-pop/bolitochas-sandia.webp",
           "categorias": [
-            "paletas"
+            "caramelo-y-confiteria"
           ]
         },
         {
@@ -603,7 +581,7 @@
           "sellos": [],
           "foto": "/productos/candy-pop/bolitochas-surtidas.webp",
           "categorias": [
-            "paletas"
+            "caramelo-y-confiteria"
           ]
         },
         {
@@ -1627,8 +1605,7 @@
           "sellos": [],
           "foto": "/productos/productos-del-rey/lancita-con-azucar.webp",
           "categorias": [
-            "tamarindo",
-            "enchilados"
+            "tamarindo"
           ]
         },
         {
@@ -1638,8 +1615,7 @@
           "sellos": [],
           "foto": "/productos/productos-del-rey/tarugo-con-azucar.webp",
           "categorias": [
-            "tamarindo",
-            "enchilados"
+            "tamarindo"
           ]
         },
         {
@@ -1872,7 +1848,8 @@
       "categorias": [
         "gomitas",
         "paletas",
-        "reposteria"
+        "reposteria",
+        "caramelo-y-confiteria"
       ],
       "resumen": "Confitado y gragea para dulcería y repostería.",
       "descripcion": [
@@ -1924,7 +1901,7 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "paletas"
+            "caramelo-y-confiteria"
           ]
         },
         {
@@ -1934,7 +1911,7 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "paletas"
+            "caramelo-y-confiteria"
           ]
         },
         {
@@ -1944,7 +1921,7 @@
           "sellos": [],
           "foto": null,
           "categorias": [
-            "paletas"
+            "caramelo-y-confiteria"
           ]
         },
         {
@@ -2143,7 +2120,8 @@
       "categorias": [
         "enchilados",
         "gomitas",
-        "paletas"
+        "paletas",
+        "caramelo-y-confiteria"
       ],
       "resumen": "Paletas de caramelo macizo, gomitas y la línea Dulce Vida sin azúcar.",
       "descripcion": [
@@ -2249,7 +2227,7 @@
           "sellos": [],
           "foto": "/productos/chompys/dulce-vida-cafe.webp",
           "categorias": [
-            "paletas"
+            "caramelo-y-confiteria"
           ]
         },
         {
@@ -3520,6 +3498,7 @@
       ],
       "productos": [],
       "datosDeEjemplo": false,
+      "ocultaDelIndice": true,
       "textoRevisado": false,
       "relacionadas": [
         "candy-pop",
@@ -3528,7 +3507,7 @@
       ],
       "sellosVerificados": false,
       "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), índice p. 3",
-      "notaInterna": "Sin páginas de producto en CAT.NITAMY.pdf (solo el logotipo en la portada de temporada, p. 73, y en el índice, p. 3). La p. 75 trae tres estuches de figuras de malvavisco de Día de Muertos SIN marca visible; pueden ser Risa o Rivera. No se asignaron a nadie hasta que el cliente confirme."
+      "notaInterna": "Sin paginas de producto en CAT.NITAMY.pdf. OCULTA DE LOS LISTADOS el 4 sep 2026 (decision de Manolo): tenia cero productos y el indice mandaba al visitante a una ficha vacia. Su pagina sigue viva y cotiza por WhatsApp; se reactiva poniendo `ocultaDelIndice` en false cuando el cliente entregue la linea.\n\nPISTA FUERTE, SIN CONFIRMAR, de que la p. 75 es SUYA: el catalogo de temporada 2026 declara en su portada (p. 73) exactamente TRES marcas -Risa, Big Boy y Productos Rivera- y trae exactamente TRES paginas de producto: 74, 75 y 76. La 74 es Risa y la 76 es Big Boy, las dos identificadas por el logotipo del EMPAQUE, porque el encabezado de esas paginas no lleva marca. Por eliminacion queda Rivera para la 75, y el logotipo de Rivera dice \"MALVAVISCOS & GOMITAS\", que es exactamente lo que hay en esa pagina (figuras de malvavisco). El empaque de la p. 75 no tiene logotipo legible ni a 500 dpi, asi que sigue siendo inferencia: los tres estuches NO se cargaron. Falta que el cliente lo confirme."
     }
   ]
 }

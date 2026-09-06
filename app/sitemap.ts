@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITIO } from "@/config/nitamy";
 import { ARTICULOS } from "@/content/blog";
-import { CATEGORIAS, MARCAS } from "@/lib/contenido";
+import { MARCAS_VISIBLES } from "@/lib/contenido";
 
 /**
  * Sitemap.
@@ -20,11 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITIO.url}/`, changeFrequency: "monthly", priority: 1 },
     { url: `${SITIO.url}/marcas`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITIO.url}/blog`, changeFrequency: "weekly", priority: 0.8 },
-    {
-      url: `${SITIO.url}/categorias`,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
     { url: `${SITIO.url}/mayoristas`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITIO.url}/tiendas`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITIO.url}/cadenas`, changeFrequency: "monthly", priority: 0.8 },
@@ -37,22 +32,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const marcas: MetadataRoute.Sitemap = MARCAS.map((m) => ({
+  const marcas: MetadataRoute.Sitemap = MARCAS_VISIBLES.map((m) => ({
     url: `${SITIO.url}/marcas/${m.slug}`,
     changeFrequency: "monthly",
     // Las tres fundadoras son las que más tráfico de marca traen.
     priority: m.fundadora ? 0.9 : 0.7,
-  }));
-
-  /**
-   * Las ocho líneas del anaquel. Son la otra puerta de entrada del sitio:
-   * `/marcas/...` responde a quien ya sabe qué marca quiere y estas a quien
-   * sabe qué hueco tiene. Misma prioridad que una marca no fundadora.
-   */
-  const categorias: MetadataRoute.Sitemap = CATEGORIAS.map((c) => ({
-    url: `${SITIO.url}/categorias/${c.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.7,
   }));
 
   /**
@@ -68,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   return [
-    ...[...fijas, ...marcas, ...categorias].map((e) => ({
+    ...[...fijas, ...marcas].map((e) => ({
       ...e,
       lastModified: ahora,
     })),

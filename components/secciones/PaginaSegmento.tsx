@@ -3,7 +3,6 @@ import {
   CheckCircleIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { BotonEnlace } from "@/components/Boton";
 import { BotonCotizar } from "@/components/calificador/BotonCotizar";
 import { Migajas } from "@/components/DatosEstructurados";
 import { IconoCategoria } from "@/components/IconoCategoria";
@@ -113,9 +112,6 @@ export function PaginaSegmento({ c }: { c: ContenidoSegmento }) {
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <BotonCotizar origen={segmento.ruta} />
-              <BotonEnlace href="/categorias" variante="secundario">
-                Ver las ocho líneas
-              </BotonEnlace>
             </div>
           </Revelar>
         </div>
@@ -217,7 +213,8 @@ export function PaginaSegmento({ c }: { c: ContenidoSegmento }) {
               Todo esto sale del mismo pedido
             </h2>
             <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-              Más de {MARCAS_DECLARADAS} marcas repartidas en ocho líneas, con{" "}
+              Más de {MARCAS_DECLARADAS} marcas repartidas en {CATEGORIAS.length}{" "}
+              líneas, con{" "}
               {COBERTURA_PORCENTAJE}% de cobertura en la República y más de{" "}
               {anios} años operando.
             </p>
@@ -228,10 +225,13 @@ export function PaginaSegmento({ c }: { c: ContenidoSegmento }) {
               const suPiel = PIELES[cat.color];
               return (
                 <li key={cat.slug}>
-                  <Link
-                    href={`/categorias/${cat.slug}`}
-                    className="chip presionable group inline-flex items-center gap-2.5 rounded-pill border border-linea bg-papel px-4 py-2.5 font-semibold text-tinta transition-colors duration-200 ease-salida hover:bg-papel-2"
-                  >
+                  {/*
+                    5 sep 2026: era un enlace a /categorias y ahora es una
+                    etiqueta. La línea se sigue enseñando con su color y su
+                    icono; lo que se quitó es la navegación, porque el cliente
+                    retiró Categorías del sitio.
+                  */}
+                  <span className="chip inline-flex items-center gap-2.5 rounded-pill border border-linea bg-papel px-4 py-2.5 font-semibold text-tinta">
                     <span
                       className={`flex size-7 items-center justify-center rounded-pill ${suPiel.relleno} ${suPiel.texto} ${BORDE_SILUETA}`}
                     >
@@ -242,7 +242,7 @@ export function PaginaSegmento({ c }: { c: ContenidoSegmento }) {
                       />
                     </span>
                     {cat.nombre}
-                  </Link>
+                  </span>
                 </li>
               );
             })}

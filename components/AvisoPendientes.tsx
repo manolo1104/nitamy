@@ -21,8 +21,13 @@ export function AvisoPendientes() {
     <aside
       aria-label="Datos pendientes del cliente"
       /* Abajo a la derecha: abajo a la izquierda vive el indicador de Next y
-         se encimaban, tapando el contenido de la página. */
-      className="fixed bottom-3 right-3 z-20 max-w-[19rem] rounded-caja border border-borde-campo bg-white/95 p-3 text-xs shadow-[0_8px_24px_rgba(20,17,15,0.14)] backdrop-blur-sm"
+         se encimaban, tapando el contenido de la página.
+
+         5 sep 2026: sube a `bottom-24` para dejar libre la esquina, donde
+         ahora va el botón flotante de WhatsApp. Este aviso solo existe en
+         desarrollo, pero es justo ahí donde se verifica el sitio, así que
+         taparse uno al otro habría estorbado en cada revisión. */
+      className="fixed bottom-24 right-3 z-20 max-w-[19rem] rounded-caja border border-borde-campo bg-white/95 p-3 text-xs shadow-[0_8px_24px_rgba(20,17,15,0.14)] backdrop-blur-sm"
     >
       <details>
         <summary className="cursor-pointer font-bold text-naranja-texto">

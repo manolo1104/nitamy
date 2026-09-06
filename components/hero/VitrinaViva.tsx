@@ -318,7 +318,7 @@ export function VitrinaViva({
           id="vitrina-titulo"
           className="mt-10 text-xs font-bold uppercase tracking-[0.18em] text-tinta-2"
         >
-          Las ocho líneas del anaquel
+          Las {lineas.length} líneas del anaquel
         </p>
 
         {/*

@@ -82,12 +82,7 @@ export default function IndiceDeMarcas() {
                   id={`cat-${categoria.slug}`}
                   className="text-[clamp(1.375rem,2.4vw,1.875rem)] font-extrabold leading-tight tracking-[-0.02em]"
                 >
-                  <Link
-                    href={`/categorias/${categoria.slug}`}
-                    className="enlace"
-                  >
-                    {categoria.nombre}
-                  </Link>
+                  {categoria.nombre}
                 </h2>
                 <p className="max-w-[46ch] text-tinta-2">{categoria.resumen}</p>
               </div>

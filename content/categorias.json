@@ -1,6 +1,6 @@
 {
   "_esquema": {
-    "slug": "string. URL: /categorias/{slug}. No cambiar una vez publicado.",
+    "slug": "string. Identificador de la linea. Desde el 5 sep 2026 ya NO es una URL: las paginas /categorias se eliminaron. Se sigue usando para agrupar /marcas, para cruzar con las temporadas y como clave de los datos de producto.",
     "nombre": "string. Como se muestra.",
     "resumen": "string. Una línea, para el índice y la meta description.",
     "descripcion": "string. Un párrafo: qué agrupa la categoría y a quién le sirve.",
@@ -97,6 +97,15 @@
       "descripcion": "Azúcar glass, gragea y granillo para decorar. No es dulce de reventa: es insumo de panadería y repostería, y por eso abre un cliente distinto al del anaquel, con pedido recurrente y por peso.",
       "color": "celeste",
       "icono": "Cake",
+      "textoRevisado": false
+    },
+    {
+      "slug": "caramelo-y-confiteria",
+      "nombre": "Caramelo y confitería",
+      "resumen": "Caramelo en bolita y popote de dulce: impulso que no es paleta.",
+      "descripcion": "Caramelo macizo en bolita, popote de dulce y goma de mascar. Es el dulce de impulso que no es paleta: comparte el mostrador y el precio de una moneda, pero se surte en bolsa y en paquete de piezas, no en display de palo.",
+      "color": "amarillo",
+      "icono": "CirclesThree",
       "textoRevisado": false
     }
   ]

@@ -1,4 +1,5 @@
 import { AvisoPendientes } from "@/components/AvisoPendientes";
+import { BotonWhatsappFlotante } from "@/components/BotonWhatsappFlotante";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { OrganizacionYNegocio } from "@/components/DatosEstructurados";
@@ -23,6 +24,7 @@ export default function LayoutSitio({
       <Header />
       <main id="contenido">{children}</main>
       <Footer />
+      <BotonWhatsappFlotante />
       <AvisoPendientes />
     </ProveedorCalificador>
   );

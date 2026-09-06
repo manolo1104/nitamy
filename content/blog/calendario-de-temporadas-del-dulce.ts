@@ -16,7 +16,7 @@ export const articulo: Articulo = {
   palabrasClave: [
     "temporadas del dulce en México",
     "cuándo pedir dulces para navidad",
-    "bolsa de posada al mayoreo",
+    "dulce de temporada al mayoreo",
     "calendario comercial dulcería",
     "dulces por temporada",
   ],
@@ -69,7 +69,7 @@ export const articulo: Articulo = {
           "Fiestas Patrias",
           "15 y 16 de septiembre",
           "5 semanas",
-          "Dulce típico, palanqueta, cocada, botana de kermés",
+          "Dulce típico, palanqueta, cocada y botana de temporada",
         ],
         [
           "Día de Muertos",
@@ -81,7 +81,7 @@ export const articulo: Articulo = {
           "Navidad y Reyes",
           "Posadas y 6 de enero",
           "8 semanas",
-          "Bolsa de posada, colación, piñata, dulce de regalo",
+          "Colación, piñata y dulce de regalo",
         ],
       ],
       nota:
@@ -136,7 +136,7 @@ export const articulo: Articulo = {
       tipo: "lista",
       items: [
         "**Escuelas y salones.** Día del Niño y Fiestas Patrias, sobre todo. Piden por lista con días de anticipación.",
-        "**Comités vecinales.** Kermés de septiembre y posadas de diciembre. Suelen pagar de contado.",
+        "**Negocios de barrio.** Suben su pedido en septiembre y en diciembre, y suelen pagar de contado.",
         "**Empresas.** Bolsa de fin de año para el personal. Es el pedido más grande del año para muchas tiendas y casi nadie lo persigue.",
       ],
     },
@@ -175,9 +175,9 @@ export const articulo: Articulo = {
   ],
   faq: [
     {
-      pregunta: "¿Cuándo hay que pedir la bolsa de posada?",
+      pregunta: "¿Cuándo hay que pedir el dulce de diciembre?",
       respuesta:
-        "Con unas ocho semanas de anticipación, es decir a mediados de octubre para las posadas de diciembre. Navidad y Reyes es la temporada más grande del año y la que más anticipación exige, porque en diciembre la producción de los fabricantes ya está comprometida desde octubre.",
+        "Con unas ocho semanas de anticipación, es decir a mediados de octubre. Navidad y Reyes es la temporada más grande del año y la que más anticipación exige, porque en diciembre la producción de los fabricantes ya está comprometida desde octubre.",
     },
     {
       pregunta: "¿Cuáles son las temporadas fuertes del dulce en México?",

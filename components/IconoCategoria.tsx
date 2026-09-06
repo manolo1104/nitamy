@@ -5,6 +5,7 @@ import {
   BalloonIcon,
   CakeIcon,
   CherriesIcon,
+  CirclesThreeIcon,
   CookieIcon,
   DropIcon,
   FlagIcon,
@@ -24,9 +25,9 @@ import {
  *
  * Lista blanca a propósito. Lo alternativo sería importar el paquete entero e
  * indexarlo por nombre, y eso arrastra los más de 9,000 iconos de Phosphor al
- * grafo de módulos para usar dieciséis. Aquí se importan los dieciséis y ya.
+ * grafo de módulos para usar diecisiete. Aquí se importan los diecisiete y ya.
  *
- * Estos dieciséis son la paleta completa de iconos del sitio: si el cliente
+ * Estos diecisiete son la paleta completa de iconos del sitio: si el cliente
  * agrega una categoría, se agrega el icono aquí y en el JSON. Un nombre que
  * no esté en la lista no revienta la página; cae al icono neutro, que es la
  * degradación correcta para un dato de contenido.
@@ -42,6 +43,7 @@ const ICONOS: Record<string, Icon> = {
   Balloon: BalloonIcon,
   Cake: CakeIcon,
   Cherries: CherriesIcon,
+  CirclesThree: CirclesThreeIcon,
   Cookie: CookieIcon,
   Drop: DropIcon,
   Flag: FlagIcon,

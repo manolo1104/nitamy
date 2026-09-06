@@ -123,7 +123,7 @@ export const articulo: Articulo = {
     {
       tipo: "parrafo",
       texto:
-        "El pedido de temporada NO se arma junto con el pedido normal, porque las fechas no coinciden. La bolsa de posada se levanta ocho semanas antes de diciembre; la calaverita, seis semanas antes del 2 de noviembre.",
+        "El pedido de temporada NO se arma junto con el pedido normal, porque las fechas no coinciden. El pedido de diciembre se levanta ocho semanas antes; la calaverita, seis semanas antes del 2 de noviembre.",
     },
     {
       tipo: "parrafo",

@@ -21,6 +21,11 @@ import type { ClaveSegmento } from "@/config/nitamy";
  * decidir. Inventar uno para que la página se vea más completa es la forma
  * más rápida de quemar un lead cuando la cotización real no coincide.
  *
+ * ⚠️ 4 sep 2026: se retiró de este archivo toda mención a los sellos
+ * NOM-051 (instrucción del cliente: la norma no es parte de lo que se
+ * cotiza). El argumento de cadenas se sostiene ahora en documentación de
+ * alta, que es lo que el corporativo realmente pide.
+ *
  * ⚠️ SEGUNDA REGLA DURA (26 ago 2026): tampoco se promete una FECHA de
  * respuesta. Antes decía "te cotizamos el mismo día" y se cambió a "con
  * rapidez" por instrucción del cliente: es una promesa que ventas no siempre
@@ -147,7 +152,7 @@ export const CONTENIDO_SEGMENTOS: ReadonlyArray<ContenidoSegmento> = [
     titulo: "Abasto continuo y documentación en regla",
     metaTitulo: "Proveedor de confitería para cadenas de autoservicio",
     metaDescripcion:
-      "Proveedor de dulce mexicano para cadenas de autoservicio: abasto continuo, sellos NOM-051 por presentación y documentación en regla. Más de 30 años operando.",
+      "Proveedor de dulce mexicano para cadenas de autoservicio: abasto continuo, documentación en regla y capacidad de suministro sostenida. Más de 30 años operando.",
     entrada:
       "Para una cadena, el precio no es la variable crítica. Lo son el desabasto en el pico de temporada y el proveedor que no entrega la documentación cuando el corporativo la solicita.",
     problema: {
@@ -162,9 +167,9 @@ export const CONTENIDO_SEGMENTOS: ReadonlyArray<ContenidoSegmento> = [
           "Grupo Nitamy abastece desde 1995 y se constituyó como S.A. de C.V. en 1999. La capacidad de suministro no empieza con este contrato.",
       },
       {
-        titulo: "Sellos NOM-051 por presentación",
+        titulo: "Documentación desde el alta",
         texto:
-          "El etiquetado frontal de cada presentación se entrega junto con la cotización, no después. Es el dato que detiene un alta y por eso se anticipa.",
+          "Fichas de producto, especificaciones de empaque y la documentación fiscal que solicite tu corporativo. Es lo que detiene un alta y por eso se anticipa.",
       },
       {
         titulo: "La temporada se pide con anticipación",
@@ -180,7 +185,7 @@ export const CONTENIDO_SEGMENTOS: ReadonlyArray<ContenidoSegmento> = [
     },
     comoEmpieza: [
       "Nos indicas qué categorías evalúas y para cuántas sucursales.",
-      "Te enviamos presentaciones, sellos NOM-051 y la documentación que solicite tu área de altas.",
+      "Te enviamos presentaciones y la documentación que solicite tu área de altas.",
       "Ajustamos volumen y calendario de entregas.",
     ],
   },

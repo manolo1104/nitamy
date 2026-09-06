@@ -1,4 +1,4 @@
-import { MARCAS, type Marca } from "./contenido";
+import type { Marca } from "./contenido";
 
 /**
  * En qué FORMATO llega cada categoría.
@@ -124,27 +124,17 @@ const CATALOGO_DE_FORMATOS: ReadonlyArray<
  * Mirando solo la presentación, el granel desaparecía del sitio entero, y es
  * justo el formato que define al comprador mayorista.
  */
-export function formatosDe(marcas: Marca[]): Formato[] {
-  const presentaciones = marcas.flatMap((m) =>
-    m.productos.map((p) => `${p.producto} ${p.presentacion}`),
-  );
-
+function formatosDeTextos(presentaciones: string[]): Formato[] {
   return CATALOGO_DE_FORMATOS.map(({ patron, ...f }) => ({
     ...f,
     cuantos: presentaciones.filter((t) => patron.test(t)).length,
   })).filter((f) => f.cuantos > 0);
 }
 
-/** Los formatos de una categoría, por su slug. */
-export function formatosDeCategoria(slug: string): Formato[] {
-  return formatosDe(MARCAS.filter((m) => m.categorias.includes(slug)));
-}
-
-/**
- * Cuenta los productos de una lista de marcas. Se usa en las cifras de las
- * páginas de categoría, y existe aquí y no en el componente para que ninguna
- * página escriba un total a mano.
- */
-export function contarProductos(marcas: Marca[]): number {
-  return marcas.reduce((n, m) => n + m.productos.length, 0);
+export function formatosDe(marcas: Marca[]): Formato[] {
+  return formatosDeTextos(
+    marcas.flatMap((m) =>
+      m.productos.map((p) => `${p.producto} ${p.presentacion}`),
+    ),
+  );
 }

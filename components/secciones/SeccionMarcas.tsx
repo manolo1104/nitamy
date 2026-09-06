@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
 import { MARCAS_DECLARADAS } from "@/config/nitamy";
-import { MARCAS, MARCAS_CON_LOGO, TOTAL_MARCAS } from "@/lib/contenido";
+import { MARCAS_CON_LOGO, MARCAS_VISIBLES } from "@/lib/contenido";
 import { LogoMarca } from "../LogoMarca";
 import { BotonEnlace } from "../Boton";
 import { Revelar } from "../Revelar";
@@ -36,9 +36,9 @@ const EN_LA_REJILLA = 12;
 
 export function SeccionMarcas() {
   const conLogo = MARCAS_CON_LOGO;
-  const sinLogo = MARCAS.filter((m) => !m.logo);
+  const sinLogo = MARCAS_VISIBLES.filter((m) => !m.logo);
   const visibles = [...conLogo, ...sinLogo].slice(0, EN_LA_REJILLA);
-  const restantes = TOTAL_MARCAS - visibles.length;
+  const restantes = MARCAS_VISIBLES.length - visibles.length;
 
   return (
     <section
@@ -115,13 +115,13 @@ export function SeccionMarcas() {
 
           {/* Nota de trabajo, nunca en producción: al comprador no le importa
               que falten logotipos, y decírselo resta credibilidad. */}
-          {TOTAL_MARCAS - conLogo.length > 0 &&
+          {MARCAS_VISIBLES.length - conLogo.length > 0 &&
             process.env.NODE_ENV !== "production" && (
               <p className="mt-4 text-xs text-naranja-texto">
                 Nota de desarrollo:{" "}
-                {TOTAL_MARCAS - conLogo.length === 1
+                {MARCAS_VISIBLES.length - conLogo.length === 1
                   ? "falta el logotipo de 1 marca"
-                  : `faltan los logotipos de ${TOTAL_MARCAS - conLogo.length} marcas`}
+                  : `faltan los logotipos de ${MARCAS_VISIBLES.length - conLogo.length} marcas`}
                 . Mientras llegan se muestran con su nombre y quedan al final
                 de la rejilla.
               </p>

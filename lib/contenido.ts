@@ -82,6 +82,19 @@ export type Marca = {
   productos: Producto[];
   datosDeEjemplo: boolean;
   /**
+   * Esconde la marca de TODOS los listados: el índice /marcas, la página de
+   * categoría, la marquesina de la home, las marcas relacionadas y el
+   * sitemap. Su página propia sigue viva y sigue cotizando por WhatsApp.
+   *
+   * Existe por Productos Rivera (4 sep 2026): el catálogo la declara en su
+   * índice pero no le dedica una sola página de producto, así que su ficha
+   * no tiene ni una presentación. Mandar a un visitante desde un listado a
+   * esa ficha es gastarle un clic para nada. La marca no se borra porque sí
+   * se distribuye; se deja de anunciar hasta que el cliente entregue la
+   * línea, y entonces esto vuelve a `false`.
+   */
+  ocultaDelIndice?: boolean;
+  /**
    * Los sellos NOM-051 NO vienen del sitio anterior del cliente: ahí no se
    * publican. Mientras esto sea `false`, la página NO afirma "sin sellos de
    * advertencia".
@@ -171,8 +184,23 @@ export const TOTAL_MARCAS = MARCAS.length;
 /** Las tres que dan nombre a Nitamy: NIshikawa, TAma-Roca, Miguelito. */
 export const MARCAS_FUNDADORAS = MARCAS.filter((m) => m.fundadora);
 
-/** Las que ya tienen logo real. Las demás caen a monograma tipográfico. */
-export const MARCAS_CON_LOGO = MARCAS.filter((m) => Boolean(m.logo));
+/**
+ * Las marcas que sí se anuncian. Es la lista que deben usar TODOS los
+ * listados; `MARCAS` a secas queda para lo que necesita el universo entero,
+ * como `generateStaticParams` o el conteo de cuántas marcas se distribuyen.
+ *
+ * Mismo patrón que `FAQS_PUBLICABLES`: el dato no se borra, se deja de
+ * publicar. Ver `ocultaDelIndice` en el tipo `Marca`.
+ */
+export const MARCAS_VISIBLES = MARCAS.filter((m) => !m.ocultaDelIndice);
+
+/**
+ * Las que ya tienen logo real. Las demás caen a monograma tipográfico.
+ *
+ * Sale de `MARCAS_VISIBLES` y no de `MARCAS` porque su único consumidor es
+ * la rejilla de la home, que es un listado y enlaza a la ficha de cada una.
+ */
+export const MARCAS_CON_LOGO = MARCAS_VISIBLES.filter((m) => Boolean(m.logo));
 
 export function marcaPorSlug(slug: string): Marca | undefined {
   return MARCAS.find((m) => m.slug === slug);
@@ -183,29 +211,13 @@ export function categoriaPorSlug(slug: string): Categoria | undefined {
 }
 
 export function marcasDeCategoria(slug: string): Marca[] {
-  return MARCAS.filter((m) => m.categorias.includes(slug));
-}
-
-/**
- * Los productos de una línea, con su marca al lado.
- *
- * Filtra por la categoría del PRODUCTO. Un producto sin `categorias` propias
- * hereda las de su marca, así que el contenido viejo sigue funcionando.
- */
-export function productosDeCategoria(
-  slug: string,
-): { producto: Producto; marca: Marca }[] {
-  return marcasDeCategoria(slug).flatMap((marca) =>
-    marca.productos
-      .filter((p) => (p.categorias ?? marca.categorias).includes(slug))
-      .map((producto) => ({ producto, marca })),
-  );
+  return MARCAS_VISIBLES.filter((m) => m.categorias.includes(slug));
 }
 
 export function marcasRelacionadas(marca: Marca): Marca[] {
   return marca.relacionadas
     .map((slug) => marcaPorSlug(slug))
-    .filter((m): m is Marca => Boolean(m));
+    .filter((m): m is Marca => m !== undefined && !m.ocultaDelIndice);
 }
 
 /** Solo las FAQ con respuesta real. Las pendientes no se muestran ni se

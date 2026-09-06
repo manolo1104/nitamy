@@ -1,6 +1,5 @@
 import { ClockIcon, PackageIcon, TruckIcon } from "@phosphor-icons/react/dist/ssr";
 import type { Metadata } from "next";
-import { BotonEnlace } from "@/components/Boton";
 import { BotonCotizar } from "@/components/calificador/BotonCotizar";
 import { Migajas } from "@/components/DatosEstructurados";
 import { Revelar } from "@/components/Revelar";
@@ -87,9 +86,6 @@ export default function PaginaDeCobertura() {
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <BotonCotizar origen="/cobertura" />
-              <BotonEnlace href="/categorias" variante="secundario">
-                Ver las ocho líneas
-              </BotonEnlace>
             </div>
           </Revelar>
         </div>

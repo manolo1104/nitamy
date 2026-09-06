@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BandaMarcas } from "@/components/secciones/BandaMarcas";
 import { BarraConfianza } from "@/components/secciones/BarraConfianza";
-import { Categorias } from "@/components/secciones/Categorias";
 import { Cobertura } from "@/components/secciones/Cobertura";
 import { ComoFunciona } from "@/components/secciones/ComoFunciona";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
@@ -18,8 +17,8 @@ import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
  * Home.
  *
  * Ninguna sección repite la familia de layout de la anterior: el split del
- * hero, la banda de logos, la banda de cifras, la rejilla de círculos con
- * panel de bloques, la rejilla de segmentos, el rail de temporadas, el
+ * hero, la banda de logos, la banda de cifras, la rejilla de segmentos, el
+ * rail de temporadas, el
  * mosaico de marcas, las tres tarjetas de pasos, las columnas de cobertura,
  * el carrusel de reseñas, la rejilla asimétrica de recursos y el acordeón.
  *
@@ -27,14 +26,21 @@ import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
  * etiqueta en versalitas encima de cada título es lo que hace que todas las
  * páginas generadas se sientan iguales.
  *
- * RITMO DE COLOR. Con la línea nueva, la regla que evita que esto se vuelva
- * confeti es que las secciones a color y las de papel se alternan. Ninguna
- * sección saturada toca a otra saturada:
+ * RITMO DE COLOR. La regla que evita que esto se vuelva confeti es que las
+ * secciones a color y las de papel se alternan. Ninguna sección saturada toca
+ * a otra saturada:
  *
- *   hero con manchas → banda de logos → cifras → categorías (color en los
- *   círculos y el panel) → segmentos (celda principal en carbón) → temporadas
- *   (color) → marcas, en papel → pasos (papel tintado, tarjetas de color) →
- *   cobertura, en papel → reseñas (color) → recursos → FAQ → CTA.
+ *   hero con manchas → banda de logos → cifras → segmentos (celda principal
+ *   en carbón) → temporadas (color) → marcas, en papel → pasos (papel
+ *   tintado, tarjetas de color) → cobertura, en papel → reseñas (color) →
+ *   recursos → FAQ → CTA.
+ *
+ * 5 SEP 2026: se eliminó la sección de categorías, que iba entre las cifras y
+ * los segmentos, porque el cliente retiró Categorías del sitio. Comprobado
+ * que no rompe el ritmo, y de hecho lo mejora: esa sección y la de segmentos
+ * compartían el mismo envoltorio sin fondo, así que había DOS paradas en
+ * papel seguidas. Ahora la banda naranja de cifras entrega directo a
+ * segmentos, que es la alternancia que pide la regla.
  *
  * REUNIÓN 21 ago 2026: se eliminó la sección oscura que iba entre los pasos y
  * cobertura. Primero perdió la historia del nombre y luego el cliente la quitó
@@ -73,7 +79,6 @@ export default function Inicio() {
       <Hero />
       <BandaMarcas />
       <BarraConfianza />
-      <Categorias />
       <RuteoSegmentos />
       <Temporadas />
       <SeccionMarcas />

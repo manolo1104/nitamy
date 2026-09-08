@@ -121,6 +121,19 @@ Tres marcas no siguen la regla y se resolvieron a mano:
 
 - **Nishikawa** tiene 25 fotos para 24 productos. La de más es el duplicado de
   "Japonés 1 kg" que se borró, y va al final, así que no desalinea nada.
+
+  🔴 **7 sep 2026: la decisión de arriba estaba al revés.** El sitio anterior
+  trae DOS fotos tituladas "Japonés 1 Kilo" (índices 11 y 24 de esa marca). El
+  23 de agosto se conservó la primera (índice 11) por ser la que aparecía
+  antes en el orden, y se descartó la última por "duplicado". Pero la del
+  índice 11 es una bolsa SIN el peso impreso, sin sellos NOM-051 ni el sello
+  rojo "Desde 1957" — un diseño de empaque más viejo que no corresponde a
+  ningún producto vigente. La del índice 24 sí dice "CONTENIDO NETO 1 kg" en
+  el empaque y coincide con la bolsa de 1 kg de `CAT.NITAMY.pdf` (p. 6):
+  bolsa grande transparente, cacahuate visible, octágonos de exceso y el
+  sello de 1957. Se corrigió: `japones-1-kg.webp` ahora es la del índice 24.
+  El orden posicional del scrape no siempre es la señal correcta; el texto
+  impreso en el propio empaque sí lo es.
 - **Tama-Roca** se había reconstruido desde el catálogo en OTRO orden, así que
   la posición no sirve. Solo se tomó "Banderilla a granel" (índice 6).
 - **Miguelito** tenía 48 fotos para 47 productos, y la de más estaba EN MEDIO
@@ -133,6 +146,25 @@ Tres son presentaciones de Tama-Roca que solo están en el catálogo (banderilla
 en display, palebola y pellizco a granel) y dos son de Productos Rivera, cuya
 página del sitio anterior da 404. Las imágenes del catálogo llegan a 288px como
 mucho y desentonarían al lado de las de 800.
+
+### 🟡 7 sep 2026: tres fotos de Nishikawa SÍ salen del catálogo, a propósito
+
+`Japonés 195 g`, `Japonés 120 g` (35 piezas) y `Japonés 55 g` no existen en el
+sitio anterior — nunca se fotografiaron ahí, ni con otro nombre: son líneas
+del catálogo (p. 7) que el sitio viejo no vendía. Sin ellas, esos tres
+productos se quedaban sin imagen desde que se capturaron del PDF el 1 sep.
+
+Manolo pidió resolverlo aunque la única fuente sea el catálogo (~130-460 px de
+origen, muy por debajo del estándar de 800×1000 del resto de la marca). Se
+recortaron de un render a 400 dpi de la p. 7, se ajustó el marco al empaque y
+se aplicó un afilado ligero para compensar el desenfoque de la ampliación.
+`japones-195-gr.webp` y `japones-120-gr-35pzs.webp` quedan legibles a tamaño
+de tarjeta; `japones-55-gr.webp` es la más comprometida porque su recorte de
+origen es el más pequeño de los tres (~132×241 px) y se nota borrosa de cerca.
+
+Es la ÚNICA excepción a la regla de "nunca se publica una foto del catálogo":
+el cliente prefirió tener algo a dejar la ficha vacía. Si algún día llega una
+foto real de estas tres presentaciones, hay que reemplazarlas sin dudarlo.
 
 ### La regla que queda
 

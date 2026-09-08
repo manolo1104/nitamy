@@ -240,7 +240,7 @@
             "exceso-calorias",
             "exceso-sodio"
           ],
-          "foto": null,
+          "foto": "/productos/nishikawa/japones-120-gr-35pzs.webp",
           "categorias": [
             "cacahuates"
           ]
@@ -250,7 +250,7 @@
           "presentacion": "1 paquete con 20 piezas de 195 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/nishikawa/japones-195-gr.webp",
           "categorias": [
             "cacahuates"
           ]
@@ -260,7 +260,7 @@
           "presentacion": "1 paquete con 50 piezas de 55 g.",
           "piezasPorCaja": 50,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/nishikawa/japones-55-gr.webp",
           "categorias": [
             "cacahuates"
           ]
@@ -297,7 +297,7 @@
         },
         {
           "producto": "Japonés 80 g exclusivo, 10 × 10",
-          "presentacion": "1 empaque con 10 bolsas; cada bolsa trae 10 piezas de 80 g. Exclusivo Grupo Nitamy.",
+          "presentacion": "1 empaque con 10 bolsas; cada bolsa trae 10 piezas de 80 g y 10 sobres de salsa. Exclusivo Grupo Nitamy.",
           "piezasPorCaja": 10,
           "sellos": [],
           "foto": "/productos/nishikawa/paquete-japones-80-gr.webp",
@@ -320,7 +320,7 @@
           "presentacion": "1 empaque con 20 bolsas; cada bolsa trae 10 piezas de 40 g, con sobres de salsa incluidos. Exclusivo Grupo Nitamy.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/nishikawa/paquete-japones-40-gr-20x10.webp",
           "categorias": [
             "cacahuates"
           ]
@@ -427,7 +427,7 @@
           "presentacion": "1 caja con 5 displays de 20 piezas de 40 g cada una.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/tama-roca/banderilla-en-display.webp",
           "categorias": [
             "tamarindo",
             "enchilados"
@@ -460,7 +460,7 @@
           "presentacion": "24 piezas de 60 g.",
           "piezasPorCaja": 24,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/tama-roca/palebola-a-granel.webp",
           "categorias": [
             "tamarindo",
             "enchilados"
@@ -482,7 +482,7 @@
           "presentacion": "160 piezas de 20 g.",
           "piezasPorCaja": 160,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/tama-roca/pellizco-a-granel.webp",
           "categorias": [
             "tamarindo",
             "enchilados"
@@ -740,7 +740,7 @@
           "presentacion": "1 caja con 24 envases de 140 g.",
           "piezasPorCaja": 24,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/salsa-tamazula/valentina-chile-en-polvo-140-g.webp",
           "categorias": [
             "salsas"
           ]
@@ -750,7 +750,7 @@
           "presentacion": "1 caja con 15 displays. Promoción: salsa Roja de 250 ml más chile en polvo de 140 g.",
           "piezasPorCaja": 15,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/salsa-tamazula/roja-250-mas-chile-en-polvo.webp",
           "categorias": [
             "salsas"
           ]
@@ -869,7 +869,7 @@
           "presentacion": "1 caja con 12 piezas de 900 g.",
           "piezasPorCaja": 12,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/miguelito/m-sazonador-900-g.webp",
           "categorias": [
             "chamoy-y-polvos"
           ]
@@ -990,7 +990,7 @@
           "presentacion": "1 caja con 20 bolsas de 980 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/miguelito/kilo-cereza.webp",
           "categorias": [
             "chamoy-y-polvos"
           ]
@@ -1041,7 +1041,7 @@
           "presentacion": "1 caja con 20 bolsas de 980 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/miguelito/kilo-pepino-limon.webp",
           "categorias": [
             "chamoy-y-polvos"
           ]
@@ -1304,7 +1304,7 @@
           "presentacion": "1 caja con 12 piezas: 200 g de pulpa más 200 g de polvo.",
           "piezasPorCaja": 12,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/miguelito/chamoyazo-duo.webp",
           "categorias": [
             "chamoy-y-polvos"
           ]
@@ -1381,7 +1381,7 @@
           "presentacion": "1 caja con 15 bolsas de 16 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/betamex/paleta-mini-gesto.webp",
           "categorias": [
             "paletas"
           ]
@@ -1391,7 +1391,7 @@
           "presentacion": "1 caja con 18 bolsas de 16 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/betamex/paleta-gesto.webp",
           "categorias": [
             "paletas"
           ]
@@ -1434,7 +1434,7 @@
           "presentacion": "1 caja con 12 estuches de 50 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/betamex/banderilla-corta.webp",
           "categorias": [
             "tamarindo",
             "enchilados"
@@ -1485,7 +1485,7 @@
           "presentacion": "1 caja con 15 paquetes de 12 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/dulces-karla/vasito-tamarindo-mediano.webp",
           "categorias": [
             "tamarindo"
           ]
@@ -1715,7 +1715,7 @@
           "presentacion": "1 caja con 100 bolsas de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/dulces-guaz/paleta-kachetada.webp",
           "categorias": [
             "paletas",
             "enchilados"
@@ -1748,7 +1748,7 @@
           "presentacion": "1 caja con 200 bolsas de 5 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/dulces-guaz/k-chekangurin-chamoy.webp",
           "categorias": [
             "paletas",
             "enchilados"
@@ -1790,7 +1790,7 @@
           "presentacion": "1 caja con 50 tiras de 10 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/dulces-guaz/unicomeme.webp",
           "categorias": [
             "gomitas"
           ]
@@ -1828,7 +1828,7 @@
           "presentacion": "1 caja con 40 bolsas de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/sandy/tamalito-de-tamarindo.webp",
           "categorias": [
             "tamarindo"
           ]
@@ -1866,7 +1866,7 @@
           "presentacion": "1 caja con 25 bolsas de 20 piezas. Variedad de cobertura.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/paleta-confibom-mix.webp",
           "categorias": [
             "paletas"
           ]
@@ -1876,7 +1876,7 @@
           "presentacion": "1 caja con 8 bolsas de 1 kg. Mango, tamarindo y sandía.",
           "piezasPorCaja": 8,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/kanguritos.webp",
           "categorias": [
             "gomitas"
           ]
@@ -1889,7 +1889,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/confitados-finos/red-balls.webp",
           "categorias": [
             "gomitas"
           ]
@@ -1899,7 +1899,7 @@
           "presentacion": "1 caja con 18 paquetes de 60 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/confi-chispas-surtidas.webp",
           "categorias": [
             "caramelo-y-confiteria"
           ]
@@ -1909,7 +1909,7 @@
           "presentacion": "1 caja con 18 paquetes de 60 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/confi-twister.webp",
           "categorias": [
             "caramelo-y-confiteria"
           ]
@@ -1919,7 +1919,7 @@
           "presentacion": "1 caja con 18 paquetes de 60 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/confi-gum.webp",
           "categorias": [
             "caramelo-y-confiteria"
           ]
@@ -1929,7 +1929,7 @@
           "presentacion": "1 caja con 25 bolsas de 1 kg.",
           "piezasPorCaja": 25,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configragea-colores.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1939,7 +1939,7 @@
           "presentacion": "1 caja con 20 bolsas de 250 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configranillo-chocolate.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1949,7 +1949,7 @@
           "presentacion": "1 caja con 20 bolsas de 250 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configranillo-multicolor.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1959,7 +1959,7 @@
           "presentacion": "1 caja con 20 bolsas de 250 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configranillo-rosa.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1969,7 +1969,7 @@
           "presentacion": "1 caja con 20 bolsas de 250 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configranillo-azul.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1979,7 +1979,7 @@
           "presentacion": "1 caja con 20 bolsas de 250 g.",
           "piezasPorCaja": 20,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configranillo-blanco.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1989,7 +1989,7 @@
           "presentacion": "1 caja con 24 bolsas de 1 kg. Azúcar glass para repostería.",
           "piezasPorCaja": 24,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configlass-1-kg.webp",
           "categorias": [
             "reposteria"
           ]
@@ -1999,7 +1999,7 @@
           "presentacion": "1 caja con 46 bolsas de 500 g. Azúcar glass para repostería.",
           "piezasPorCaja": 46,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/confitados-finos/configlass-500-g.webp",
           "categorias": [
             "reposteria"
           ]
@@ -2037,17 +2037,17 @@
           "presentacion": "1 caja con 6 bolsas de aproximadamente 100 piezas de 15 g; 9 kg por caja.",
           "piezasPorCaja": 6,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/jovy/fantasy-gummy-mix.webp",
           "categorias": [
             "gomitas"
           ]
         },
         {
           "producto": "Mini Gummi Bears",
-          "presentacion": "1 caja con 10 bolsas de aproximadamente 25 piezas de 15 g; 4.05 kg por caja.",
+          "presentacion": "1 caja con 10 bolsas de aproximadamente 25 + 2 piezas de 15 g; 4.05 kg por caja.",
           "piezasPorCaja": 10,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/jovy/mini-gummi-bears.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2060,7 +2060,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/jovy/frutastika-1-kg.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2070,7 +2070,7 @@
           "presentacion": "1 caja con 10 bolsas de 500 g.",
           "piezasPorCaja": 10,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/jovy/fantasy-gummy-rings.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2080,7 +2080,7 @@
           "presentacion": "1 caja con 10 bolsas de 500 g.",
           "piezasPorCaja": 10,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/jovy/fantasy-gummy-rings-sour.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2090,7 +2090,7 @@
           "presentacion": "1 caja con 10 bolsas de 500 g.",
           "piezasPorCaja": 10,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/jovy/coni-lokos-gummies.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2100,7 +2100,7 @@
           "presentacion": "1 caja con 10 bolsas de 500 g.",
           "piezasPorCaja": 10,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/jovy/mini-sharks.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2204,7 +2204,7 @@
           "presentacion": "1 caja con 14 bolsas de 12 sobres. Gomita de mango enchilado con chamoy.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/chompys/salsimangos.webp",
           "categorias": [
             "gomitas",
             "enchilados"
@@ -2215,7 +2215,7 @@
           "presentacion": "1 caja con 10 bolsas de 1 kg. Gomita de grenetina con cubierta acidulada.",
           "piezasPorCaja": 10,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/chompys/gomitas-ahijolotl-1-kg.webp",
           "categorias": [
             "gomitas"
           ]
@@ -2335,7 +2335,7 @@
             "exceso-azucares",
             "exceso-sodio"
           ],
-          "foto": null,
+          "foto": "/productos/alvbro/paleta-chiqui-hueso.webp",
           "categorias": [
             "paletas"
           ]
@@ -2538,7 +2538,7 @@
             "exceso-calorias",
             "exceso-grasas-saturadas"
           ],
-          "foto": null,
+          "foto": "/productos/yens/papas-trozas-125-g.webp",
           "categorias": [
             "botana"
           ]
@@ -2711,7 +2711,7 @@
           "presentacion": "1 caja con 18 paquetes de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/wla/barquillo-arcoiris.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2721,7 +2721,7 @@
           "presentacion": "1 caja con 18 paquetes de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/wla/barquillo-relleno.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2731,7 +2731,7 @@
           "presentacion": "1 caja con 18 paquetes de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/wla/barquillo-capuchino.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2741,7 +2741,7 @@
           "presentacion": "1 caja con 18 paquetes de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/wla/barquillo-nino.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2754,7 +2754,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/wla/barquillo-nina.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2767,7 +2767,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/wla/barquillo-mazapan.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2801,7 +2801,7 @@
           "presentacion": "1 caja con 20 displays de 24 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/la-coculense/borrachines-surtidos.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2811,7 +2811,7 @@
           "presentacion": "1 caja con 20 displays de 24 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/la-coculense/borrachines-rompope.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2821,7 +2821,7 @@
           "presentacion": "1 caja con 20 displays de 24 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/la-coculense/borrachines-tequila.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2834,7 +2834,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/la-coculense/frutilenas-surtido.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2847,7 +2847,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/la-coculense/barricoquinas.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -2857,7 +2857,7 @@
           "presentacion": "1 caja con 24 bolsas de 22 piezas. Rollo de guayaba tricolor.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/la-coculense/guayaroll.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3082,7 +3082,7 @@
           "presentacion": "1 caja con 30 paquetes de 10 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/amarantos/amaranto-cuadro-chico.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3092,7 +3092,7 @@
           "presentacion": "1 caja con 20 paquetes de 10 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/amarantos/amaranto-cuadro-grande.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3157,7 +3157,7 @@
           "presentacion": "1 caja con 30 displays de 100 piezas. Dulce de cacahuate.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/orquidea/mini-mazapan.webp",
           "categorias": [
             "cacahuates",
             "obleas-y-dulce-tradicional"
@@ -3193,7 +3193,7 @@
           "presentacion": "1 caja con 12 estuches de 22 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/rikaleche/super-mostachon.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3203,7 +3203,7 @@
           "presentacion": "1 caja con 12 estuches de 20 piezas.",
           "piezasPorCaja": null,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/rikaleche/macarronzote.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3241,7 +3241,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/dulces-kokito/guayakoko.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3254,7 +3254,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/dulces-kokito/bandera-mediana.webp",
           "categorias": [
             "obleas-y-dulce-tradicional"
           ]
@@ -3408,7 +3408,7 @@
           "presentacion": "1 caja con 12 estuches de 300 g.",
           "piezasPorCaja": 12,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/risa/ojos-de-terror-en-estuche.webp",
           "categorias": [
             "gomitas"
           ]
@@ -3418,7 +3418,7 @@
           "presentacion": "1 caja con 14 bolsas de 300 g.",
           "piezasPorCaja": 14,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/risa/ojos-de-terror-en-bolsa.webp",
           "categorias": [
             "gomitas"
           ]
@@ -3428,7 +3428,7 @@
           "presentacion": "1 caja con 45 piezas. Figuras de malvavisco.",
           "piezasPorCaja": 45,
           "sellos": [],
-          "foto": null,
+          "foto": "/productos/risa/paleta-dia-de-muertos.webp",
           "categorias": [
             "paletas"
           ]
@@ -3466,7 +3466,7 @@
             "exceso-calorias",
             "exceso-azucares"
           ],
-          "foto": null,
+          "foto": "/productos/big-boy/dedos-de-terror.webp",
           "categorias": [
             "gomitas"
           ]

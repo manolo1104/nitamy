@@ -210,10 +210,6 @@ export function categoriaPorSlug(slug: string): Categoria | undefined {
   return CATEGORIAS.find((c) => c.slug === slug);
 }
 
-export function marcasDeCategoria(slug: string): Marca[] {
-  return MARCAS_VISIBLES.filter((m) => m.categorias.includes(slug));
-}
-
 export function marcasRelacionadas(marca: Marca): Marca[] {
   return marca.relacionadas
     .map((slug) => marcaPorSlug(slug))

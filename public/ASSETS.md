@@ -81,7 +81,19 @@ la firma manuscrita "Sandy" está como arte plano en la tarjeta del producto
 (p. 37) y se extrajo de ahí. Hay que recortarla por encima de la hoja de tamal,
 que se cuela por abajo a la izquierda.
 
-### 🔴 Los 4 que siguen sin logotipo, y por qué
+### 🟢 Risa: resuelto leyendo la URL impresa en el empaque
+
+La p. 74 no trae logotipo en el encabezado, pero **la etiqueta del vitrolero
+imprime `risa.mx`**. Ese sitio es el de **Productos RISA S.A. de C.V.** y
+publica su logotipo en PNG con transparencia (428×329). Comprobado contra el
+óvalo del empaque: es el mismo.
+
+⚠️ **La técnica es reutilizable**: cuando una marca no aparece en buscadores,
+hay que ampliar su empaque en el catálogo y buscar la URL o la razón social
+impresas. Es lo que aquí llevó al sitio oficial en un intento, después de que
+la búsqueda por nombre solo devolviera tiendas.
+
+### 🔴 Los 3 que siguen sin logotipo, y por qué
 
 No es un descuido; en el catálogo no existe una fuente que valga la pena:
 
@@ -89,7 +101,6 @@ No es un descuido; en el catálogo no existe una fuente que valga la pena:
 |---|---|
 | **Dulces El Barquito** | Su logo (p. 65) mide **108×107 px nativos** y viene sobre un cuadro azul marino que es parte de la imagen, no fondo removible. Ampliado sale borroso y con el texto ilegible: se ve peor que el monograma |
 | **Amarantos** | La p. 67 no tiene logotipo, solo el título "AMARANTO Y HOSTIAS". No parece existir una marca gráfica |
-| **Risa** | La p. 74 es del catálogo de temporada: su encabezado lleva la marca de casa Nitamy. El óvalo Risa solo aparece impreso en el empaque |
 | **Big Boy Candies** | Igual que Risa: su logo solo está impreso en la bolsa fotografiada, con arrugas y perspectiva. Recortarlo daría un trozo de foto, no un logotipo |
 
 Los cuatro se quedan con el **monograma tipográfico**, que es la degradación

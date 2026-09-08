@@ -3400,6 +3400,7 @@
     {
       "slug": "risa",
       "nombre": "Risa",
+      "logo": "/marcas/risa.webp",
       "categorias": [
         "gomitas",
         "paletas"

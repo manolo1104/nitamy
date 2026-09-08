@@ -59,7 +59,44 @@ Los cinco logos de marca que el PDF traía en alta (p. 13), extraídos con trans
 | `valentina.png` | Valentina Salsa Picante (Salsa Tamazula) | 235×138 |
 | `candy-pop.png` | CP Products / Candy Pop | 400×178 |
 
-**Faltan 15 logos** de las marcas restantes: Miguelito, Grupo Frato, Betamex,
+### 🟢 7 sep 2026: 12 logos más, sacados del encabezado del catálogo
+
+Cada marca del catálogo lleva su logotipo en el encabezado de SU página, y ahí
+está más grande que en el índice de las pp. 2-3 (donde miden 79-135 px). De ahí
+salieron doce: Jovy, Checolines, YENS, Cisne, W.L.A., La Coculense, Los Reyes,
+H. Díaz, Orquídea, Rikaleche, Dulces Kokito y Sandy.
+
+**Receta**, la misma que se usó con los 20 primeros: renderizar la página a
+**600 dpi** → recortar el logotipo del encabezado (cuidando de no arrastrar el
+título de sección que va debajo) → ajustar el marco con `getbbox` → bajar a
+**400 px de ancho ANTES** de calcular el alfa, para que el borde quede suave →
+quitar el fondo **inundando desde los bordes** → WebP con alfa.
+
+⚠️ **Inundar desde el borde, no "todo píxel blanco a transparente".** Es lo que
+conserva los blancos INTERIORES: los cisnes del logo de Cisne, las letras de
+W.L.A. y el fondo del óvalo de Rikaleche desaparecerían con el método ingenuo.
+
+**Sandy es un caso aparte**: su página no tiene logotipo en el encabezado, pero
+la firma manuscrita "Sandy" está como arte plano en la tarjeta del producto
+(p. 37) y se extrajo de ahí. Hay que recortarla por encima de la hoja de tamal,
+que se cuela por abajo a la izquierda.
+
+### 🔴 Los 4 que siguen sin logotipo, y por qué
+
+No es un descuido; en el catálogo no existe una fuente que valga la pena:
+
+| Marca | Qué hay en el catálogo |
+|---|---|
+| **Dulces El Barquito** | Su logo (p. 65) mide **108×107 px nativos** y viene sobre un cuadro azul marino que es parte de la imagen, no fondo removible. Ampliado sale borroso y con el texto ilegible: se ve peor que el monograma |
+| **Amarantos** | La p. 67 no tiene logotipo, solo el título "AMARANTO Y HOSTIAS". No parece existir una marca gráfica |
+| **Risa** | La p. 74 es del catálogo de temporada: su encabezado lleva la marca de casa Nitamy. El óvalo Risa solo aparece impreso en el empaque |
+| **Big Boy Candies** | Igual que Risa: su logo solo está impreso en la bolsa fotografiada, con arrugas y perspectiva. Recortarlo daría un trozo de foto, no un logotipo |
+
+Los cuatro se quedan con el **monograma tipográfico**, que es la degradación
+que el sitio ya tiene prevista y se ve limpia. Si el cliente consigue los
+logotipos reales, se sustituyen.
+
+**Faltan 15 logos** de las marcas restantes (⚠️ dato de agosto; hoy son 4, ver arriba): Miguelito, Grupo Frato, Betamex,
 Cabadas, Dulces Pillo, Dulces Liz, Dulces Tradicionales, Portico, Productos del
 Rey, Dulces Karla, Pipos, Dulces Guaz, Chaca Chaca, Charly, Confitados Finos,
 Alvbro, Chompys. Mientras llegan, `MarquesinaMarcas` los renderiza como

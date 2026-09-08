@@ -1809,6 +1809,7 @@
       "slug": "sandy",
       "nombre": "Sandy",
       "nombreCompleto": "Sandy, tamalito de tamarindo",
+      "logo": "/marcas/sandy.webp",
       "categorias": [
         "tamarindo"
       ],
@@ -2018,6 +2019,7 @@
     {
       "slug": "jovy",
       "nombre": "Jovy",
+      "logo": "/marcas/jovy.webp",
       "categorias": [
         "gomitas"
       ],
@@ -2355,6 +2357,7 @@
       "slug": "checolines",
       "nombre": "Checolines",
       "nombreCompleto": "Checolines, tamarindo confitado",
+      "logo": "/marcas/checolines.webp",
       "categorias": [
         "tamarindo"
       ],
@@ -2516,6 +2519,7 @@
     {
       "slug": "yens",
       "nombre": "YENS Botanas",
+      "logo": "/marcas/yens.webp",
       "categorias": [
         "botana"
       ],
@@ -2554,6 +2558,7 @@
       "slug": "cisne",
       "nombre": "Cisne",
       "nombreCompleto": "Fábrica de Dulces Cisne",
+      "logo": "/marcas/cisne.webp",
       "categorias": [
         "tamarindo"
       ],
@@ -2692,6 +2697,7 @@
       "slug": "wla",
       "nombre": "W.L.A. Dulces",
       "nombreCompleto": "W.L.A., barquillos con malvavisco",
+      "logo": "/marcas/wla.webp",
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],
@@ -2782,6 +2788,7 @@
     {
       "slug": "la-coculense",
       "nombre": "La Coculense",
+      "logo": "/marcas/la-coculense.webp",
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],
@@ -2926,6 +2933,7 @@
     {
       "slug": "los-reyes",
       "nombre": "Los Reyes",
+      "logo": "/marcas/los-reyes.webp",
       "categorias": [
         "paletas"
       ],
@@ -3018,6 +3026,7 @@
       "slug": "h-diaz",
       "nombre": "H. Díaz",
       "nombreCompleto": "H. Díaz, borrachitos tradicionales",
+      "logo": "/marcas/h-diaz.webp",
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],
@@ -3137,6 +3146,7 @@
     {
       "slug": "orquidea",
       "nombre": "Orquídea Dulces",
+      "logo": "/marcas/orquidea.webp",
       "categorias": [
         "cacahuates",
         "obleas-y-dulce-tradicional"
@@ -3174,6 +3184,7 @@
       "slug": "rikaleche",
       "nombre": "Rikaleche",
       "nombreCompleto": "Rikaleche, dulces de leche",
+      "logo": "/marcas/rikaleche.webp",
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],
@@ -3219,6 +3230,7 @@
       "slug": "dulces-kokito",
       "nombre": "Dulces Kokito",
       "nombreCompleto": "Dulces Kokito, dulces de coco",
+      "logo": "/marcas/dulces-kokito.webp",
       "categorias": [
         "obleas-y-dulce-tradicional"
       ],

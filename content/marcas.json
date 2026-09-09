@@ -7,6 +7,7 @@
     "logo": "string opcional. Ruta en /public/marcas/. Los 20 logos del sitio vivo venian con fondo BLANCO OPACO; se les quito por inundacion desde los bordes y se guardaron en WebP con alfa. Si falta, se renderiza un monograma.",
     "categorias": "string[]. Slugs de content/categorias.json. Se DERIVA de la union de `categorias` de sus productos: no se escribe a mano. Es el eje con el que /marcas agrupa las marcas.",
     "fundadora": "boolean. true solo para Nishikawa, Tama-Roca y Miguelito, los tres proveedores que dan nombre a Nitamy.",
+    "socioEstrategico": "boolean opcional. true para las tres marcas que la portada del catálogo de temporada (p. 73) pone bajo el lema \"TU SOCIO ESTRATÉGICO\": Risa, Big Boy y Productos Rivera. Pinta la etiqueta \"Socio estratégico\" en el índice y en la ficha. Es lo que declara el catálogo, no una categoría comercial nuestra: si el cliente cambia la portada, cambia esta lista.",
     "resumen": "string. Una línea. Se usa en la marquesina, en el índice y en la meta description.",
     "descripcion": "string[]. Dos o tres párrafos: qué es la marca y por qué rota.",
     "porQueRota": "string. El argumento comercial de rotación, en una frase.",
@@ -3405,6 +3406,7 @@
         "gomitas",
         "paletas"
       ],
+      "socioEstrategico": true,
       "resumen": "Línea de Día de Muertos: ojos de terror y paleta de malvavisco.",
       "descripcion": [
         "Risa surte la línea de Día de Muertos: los ojos de terror en estuche y en bolsa, y la paleta de figuras de malvavisco.",
@@ -3449,17 +3451,22 @@
       ],
       "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": [],
+      "relacionadas": [
+        "big-boy",
+        "rivera"
+      ],
       "sellosVerificados": false,
       "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), p. 74",
-      "notaInterna": "La p. 75 del catálogo (Día de Muertos) trae tres estuches de figuras de malvavisco sin logotipo en la página ni legible en el empaque: 'Día de Muertos 50 piezas' (16 estuches · 50 piezas), 'Día de Muertos Impreso' (16 estuches · 40 piezas) y 'Día de Muertos 25 piezas' (caja con 32 estuches). Van entre Risa (p. 74) y Big Boy (p. 76); pueden ser Risa o Rivera. NO se publicaron: falta que el cliente diga de quién son."
+      "notaInterna": "Las tres marcas del catálogo de temporada (Risa, Big Boy y Productos Rivera) llevan `socioEstrategico`: la portada de ese catálogo (p. 73) las pone juntas bajo el lema \"TU SOCIO ESTRATÉGICO\".\n\nLa p. 75 (los tres estuches de figuras de malvavisco) NO es de Risa: se cargó bajo Productos Rivera el 9 sep 2026. El razonamiento está en la nota de esa marca."
     },
     {
       "slug": "big-boy",
       "nombre": "Big Boy Candies",
+      "logo": "/marcas/big-boy.webp",
       "categorias": [
         "gomitas"
       ],
+      "socioEstrategico": true,
       "resumen": "Dedos de terror, gomita de temporada en bolsa de 750 g.",
       "descripcion": [
         "Big Boy Candies surte los dedos de terror, figuras de goma en bolsa de 750 gramos.",
@@ -3487,9 +3494,13 @@
       ],
       "datosDeEjemplo": false,
       "textoRevisado": false,
-      "relacionadas": [],
+      "relacionadas": [
+        "risa",
+        "rivera"
+      ],
       "sellosVerificados": false,
-      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), p. 76"
+      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), p. 76",
+      "notaInterna": "Logotipo sacado de la PORTADA del catálogo de temporada (p. 73), donde viene como imagen suelta con su máscara (480x222), no impreso sobre la bolsa. Hasta el 9 sep 2026 esta marca caía a monograma porque el único logo conocido era el de la foto del empaque de la p. 76, con arrugas y perspectiva."
     },
     {
       "slug": "rivera",
@@ -3498,29 +3509,59 @@
       "categorias": [
         "gomitas"
       ],
-      "resumen": "Malvaviscos y gomitas, marca del catálogo de temporada.",
+      "socioEstrategico": true,
+      "resumen": "Figuras de malvavisco de Día de Muertos, en estuche de mostrador.",
       "descripcion": [
-        "Productos Rivera es la marca de malvaviscos y gomitas del catálogo de temporada 2026 de Grupo Nitamy.",
-        "Está en el índice del catálogo, pero sus presentaciones no vienen en las páginas de producto: se cotizan directo."
+        "Productos Rivera es la marca de malvaviscos y gomitas del catálogo de temporada de Grupo Nitamy. Su línea son las figuras de malvavisco de Día de Muertos, en estuche de mostrador de 25, 40 y 50 piezas.",
+        "Es temporada de fecha fija: la demanda arranca a mediados de octubre y lo que no se vendió el 2 de noviembre se queda un año en bodega. El pedido se levanta seis semanas antes."
       ],
-      "porQueRota": "Malvavisco y gomita de temporada; las presentaciones se cotizan por WhatsApp.",
+      "porQueRota": "Estuche de mostrador que se vende pieza por pieza, en la única temporada de dulce con fecha exacta.",
       "compradores": [
         "tienda",
         "mayorista",
         "cadena"
       ],
-      "productos": [],
+      "productos": [
+        {
+          "producto": "Día de Muertos 50 piezas",
+          "presentacion": "1 caja con 16 estuches de 50 piezas. Figuras de malvavisco con gomita, 500 g por estuche.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/rivera/dia-de-muertos-50-piezas.webp",
+          "categorias": [
+            "gomitas"
+          ]
+        },
+        {
+          "producto": "Día de Muertos Impreso",
+          "presentacion": "1 caja con 16 estuches de 40 piezas. Figuras de malvavisco impresas.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/rivera/dia-de-muertos-impreso.webp",
+          "categorias": [
+            "gomitas"
+          ]
+        },
+        {
+          "producto": "Día de Muertos 25 piezas",
+          "presentacion": "1 caja con 32 estuches de 25 piezas. Figuras de malvavisco.",
+          "piezasPorCaja": null,
+          "sellos": [],
+          "foto": "/productos/rivera/dia-de-muertos-25-piezas.webp",
+          "categorias": [
+            "gomitas"
+          ]
+        }
+      ],
       "datosDeEjemplo": false,
-      "ocultaDelIndice": true,
       "textoRevisado": false,
       "relacionadas": [
-        "candy-pop",
-        "dulces-liz",
-        "charly"
+        "risa",
+        "big-boy"
       ],
       "sellosVerificados": false,
-      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), índice p. 3",
-      "notaInterna": "Sin paginas de producto en CAT.NITAMY.pdf. OCULTA DE LOS LISTADOS el 4 sep 2026 (decision de Manolo): tenia cero productos y el indice mandaba al visitante a una ficha vacia. Su pagina sigue viva y cotiza por WhatsApp; se reactiva poniendo `ocultaDelIndice` en false cuando el cliente entregue la linea.\n\nPISTA FUERTE, SIN CONFIRMAR, de que la p. 75 es SUYA: el catalogo de temporada 2026 declara en su portada (p. 73) exactamente TRES marcas -Risa, Big Boy y Productos Rivera- y trae exactamente TRES paginas de producto: 74, 75 y 76. La 74 es Risa y la 76 es Big Boy, las dos identificadas por el logotipo del EMPAQUE, porque el encabezado de esas paginas no lleva marca. Por eliminacion queda Rivera para la 75, y el logotipo de Rivera dice \"MALVAVISCOS & GOMITAS\", que es exactamente lo que hay en esa pagina (figuras de malvavisco). El empaque de la p. 75 no tiene logotipo legible ni a 500 dpi, asi que sigue siendo inferencia: los tres estuches NO se cargaron. Falta que el cliente lo confirme."
+      "fuenteProductos": "Catálogo Grupo Nitamy (CAT.NITAMY.pdf), p. 75",
+      "notaInterna": "ATRIBUCIÓN POR ELIMINACIÓN, no por logotipo. La p. 75 del catálogo no lleva marca en el encabezado y su empaque no tiene logotipo legible ni a 500 dpi. Se le asignó a Rivera el 9 sep 2026, por instrucción de Manolo de cargar la línea de Día de Muertos, con este razonamiento: la portada del catálogo de temporada (p. 73) declara EXACTAMENTE tres marcas -Risa, Big Boy y Productos Rivera- y el catálogo trae EXACTAMENTE tres páginas de producto, la 74, la 75 y la 76. La 74 es Risa y la 76 es Big Boy, las dos identificadas por el logotipo impreso en el EMPAQUE. Queda Rivera para la 75, y su logotipo dice \"MALVAVISCOS & GOMITAS\", que es exactamente lo que hay en esa página.\n\nSigue sin confirmar por el cliente. Si dijera que la p. 75 es de Risa, se mueven los tres productos y sus tres fotos de /productos/rivera/ a /productos/risa/, y Rivera vuelve a `ocultaDelIndice: true`, que es como estuvo del 4 sep al 9 sep 2026 mientras no tenía una sola presentación.\n\nLas tres fotos salieron de las imágenes embebidas de la p. 75 (color 323x431 con máscara 822x1096), no de un recorte de la página renderizada."
     }
   ]
 }

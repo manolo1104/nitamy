@@ -398,6 +398,41 @@ export const DESTINO_REGISTRO_LEADS: PorDefinir<
  */
 export const DATOS_PRODUCTO_POR_MARCA: PorDefinir<true> = PENDIENTE;
 
+/**
+ * La p. 75 del catálogo (los tres estuches de Día de Muertos) se publicó bajo
+ * Productos Rivera SIN que el cliente lo confirme.
+ *
+ * Esa página no lleva marca en el encabezado y su empaque no tiene logotipo
+ * legible ni a 500 dpi. La atribución sale de contar: la portada del catálogo
+ * de temporada (p. 73) declara tres marcas -Risa, Big Boy y Rivera- y hay
+ * tres páginas de producto, la 74, la 75 y la 76. La 74 y la 76 están
+ * identificadas por el logotipo impreso en el empaque, así que la 75 es
+ * Rivera por eliminación, y el logotipo de Rivera dice "MALVAVISCOS &
+ * GOMITAS", que es lo que hay en esa página.
+ *
+ * Es la mejor lectura disponible, pero sigue siendo una inferencia sobre de
+ * quién es un producto, y eso lo confirma el cliente con una frase. Mientras
+ * no lo haga, el aviso lo recuerda en cada página en desarrollo. Cómo
+ * revertirlo está en el `notaInterna` de Rivera en content/marcas.json.
+ */
+export const MARCA_DIA_DE_MUERTOS_POR_CONFIRMAR = true;
+
+/**
+ * La misma página 5 del catálogo se contradice sola en los paquetes de 200 g.
+ *
+ * El encabezado de esa fila dice "200 g · Paquete con 20 piezas" para los
+ * tres sabores, y así está en el sitio. Pero el arte impreso en las cajas de
+ * SALADO y ENCHILADO dice "Contiene 20 piezas de 20 g c/u", mientras que la
+ * de JAPONÉS dice "20 piezas de 200 g c/u". Las fotos del sitio salen de esa
+ * misma fila, así que la caja que se ve en la tarjeta imprime "20 g" debajo
+ * de un título que dice 200 g.
+ *
+ * Son 400 g o 4 kg por paquete: diez veces. No se toca hasta que el cliente
+ * diga cuál vale, porque cambiar el gramaje de una presentación por nuestra
+ * cuenta es corromper una cotización.
+ */
+export const GRAMAJE_200G_POR_CONFIRMAR = true;
+
 /** Lista legible para el aviso de desarrollo y para auditar antes de publicar. */
 export function pendientesSinResolver(): string[] {
   const mapa: Array<[string, PorDefinir<unknown>]> = [
@@ -414,6 +449,12 @@ export function pendientesSinResolver(): string[] {
   const sinResolver = mapa.filter(([, v]) => estaPendiente(v)).map(([k]) => k);
   if (WHATSAPP_POR_CONFIRMAR) {
     sinResolver.push("WHATSAPP: confirmar el segundo número con el cliente");
+  }
+  if (MARCA_DIA_DE_MUERTOS_POR_CONFIRMAR) {
+    sinResolver.push("DÍA DE MUERTOS: confirmar que la p. 75 es de Rivera");
+  }
+  if (GRAMAJE_200G_POR_CONFIRMAR) {
+    sinResolver.push("NISHIKAWA 200 g: la caja imprime 20 g, el catálogo 200 g");
   }
   return sinResolver;
 }

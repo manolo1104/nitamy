@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Migajas } from "@/components/DatosEstructurados";
+import { EtiquetaSocio } from "@/components/EtiquetaSocio";
 import { ViewTransition } from "react";
 import { LogoMarca } from "@/components/LogoMarca";
 import { Revelar } from "@/components/Revelar";
@@ -87,6 +88,17 @@ export default function IndiceDeMarcas() {
                   <p className="mt-1.5 text-sm leading-relaxed text-tinta-2">
                     {marca.resumen}
                   </p>
+                  {/*
+                    `mt-auto`: la etiqueta se va al fondo de la tarjeta. Las
+                    tarjetas de una fila miden lo mismo pero sus resúmenes no,
+                    y sin esto las tres etiquetas de la rejilla quedarían a
+                    tres alturas distintas.
+                  */}
+                  {marca.socioEstrategico && (
+                    <span className="mt-auto pt-4">
+                      <EtiquetaSocio marca={marca} />
+                    </span>
+                  )}
                 </Link>
               </Revelar>
             ))}

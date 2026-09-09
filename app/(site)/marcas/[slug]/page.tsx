@@ -6,6 +6,7 @@ import { ViewTransition } from "react";
 import { BotonEnlace } from "@/components/Boton";
 import { BotonCotizar } from "@/components/calificador/BotonCotizar";
 import { Migajas } from "@/components/DatosEstructurados";
+import { EtiquetaSocio } from "@/components/EtiquetaSocio";
 import { FichaProducto } from "@/components/FichaProducto";
 import { LogoMarca } from "@/components/LogoMarca";
 import { Revelar } from "@/components/Revelar";
@@ -106,6 +107,11 @@ export default async function PaginaDeMarca(
                 contenido si no se le dice, y aquí adentro hay un botón que no
                 parte línea. */}
             <div className="min-w-0 lg:col-span-7">
+              {marca.socioEstrategico && (
+                <div className="mb-5">
+                  <EtiquetaSocio marca={marca} />
+                </div>
+              )}
               <h1 className="titular text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
                 {marca.nombre} al mayoreo, distribuidor en México
               </h1>

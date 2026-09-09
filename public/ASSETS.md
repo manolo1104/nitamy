@@ -93,6 +93,64 @@ hay que ampliar su empaque en el catálogo y buscar la URL o la razón social
 impresas. Es lo que aquí llevó al sitio oficial en un intento, después de que
 la búsqueda por nombre solo devolviera tiendas.
 
+### 🟢 9 sep 2026: 10 logotipos estaban CORTADOS, y la receta de arriba era la causa
+
+Manolo vio que varios logos aparecían recortados. Eran **diez**: Checolines,
+Cisne, Chaca-Chaca, La Coculense, Orquídea, Rikaleche, Dulces Karla, Jovy,
+YENS y W.L.A. El más caro era Orquídea, al que le faltaba entera la palabra
+**DULCES** que va debajo del wordmark.
+
+**La causa es la receta anterior.** "Renderizar la página a 600 dpi y recortar
+el logotipo del encabezado cuidando de no arrastrar el título de sección que
+va debajo" obliga a poner el borde inferior del recorte a ojo, justo donde el
+logotipo termina, y a ojo se come unos píxeles. Por eso casi todos los cortes
+son por ABAJO.
+
+**La receta nueva no recorta nada: el logotipo del encabezado es una imagen
+embebida en el PDF, con su propia máscara de transparencia.**
+
+    pdfimages -list -f N -l N CAT.NITAMY.pdf     # ver qué trae la página
+    pdfimages -png  -f N -l N CAT.NITAMY.pdf pg/i
+
+Cada `image` viene seguida de su `smask`, que es su canal alfa y suele tener
+MÁS resolución que el color. Se escala el color al tamaño de la máscara, se
+pega la máscara como alfa, se ajusta el marco con `getbbox` y se guarda a 400
+px de ancho. El resultado es el logotipo completo por construcción: no hay
+recorte que pueda comerse un borde, y de paso desaparece el paso de quitar el
+fondo por inundación.
+
+⚠️ **Cuando la imagen NO trae smask hay que inundar igual.** Le pasó a Cisne
+(p. 57): su logotipo viene opaco sobre blanco. Ahí sigue valiendo la regla de
+siempre, inundar desde los BORDES y no "todo píxel blanco a transparente", que
+es lo que conserva los dos cisnes blancos del interior.
+
+⚠️ **No siempre es la primera imagen de la página.** En La Coculense (p. 61)
+el logotipo es la cuarta; las tres primeras son cajas de Borrachines. Hay que
+mirar la hoja de contacto de las piezas extraídas antes de elegir.
+
+Dónde está el logotipo de cada uno: Checolines p. 53, Cisne p. 57, Chaca-Chaca
+p. 58, La Coculense p. 61, Orquídea p. 68, Rikaleche p. 69, Dulces Karla p. 31,
+Jovy p. 44, YENS p. 56, W.L.A. p. 59.
+
+**Alvbro NO se tocó.** También daba tinta en el borde, pero al comparar el
+actual (304×400) contra el del catálogo (178×232) son el mismo encuadre: el
+suyo está tenso, no cortado, y el que ya había tiene más resolución.
+
+**Cómo detectar esto sin ojo clínico:** medir qué porcentaje de cada borde de
+la imagen lleva alfa. Un logotipo bien recortado toca sus cuatro bordes en un
+punto; uno cortado los toca en una franja larga. Ojo con los falsos positivos:
+una píldora o un óvalo con lados rectos, como Dulces Liz, toca el borde en
+toda su anchura y está perfectamente completo. La medida sirve para hacer la
+lista corta; la decisión es siempre comparar las dos versiones lado a lado.
+
+### 🟢 9 sep 2026: Big Boy Candies ya tiene logotipo
+
+Estaba en la lista de los que se quedaban con monograma porque el único
+logotipo conocido era el impreso en la bolsa de la p. 76, con arrugas y
+perspectiva. **La portada del catálogo de temporada (p. 73) lo trae como
+imagen suelta**, con máscara de 480×222, junto a los de Risa y Rivera. Salió
+con la receta de arriba, sin retoque.
+
 ### 🔴 Los 3 que siguen sin logotipo, y por qué
 
 No es un descuido; en el catálogo no existe una fuente que valga la pena:
@@ -101,9 +159,9 @@ No es un descuido; en el catálogo no existe una fuente que valga la pena:
 |---|---|
 | **Dulces El Barquito** | Su logo (p. 65) mide **108×107 px nativos** y viene sobre un cuadro azul marino que es parte de la imagen, no fondo removible. Ampliado sale borroso y con el texto ilegible: se ve peor que el monograma |
 | **Amarantos** | La p. 67 no tiene logotipo, solo el título "AMARANTO Y HOSTIAS". No parece existir una marca gráfica |
-| **Big Boy Candies** | Igual que Risa: su logo solo está impreso en la bolsa fotografiada, con arrugas y perspectiva. Recortarlo daría un trozo de foto, no un logotipo |
+| ~~**Big Boy Candies**~~ | 🟢 RESUELTO el 9 sep 2026 con la portada del catálogo de temporada, ver arriba |
 
-Los cuatro se quedan con el **monograma tipográfico**, que es la degradación
+Los dos que quedan se quedan con el **monograma tipográfico**, que es la degradación
 que el sitio ya tiene prevista y se ve limpia. Si el cliente consigue los
 logotipos reales, se sustituyen.
 
@@ -213,6 +271,53 @@ origen es el más pequeño de los tres (~132×241 px) y se nota borrosa de cerca
 Es la ÚNICA excepción a la regla de "nunca se publica una foto del catálogo":
 el cliente prefirió tener algo a dejar la ficha vacía. Si algún día llega una
 foto real de estas tres presentaciones, hay que reemplazarlas sin dudarlo.
+
+### 🟢 9 sep 2026: el paquete de 200 g de Nishikawa, y una foto que mentía
+
+Manolo pidió que las tres presentaciones de 200 g -japonés, salado y
+enchilado- enseñaran **el paquete**, como en la p. 5 del catálogo, y no una
+bolsa suelta. De paso salió un error más grave:
+
+🔴 **`salado-200-gr.webp` no era salado.** Era la MISMA imagen que
+`japones-190-gr.webp`, la bolsa naranja de japonés, byte por byte. Se destapó
+comparando cada archivo de la marca contra las 25 fotos del sitio anterior con
+un hash perceptual: la del sitio viejo rotulada "Salado 200 gr" no la usaba
+nadie, y en su lugar estaba repetida la de "Japonés 190 GR". Es el segundo
+caso de foto mal asignada en producción, después de la raqueta de Miguelito
+que era un bote de Chochi Boys.
+
+Las tres fotos nuevas salen de **la fila de 200 g de la p. 5**, que es una
+sola imagen embebida con máscara (color 392×261, máscara 768×512). Se escaló
+el color a la máscara, se recortó cada caja por separado y se dejó un margen
+blanco de 6 px. Quedan de 231-254 px de ancho, muy por debajo de las 800×1000
+del resto de la marca, pero el arte de la caja es plano y a tamaño de tarjeta
+se lee bien; se comprobó en el navegador antes de dejarlas.
+
+**También se cambió la de japonés, que era buena.** Venía del sitio anterior a
+800×1000 y enseñaba un paquete de otra generación, con la leyenda en azul y
+"20 BOLSAS de 200 g". Al ponerla junto a las otras dos, la fila se veía como
+tres productos distintos. Las tres del catálogo son la misma toma, el mismo
+ángulo y la misma familia de empaque, que es justo lo que el comprador
+necesita comparar.
+
+⚠️ **El catálogo se contradice en esta fila y no se arregló solo.** El
+encabezado dice "200 g · Paquete con 20 piezas" para los tres, pero el arte de
+las cajas de SALADO y ENCHILADO imprime "Contiene 20 piezas de **20 g** c/u",
+mientras que la de JAPONÉS dice "20 piezas de **200 g** c/u". Son 400 g o
+4 kg: diez veces. El sitio muestra lo que dice el encabezado, y el pendiente
+`GRAMAJE_200G_POR_CONFIRMAR` de `config/nitamy.ts` lo recuerda en cada página
+en desarrollo hasta que el cliente diga cuál vale.
+
+### 🟢 9 sep 2026: las tres fotos de Día de Muertos de Productos Rivera
+
+`productos/rivera/` no existía. Sus tres estuches salen de las **imágenes
+embebidas de la p. 75** (color 323×431, máscara 822×1096), con la receta de
+`pdfimages` que está documentada arriba en `marcas/`. Quedan de 435-447 px, y
+son las más limpias que ha dado el catálogo porque su máscara es grande.
+
+⚠️ **A quién pertenece esa página es una inferencia, no un dato.** El
+razonamiento y cómo revertirlo están en el `notaInterna` de Rivera en
+`content/marcas.json`.
 
 ### La regla que queda
 

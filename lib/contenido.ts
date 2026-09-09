@@ -75,6 +75,16 @@ export type Marca = {
   logo?: string;
   categorias: string[];
   fundadora?: boolean;
+  /**
+   * Las tres marcas que la portada del catálogo de temporada (p. 73) pone
+   * bajo el lema "TU SOCIO ESTRATÉGICO": Risa, Big Boy y Productos Rivera.
+   * Son también las únicas tres con página de producto en ese catálogo.
+   *
+   * Pinta la etiqueta de `<EtiquetaSocio>` en el índice y en la ficha. La
+   * lista sale del catálogo, no de una decisión comercial nuestra: si el
+   * cliente cambia la portada, cambia esta lista.
+   */
+  socioEstrategico?: boolean;
   resumen: string;
   descripcion: string[];
   porQueRota: string;

@@ -1,31 +1,33 @@
-import {
-  CATEGORIAS,
-  fechaLegible,
-  temporadasPorCercania,
-} from "@/lib/contenido";
+import { temporadasPorCercania } from "@/lib/contenido";
 import { IconoCategoria } from "../IconoCategoria";
 import { RailTemporadas, type TemporadaVista } from "../temporadas/RailTemporadas";
 import { Revelar } from "../Revelar";
 
 /**
- * Temporadas.
+ * Productos de temporada.
  *
  * La referencia que mandó el cliente (Azúcar Dulcerías) tiene esta misma
  * forma: rail de temporadas a la izquierda con su cuadrito de color, panel de
  * contenido a la derecha. De ahí se toma el layout tal cual.
  *
- * Lo que cambia es qué dice el panel, y esa es la parte que vale. Azúcar le
- * vende al consumidor final, así que su rail es un FILTRO: eliges San
- * Valentín y ves 90 productos. A un dueño de tienda ese filtro no le aporta
- * nada, porque ya sabe qué es San Valentín y qué se vende en San Valentín.
+ * 17 OCT 2026, revisión del cliente. Antes se titulaba "La venta de temporada
+ * se define en la fecha del pedido, no en la de la fiesta", y el panel decía
+ * qué producto rotaba en cada fecha, con qué líneas surtirse y cuántos días
+ * quedaban para levantar el pedido. El cliente pidió:
  *
- * Lo que no sabe, y es exactamente lo que lo hace escribir por WhatsApp, es
- * CUÁNDO tiene que levantar el pedido para que le llegue a tiempo. Así que
- * este rail no filtra: cuenta los días que le quedan.
+ *   - el título "Productos de temporada";
+ *   - quitar los productos y las marcas: hablaba de calaverita de azúcar, que
+ *     Nitamy no vende;
+ *   - no inventar reglas ni fechas: la "fecha de corte" restaba a cada fiesta
+ *     unas semanas de anticipación que nadie en Nitamy dio;
+ *   - quitar el "Qué surtir" de cada temporada.
  *
- * Todo se deriva de la fecha de hoy (ver `temporadasPorCercania`). Por eso la
- * home declara `revalidate`: en una página estática pura, "faltan 12 días" se
- * congelaría en el momento del build y a la semana estaría mintiendo.
+ * Así que cada temporada queda con su nombre y su fecha, que son datos del
+ * calendario y no de nadie. El rail se sigue ordenando por cercanía, y por
+ * eso la home sigue declarando `revalidate`.
+ *
+ * 26 oct 2026 Ximena confirmó ese corte: se quedan la temporada y la fecha,
+ * y se va cualquier descripción de más.
  *
  * El componente es de servidor y hace el cálculo aquí. Al cliente solo baja
  * el estado de la pestaña seleccionada, que es lo único que necesita
@@ -60,24 +62,10 @@ export function Temporadas() {
     slug: t.slug,
     nombre: t.nombre,
     cuando: t.cuando,
-    queRota: t.queRota,
     color: t.color,
     posicion: posicionEnElAnio(t.mesPico, t.diaPico),
     icono: <IconoCategoria nombre={t.icono} size={22} />,
     iconoGrande: <IconoCategoria nombre={t.icono} size={260} />,
-    estado: t.estado,
-    diasParaCorte: t.diasParaCorte,
-    corteLegible: fechaLegible(t.corte),
-    picoLegible: fechaLegible(t.pico),
-    categorias: t.categorias
-      .map((slug) => CATEGORIAS.find((c) => c.slug === slug))
-      .filter((c) => c !== undefined)
-      .map((c) => ({
-        slug: c.slug,
-        nombre: c.nombre,
-        color: c.color,
-        icono: <IconoCategoria nombre={c.icono} size={14} />,
-      })),
   }));
 
   return (
@@ -91,15 +79,8 @@ export function Temporadas() {
             id="temporadas"
             className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
-            La venta de temporada se define en la fecha del pedido, no en la
-            de la fiesta
+            Productos de temporada
           </h2>
-          <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-            En diciembre la producción de los fabricantes ya está comprometida
-            desde octubre. Estas son las siete temporadas que concentran la
-            venta extraordinaria de dulce en México y la anticipación con la
-            que conviene levantar cada pedido.
-          </p>
         </Revelar>
 
         <div className="mt-10">

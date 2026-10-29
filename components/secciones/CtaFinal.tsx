@@ -14,7 +14,7 @@ import { Revelar } from "../Revelar";
  * Aquí vive la estela de dulces, y es el único lugar del sitio donde cabe.
  * El hero ya tiene la vitrina 3D y el titular que se voltea; una tercera
  * cosa moviéndose ahí competiría con el argumento. Esta sección es la menos
- * densa de la página (un titular, un párrafo y un botón), así que la estela
+ * densa de la página (un titular y un botón), así que la estela
  * no tapa nada, y es el instante en que el visitante decide escribir.
  */
 
@@ -36,13 +36,12 @@ export function CtaFinal({ origen }: { origen: string }) {
           se ve alrededor de las letras, no sobre ellas. */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:py-28">
         <Revelar>
+          {/* 17 oct 2026, pedido del cliente: el título es solo "Solicita tu
+              cotización" y se fue el párrafo que prometía no pedir teléfono
+              ni correo, porque ahora el formulario sí los pide. */}
           <h2 className="titular max-w-[20ch] text-[clamp(1.875rem,4vw,3.25rem)] font-extrabold leading-[1.06] tracking-[-0.02em]">
-            Solicita tu cotización y te respondemos con rapidez
+            Solicita tu cotización
           </h2>
-          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-tinta-2">
-            Tres datos. No solicitamos teléfono ni correo electrónico: el
-            mensaje se redacta solo y únicamente tienes que enviarlo.
-          </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
             <BotonCotizar origen={origen} />
             <p className="text-sm text-tinta-2">

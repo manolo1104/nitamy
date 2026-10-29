@@ -56,8 +56,11 @@ export async function POST(peticion: Request) {
   const estado = limpiar(d.estado, 60);
   const interes = limpiar(d.interes, 600);
 
-  // Solo el interés es indispensable: sin él, el lead no dice nada. Segmento y
-  // estado se marcan como desconocidos si vienen raros, pero no se descarta.
+  // Solo el interés es indispensable: sin él, el lead no dice nada. El resto
+  // se marca como vacío o desconocido si viene raro, pero no se descarta. El
+  // formulario ya exige nombre, negocio, teléfono y correo antes de enviar;
+  // aquí no se vuelve a exigir porque esta petición no tiene a quién
+  // devolverle el error: el usuario ya está en WhatsApp.
   if (!interes) {
     return NextResponse.json({ ok: false, error: "interes" }, { status: 400 });
   }
@@ -66,6 +69,10 @@ export async function POST(peticion: Request) {
 
   const lead: Lead = {
     timestamp: new Date().toISOString(),
+    nombre: limpiar(d.nombre, 120),
+    negocio: limpiar(d.negocio, 160),
+    telefono: limpiar(d.telefono, 30),
+    correo: limpiar(d.correo, 160),
     segmento: (SEGMENTOS_VALIDOS.has(segmento as never)
       ? segmento
       : "otro") as Lead["segmento"],
@@ -80,8 +87,8 @@ export async function POST(peticion: Request) {
       : "escritorio") as Lead["dispositivo"],
   };
 
-  const correo = limpiar(d.correo_respaldo, 160);
-  if (correo) lead.correo_respaldo = correo;
+  const segmentoOtro = limpiar(d.segmento_otro, 120);
+  if (segmentoOtro) lead.segmento_otro = segmentoOtro;
 
   try {
     await obtenerAdaptador().registrar(lead);

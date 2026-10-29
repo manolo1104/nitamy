@@ -120,6 +120,9 @@ export const ANIO_RAZON_SOCIAL = 1999;
  *
  * En cuanto lleguen las que faltan y entren al JSON, esta constante se puede
  * borrar y volver a derivar todo de `TOTAL_MARCAS`.
+ *
+ * 17 oct 2026: el cliente retiró Pipos. El JSON queda en 35 marcas y "+30"
+ * sigue siendo cierto.
  */
 export const MARCAS_DECLARADAS = 30;
 
@@ -283,7 +286,9 @@ export const SEGMENTOS = [
     clave: "tienda",
     etiqueta: "Tienda o dulcería",
     tarjeta: "Tengo una tienda o dulcería",
-    bajada: "Entrega directa en CDMX y Estado de México",
+    // 26 oct 2026: "Valle de México", la zona a la que el cliente acotó la
+    // flotilla el 17 oct. Antes decía "CDMX y Estado de México".
+    bajada: "Entrega directa en el Valle de México",
     dolor: "Perder días de venta para ir a surtirse",
     argumento: "Nosotros llevamos el pedido a tu tienda",
     ruta: "/tiendas",
@@ -433,6 +438,17 @@ export const MARCA_DIA_DE_MUERTOS_POR_CONFIRMAR = true;
  */
 export const GRAMAJE_200G_POR_CONFIRMAR = true;
 
+/**
+ * 17 oct 2026, en la revisión del cliente: "FALTA GOMITAS DE KARLA".
+ *
+ * El catálogo (pp. 31-32) solo trae una gomita de Dulces Karla, Mangomis, y
+ * ya está publicada con su foto, junto a las dos paletas de gomita. O el
+ * cliente se refiere a un producto que no viene en el catálogo, o no la vio.
+ * No se inventa una presentación: se le pregunta qué gomita falta y se
+ * captura con nombre, empaque y foto cuando la mande.
+ */
+export const GOMITAS_KARLA_POR_CONFIRMAR = true;
+
 /** Lista legible para el aviso de desarrollo y para auditar antes de publicar. */
 export function pendientesSinResolver(): string[] {
   const mapa: Array<[string, PorDefinir<unknown>]> = [
@@ -455,6 +471,9 @@ export function pendientesSinResolver(): string[] {
   }
   if (GRAMAJE_200G_POR_CONFIRMAR) {
     sinResolver.push("NISHIKAWA 200 g: la caja imprime 20 g, el catálogo 200 g");
+  }
+  if (GOMITAS_KARLA_POR_CONFIRMAR) {
+    sinResolver.push("KARLA: ¿qué gomita falta? El catálogo solo trae Mangomis");
   }
   return sinResolver;
 }

@@ -18,6 +18,11 @@ import { Revelar } from "../Revelar";
  * mitad. Una celda vacía en la sección donde el visitante se identifica a sí
  * mismo se lee como sitio a medio hacer.
  *
+ * 17 OCT 2026: el título cambió a "Opciones de abastecimiento para cada tipo
+ * de negocio" y las tres tarjetas ahora llevan a una página que es solo el
+ * formulario de cotización con ese segmento preseleccionado. Pedido del
+ * cliente.
+ *
  * La jerarquía se marca con tratamiento y no solo con tamaño: la celda de
  * mayoristas va en carbón porque es el segmento de mayor prioridad comercial,
  * las otras dos en pastel.
@@ -51,7 +56,7 @@ export function RuteoSegmentos() {
           id="segmentos"
           className="titular max-w-[20ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
         >
-          Cada tipo de negocio se abastece de forma distinta
+          Opciones de abastecimiento para cada tipo de negocio
         </h2>
       </Revelar>
 
@@ -80,8 +85,10 @@ export function RuteoSegmentos() {
                 complica la administración. Con nosotros es un pedido, un pago
                 y un envío.
               </p>
+              {/* "Ver más" y no "Ver cómo funciona": desde el 17 oct 2026 la
+                  página de destino es solo el formulario de cotización. */}
               <span className="mt-5 inline-flex items-center gap-2 font-semibold text-amarillo">
-                Ver cómo funciona
+                Ver más
                 <ArrowRightIcon
                   size={18}
                   aria-hidden="true"

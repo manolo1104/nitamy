@@ -3,6 +3,14 @@ import type { ClaveSegmento } from "@/config/nitamy";
 /**
  * El contenido de las tres páginas de segmento.
  *
+ * ⚠️ 17 OCT 2026: el cliente pidió que /mayoristas, /tiendas y /cadenas sean
+ * SOLO el formulario de cotización (`components/secciones/PaginaFormulario`).
+ * De este archivo hoy solo se usan `metaTitulo` y `metaDescripcion`. El resto
+ * se queda a propósito, como los textos sin publicar de `content/marcas.json`:
+ * si el cliente quiere de vuelta el argumento, no hay que reescribirlo. La
+ * plantilla vieja (`PaginaSegmento`) y `lib/formatos.ts` se borraron; están
+ * en el historial de git.
+ *
  * Vive aquí y no en `config/nitamy.ts` porque son TEXTOS, no configuración:
  * config guarda los datos de la empresa (teléfonos, fundación, cobertura) y
  * este archivo guarda cómo se le habla a cada comprador. Mezclarlos hace que
@@ -110,7 +118,7 @@ export const CONTENIDO_SEGMENTOS: ReadonlyArray<ContenidoSegmento> = [
     titulo: "Recibe el surtido completo sin cerrar tu tienda",
     metaTitulo: "Dulces al mayoreo para tiendas y dulcerías en CDMX",
     metaDescripcion:
-      "Entrega directa en CDMX y Estado de México con flotilla propia. Enchilados, gomitas, paletas, tamarindo y botana en un solo pedido. Cotiza por WhatsApp.",
+      "Entrega directa en el Valle de México con flotilla propia. Enchilados, gomitas, paletas, tamarindo y botana en un solo pedido. Cotiza por WhatsApp.",
     entrada:
       "Cada día que dedicas a surtirte en la central es un día que tu tienda no vende. El flete, el tiempo y el combustible no aparecen en ningún ticket, pero salen de la misma caja.",
     problema: {

@@ -47,6 +47,10 @@ export type Producto = {
    * mayorista, y publicar cualquiera de los dos números es inventar el dato
    * más sensible de una cotización. En esos casos se muestra el texto tal
    * como lo escribió el cliente y no se destaca ninguna cifra.
+   *
+   * 26 oct 2026: la ficha ya no pinta este número en ningún producto, solo
+   * el texto de `presentacion` (ver `components/FichaProducto.tsx`). El dato
+   * se conserva por si algún día se usa para calcular, no para mostrarse.
    */
   piezasPorCaja: number | null;
   sellos: SelloNom051[];
@@ -85,6 +89,17 @@ export type Marca = {
    * cliente cambia la portada, cambia esta lista.
    */
   socioEstrategico?: boolean;
+  /**
+   * Las tres marcas que la p. 3 del catálogo pone bajo el rótulo TEMPORADA:
+   * Big Boy, Risa y Productos Rivera.
+   *
+   * 17 oct 2026: el cliente pidió un "botón de Temporada" con esas tres en
+   * /marcas, como lo hace su catálogo. Es la misma lista que la de
+   * `socioEstrategico`, pero no significa lo mismo: aquella pinta una
+   * etiqueta, esta agrupa. Si un día una marca de temporada deja de ser
+   * socio, o al revés, no tienen por qué moverse juntas.
+   */
+  temporada?: boolean;
   resumen: string;
   descripcion: string[];
   porQueRota: string;
@@ -152,12 +167,8 @@ export type Temporada = {
   cuando: string;
   mesPico: number;
   diaPico: number;
-  semanasAntes: number;
-  queRota: string;
-  categorias: string[];
   color: ColorMarca;
   icono: string;
-  textoRevisado: boolean;
 };
 
 export type Faq = {
@@ -205,12 +216,16 @@ export const MARCAS_FUNDADORAS = MARCAS.filter((m) => m.fundadora);
 export const MARCAS_VISIBLES = MARCAS.filter((m) => !m.ocultaDelIndice);
 
 /**
- * Las que ya tienen logo real. Las demás caen a monograma tipográfico.
+ * Las dos mitades de la rejilla de marcas del catálogo (pp. 2-3): las de
+ * línea y, bajo el rótulo TEMPORADA, Big Boy, Risa y Rivera.
  *
- * Sale de `MARCAS_VISIBLES` y no de `MARCAS` porque su único consumidor es
- * la rejilla de la home, que es un listado y enlaza a la ficha de cada una.
+ * 17 oct 2026: el cliente pidió las marcas TAL CUAL vienen en el catálogo,
+ * porque ese orden va de la que más se vende a la que menos. El JSON ya está
+ * en ese orden, así que aquí solo se filtra: ninguna de las dos listas se
+ * reordena, ni alfabéticamente ni por tener logotipo.
  */
-export const MARCAS_CON_LOGO = MARCAS_VISIBLES.filter((m) => Boolean(m.logo));
+export const MARCAS_DE_LINEA = MARCAS_VISIBLES.filter((m) => !m.temporada);
+export const MARCAS_DE_TEMPORADA = MARCAS_VISIBLES.filter((m) => m.temporada);
 
 export function marcaPorSlug(slug: string): Marca | undefined {
   return MARCAS.find((m) => m.slug === slug);
@@ -240,33 +255,21 @@ export const FAQS_PUBLICABLES = FAQS.filter(
    de catálogo, porque le vende al consumidor final: entras, eliges "San
    Valentín" y ves 90 productos.
 
-   Aquí el visitante es un negocio y ese filtro no le sirve de nada: ya sabe
-   qué es San Valentín. Lo que no sabe, y es justo lo que lo hace escribir por
-   WhatsApp, es CUÁNDO tiene que levantar el pedido para que le llegue a
-   tiempo. Por eso el rail no filtra: cuenta los días.
+   17 OCT 2026: el rail dejó de contar días. Calculaba una "fecha de corte"
+   restando a cada fiesta unas semanas de anticipación que nunca dio el
+   cliente, y él pidió no inventar reglas ni fechas. Tampoco dice ya qué
+   producto rota en cada una: el texto hablaba de calaverita de azúcar, que
+   Nitamy no vende, y el cliente pidió dejar solo la temporada, sin marcas ni
+   productos.
 
-   Todo se DERIVA de mesPico, diaPico y semanasAntes. En el JSON no hay un
-   solo año escrito, así que el sitio no puede envejecer: en 2029 sigue dando
-   la fecha correcta sin que nadie lo toque.
+   Lo único que queda derivado de la fecha es el ORDEN: la temporada más
+   próxima va primero. En el JSON no hay un solo año escrito, así que el sitio
+   no puede envejecer.
    ========================================================================== */
-
-const MS_POR_DIA = 86_400_000;
 
 export type TemporadaCalculada = Temporada & {
   /** Fecha pico de la próxima ocurrencia. */
   pico: Date;
-  /** Último día recomendado para levantar el pedido. */
-  corte: Date;
-  /** Días desde hoy hasta el corte. Negativo si el corte ya pasó. */
-  diasParaCorte: number;
-  /**
-   * `abierta`  hay tiempo de sobra.
-   * `urgente`  quedan 14 días o menos para el corte.
-   * `tarde`    el corte pasó pero la fecha pico no: todavía se alcanza,
-   *            con menos margen. No se oculta la temporada, porque un
-   *            pedido tarde sigue siendo un pedido.
-   */
-  estado: "abierta" | "urgente" | "tarde";
 };
 
 /** Medianoche local. Comparar fechas con hora mete errores de un día. */
@@ -287,23 +290,6 @@ function proximaOcurrencia(mes: number, dia: number, hoy: Date): Date {
   return new Date(hoy.getFullYear() + 1, mes - 1, dia);
 }
 
-export function calcularTemporada(
-  t: Temporada,
-  hoy: Date = new Date(),
-): TemporadaCalculada {
-  const referencia = aMedianoche(hoy);
-  const pico = proximaOcurrencia(t.mesPico, t.diaPico, referencia);
-  const corte = new Date(pico.getTime() - t.semanasAntes * 7 * MS_POR_DIA);
-  const diasParaCorte = Math.round(
-    (corte.getTime() - referencia.getTime()) / MS_POR_DIA,
-  );
-
-  const estado =
-    diasParaCorte < 0 ? "tarde" : diasParaCorte <= 14 ? "urgente" : "abierta";
-
-  return { ...t, pico, corte, diasParaCorte, estado };
-}
-
 /**
  * Las siete temporadas ordenadas por cercanía, la más próxima primero.
  *
@@ -314,17 +300,9 @@ export function calcularTemporada(
 export function temporadasPorCercania(
   hoy: Date = new Date(),
 ): TemporadaCalculada[] {
-  return TEMPORADAS.map((t) => calcularTemporada(t, hoy)).sort(
-    (a, b) => a.pico.getTime() - b.pico.getTime(),
-  );
-}
-
-const FORMATO_FECHA = new Intl.DateTimeFormat("es-MX", {
-  day: "numeric",
-  month: "long",
-});
-
-/** "24 de octubre". Sin año: el año lo pone el contexto y así no envejece. */
-export function fechaLegible(d: Date): string {
-  return FORMATO_FECHA.format(d);
+  const referencia = aMedianoche(hoy);
+  return TEMPORADAS.map((t) => ({
+    ...t,
+    pico: proximaOcurrencia(t.mesPico, t.diaPico, referencia),
+  })).sort((a, b) => a.pico.getTime() - b.pico.getTime());
 }

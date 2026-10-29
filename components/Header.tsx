@@ -1,10 +1,11 @@
 "use client";
 
-import { ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
+import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { MARCAS_DE_LINEA, MARCAS_DE_TEMPORADA } from "@/lib/contenido";
 import { nombreDePagina } from "@/lib/origen";
 import { BotonCotizar } from "./calificador/BotonCotizar";
 
@@ -28,31 +29,45 @@ import { BotonCotizar } from "./calificador/BotonCotizar";
  *
  * 5 SEP 2026: y salió del sitio entero. Se borraron las páginas /categorias y
  * todos los enlaces que llevaban a ellas (la sección de la home, el pie, las
- * páginas de segmento y cobertura). Las líneas se siguen VIENDO -agrupan
- * /marcas, salen como etiquetas en /nosotros y en los segmentos, y el rail de
- * temporadas dice cuál surtir- pero ya no son un destino navegable.
+ * páginas de segmento y cobertura).
+ *
+ * 17 OCT 2026, revisión del cliente:
+ *   - "Mayoristas" salió del menú: repetía lo que ya está en la home. La
+ *     página sigue viva y se llega desde su tarjeta en la home y desde el pie.
+ *   - "Marcas" pasó a ser un menú desplegable con todas las marcas, en el
+ *     orden del catálogo, y aparte las tres de Temporada. En celular es un
+ *     desplegable dentro del menú.
  */
 
 const ENLACES = [
-  { href: "/marcas", texto: "Marcas" },
-  { href: "/mayoristas", texto: "Mayoristas" },
   { href: "/cobertura", texto: "Cobertura" },
   { href: "/nosotros", texto: "Nosotros" },
   // REUNIÓN 21 ago 2026: el cliente lo pidió a la derecha de "Nosotros".
   { href: "/blog", texto: "Blog" },
 ];
 
+/** Las mismas clases de píldora para los enlaces y el botón de Marcas. */
+const PILDORA =
+  "rounded-pill px-3 py-2 text-[0.9375rem] xl:px-4 font-medium text-tinta-2 transition-[color,background-color,transform] duration-200 ease-salida hover:bg-papel-2 hover:text-tinta active:scale-[0.97]";
+
 export function Header() {
   const [abierto, setAbierto] = useState(false);
+  const [marcasAbierto, setMarcasAbierto] = useState(false);
+  const [marcasMovilAbierto, setMarcasMovilAbierto] = useState(false);
+  const botonMarcas = useRef<HTMLButtonElement>(null);
+  const panelMarcas = useRef<HTMLDivElement>(null);
   const ruta = usePathname();
   // El origen sale de la ruta, no de una prop: el layout no sabe en qué
   // página está, y este componente sí.
   const origen = nombreDePagina(ruta);
+  const enMarcas = ruta.startsWith("/marcas");
 
-  // Cerrar el menú al navegar. Sin esto, en celular se queda abierto encima
+  // Cerrar los menús al navegar. Sin esto, en celular se queda abierto encima
   // de la página nueva.
   useEffect(() => {
     setAbierto(false);
+    setMarcasAbierto(false);
+    setMarcasMovilAbierto(false);
   }, [ruta]);
 
   // Con el menú abierto en celular, el fondo no debe poder desplazarse.
@@ -64,6 +79,37 @@ export function Header() {
       document.body.style.overflow = previo;
     };
   }, [abierto]);
+
+  /*
+    El desplegable de marcas se cierra con Escape y con un clic fuera de él,
+    que es lo que cualquiera espera de un menú. Con Escape el foco vuelve al
+    botón: si se quedara en un enlace que acaba de desaparecer, quien navega
+    con teclado caería al inicio del documento.
+  */
+  useEffect(() => {
+    if (!marcasAbierto) return;
+    function alTeclado(e: KeyboardEvent) {
+      if (e.key !== "Escape") return;
+      setMarcasAbierto(false);
+      botonMarcas.current?.focus();
+    }
+    function alPresionar(e: PointerEvent) {
+      const objetivo = e.target as Node;
+      if (
+        botonMarcas.current?.contains(objetivo) ||
+        panelMarcas.current?.contains(objetivo)
+      ) {
+        return;
+      }
+      setMarcasAbierto(false);
+    }
+    document.addEventListener("keydown", alTeclado);
+    document.addEventListener("pointerdown", alPresionar);
+    return () => {
+      document.removeEventListener("keydown", alTeclado);
+      document.removeEventListener("pointerdown", alPresionar);
+    };
+  }, [marcasAbierto]);
 
   return (
     // `cabecera-scroll` le da sombra conforme baja el scroll. Va con línea de
@@ -94,12 +140,87 @@ export function Header() {
 
           El estilo cuelga de `aria-current`, no de una clase suelta: así el
           marcado que anuncia la página actual al lector de pantalla y el que
-          la pinta son el mismo, y no pueden desincronizarse.
+          la pinta son el mismo, y no pueden desincronizarse. El botón de
+          Marcas no es un enlace y no lleva `aria-current`; ahí la píldora
+          cuelga de `data-activo`.
         */}
         <nav
           aria-label="Principal"
           className="ml-auto hidden items-center gap-1 lg:flex"
         >
+          <button
+            ref={botonMarcas}
+            type="button"
+            onClick={() => setMarcasAbierto((v) => !v)}
+            aria-expanded={marcasAbierto}
+            aria-controls="menu-marcas"
+            data-activo={enMarcas || undefined}
+            className={`${PILDORA} inline-flex items-center gap-1.5 data-[activo]:bg-naranja data-[activo]:font-semibold data-[activo]:text-tinta`}
+          >
+            Marcas
+            <CaretDownIcon
+              size={14}
+              weight="bold"
+              aria-hidden="true"
+              className={`transition-transform duration-200 ease-salida ${marcasAbierto ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {/*
+            El panel va aquí, justo después de su botón, y no al final del
+            header: así el orden de tabulación pasa del botón a las marcas y
+            no a Cobertura. Se posiciona contra el header (el primer ancestro
+            posicionado, que es pegajoso) y por eso ocupa todo su ancho.
+          */}
+          {marcasAbierto && (
+            <div
+              ref={panelMarcas}
+              id="menu-marcas"
+              className="menu-baja absolute inset-x-0 top-full border-y border-linea bg-papel shadow-[0_24px_40px_-24px_rgb(20_17_15/0.35)]"
+            >
+              <div className="mx-auto max-w-[1400px] px-8 py-7">
+                <ul className="grid grid-cols-4 gap-x-6 gap-y-0.5 xl:grid-cols-5">
+                  {MARCAS_DE_LINEA.map((m) => (
+                    <li key={m.slug}>
+                      <Link
+                        href={`/marcas/${m.slug}`}
+                        aria-current={ruta === `/marcas/${m.slug}` ? "page" : undefined}
+                        className="block rounded-caja px-3 py-1.5 text-[0.9375rem] text-tinta-2 transition-colors duration-200 ease-salida hover:bg-papel-2 hover:text-tinta aria-[current=page]:font-semibold aria-[current=page]:text-tinta"
+                      >
+                        {m.nombre}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2 border-t border-linea pt-5">
+                  <Link
+                    href="/marcas#temporada"
+                    className="mr-2 inline-flex items-center rounded-pill bg-naranja px-3.5 py-1 text-xs font-extrabold uppercase tracking-[0.14em] text-tinta"
+                  >
+                    Temporada
+                  </Link>
+                  {MARCAS_DE_TEMPORADA.map((m) => (
+                    <Link
+                      key={m.slug}
+                      href={`/marcas/${m.slug}`}
+                      aria-current={ruta === `/marcas/${m.slug}` ? "page" : undefined}
+                      className="rounded-caja px-3 py-1.5 text-[0.9375rem] text-tinta-2 transition-colors duration-200 ease-salida hover:bg-papel-2 hover:text-tinta aria-[current=page]:font-semibold aria-[current=page]:text-tinta"
+                    >
+                      {m.nombre}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/marcas"
+                    className="enlace ml-auto text-[0.9375rem] font-semibold text-naranja-texto"
+                  >
+                    Ver todas las marcas
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
           {ENLACES.map((e) => (
             <Link
               key={e.href}
@@ -115,7 +236,7 @@ export function Header() {
                 `transition-colors`, que no incluye `transform` y dejaba el
                 hundido sin animar.
               */
-              className="rounded-pill px-3 py-2 text-[0.9375rem] xl:px-4 font-medium text-tinta-2 transition-[color,background-color,transform] duration-200 ease-salida hover:bg-papel-2 hover:text-tinta active:scale-[0.97] aria-[current=page]:bg-naranja aria-[current=page]:font-semibold aria-[current=page]:text-tinta"
+              className={`${PILDORA} aria-[current=page]:bg-naranja aria-[current=page]:font-semibold aria-[current=page]:text-tinta`}
             >
               {e.texto}
             </Link>
@@ -147,15 +268,75 @@ export function Header() {
       />
 
       {abierto && (
+        /*
+          Con el desplegable de marcas el menú puede medir más que la
+          pantalla, y el fondo está bloqueado mientras está abierto. Por eso
+          el panel se desplaza solo: sin `overflow-y-auto`, las últimas filas
+          quedarían fuera de alcance.
+        */
         <div
           id="menu-movil"
-          className="menu-baja border-t border-linea bg-papel lg:hidden"
+          className="menu-baja max-h-[calc(100dvh-4.25rem)] overflow-y-auto overscroll-contain border-t border-linea bg-papel lg:hidden"
         >
           <nav aria-label="Principal, celular" className="px-5 py-4">
             <ul className="divide-y divide-linea">
+              <li style={{ "--i": 0 } as React.CSSProperties}>
+                <button
+                  type="button"
+                  onClick={() => setMarcasMovilAbierto((v) => !v)}
+                  aria-expanded={marcasMovilAbierto}
+                  aria-controls="menu-movil-marcas"
+                  className="presionable flex min-h-13 w-full items-center justify-between text-base font-medium text-tinta"
+                >
+                  Marcas
+                  <CaretDownIcon
+                    size={18}
+                    weight="bold"
+                    aria-hidden="true"
+                    className={`transition-transform duration-200 ease-salida ${marcasMovilAbierto ? "rotate-180" : ""}`}
+                  />
+                </button>
+                {marcasMovilAbierto && (
+                  <div id="menu-movil-marcas" className="pb-4">
+                    <ul className="grid grid-cols-2 gap-x-3">
+                      {MARCAS_DE_LINEA.map((m) => (
+                        <li key={m.slug}>
+                          <Link
+                            href={`/marcas/${m.slug}`}
+                            className="presionable flex min-h-11 items-center text-[0.9375rem] text-tinta-2"
+                          >
+                            {m.nombre}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 inline-flex items-center rounded-pill bg-naranja px-3.5 py-1 text-xs font-extrabold uppercase tracking-[0.14em] text-tinta">
+                      Temporada
+                    </p>
+                    <ul className="mt-1 grid grid-cols-2 gap-x-3">
+                      {MARCAS_DE_TEMPORADA.map((m) => (
+                        <li key={m.slug}>
+                          <Link
+                            href={`/marcas/${m.slug}`}
+                            className="presionable flex min-h-11 items-center text-[0.9375rem] text-tinta-2"
+                          >
+                            {m.nombre}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/marcas"
+                      className="presionable mt-2 flex min-h-11 items-center text-[0.9375rem] font-semibold text-naranja-texto"
+                    >
+                      Ver todas las marcas
+                    </Link>
+                  </div>
+                )}
+              </li>
               {ENLACES.map((e, i) => (
                 // `--i` escalona la entrada de cada fila detrás del panel.
-                <li key={e.href} style={{ "--i": i } as React.CSSProperties}>
+                <li key={e.href} style={{ "--i": i + 1 } as React.CSSProperties}>
                   <Link
                     href={e.href}
                     /*

@@ -1,15 +1,18 @@
 import { TruckIcon, PackageIcon } from "@phosphor-icons/react/dist/ssr";
-import {
-  COBERTURA_PORCENTAJE,
-  TIEMPOS_ENTREGA_POR_ZONA,
-  estaPendiente,
-} from "@/config/nitamy";
+import { TIEMPOS_ENTREGA_POR_ZONA, estaPendiente } from "@/config/nitamy";
 import { BotonCotizar } from "../calificador/BotonCotizar";
 import { Ruta } from "../cobertura/Ruta";
 import { Revelar } from "../Revelar";
 
 /**
- * Cobertura.
+ * Cobertura, titulada "Opciones de envío".
+ *
+ * 17 OCT 2026, revisión del cliente: el título "80% de cobertura en la
+ * República, con dos niveles de servicio" pasó a "Opciones de envío", y cada
+ * tarjeta dice solo a dónde entrega: la flotilla propia, el Valle de México;
+ * la red de transporte, el resto de la República. Se fueron las viñetas de
+ * cada tarjeta y el párrafo de debajo del título, que repetían el argumento
+ * con adjetivos. El 80% sigue en la barra de cifras.
  *
  * 🔴 26 AGO 2026: SE RETIRÓ EL LISTADO DE ENTIDADES, y esto es lo que hay que
  * entender antes de volver a meterlo.
@@ -38,13 +41,6 @@ import { Revelar } from "../Revelar";
  * pintar entidades es exactamente la promesa que se acaba de retirar.
  */
 
-/** Lo que sustituye a la lista de chips: por qué la red aguanta el volumen. */
-const RED = [
-  "Rutas consolidadas hacia el centro, el bajío, el norte y el sureste.",
-  "Transportistas seleccionados por cobertura y cumplimiento, no por tarifa.",
-  "Foráneo operando desde 1999, no una capacidad improvisada.",
-];
-
 export function Cobertura() {
   const conTiempos = !estaPendiente(TIEMPOS_ENTREGA_POR_ZONA);
 
@@ -58,20 +54,13 @@ export function Cobertura() {
           id="cobertura"
           className="titular max-w-[18ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
         >
-          {COBERTURA_PORCENTAJE}% de cobertura en la República, con dos niveles
-          de servicio
+          Opciones de envío
         </h2>
-        <p className="mt-4 max-w-[56ch] text-lg leading-relaxed text-tinta-2">
-          La diferencia es operativa: donde tenemos unidades propias
-          controlamos la ruta completa; en el resto del país entregamos a
-          través de una red de transporte consolidada a lo largo de más de dos
-          décadas. Consúltanos por tu zona y te confirmamos cómo llega.
-        </p>
       </Revelar>
 
       {/* El camión recorre la ruta y va dejando entregas conforme se baja
-          por la página. Va aquí, entre el argumento y las dos tarjetas de
-          servicio: ilustra lo que el párrafo acaba de decir. */}
+          por la página. Va aquí, entre el título y las dos tarjetas de
+          servicio: ilustra lo que las tarjetas dicen. */}
       <Ruta />
 
       <div className="mt-4 grid gap-6 lg:grid-cols-2">
@@ -87,24 +76,8 @@ export function Cobertura() {
               Flotilla propia
             </h3>
             <p className="mt-2.5 leading-relaxed text-tinta-2">
-              Cargamos y entregamos nosotros en el área metropolitana de la
-              Ciudad de México. Si algo se atrasa, lo sabemos antes que tú.
+              Entregamos en el Valle de México.
             </p>
-
-            <ul className="mt-7 space-y-3 border-t border-linea pt-6 text-[0.9375rem] leading-relaxed text-tinta-2">
-              <li>
-                Tratas con nosotros de principio a fin, no con una paquetería
-                intermediaria.
-              </li>
-              <li>
-                Podemos ajustar la ruta si necesitas la entrega en un horario
-                distinto al de tu zona.
-              </li>
-              <li>
-                La mercancía va acomodada conforme a tu orden, no revuelta con
-                la de otros clientes.
-              </li>
-            </ul>
           </div>
         </Revelar>
 
@@ -120,15 +93,8 @@ export function Cobertura() {
               Red de transporte a foráneo
             </h3>
             <p className="mt-2.5 leading-relaxed text-tinta-2">
-              El resto de la República, con transportistas seleccionados por
-              cobertura y confiabilidad.
+              Entregamos al resto de la República.
             </p>
-
-            <ul className="mt-7 space-y-3 border-t border-linea pt-6 text-[0.9375rem] leading-relaxed text-tinta-2">
-              {RED.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
           </div>
         </Revelar>
       </div>
@@ -146,8 +112,11 @@ export function Cobertura() {
               </>
             )}
           </p>
+          {/* "Inicio" y no "Cobertura": desde el 17 oct 2026 esta sección ya
+              no se monta en /cobertura, solo en la home, y el origen es lo
+              que lee el vendedor en "Vengo de la página de…". */}
           <BotonCotizar
-            origen="Cobertura"
+            origen="Inicio"
             etiqueta="Consulta tu zona"
             tamano="normal"
             className="shrink-0"

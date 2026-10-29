@@ -32,10 +32,12 @@ const SECCIONES = [
   {
     titulo: "Qué datos recabamos",
     parrafos: [
-      "Cuando solicitas una cotización desde este sitio recabamos únicamente: el tipo de negocio que tienes, el estado de la República donde te encuentras y la descripción de lo que te interesa cotizar.",
-      "Si nos escribes fuera de horario y decides dejarlo, recabamos también un correo electrónico de respaldo. Es opcional.",
+      // 17 oct 2026: el formulario pasó a pedir nombre, negocio, teléfono y
+      // correo. Este párrafo tiene que decir exactamente lo que se recaba,
+      // así que cambió con él. Antes afirmaba que no se pedía teléfono.
+      "Cuando solicitas una cotización desde este sitio recabamos: tu nombre, el nombre de tu negocio, tu teléfono, tu correo electrónico, el tipo de negocio que tienes, el estado de la República donde te encuentras y la descripción de lo que te interesa cotizar.",
       "De forma automática registramos la página desde la que solicitaste la cotización, los parámetros de campaña de la liga por la que llegaste y el tipo de dispositivo que usaste. Esto sirve para saber qué canales funcionan.",
-      "No pedimos ni almacenamos tu número telefónico desde este sitio. Cuando continúas la conversación por WhatsApp, tu número lo recibe ese servicio conforme a sus propias condiciones.",
+      "Cuando continúas la conversación por WhatsApp, ese servicio recibe tu mensaje y tu número conforme a sus propias condiciones.",
     ],
   },
   {

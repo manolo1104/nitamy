@@ -27,6 +27,16 @@ import type { ColorMarca } from "@/lib/contenido";
  * iconos se siguen renderizando en el servidor; lo único que baja al
  * navegador es el rastreo del cursor.
  *
+ * 17 OCT 2026, revisión del cliente: el título pasó a "Tu pedido en 3 pasos"
+ * y se quitaron los párrafos de detalle de cada paso por genéricos. El paso 1
+ * nombra los tres canales por los que se recibe un pedido: WhatsApp, llamada
+ * y correo. El 26 oct 2026 Ximena confirmó que los tres van juntos en ese
+ * paso, sin abrir un paso por canal.
+ *
+ * El paso 3 dice "Valle de México" y no "CDMX y Estado de México": en la
+ * misma revisión el cliente acotó la flotilla a esa zona (ver la sección de
+ * envío), y prometer todo el Estado de México aquí la contradecía.
+ *
  * El número va en el sticker girado y no como un `<h3>` numerado porque
  * `<ol>` ya numera para el lector de pantalla; el sticker es la versión
  * visible de esa misma numeración, y por eso es `aria-hidden`.
@@ -35,32 +45,25 @@ import type { ColorMarca } from "@/lib/contenido";
 const PASOS = [
   {
     titulo: "Nos indicas qué necesitas",
-    texto: "Por WhatsApp, en un minuto.",
-    detalle:
-      "Marcas, líneas completas o el surtido íntegro. Si todavía no defines el pedido, te indicamos qué rota en negocios del mismo giro.",
+    texto: "Por WhatsApp, llamada o correo.",
     Icono: ChatCircleTextIcon,
     color: "celeste",
   },
   {
     titulo: "Te cotizamos con rapidez",
     texto: "Con precios, presentaciones y tiempo de entrega.",
-    detalle:
-      "La cotización detalla el precio y el empaque de cada presentación, para que sepas exactamente qué llega a tu anaquel.",
     Icono: ReceiptIcon,
     color: "amarillo",
   },
   {
     titulo: "Te lo entregamos",
-    texto: "Con flotilla propia en CDMX y Estado de México.",
-    detalle:
-      "En la zona metropolitana controlamos la ruta de punta a punta. Para el resto del país trabajamos con transportistas elegidos por cobertura y cumplimiento.",
+    texto: "Con flotilla propia en el Valle de México.",
     Icono: TruckIcon,
     color: "naranja",
   },
 ] as const satisfies ReadonlyArray<{
   titulo: string;
   texto: string;
-  detalle: string;
   Icono: typeof TruckIcon;
   color: ColorMarca;
 }>;
@@ -81,7 +84,7 @@ export function ComoFunciona() {
             id="como-funciona"
             className="titular max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
-            De tu mensaje a tu bodega, en tres pasos
+            Tu pedido en 3 pasos
           </h2>
         </Revelar>
 
@@ -211,9 +214,6 @@ export function ComoFunciona() {
                   </h3>
                   <p className="mt-2 font-semibold leading-relaxed text-tinta">
                     {paso.texto}
-                  </p>
-                  <p className="mt-3 leading-relaxed text-tinta-2">
-                    {paso.detalle}
                   </p>
                 </Reflector>
               </Revelar>

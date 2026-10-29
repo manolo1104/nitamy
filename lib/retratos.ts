@@ -13,11 +13,20 @@ import { CATEGORIAS, MARCAS, type ColorMarca } from "./contenido";
  * mismo tamarindo para cuatro categorías distintas. Aquí cada línea enseña
  * algo que de verdad la representa.
  */
+/*
+ * 17 oct 2026, dos cambios:
+ *   - gomitas: era Comesaurio de Dulces Guaz, y el cliente aclaró que NO es
+ *     gomita (se movió a caramelo y confitería). Ahora es Mangomis de Karla,
+ *     que el propio catálogo pone bajo "GOMITAS".
+ *   - cacahuates: apuntaba a `japon-s-60-gr.webp`, un nombre de archivo que
+ *     dejó de existir cuando se renombraron las fotos. `credito()` no lo
+ *     encontraba y la línea de cacahuate desaparecía del hero en silencio.
+ */
 const RETRATO: Record<string, string> = {
   enchilados: "/productos/chaca-chaca/rielito-en-trozo-en-bolsa.webp",
-  cacahuates: "/productos/nishikawa/japon-s-60-gr.webp",
+  cacahuates: "/productos/nishikawa/japones-60-gr.webp",
   tamarindo: "/productos/tama-roca/pellizco.webp",
-  gomitas: "/productos/dulces-guaz/comesaurio.webp",
+  gomitas: "/productos/dulces-karla/mangomis.webp",
   paletas: "/productos/alvbro/paleta-hueso.webp",
   salsas: "/productos/salsa-tamazula/salsa-roja-370-ml.webp",
   "obleas-y-dulce-tradicional": "/productos/cabadas/oblea-mediana.webp",

@@ -61,15 +61,16 @@ export const metadata: Metadata = {
 };
 
 /**
- * La sección de temporadas cuenta los días que faltan para la fecha de corte
- * de cada pedido, así que depende de qué día es hoy.
+ * La sección de temporadas abre en la temporada más próxima y marca "Hoy" en
+ * el calendario del año, así que depende de qué día es hoy.
  *
- * Sin esto, la home se prerenderiza una vez en el build y "quedan 12 días" se
- * queda congelado para siempre: a la semana estaría mintiendo, y mintiendo
- * justo en el dato por el que existe la sección.
+ * 17 oct 2026: ya no cuenta días para una fecha de corte (el cliente pidió
+ * no inventar reglas de anticipación), pero el orden y la marca siguen
+ * dependiendo de la fecha. Sin esto, la home se prerenderiza una vez en el
+ * build y en noviembre seguiría abriendo en Día de Muertos.
  *
- * Un día es el intervalo correcto, no una hora: la cuenta está en días y
- * revalidar más seguido no cambiaría ni un número en pantalla.
+ * Un día es el intervalo correcto, no una hora: revalidar más seguido no
+ * cambiaría nada en pantalla.
  */
 export const revalidate = 86400;
 

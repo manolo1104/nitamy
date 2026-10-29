@@ -6,8 +6,12 @@ import { ViewTransition } from "react";
 import { LogoMarca } from "@/components/LogoMarca";
 import { Revelar } from "@/components/Revelar";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
-import { MARCAS_DECLARADAS, aniosOperando } from "@/config/nitamy";
-import { MARCAS_VISIBLES } from "@/lib/contenido";
+import { MARCAS_DECLARADAS } from "@/config/nitamy";
+import {
+  MARCAS_DE_LINEA,
+  MARCAS_DE_TEMPORADA,
+  type Marca,
+} from "@/lib/contenido";
 
 /**
  * Índice de marcas: UNA lista con todas, cada marca una sola vez.
@@ -18,15 +22,20 @@ import { MARCAS_VISIBLES } from "@/lib/contenido";
  * estorba, porque no sabe si dos tarjetas iguales son la misma o dos cosas
  * distintas. El cliente pidió verlas sin repetir.
  *
- * ORDEN ALFABÉTICO, con `localeCompare` en español para que los acentos y la
- * Ñ caigan donde un lector espera. El argumento viejo contra el alfabético
- * ("el comprador no busca la letra P, busca qué tienes de tamarindo") valía
- * mientras hubiera agrupación semántica que ofrecer; sin ella, el orden que
- * más ayuda a encontrar una marca es el del abecedario.
+ * 17 OCT 2026, revisión del cliente, tres cambios:
+ *
+ *   1. ORDEN DEL CATÁLOGO, ya no alfabético. El catálogo acomoda las marcas
+ *      de la que más se vende a la que menos, y el cliente pidió que el sitio
+ *      respete ese orden. `content/marcas.json` ya está así; aquí no se
+ *      reordena nada.
+ *   2. Sin el párrafo de debajo del título.
+ *   3. Un rótulo "Temporada" con Big Boy, Risa y Rivera al final, como en la
+ *      p. 3 del catálogo. Va con ancla (`#temporada`) para que el menú de
+ *      Marcas pueda llevar directo ahí.
  *
  * Al desaparecer las repeticiones también se fue el mapa `primeraAparicion`,
  * que existía solo para no repetir el `name` de `ViewTransition` -React
- * desactiva el morph si se duplica-. Ahora cada marca aparece una vez y su
+ * desactiva el morph si se duplica-. Cada marca aparece una vez y su
  * transición se marca sin ceremonia.
  */
 
@@ -36,11 +45,52 @@ export const metadata: Metadata = {
   alternates: { canonical: "/marcas" },
 };
 
-export default function IndiceDeMarcas() {
-  const marcas = [...MARCAS_VISIBLES].sort((a, b) =>
-    a.nombre.localeCompare(b.nombre, "es"),
+/** La rejilla de tarjetas. La usan las dos secciones de la página. */
+function RejillaDeMarcas({ marcas }: { marcas: Marca[] }) {
+  return (
+    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {marcas.map((marca, i) => (
+        /*
+          El retraso se corta en la primera fila y media. Escalonar las
+          35 dejaría la última tarjeta esperando 1.4 s, y lo que se
+          busca es que la rejilla entre con ritmo, no que el visitante
+          vea aparecer el final con retardo.
+        */
+        <Revelar key={marca.slug} retraso={Math.min(i, 7) * 40} como="li">
+          <Link
+            href={`/marcas/${marca.slug}`}
+            className="flex h-full flex-col rounded-caja border border-linea p-5 transition-[border-color,transform] duration-200 ease-salida hover:border-tinta active:scale-[0.99]"
+          >
+            <div className="flex h-11 items-center">
+              <ViewTransition name={`marca-${marca.slug}`}>
+                <LogoMarca marca={marca} alto={36} />
+              </ViewTransition>
+            </div>
+            <h2 className="mt-4 text-base font-extrabold tracking-tight">
+              {marca.nombre}
+            </h2>
+            <p className="mt-1.5 text-sm leading-relaxed text-tinta-2">
+              {marca.resumen}
+            </p>
+            {/*
+              `mt-auto`: la etiqueta se va al fondo de la tarjeta. Las
+              tarjetas de una fila miden lo mismo pero sus resúmenes no,
+              y sin esto las tres etiquetas de la rejilla quedarían a
+              tres alturas distintas.
+            */}
+            {marca.socioEstrategico && (
+              <span className="mt-auto pt-4">
+                <EtiquetaSocio marca={marca} />
+              </span>
+            )}
+          </Link>
+        </Revelar>
+      ))}
+    </ul>
   );
+}
 
+export default function IndiceDeMarcas() {
   return (
     <>
       <Migajas
@@ -55,56 +105,45 @@ export default function IndiceDeMarcas() {
           <h1 className="titular max-w-[20ch] text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
             Las marcas que distribuimos
           </h1>
-          <p className="mt-5 max-w-[56ch] text-lg leading-relaxed text-tinta-2">
-            Más de {aniosOperando()} años construyendo este catálogo. Todas se
-            surten en un solo pedido, con una factura y un pago.
-          </p>
         </div>
       </section>
 
       <section aria-label="Todas las marcas" className="border-b border-linea">
         <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-8 lg:py-16">
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {marcas.map((marca, i) => (
-              /*
-                El retraso se corta en la primera fila y media. Escalonar las
-                35 dejaría la última tarjeta esperando 1.4 s, y lo que se
-                busca es que la rejilla entre con ritmo, no que el visitante
-                vea aparecer el final con retardo.
-              */
-              <Revelar key={marca.slug} retraso={Math.min(i, 7) * 40} como="li">
-                <Link
-                  href={`/marcas/${marca.slug}`}
-                  className="flex h-full flex-col rounded-caja border border-linea p-5 transition-[border-color,transform] duration-200 ease-salida hover:border-tinta active:scale-[0.99]"
-                >
-                  <div className="flex h-11 items-center">
-                    <ViewTransition name={`marca-${marca.slug}`}>
-                      <LogoMarca marca={marca} alto={36} />
-                    </ViewTransition>
-                  </div>
-                  <h2 className="mt-4 text-base font-extrabold tracking-tight">
-                    {marca.nombre}
-                  </h2>
-                  <p className="mt-1.5 text-sm leading-relaxed text-tinta-2">
-                    {marca.resumen}
-                  </p>
-                  {/*
-                    `mt-auto`: la etiqueta se va al fondo de la tarjeta. Las
-                    tarjetas de una fila miden lo mismo pero sus resúmenes no,
-                    y sin esto las tres etiquetas de la rejilla quedarían a
-                    tres alturas distintas.
-                  */}
-                  {marca.socioEstrategico && (
-                    <span className="mt-auto pt-4">
-                      <EtiquetaSocio marca={marca} />
-                    </span>
-                  )}
-                </Link>
-              </Revelar>
-            ))}
-          </ul>
+          <RejillaDeMarcas marcas={MARCAS_DE_LINEA} />
         </div>
       </section>
+
+      {MARCAS_DE_TEMPORADA.length > 0 && (
+        /*
+          `scroll-mt-24`: el header es pegajoso y mide 68px. Sin margen, al
+          llegar por el ancla desde el menú el rótulo quedaría escondido
+          debajo de él.
+        */
+        <section
+          id="temporada"
+          aria-labelledby="titulo-temporada"
+          className="scroll-mt-24 border-b border-linea bg-papel-2"
+        >
+          <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-8 lg:py-16">
+            {/*
+              El rótulo copia el botón "TEMPORADA" de la p. 3 del catálogo:
+              píldora naranja con el texto en versalitas. Tinta y no blanco
+              encima, por la misma razón que el botón primario (6.15:1 contra
+              3.41:1).
+            */}
+            <h2
+              id="titulo-temporada"
+              className="inline-flex items-center rounded-pill bg-naranja px-6 py-2.5 text-lg font-extrabold uppercase tracking-[0.12em] text-tinta"
+            >
+              Temporada
+            </h2>
+            <div className="mt-8">
+              <RejillaDeMarcas marcas={MARCAS_DE_TEMPORADA} />
+            </div>
+          </div>
+        </section>
+      )}
 
       <CtaFinal origen="Marcas" />
     </>

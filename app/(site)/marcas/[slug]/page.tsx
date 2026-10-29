@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
 import { BotonEnlace } from "@/components/Boton";
-import { BotonCotizar } from "@/components/calificador/BotonCotizar";
+import { FormularioCotizacion } from "@/components/calificador/FormularioCotizacion";
 import { Migajas } from "@/components/DatosEstructurados";
 import { EtiquetaSocio } from "@/components/EtiquetaSocio";
 import { FichaProducto } from "@/components/FichaProducto";
@@ -77,7 +77,6 @@ export default async function PaginaDeMarca(
   if (!marca) notFound();
 
   const relacionadas = marcasRelacionadas(marca);
-  const anios = aniosOperando();
 
   return (
     <>
@@ -112,38 +111,32 @@ export default async function PaginaDeMarca(
                   <EtiquetaSocio marca={marca} />
                 </div>
               )}
+              {/*
+                17 oct 2026, pedido del cliente: el título es SOLO el nombre
+                de la marca (antes "{marca} al mayoreo, distribuidor en
+                México"), sin el resumen ni la nota de marca fundadora debajo.
+                En su lugar va un formulario chico que abre WhatsApp con la
+                marca ya escrita en el interés.
+
+                El "al mayoreo" que se fue del H1 sigue en el <title> y en la
+                descripción de `generateMetadata`, que es donde pesa para
+                Google; el H1 es lo que lee el comprador.
+              */}
               <h1 className="titular text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
-                {marca.nombre} al mayoreo, distribuidor en México
+                {marca.nombre}
               </h1>
-              <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-tinta-2">
-                {marca.resumen}
-              </p>
 
-              {marca.fundadora && (
-                <p className="mt-6 border-l-2 border-naranja pl-5 text-lg font-semibold leading-relaxed text-tinta">
-                  Trabajamos con {marca.nombre} desde 1995. Es una de las tres
-                  marcas que dan nombre a Grupo Nitamy, y sigue siendo
-                  proveedor {anios} años después.
-                </p>
-              )}
-
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                {/*
-                  La etiqueta lleva el nombre de la marca pero NO el "por
-                  WhatsApp" del resto del sitio, y no es un descuido.
-
-                  Los botones del sitio no parten línea a propósito, con la
-                  regla de que ninguna etiqueta pase de tres palabras.
-                  "Cotizar Confitados Finos por WhatsApp" son cinco, y medido
-                  a 375px empujaba la celda a 373px: la página de esa marca se
-                  desplazaba 18px en horizontal en celular. El icono de
-                  WhatsApp ya dice a dónde va.
-                */}
-                <BotonCotizar
-                  origen={marca.nombre}
-                  interes={marca.nombre}
-                  etiqueta={`Cotizar ${marca.nombre}`}
-                />
+              <div className="mt-8 rounded-caja border border-linea bg-white p-5 sm:p-6">
+                <h2 className="text-lg font-extrabold leading-tight tracking-tight">
+                  Cotiza {marca.nombre} por WhatsApp
+                </h2>
+                <div className="mt-4">
+                  <FormularioCotizacion
+                    origen={marca.nombre}
+                    interesInicial={marca.nombre}
+                    compacto
+                  />
+                </div>
               </div>
             </div>
 

@@ -5,16 +5,12 @@ import { Migajas } from "@/components/DatosEstructurados";
 import { Revelar } from "@/components/Revelar";
 import { CtaFinal } from "@/components/secciones/CtaFinal";
 import {
-  ANIO_RAZON_SOCIAL,
   COBERTURA_PORCENTAJE,
   EMPRESA,
   FUNDACION,
-  HITOS,
   MARCAS_DECLARADAS,
   aniosOperando,
 } from "@/config/nitamy";
-import { PIELES } from "@/lib/colores";
-import { CATEGORIAS } from "@/lib/contenido";
 
 /**
  * Nosotros.
@@ -28,6 +24,11 @@ import { CATEGORIAS } from "@/lib/contenido";
  * datos. Los años se derivan de FUNDACION: el sitio anterior publica "más de
  * 40 años" y es falso, la empresa se fundó en 1995. Al derivarlo, ese error
  * no puede repetirse aquí.
+ *
+ * 17 OCT 2026, revisión del cliente: el párrafo de entrada es el texto que
+ * mandó el cliente, y se quitaron "Cómo llegamos hasta aquí" (la cronología)
+ * y "Qué distribuimos" (las líneas del catálogo). Misión, visión y valores se
+ * quedan. Los hitos siguen en `HITOS` de `config/nitamy.ts` por si vuelven.
  *
  * ⚠️ El acrónimo NIshikawa + TAma-Roca + Miguelito NO va aquí. Se quitó de la
  * home el 21 ago 2026 a petición del cliente, se probó a traerlo a esta
@@ -67,11 +68,10 @@ export default function PaginaDeNosotros() {
               Más de {anios} años abasteciendo el mismo anaquel
             </h1>
             <p className="mt-5 max-w-[58ch] text-lg leading-relaxed text-tinta-2">
-              {EMPRESA.razonSocial} nació en {FUNDACION} en Iztapalapa, Ciudad
-              de México, con una bodega, tres proveedores y un cliente. Hoy
-              distribuye más de {MARCAS_DECLARADAS} marcas de confitería,
-              cacahuate, tamarindo y botana a negocios establecidos de la
-              República Mexicana.
+              {EMPRESA.razonSocial} es una empresa mexicana dedicada a la
+              distribución de confitería, botanas y complementos. Ofrecemos
+              una amplia variedad que se adapta a diferentes necesidades de
+              abastecimiento.
             </p>
             <p className="mt-6 max-w-[52ch] border-l-2 border-naranja pl-5 text-lg font-semibold leading-relaxed text-tinta">
               {EMPRESA.filosofia}.
@@ -82,48 +82,6 @@ export default function PaginaDeNosotros() {
                 Ver el catálogo de marcas
               </BotonEnlace>
             </div>
-          </Revelar>
-        </div>
-      </section>
-
-      {/* Cronología ------------------------------------------------------- */}
-      <section className="border-b border-linea">
-        <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:py-20">
-          <Revelar>
-            <h2 className="titular text-[clamp(1.5rem,2.8vw,2.25rem)] font-extrabold leading-tight tracking-[-0.02em]">
-              Cómo llegamos hasta aquí
-            </h2>
-          </Revelar>
-
-          <ol className="mt-8 grid gap-4 lg:grid-cols-3">
-            {HITOS.map((h, i) => {
-              const piel = PIELES[(["naranja", "carmesi", "celeste"] as const)[i % 3]];
-              return (
-                <Revelar key={h.anio} retraso={i * 60} como="li">
-                  <div
-                    className={`grupo-sticker flex h-full flex-col rounded-blanda p-7 ${piel.pastel}`}
-                  >
-                    <p
-                      className={`sticker cifra inline-flex w-fit items-center rounded-pill px-3.5 py-1.5 text-sm font-extrabold tracking-wide ${piel.profundo} ${piel.profundoTexto}`}
-                    >
-                      {h.anio}
-                    </p>
-                    <h3 className="mt-5 text-xl font-extrabold leading-tight tracking-tight text-tinta">
-                      {h.titulo}
-                    </h3>
-                    <p className="mt-3 leading-relaxed text-tinta-2">{h.texto}</p>
-                  </div>
-                </Revelar>
-              );
-            })}
-          </ol>
-
-          <Revelar>
-            <p className="mt-8 max-w-[62ch] leading-relaxed text-tinta-2">
-              La empresa se constituyó como {EMPRESA.razonSocial} en{" "}
-              {ANIO_RAZON_SOCIAL}; antes operaba como{" "}
-              {EMPRESA.nombreAnterior}. La fundó {EMPRESA.fundador}.
-            </p>
           </Revelar>
         </div>
       </section>
@@ -169,37 +127,6 @@ export default function PaginaDeNosotros() {
             ))}
           </ul>
         </div>
-      </section>
-
-      {/* Qué distribuimos -------------------------------------------------- */}
-      <section className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8 lg:py-20">
-        <Revelar>
-          <h2 className="titular text-[clamp(1.5rem,2.8vw,2.25rem)] font-extrabold leading-tight tracking-[-0.02em]">
-            Qué distribuimos
-          </h2>
-          <p className="mt-4 max-w-[58ch] leading-relaxed text-tinta-2">
-            {CATEGORIAS.length} líneas que cubren el anaquel completo de una
-            dulcería, con {COBERTURA_PORCENTAJE}% de cobertura en la República
-            y entrega directa en la zona metropolitana.
-          </p>
-        </Revelar>
-
-        <ul className="mt-8 flex flex-wrap gap-3">
-          {/*
-            5 sep 2026: eran enlaces a /categorias y ahora son etiquetas. El
-            cliente retiró esa sección del sitio, así que las líneas se siguen
-            enseñando -son el argumento de que cubrimos el anaquel entero-
-            pero ya no llevan a ningún lado. Mismo patrón que los chips de
-            "Qué surtir" del rail de temporadas, que nunca fueron enlaces.
-          */}
-          {CATEGORIAS.map((c) => (
-            <li key={c.slug}>
-              <span className="chip inline-flex items-center rounded-pill border border-linea bg-papel px-4 py-2.5 font-semibold text-tinta">
-                {c.nombre}
-              </span>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <CtaFinal origen="/nosotros" />

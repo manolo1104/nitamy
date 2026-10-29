@@ -6,7 +6,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
-import { CONTACTO, EMPRESA, HORARIO, aniosOperando } from "@/config/nitamy";
+import { CONTACTO, EMPRESA, HORARIO } from "@/config/nitamy";
 import { MARCAS_FUNDADORAS } from "@/lib/contenido";
 import { enlaceWhatsappSimple } from "@/lib/whatsapp";
 
@@ -19,8 +19,6 @@ import { enlaceWhatsappSimple } from "@/lib/whatsapp";
  */
 
 export function Footer() {
-  const anios = aniosOperando();
-
   return (
     <footer className="border-t border-linea bg-papel-2">
       <div className="mx-auto max-w-[1400px] px-5 py-14 sm:px-8">
@@ -35,12 +33,11 @@ export function Footer() {
                 className="h-10 w-auto object-contain"
               />
             </div>
-            <p className="mt-4 max-w-[36ch] text-sm leading-relaxed text-tinta-2">
-              {EMPRESA.razonSocial}. Más de {anios} años distribuyendo
-              confitería, cacahuate, tamarindo y botana a negocios
-              establecidos en la República Mexicana.
-            </p>
-            <p className="mt-3 text-sm font-medium text-tinta">
+            {/* 17 oct 2026, pedido del cliente: debajo del logo solo el
+                nombre y la filosofía. Se fue el párrafo de razón social y
+                años, que repetía lo que ya dicen la home y Nosotros. */}
+            <p className="mt-4 text-sm font-bold text-tinta">{EMPRESA.nombre}</p>
+            <p className="mt-1 text-sm font-medium text-tinta">
               {EMPRESA.filosofia}
             </p>
           </div>

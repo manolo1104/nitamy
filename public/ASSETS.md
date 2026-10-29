@@ -167,7 +167,7 @@ logotipos reales, se sustituyen.
 
 **Faltan 15 logos** de las marcas restantes (⚠️ dato de agosto; hoy son 4, ver arriba): Miguelito, Grupo Frato, Betamex,
 Cabadas, Dulces Pillo, Dulces Liz, Dulces Tradicionales, Portico, Productos del
-Rey, Dulces Karla, Pipos, Dulces Guaz, Chaca Chaca, Charly, Confitados Finos,
+Rey, Dulces Karla, Pipos (retirada del sitio el 17 oct 2026), Dulces Guaz, Chaca Chaca, Charly, Confitados Finos,
 Alvbro, Chompys. Mientras llegan, `MarquesinaMarcas` los renderiza como
 monograma tipográfico.
 
@@ -318,6 +318,30 @@ son las más limpias que ha dado el catálogo porque su máscara es grande.
 ⚠️ **A quién pertenece esa página es una inferencia, no un dato.** El
 razonamiento y cómo revertirlo están en el `notaInterna` de Rivera en
 `content/marcas.json`.
+
+### 🟢 17 oct 2026: dos fotos de Nishikawa Exclusivo que eran de otro producto
+
+El cliente lo marcó en su revisión y era cierto:
+
+- **Mix 60 g, 15×10** enseñaba el paquete rojo del Japonés 40 g 20×10. El
+  bueno es el rosa "Surtido" de la p. 9, que el catálogo arma con varias
+  imágenes sueltas (no hay una sola embebida), así que se recortó de la página
+  renderizada a 300 dpi y se blanqueó la banda gris del fondo por inundación
+  desde los bordes: `nishikawa/paquete-mix-60-gr.webp`.
+- **Japonés 40 g, 16×25** enseñaba el paquete amarillo del 120 g 8×7. El bueno
+  es la imagen embebida de la p. 10 con su máscara:
+  `nishikawa/paquete-japones-40-gr-16x25.webp`.
+- De paso, el **20×10** pasó a usar `paquete-japones-40-gr.webp`, que es el
+  mismo producto en mejor calidad. Se borraron `paquete-japones-40-gr-20x10.webp`
+  (recorte borroso del mismo empaque) y `japones-40-gr-con-salsa.webp` (copia
+  del 8×7 que solo usaba el 16×25 por error).
+
+Y una foto nueva: **`nishikawa/japones-1-kg-por-pieza.webp`**, la bolsa de
+1 kg de la p. 6 (imagen embebida con máscara), para la venta por pieza que el
+cliente pidió agregar.
+
+Se fueron también `chompys/futgoliza.webp`, `productos/pipos/` y
+`marcas/pipos.webp`: el cliente retiró Futgoliza y la marca Pipos.
 
 ### La regla que queda
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { MARCAS_DECLARADAS } from "@/config/nitamy";
-import { MARCAS_CON_LOGO, MARCAS_VISIBLES } from "@/lib/contenido";
+import { MARCAS_VISIBLES } from "@/lib/contenido";
 import { LogoMarca } from "../LogoMarca";
 import { BotonEnlace } from "../Boton";
 import { Revelar } from "../Revelar";
@@ -24,10 +23,12 @@ import { Revelar } from "../Revelar";
  * el cliente, y ningún botón promete un número que se pueda contar en
  * pantalla (el catálogo publicado todavía trae 22).
  *
- * ORDEN: primero las marcas con logotipo real. No es estética, es que los
- * quince monogramas tipográficos intercalados hacen que la rejilla se lea
- * como sitio a medio hacer. Arriba lo que se ve terminado, abajo lo demás, y
- * el corte deja de notarse cuando lleguen los logos que faltan.
+ * 17 OCT 2026, revisión del cliente: el título pasó a "Marcas líderes", sin
+ * el párrafo de abajo, y el ORDEN es el del catálogo. Antes iban primero las
+ * marcas con logotipo; el cliente pidió las marcas tal cual vienen en el
+ * catálogo porque ese orden va de la que más se vende a la que menos, y es
+ * justo lo que una rejilla de doce tiene que enseñar. Las doce primeras del
+ * catálogo tienen logotipo, así que el monograma no asoma aquí.
  */
 
 /** Doce fichas: tres filas de cuatro en escritorio, sin huecos en ningún
@@ -35,10 +36,9 @@ import { Revelar } from "../Revelar";
 const EN_LA_REJILLA = 12;
 
 export function SeccionMarcas() {
-  const conLogo = MARCAS_CON_LOGO;
-  const sinLogo = MARCAS_VISIBLES.filter((m) => !m.logo);
-  const visibles = [...conLogo, ...sinLogo].slice(0, EN_LA_REJILLA);
+  const visibles = MARCAS_VISIBLES.slice(0, EN_LA_REJILLA);
   const restantes = MARCAS_VISIBLES.length - visibles.length;
+  const sinLogo = MARCAS_VISIBLES.filter((m) => !m.logo).length;
 
   return (
     <section
@@ -51,14 +51,8 @@ export function SeccionMarcas() {
             id="marcas"
             className="titular max-w-[22ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.08] tracking-[-0.02em]"
           >
-            Las marcas que tu cliente ya conoce, en un solo pedido
+            Marcas líderes
           </h2>
-          <p className="mt-4 max-w-[54ch] leading-relaxed text-tinta-2">
-            Más de {MARCAS_DECLARADAS} marcas en una sola orden. Contratarlas
-            por separado significa {MARCAS_DECLARADAS} altas,{" "}
-            {MARCAS_DECLARADAS} facturas y {MARCAS_DECLARADAS} pagos; con
-            nosotros es uno de cada uno.
-          </p>
         </Revelar>
 
         {/* `rejilla-atenua`: al señalar una ficha, las demás bajan de
@@ -115,17 +109,15 @@ export function SeccionMarcas() {
 
           {/* Nota de trabajo, nunca en producción: al comprador no le importa
               que falten logotipos, y decírselo resta credibilidad. */}
-          {MARCAS_VISIBLES.length - conLogo.length > 0 &&
-            process.env.NODE_ENV !== "production" && (
-              <p className="mt-4 text-xs text-naranja-texto">
-                Nota de desarrollo:{" "}
-                {MARCAS_VISIBLES.length - conLogo.length === 1
-                  ? "falta el logotipo de 1 marca"
-                  : `faltan los logotipos de ${MARCAS_VISIBLES.length - conLogo.length} marcas`}
-                . Mientras llegan se muestran con su nombre y quedan al final
-                de la rejilla.
-              </p>
-            )}
+          {sinLogo > 0 && process.env.NODE_ENV !== "production" && (
+            <p className="mt-4 text-xs text-naranja-texto">
+              Nota de desarrollo:{" "}
+              {sinLogo === 1
+                ? "falta el logotipo de 1 marca"
+                : `faltan los logotipos de ${sinLogo} marcas`}
+              . Mientras llegan se muestran con su nombre.
+            </p>
+          )}
         </Revelar>
       </div>
     </section>

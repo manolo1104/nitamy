@@ -4,7 +4,6 @@ import { type ReactNode, useId, useRef, useState } from "react";
 import type { ColorMarca } from "@/lib/contenido";
 import { BORDE_SILUETA, PIELES } from "@/lib/colores";
 import { BotonCotizar } from "../calificador/BotonCotizar";
-import { Odometro } from "../Odometro";
 
 /**
  * El rail seleccionable de temporadas.
@@ -25,6 +24,12 @@ import { Odometro } from "../Odometro";
  *   - El foco sigue a la selección, y por eso se llama `.focus()` a mano: sin
  *     eso, el foco se queda en la pestaña vieja y la navegación se rompe.
  *
+ * 17 OCT 2026: el panel quedó en nombre, fecha y botón. Por pedido del
+ * cliente se fueron la descripción de qué rota (nombraba productos que
+ * Nitamy no vende), el bloque "Qué surtir" y la cuenta regresiva con su fecha
+ * de corte, que era una regla de anticipación inventada. La pestaña enseña la
+ * fecha de la temporada en vez de "Quedan X días".
+ *
  * La selección inicial es la temporada MÁS PRÓXIMA, no la primera del año.
  * El servidor ya manda el arreglo ordenado por cercanía, así que es el índice
  * cero. En enero abre en San Valentín y en octubre en Día de Muertos, sin que
@@ -42,29 +47,15 @@ import { Odometro } from "../Odometro";
  * verdad necesita JavaScript.
  */
 
-export type CategoriaVista = {
-  slug: string;
-  nombre: string;
-  color: ColorMarca;
-  /** Icono ya renderizado en el servidor. Ver la nota de arriba. */
-  icono: ReactNode;
-};
-
 export type TemporadaVista = {
   slug: string;
   nombre: string;
   cuando: string;
-  queRota: string;
   color: ColorMarca;
   /** Icono chico, para la pestaña del rail. */
   icono: ReactNode;
   /** El mismo icono en grande, para la marca de agua del panel. */
   iconoGrande: ReactNode;
-  estado: "abierta" | "urgente" | "tarde";
-  diasParaCorte: number;
-  corteLegible: string;
-  picoLegible: string;
-  categorias: CategoriaVista[];
   /** Dónde cae su fecha pico dentro del año, de 0 a 1. Lo calcula el
    *  servidor: si lo hiciera el cliente habría error de hidratación al
    *  cambiar el día. */
@@ -72,27 +63,6 @@ export type TemporadaVista = {
 };
 
 const MESES = ["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
-
-/** El texto corto del rail. Se lee de reojo, así que no pasa de tres palabras. */
-function resumenDeCorte(t: TemporadaVista): string {
-  if (t.estado === "tarde") return "Sobre el tiempo";
-  if (t.diasParaCorte === 0) return "Último día";
-  if (t.diasParaCorte === 1) return "Queda 1 día";
-  return `Quedan ${t.diasParaCorte} días`;
-}
-
-/** El texto largo del panel. Aquí sí se explica de qué son los días. */
-function frameDeCorte(t: TemporadaVista): string {
-  if (t.estado === "tarde") {
-    return `La fecha recomendada para pedir era el ${t.corteLegible}. Todavía se alcanza, pero con menos margen: escríbenos y vemos qué hay disponible.`;
-  }
-  if (t.diasParaCorte === 0) {
-    return `Hoy es el último día recomendado para levantar el pedido y que llegue completo al ${t.picoLegible}.`;
-  }
-  const dias =
-    t.diasParaCorte === 1 ? "queda 1 día" : `quedan ${t.diasParaCorte} días`;
-  return `Para llegar completo al ${t.picoLegible}, conviene levantar el pedido antes del ${t.corteLegible}: ${dias}.`;
-}
 
 export function RailTemporadas({
   temporadas,
@@ -145,8 +115,8 @@ export function RailTemporadas({
 
         Las siete temporadas puestas sobre los doce meses, más una marca en
         el día de hoy. Es el mapa que le faltaba a la sección: el rail de
-        abajo dice cuántos días quedan para cada una, pero no dónde está uno
-        parado en el año ni cómo se reparten.
+        abajo dice la fecha de cada una, pero no dónde está uno parado en el
+        año ni cómo se reparten.
 
         La línea se DIBUJA con el scroll y los pines aparecen a su paso, así
         que el año se recorre de enero a diciembre mientras el visitante
@@ -294,12 +264,8 @@ export function RailTemporadas({
                 >
                   {item.nombre}
                 </span>
-                <span
-                  className={`cifra mt-0.5 block text-xs font-semibold ${
-                    item.estado === "abierta" ? "text-tinta-2" : "text-naranja-texto"
-                  }`}
-                >
-                  {resumenDeCorte(item)}
+                <span className="mt-0.5 block truncate text-xs font-semibold text-tinta-2">
+                  {item.cuando}
                 </span>
               </span>
             </button>
@@ -373,84 +339,11 @@ export function RailTemporadas({
               {t.nombre}
             </h3>
 
-            <p className="mt-4 max-w-[54ch] text-lg leading-relaxed text-tinta">
-              {t.queRota}
-            </p>
-
-            {/*
-              La cuenta regresiva. Va en una caja de papel y no suelta sobre
-              el pastel: es el dato por el que existe la sección y tiene que
-              despegarse del párrafo de arriba.
-
-              Cuando quedan días por delante, el número sale del párrafo y se
-              muestra en grande con los dígitos rodando. Antes iba enterrado a
-              media frase, y es lo único de esta sección que hace que alguien
-              abra WhatsApp hoy en vez de la semana que entra.
-
-              Cuando el corte ya pasó no hay número que enseñar, así que solo
-              queda la explicación.
-            */}
-            <div className="mt-6 max-w-[54ch] rounded-caja bg-papel/80 px-5 py-4">
-              {t.estado !== "tarde" && t.diasParaCorte > 0 && (
-                <p className="flex items-baseline gap-3">
-                  {/* En `naranja-texto`, NO en el naranja del manual y
-                      tampoco en el acento de la temporada. Este odómetro va
-                      encima del PASTEL de su temporada, y ahí el naranja del
-                      manual da 2.77:1: por debajo del 3:1 que WCAG pide
-                      incluso a texto grande. `naranja-texto` da 3.90:1 sobre
-                      cualquiera de los cuatro pasteles, y de paso es el mismo
-                      color de las cifras grandes de la barra de credibilidad,
-                      así que además unifica. */}
-                  <Odometro
-                    valor={t.diasParaCorte}
-                    className="titular text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold tracking-[-0.03em] text-naranja-texto"
-                  />
-                  <span className="text-sm font-semibold leading-tight text-tinta-2">
-                    {t.diasParaCorte === 1 ? "día" : "días"}
-                    <br />
-                    para pedir
-                  </span>
-                </p>
-              )}
-              <p
-                className={`leading-relaxed text-tinta ${
-                  t.estado !== "tarde" && t.diasParaCorte > 0 ? "mt-3" : ""
-                }`}
-              >
-                {frameDeCorte(t)}
-              </p>
-            </div>
-
-            {t.categorias.length > 0 && (
-              <div className="mt-7">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tinta-2">
-                  Qué surtir
-                </p>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {t.categorias.map((c) => {
-                    const cPiel = PIELES[c.color];
-                    return (
-                      <li key={c.slug}>
-                        <span className="chip inline-flex items-center gap-2 rounded-pill bg-papel px-3.5 py-2 text-sm font-semibold text-tinta">
-                          <span
-                            className={`flex size-6 items-center justify-center rounded-pill ${cPiel.relleno} ${cPiel.texto} ${BORDE_SILUETA}`}
-                          >
-                            {c.icono}
-                          </span>
-                          {c.nombre}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-
             <div className="mt-8">
               <BotonCotizar
                 origen="Inicio"
                 interes={`Temporada: ${t.nombre}`}
-                etiqueta={`Apartar ${t.nombre}`}
+                etiqueta={`Cotizar ${t.nombre}`}
               />
             </div>
           </div>

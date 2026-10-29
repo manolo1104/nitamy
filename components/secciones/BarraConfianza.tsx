@@ -58,7 +58,8 @@ import { Revelar } from "../Revelar";
 export function BarraConfianza() {
   const cifras = [
     { prefijo: "+", valor: aniosOperando(), sufijo: "", pie: "años operando" },
-    { prefijo: "+", valor: MARCAS_DECLARADAS, sufijo: "", pie: "marcas distribuidas" },
+    // 17 oct 2026: "marcas distribuidas" pasó a "marcas", pedido del cliente.
+    { prefijo: "+", valor: MARCAS_DECLARADAS, sufijo: "", pie: "marcas" },
     {
       prefijo: "",
       valor: COBERTURA_PORCENTAJE,

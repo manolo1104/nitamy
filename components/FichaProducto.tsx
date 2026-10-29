@@ -10,7 +10,8 @@ import { ETIQUETA_SELLO, type Marca, type Producto } from "@/lib/contenido";
  * tarjeta. Duplicarla habría dejado dos copias de las dos reglas delicadas
  * que lleva dentro, y son justo las que no pueden divergir:
  *
- *   1. La cifra de piezas por caja solo sale cuando NO hay ambigüedad.
+ *   1. La presentación se muestra como texto, tal cual la da el catálogo, y
+ *      nunca se destaca una cifra suelta (ver la nota de abajo).
  *   2. Los sellos NOM-051 no se muestran (instrucción del cliente, 4 sep
  *      2026) y el bloque solo revive si algún día `sellosVerificados` es
  *      true. Nunca se afirma nada de etiquetado sin el dato del cliente.
@@ -66,26 +67,21 @@ export function FichaProducto({ producto: p, marca, mostrarMarca = false }: Prop
         </h3>
 
         {/*
-          Dos formas de mostrar lo mismo, según haya dato duro:
+          Un solo diseño para las 228 fichas: foto, nombre y presentación.
 
-          con cifra  cuando el cliente dice sin ambigüedad cuántas piezas trae
-                     la caja. Es el número que el comprador está buscando, y
-                     por eso va grande.
-          sin cifra  cuando el texto dice "16 bolsas de 12 piezas" y no se
-                     sabe si son 16 o 192. Se muestra tal cual lo escribió el
-                     cliente. Inventar aquí es corromper una cotización.
+          Hasta el 26 oct 2026 había dos. Cuando `piezasPorCaja` tenía dato,
+          la ficha sacaba además la cifra en grande con la leyenda "piezas por
+          caja", y el cliente notó que unas fichas se veían distintas de otras
+          dentro de la misma marca. La cifra también mentía: la leyenda era
+          fija, y en 77 de las 112 fichas que la llevaban la unidad no eran
+          piezas sino bolsas, envases, paquetes o empaques. El Japonés 60 g
+          exclusivo decía "15 piezas por caja" siendo 15 bolsas de 10.
+
+          El texto de la presentación ya dice todo, con su unidad correcta, así
+          que la cifra se fue. `piezasPorCaja` sigue en `marcas.json`, pero la
+          ficha ya no lo pinta.
         */}
-        {p.piezasPorCaja !== null ? (
-          <>
-            <p className="mt-1 text-tinta-2">{p.presentacion}</p>
-            <p className="titular cifra mt-5 text-3xl font-extrabold leading-none tracking-tight text-naranja">
-              {p.piezasPorCaja}
-            </p>
-            <p className="mt-1 text-sm text-tinta-2">piezas por caja</p>
-          </>
-        ) : (
-          <p className="mt-3 leading-relaxed text-tinta">{p.presentacion}</p>
-        )}
+        <p className="mt-3 leading-relaxed text-tinta">{p.presentacion}</p>
 
         {/*
           4 sep 2026: la tarjeta ya NO dice "Sellos NOM-051 en la cotización".

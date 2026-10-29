@@ -11,7 +11,14 @@ import type { ClaveSegmento } from "@/config/nitamy";
 
 export type Lead = {
   timestamp: string;
+  /** Nombre de la persona. 17 oct 2026: el cliente pidió los datos de contacto. */
+  nombre: string;
+  negocio: string;
+  telefono: string;
+  correo: string;
   segmento: ClaveSegmento;
+  /** Lo que escribió quien eligió "Otro" como tipo de negocio. */
+  segmento_otro?: string;
   estado: string;
   interes: string;
   url_origen: string;
@@ -19,8 +26,6 @@ export type Lead = {
   utm_medium: string | null;
   utm_campaign: string | null;
   dispositivo: "movil" | "tableta" | "escritorio";
-  /** Solo cuando el usuario cotiza fuera de horario y deja correo de respaldo. */
-  correo_respaldo?: string;
 };
 
 export interface AdaptadorLeads {
